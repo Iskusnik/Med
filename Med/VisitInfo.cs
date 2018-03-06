@@ -19,8 +19,8 @@ namespace Med
         public System.DateTime OperatorBirthDate { get; set; }
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateFinish { get; set; }
+        public long DoctorID { get; set; }
     
         public virtual Operator Operator { get; set; }
-        public virtual WorkTime WorkTime { get; set; }
     }
 }

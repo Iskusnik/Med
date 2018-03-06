@@ -12,7 +12,7 @@ namespace Med
     using System;
     using System.Collections.Generic;
     
-    public abstract partial class Person
+    public partial class Person
     {
         public string FullName { get; set; }
         public string Gender { get; set; }
@@ -22,6 +22,7 @@ namespace Med
         public string RegAdress { get; set; }
         public System.DateTime RegDate { get; set; }
         public string InsuranceBillNum { get; set; }
+        public long NameHashID { get; set; }
     
         public virtual Documents Documents { get; set; }
     }

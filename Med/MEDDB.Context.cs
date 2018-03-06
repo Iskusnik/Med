@@ -13,10 +13,10 @@ namespace Med
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MedDB1Entities : DbContext
+    public partial class MEDDBContainer : DbContext
     {
-        public MedDB1Entities()
-            : base("name=MedDB1Entities")
+        public MEDDBContainer()
+            : base("name=MEDDBContainer")
         {
         }
     

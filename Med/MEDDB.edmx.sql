@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/06/2018 18:13:55
--- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med\Model1.edmx
+-- Date Created: 03/06/2018 19:14:44
+-- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med\MEDDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [MedDB1];
+USE [WorkingMedDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -26,11 +26,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MedCardHaveDoctorRecord]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DoctorRecordSet] DROP CONSTRAINT [FK_MedCardHaveDoctorRecord];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonHaveDocuments]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_PersonHaveDocuments];
-GO
 IF OBJECT_ID(N'[dbo].[FK_OperatorMakesVisitInfo]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_OperatorMakesVisitInfo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonHaveDocuments]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_PersonHaveDocuments];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DoctorMakesDoctorRecord]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DoctorRecordSet] DROP CONSTRAINT [FK_DoctorMakesDoctorRecord];
@@ -40,9 +40,6 @@ IF OBJECT_ID(N'[dbo].[FK_DoctorFreeTime]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_DoctorWorkTime]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WorkTimeSet] DROP CONSTRAINT [FK_DoctorWorkTime];
-GO
-IF OBJECT_ID(N'[dbo].[FK_WorkTimeVisitInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkTimeSet] DROP CONSTRAINT [FK_WorkTimeVisitInfo];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Patient_inherits_Person]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonSet_Patient] DROP CONSTRAINT [FK_Patient_inherits_Person];
@@ -99,16 +96,17 @@ GO
 -- Creating table 'IllnessSet'
 CREATE TABLE [dbo].[IllnessSet] (
     [Name] nvarchar(max)  NOT NULL,
-    [Patient_FullName] nvarchar(max)  NOT NULL,
-    [Patient_BirthDate] datetime  NOT NULL
+    [Hash] bigint  NOT NULL,
+    [Patient_BirthDate] datetime  NOT NULL,
+    [Patient_NameHashID] bigint  NOT NULL
 );
 GO
 
 -- Creating table 'MedCardSet'
 CREATE TABLE [dbo].[MedCardSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Patient_FullName] nvarchar(max)  NOT NULL,
-    [Patient_BirthDate] datetime  NOT NULL
+    [Patient_BirthDate] datetime  NOT NULL,
+    [Patient_NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -129,8 +127,8 @@ CREATE TABLE [dbo].[PersonSet] (
     [RegAdress] nvarchar(max)  NOT NULL,
     [RegDate] datetime  NOT NULL,
     [InsuranceBillNum] nvarchar(max)  NOT NULL,
-    [Documents_Id] int  NOT NULL,
-    [Documents_DocumentName] nvarchar(max)  NOT NULL
+    [NameHashID] bigint  NOT NULL,
+    [Documents_Id] int  NOT NULL
 );
 GO
 
@@ -143,10 +141,11 @@ CREATE TABLE [dbo].[DoctorRecordSet] (
     [Result] nvarchar(max)  NOT NULL,
     [Standarts] nvarchar(max)  NOT NULL,
     [DoctorInfo] nvarchar(max)  NOT NULL,
-    [Date] nvarchar(max)  NOT NULL,
+    [Date] datetime  NOT NULL,
+    [DoctorID] bigint  NOT NULL,
     [MedCard_Id] int  NOT NULL,
-    [Doctor_FullName] nvarchar(max)  NOT NULL,
-    [Doctor_BirthDate] datetime  NOT NULL
+    [Doctor_BirthDate] datetime  NOT NULL,
+    [Doctor_NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -156,7 +155,10 @@ CREATE TABLE [dbo].[VisitInfoSet] (
     [OperatorFullName] nvarchar(max)  NOT NULL,
     [OperatorBirthDate] datetime  NOT NULL,
     [DateStart] datetime  NOT NULL,
-    [DateFinish] datetime  NOT NULL
+    [DateFinish] datetime  NOT NULL,
+    [DoctorID] bigint  NOT NULL,
+    [Operator_BirthDate] datetime  NOT NULL,
+    [Operator_NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -164,8 +166,8 @@ GO
 CREATE TABLE [dbo].[FreeTimeSet] (
     [Start] datetime  NOT NULL,
     [Finish] datetime  NOT NULL,
-    [Doctor_FullName] nvarchar(max)  NOT NULL,
-    [Doctor_BirthDate] datetime  NOT NULL
+    [Doctor_BirthDate] datetime  NOT NULL,
+    [Doctor_NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -173,11 +175,8 @@ GO
 CREATE TABLE [dbo].[WorkTimeSet] (
     [Start] datetime  NOT NULL,
     [Finish] datetime  NOT NULL,
-    [Doctor_FullName] nvarchar(max)  NOT NULL,
     [Doctor_BirthDate] datetime  NOT NULL,
-    [VisitInfo_Doctor] int  NOT NULL,
-    [VisitInfo_DateStart] datetime  NOT NULL,
-    [VisitInfo_DateFinish] datetime  NOT NULL
+    [Doctor_NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -187,8 +186,8 @@ CREATE TABLE [dbo].[PersonSet_Patient] (
     [WorkIncapacityListNum] nvarchar(max)  NOT NULL,
     [BloodType] tinyint  NOT NULL,
     [Rhesus] nvarchar(max)  NOT NULL,
-    [FullName] nvarchar(max)  NOT NULL,
-    [BirthDate] datetime  NOT NULL
+    [BirthDate] datetime  NOT NULL,
+    [NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -196,8 +195,8 @@ GO
 CREATE TABLE [dbo].[PersonSet_Operator] (
     [Login] int IDENTITY(1,1) NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [FullName] nvarchar(max)  NOT NULL,
-    [BirthDate] datetime  NOT NULL
+    [BirthDate] datetime  NOT NULL,
+    [NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -206,8 +205,8 @@ CREATE TABLE [dbo].[PersonSet_Doctor] (
     [Education] int IDENTITY(1,1) NOT NULL,
     [Job] nvarchar(max)  NOT NULL,
     [Memberships] nvarchar(max)  NOT NULL,
-    [FullName] nvarchar(max)  NOT NULL,
-    [BirthDate] datetime  NOT NULL
+    [BirthDate] datetime  NOT NULL,
+    [NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -215,10 +214,10 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Name] in table 'IllnessSet'
+-- Creating primary key on [Hash] in table 'IllnessSet'
 ALTER TABLE [dbo].[IllnessSet]
 ADD CONSTRAINT [PK_IllnessSet]
-    PRIMARY KEY CLUSTERED ([Name] ASC);
+    PRIMARY KEY CLUSTERED ([Hash] ASC);
 GO
 
 -- Creating primary key on [Id] in table 'MedCardSet'
@@ -227,28 +226,28 @@ ADD CONSTRAINT [PK_MedCardSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id], [DocumentName] in table 'DocumentsSet'
+-- Creating primary key on [Id] in table 'DocumentsSet'
 ALTER TABLE [dbo].[DocumentsSet]
 ADD CONSTRAINT [PK_DocumentsSet]
-    PRIMARY KEY CLUSTERED ([Id], [DocumentName] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [FullName], [BirthDate] in table 'PersonSet'
+-- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet'
 ALTER TABLE [dbo].[PersonSet]
 ADD CONSTRAINT [PK_PersonSet]
-    PRIMARY KEY CLUSTERED ([FullName], [BirthDate] ASC);
+    PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
 GO
 
--- Creating primary key on [DoctorInfo], [Date] in table 'DoctorRecordSet'
+-- Creating primary key on [Date], [DoctorID] in table 'DoctorRecordSet'
 ALTER TABLE [dbo].[DoctorRecordSet]
 ADD CONSTRAINT [PK_DoctorRecordSet]
-    PRIMARY KEY CLUSTERED ([DoctorInfo], [Date] ASC);
+    PRIMARY KEY CLUSTERED ([Date], [DoctorID] ASC);
 GO
 
--- Creating primary key on [Doctor], [DateStart], [DateFinish] in table 'VisitInfoSet'
+-- Creating primary key on [DateStart], [DateFinish], [DoctorID] in table 'VisitInfoSet'
 ALTER TABLE [dbo].[VisitInfoSet]
 ADD CONSTRAINT [PK_VisitInfoSet]
-    PRIMARY KEY CLUSTERED ([Doctor], [DateStart], [DateFinish] ASC);
+    PRIMARY KEY CLUSTERED ([DateStart], [DateFinish], [DoctorID] ASC);
 GO
 
 -- Creating primary key on [Start], [Finish] in table 'FreeTimeSet'
@@ -263,56 +262,56 @@ ADD CONSTRAINT [PK_WorkTimeSet]
     PRIMARY KEY CLUSTERED ([Start], [Finish] ASC);
 GO
 
--- Creating primary key on [FullName], [BirthDate] in table 'PersonSet_Patient'
+-- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet_Patient'
 ALTER TABLE [dbo].[PersonSet_Patient]
 ADD CONSTRAINT [PK_PersonSet_Patient]
-    PRIMARY KEY CLUSTERED ([FullName], [BirthDate] ASC);
+    PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
 GO
 
--- Creating primary key on [FullName], [BirthDate] in table 'PersonSet_Operator'
+-- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet_Operator'
 ALTER TABLE [dbo].[PersonSet_Operator]
 ADD CONSTRAINT [PK_PersonSet_Operator]
-    PRIMARY KEY CLUSTERED ([FullName], [BirthDate] ASC);
+    PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
 GO
 
--- Creating primary key on [FullName], [BirthDate] in table 'PersonSet_Doctor'
+-- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet_Doctor'
 ALTER TABLE [dbo].[PersonSet_Doctor]
 ADD CONSTRAINT [PK_PersonSet_Doctor]
-    PRIMARY KEY CLUSTERED ([FullName], [BirthDate] ASC);
+    PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Patient_FullName], [Patient_BirthDate] in table 'IllnessSet'
+-- Creating foreign key on [Patient_BirthDate], [Patient_NameHashID] in table 'IllnessSet'
 ALTER TABLE [dbo].[IllnessSet]
 ADD CONSTRAINT [FK_PatientHaveIllness]
-    FOREIGN KEY ([Patient_FullName], [Patient_BirthDate])
+    FOREIGN KEY ([Patient_BirthDate], [Patient_NameHashID])
     REFERENCES [dbo].[PersonSet_Patient]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PatientHaveIllness'
 CREATE INDEX [IX_FK_PatientHaveIllness]
 ON [dbo].[IllnessSet]
-    ([Patient_FullName], [Patient_BirthDate]);
+    ([Patient_BirthDate], [Patient_NameHashID]);
 GO
 
--- Creating foreign key on [Patient_FullName], [Patient_BirthDate] in table 'MedCardSet'
+-- Creating foreign key on [Patient_BirthDate], [Patient_NameHashID] in table 'MedCardSet'
 ALTER TABLE [dbo].[MedCardSet]
 ADD CONSTRAINT [FK_PatientHaveMedCard]
-    FOREIGN KEY ([Patient_FullName], [Patient_BirthDate])
+    FOREIGN KEY ([Patient_BirthDate], [Patient_NameHashID])
     REFERENCES [dbo].[PersonSet_Patient]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PatientHaveMedCard'
 CREATE INDEX [IX_FK_PatientHaveMedCard]
 ON [dbo].[MedCardSet]
-    ([Patient_FullName], [Patient_BirthDate]);
+    ([Patient_BirthDate], [Patient_NameHashID]);
 GO
 
 -- Creating foreign key on [MedCard_Id] in table 'DoctorRecordSet'
@@ -330,120 +329,105 @@ ON [dbo].[DoctorRecordSet]
     ([MedCard_Id]);
 GO
 
--- Creating foreign key on [Documents_Id], [Documents_DocumentName] in table 'PersonSet'
-ALTER TABLE [dbo].[PersonSet]
-ADD CONSTRAINT [FK_PersonHaveDocuments]
-    FOREIGN KEY ([Documents_Id], [Documents_DocumentName])
-    REFERENCES [dbo].[DocumentsSet]
-        ([Id], [DocumentName])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonHaveDocuments'
-CREATE INDEX [IX_FK_PersonHaveDocuments]
-ON [dbo].[PersonSet]
-    ([Documents_Id], [Documents_DocumentName]);
-GO
-
--- Creating foreign key on [OperatorFullName], [OperatorBirthDate] in table 'VisitInfoSet'
+-- Creating foreign key on [Operator_BirthDate], [Operator_NameHashID] in table 'VisitInfoSet'
 ALTER TABLE [dbo].[VisitInfoSet]
 ADD CONSTRAINT [FK_OperatorMakesVisitInfo]
-    FOREIGN KEY ([OperatorFullName], [OperatorBirthDate])
+    FOREIGN KEY ([Operator_BirthDate], [Operator_NameHashID])
     REFERENCES [dbo].[PersonSet_Operator]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OperatorMakesVisitInfo'
 CREATE INDEX [IX_FK_OperatorMakesVisitInfo]
 ON [dbo].[VisitInfoSet]
-    ([OperatorFullName], [OperatorBirthDate]);
+    ([Operator_BirthDate], [Operator_NameHashID]);
 GO
 
--- Creating foreign key on [Doctor_FullName], [Doctor_BirthDate] in table 'DoctorRecordSet'
+-- Creating foreign key on [Documents_Id] in table 'PersonSet'
+ALTER TABLE [dbo].[PersonSet]
+ADD CONSTRAINT [FK_PersonHaveDocuments]
+    FOREIGN KEY ([Documents_Id])
+    REFERENCES [dbo].[DocumentsSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonHaveDocuments'
+CREATE INDEX [IX_FK_PersonHaveDocuments]
+ON [dbo].[PersonSet]
+    ([Documents_Id]);
+GO
+
+-- Creating foreign key on [Doctor_BirthDate], [Doctor_NameHashID] in table 'DoctorRecordSet'
 ALTER TABLE [dbo].[DoctorRecordSet]
 ADD CONSTRAINT [FK_DoctorMakesDoctorRecord]
-    FOREIGN KEY ([Doctor_FullName], [Doctor_BirthDate])
+    FOREIGN KEY ([Doctor_BirthDate], [Doctor_NameHashID])
     REFERENCES [dbo].[PersonSet_Doctor]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DoctorMakesDoctorRecord'
 CREATE INDEX [IX_FK_DoctorMakesDoctorRecord]
 ON [dbo].[DoctorRecordSet]
-    ([Doctor_FullName], [Doctor_BirthDate]);
+    ([Doctor_BirthDate], [Doctor_NameHashID]);
 GO
 
--- Creating foreign key on [Doctor_FullName], [Doctor_BirthDate] in table 'FreeTimeSet'
+-- Creating foreign key on [Doctor_BirthDate], [Doctor_NameHashID] in table 'FreeTimeSet'
 ALTER TABLE [dbo].[FreeTimeSet]
 ADD CONSTRAINT [FK_DoctorFreeTime]
-    FOREIGN KEY ([Doctor_FullName], [Doctor_BirthDate])
+    FOREIGN KEY ([Doctor_BirthDate], [Doctor_NameHashID])
     REFERENCES [dbo].[PersonSet_Doctor]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DoctorFreeTime'
 CREATE INDEX [IX_FK_DoctorFreeTime]
 ON [dbo].[FreeTimeSet]
-    ([Doctor_FullName], [Doctor_BirthDate]);
+    ([Doctor_BirthDate], [Doctor_NameHashID]);
 GO
 
--- Creating foreign key on [Doctor_FullName], [Doctor_BirthDate] in table 'WorkTimeSet'
+-- Creating foreign key on [Doctor_BirthDate], [Doctor_NameHashID] in table 'WorkTimeSet'
 ALTER TABLE [dbo].[WorkTimeSet]
 ADD CONSTRAINT [FK_DoctorWorkTime]
-    FOREIGN KEY ([Doctor_FullName], [Doctor_BirthDate])
+    FOREIGN KEY ([Doctor_BirthDate], [Doctor_NameHashID])
     REFERENCES [dbo].[PersonSet_Doctor]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_DoctorWorkTime'
 CREATE INDEX [IX_FK_DoctorWorkTime]
 ON [dbo].[WorkTimeSet]
-    ([Doctor_FullName], [Doctor_BirthDate]);
+    ([Doctor_BirthDate], [Doctor_NameHashID]);
 GO
 
--- Creating foreign key on [VisitInfo_Doctor], [VisitInfo_DateStart], [VisitInfo_DateFinish] in table 'WorkTimeSet'
-ALTER TABLE [dbo].[WorkTimeSet]
-ADD CONSTRAINT [FK_WorkTimeVisitInfo]
-    FOREIGN KEY ([VisitInfo_Doctor], [VisitInfo_DateStart], [VisitInfo_DateFinish])
-    REFERENCES [dbo].[VisitInfoSet]
-        ([Doctor], [DateStart], [DateFinish])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_WorkTimeVisitInfo'
-CREATE INDEX [IX_FK_WorkTimeVisitInfo]
-ON [dbo].[WorkTimeSet]
-    ([VisitInfo_Doctor], [VisitInfo_DateStart], [VisitInfo_DateFinish]);
-GO
-
--- Creating foreign key on [FullName], [BirthDate] in table 'PersonSet_Patient'
+-- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Patient'
 ALTER TABLE [dbo].[PersonSet_Patient]
 ADD CONSTRAINT [FK_Patient_inherits_Person]
-    FOREIGN KEY ([FullName], [BirthDate])
+    FOREIGN KEY ([BirthDate], [NameHashID])
     REFERENCES [dbo].[PersonSet]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [FullName], [BirthDate] in table 'PersonSet_Operator'
+-- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Operator'
 ALTER TABLE [dbo].[PersonSet_Operator]
 ADD CONSTRAINT [FK_Operator_inherits_Person]
-    FOREIGN KEY ([FullName], [BirthDate])
+    FOREIGN KEY ([BirthDate], [NameHashID])
     REFERENCES [dbo].[PersonSet]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [FullName], [BirthDate] in table 'PersonSet_Doctor'
+-- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Doctor'
 ALTER TABLE [dbo].[PersonSet_Doctor]
 ADD CONSTRAINT [FK_Doctor_inherits_Person]
-    FOREIGN KEY ([FullName], [BirthDate])
+    FOREIGN KEY ([BirthDate], [NameHashID])
     REFERENCES [dbo].[PersonSet]
-        ([FullName], [BirthDate])
+        ([BirthDate], [NameHashID])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 

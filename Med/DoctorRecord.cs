@@ -21,7 +21,8 @@ namespace Med
         public string Result { get; set; }
         public string Standarts { get; set; }
         public string DoctorInfo { get; set; }
-        public string Date { get; set; }
+        public System.DateTime Date { get; set; }
+        public long DoctorID { get; set; }
     
         public virtual MedCard MedCard { get; set; }
         public virtual Doctor Doctor { get; set; }

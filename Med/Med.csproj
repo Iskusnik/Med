@@ -58,74 +58,60 @@
   <ItemGroup>
     <Compile Include="ControlFunctions.cs" />
     <Compile Include="Doctor.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DoctorRecord.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Documents.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="FreeTime.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Illness.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MedCard.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="MedDB_ModelFirstDB.Context.cs">
+    <Compile Include="MEDDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MedDB_ModelFirstDB.Context.tt</DependentUpon>
+      <DependentUpon>MEDDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="MedDB_ModelFirstDB.cs">
+    <Compile Include="MEDDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MedDB_ModelFirstDB.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
+    <Compile Include="MEDDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>MEDDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Operator.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Patient.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisitInfo.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkingMedDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkingMedDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="WorkTime.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -135,12 +121,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EntityDeploy Include="Model1.edmx">
+    <EntityDeploy Include="MEDDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>MEDDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="MEDDB.edmx.diagram">
+      <DependentUpon>MEDDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -152,31 +138,32 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="WorkingMedDBDataSet.xsc">
+      <DependentUpon>WorkingMedDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="WorkingMedDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkingMedDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WorkingMedDBDataSet.xss">
+      <DependentUpon>WorkingMedDBDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MedDB_ModelFirstDB.Context.tt">
+    <Content Include="MEDDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MedDB_ModelFirstDB.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>MEDDB.Context.cs</LastGenOutput>
+      <DependentUpon>MEDDB.edmx</DependentUpon>
     </Content>
-    <Content Include="MedDB_ModelFirstDB.edmx.sql" />
-    <Content Include="MedDB_ModelFirstDB.tt">
+    <Content Include="MEDDB.edmx.sql" />
+    <Content Include="MEDDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MedDB_ModelFirstDB.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <LastGenOutput>MEDDB.cs</LastGenOutput>
+      <DependentUpon>MEDDB.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

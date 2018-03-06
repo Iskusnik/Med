@@ -15,6 +15,7 @@ namespace Med
     public partial class Illness
     {
         public string Name { get; set; }
+        public long Hash { get; set; }
     
         public virtual Patient Patient { get; set; }
     }
