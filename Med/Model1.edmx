@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MedDB1Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MedDB1ModelStoreContainer">
+    <EntitySet Name="IllnessSet" EntityType="MedDB1Model.Store.IllnessSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MedCardSet" EntityType="MedDB1Model.Store.MedCardSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DocumentsSet" EntityType="MedDB1Model.Store.DocumentsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet" EntityType="MedDB1Model.Store.PersonSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DoctorRecordSet" EntityType="MedDB1Model.Store.DoctorRecordSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VisitInfoSet" EntityType="MedDB1Model.Store.VisitInfoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FreeTimeSet" EntityType="MedDB1Model.Store.FreeTimeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WorkTimeSet" EntityType="MedDB1Model.Store.WorkTimeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Patient" EntityType="MedDB1Model.Store.PersonSet_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Operator" EntityType="MedDB1Model.Store.PersonSet_Operator" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonSet_Doctor" EntityType="MedDB1Model.Store.PersonSet_Doctor" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Have" Association="MedDB1Model.Store.PatientHaveIllness">
+      <End Role="Illness" EntitySet="IllnessSet" />
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="PatientHaveMedCard" Association="MedDB1Model.Store.PatientHaveMedCard">
+      <End Role="MedCard" EntitySet="MedCardSet" />
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="MedCardHaveDoctorRecord" Association="MedDB1Model.Store.MedCardHaveDoctorRecord">
+      <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
+      <End Role="MedCard" EntitySet="MedCardSet" />
+    </AssociationSet>
+    <AssociationSet Name="PersonHaveDocuments" Association="MedDB1Model.Store.PersonHaveDocuments">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Documents" EntitySet="DocumentsSet" />
+    </AssociationSet>
+    <AssociationSet Name="OperatorMakesVisitInfo" Association="MedDB1Model.Store.OperatorMakesVisitInfo">
+      <End Role="Operator" EntitySet="PersonSet_Operator" />
+      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorMakesDoctorRecord" Association="MedDB1Model.Store.DoctorMakesDoctorRecord">
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorFreeTime" Association="MedDB1Model.Store.DoctorFreeTime">
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="FreeTime" EntitySet="FreeTimeSet" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorWorkTime" Association="MedDB1Model.Store.DoctorWorkTime">
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="WorkTime" EntitySet="WorkTimeSet" />
+    </AssociationSet>
+    <AssociationSet Name="WorkTimeVisitInfo" Association="MedDB1Model.Store.WorkTimeVisitInfo">
+      <End Role="WorkTime" EntitySet="WorkTimeSet" />
+      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_Person" Association="MedDB1Model.Store.FK_Patient_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operator_inherits_Person" Association="MedDB1Model.Store.FK_Operator_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Operator" EntitySet="PersonSet_Operator" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_inherits_Person" Association="MedDB1Model.Store.FK_Doctor_inherits_Person">
+      <End Role="Person" EntitySet="PersonSet" />
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="IllnessSet">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Patient_FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Patient_BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedCardSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Patient_FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Patient_BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DocumentName" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocumentName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet">
+    <Key>
+      <PropertyRef Name="FullName" />
+      <PropertyRef Name="BirthDate" />
+    </Key>
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Nationality" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LiveAdress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegAdress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegDate" Type="datetime" Nullable="false" />
+    <Property Name="InsuranceBillNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Documents_Id" Type="int" Nullable="false" />
+    <Property Name="Documents_DocumentName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DoctorRecordSet">
+    <Key>
+      <PropertyRef Name="DoctorInfo" />
+      <PropertyRef Name="Date" />
+    </Key>
+    <Property Name="Anamnesis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Diagnosis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HelpType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HelpAmount" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Result" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Standarts" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DoctorInfo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MedCard_Id" Type="int" Nullable="false" />
+    <Property Name="Doctor_FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Doctor_BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VisitInfoSet">
+    <Key>
+      <PropertyRef Name="Doctor" />
+      <PropertyRef Name="DateStart" />
+      <PropertyRef Name="DateFinish" />
+    </Key>
+    <Property Name="Doctor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OperatorFullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OperatorBirthDate" Type="datetime" Nullable="false" />
+    <Property Name="DateStart" Type="datetime" Nullable="false" />
+    <Property Name="DateFinish" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FreeTimeSet">
+    <Key>
+      <PropertyRef Name="Start" />
+      <PropertyRef Name="Finish" />
+    </Key>
+    <Property Name="Start" Type="datetime" Nullable="false" />
+    <Property Name="Finish" Type="datetime" Nullable="false" />
+    <Property Name="Doctor_FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Doctor_BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkTimeSet">
+    <Key>
+      <PropertyRef Name="Start" />
+      <PropertyRef Name="Finish" />
+    </Key>
+    <Property Name="Start" Type="datetime" Nullable="false" />
+    <Property Name="Finish" Type="datetime" Nullable="false" />
+    <Property Name="Doctor_FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Doctor_BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="VisitInfo_Doctor" Type="int" Nullable="false" />
+    <Property Name="VisitInfo_DateStart" Type="datetime" Nullable="false" />
+    <Property Name="VisitInfo_DateFinish" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Patient">
+    <Key>
+      <PropertyRef Name="FullName" />
+      <PropertyRef Name="BirthDate" />
+    </Key>
+    <Property Name="InsurancePolicyNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WorkIncapacityListNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BloodType" Type="tinyint" Nullable="false" />
+    <Property Name="Rhesus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Operator">
+    <Key>
+      <PropertyRef Name="FullName" />
+      <PropertyRef Name="BirthDate" />
+    </Key>
+    <Property Name="Login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonSet_Doctor">
+    <Key>
+      <PropertyRef Name="FullName" />
+      <PropertyRef Name="BirthDate" />
+    </Key>
+    <Property Name="Education" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Job" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Memberships" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="PatientHaveIllness">
+    <End Role="Illness" Type="MedDB1Model.Store.IllnessSet" Multiplicity="*" />
+    <End Role="Patient" Type="MedDB1Model.Store.PersonSet_Patient" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="Illness">
+        <PropertyRef Name="Patient_FullName" />
+        <PropertyRef Name="Patient_BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientHaveMedCard">
+    <End Role="MedCard" Type="MedDB1Model.Store.MedCardSet" Multiplicity="*" />
+    <End Role="Patient" Type="MedDB1Model.Store.PersonSet_Patient" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="MedCard">
+        <PropertyRef Name="Patient_FullName" />
+        <PropertyRef Name="Patient_BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedCardHaveDoctorRecord">
+    <End Role="DoctorRecord" Type="MedDB1Model.Store.DoctorRecordSet" Multiplicity="*" />
+    <End Role="MedCard" Type="MedDB1Model.Store.MedCardSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MedCard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoctorRecord">
+        <PropertyRef Name="MedCard_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonHaveDocuments">
+    <End Role="Person" Type="MedDB1Model.Store.PersonSet" Multiplicity="*" />
+    <End Role="Documents" Type="MedDB1Model.Store.DocumentsSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Documents">
+        <PropertyRef Name="Id" />
+        <PropertyRef Name="DocumentName" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="Documents_Id" />
+        <PropertyRef Name="Documents_DocumentName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OperatorMakesVisitInfo">
+    <End Role="Operator" Type="MedDB1Model.Store.PersonSet_Operator" Multiplicity="1" />
+    <End Role="VisitInfo" Type="MedDB1Model.Store.VisitInfoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operator">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="VisitInfo">
+        <PropertyRef Name="OperatorFullName" />
+        <PropertyRef Name="OperatorBirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorMakesDoctorRecord">
+    <End Role="Doctor" Type="MedDB1Model.Store.PersonSet_Doctor" Multiplicity="1" />
+    <End Role="DoctorRecord" Type="MedDB1Model.Store.DoctorRecordSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="DoctorRecord">
+        <PropertyRef Name="Doctor_FullName" />
+        <PropertyRef Name="Doctor_BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorFreeTime">
+    <End Role="Doctor" Type="MedDB1Model.Store.PersonSet_Doctor" Multiplicity="1" />
+    <End Role="FreeTime" Type="MedDB1Model.Store.FreeTimeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="FreeTime">
+        <PropertyRef Name="Doctor_FullName" />
+        <PropertyRef Name="Doctor_BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorWorkTime">
+    <End Role="Doctor" Type="MedDB1Model.Store.PersonSet_Doctor" Multiplicity="1" />
+    <End Role="WorkTime" Type="MedDB1Model.Store.WorkTimeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="WorkTime">
+        <PropertyRef Name="Doctor_FullName" />
+        <PropertyRef Name="Doctor_BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WorkTimeVisitInfo">
+    <End Role="WorkTime" Type="MedDB1Model.Store.WorkTimeSet" Multiplicity="*" />
+    <End Role="VisitInfo" Type="MedDB1Model.Store.VisitInfoSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="VisitInfo">
+        <PropertyRef Name="Doctor" />
+        <PropertyRef Name="DateStart" />
+        <PropertyRef Name="DateFinish" />
+      </Principal>
+      <Dependent Role="WorkTime">
+        <PropertyRef Name="VisitInfo_Doctor" />
+        <PropertyRef Name="VisitInfo_DateStart" />
+        <PropertyRef Name="VisitInfo_DateFinish" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_Person">
+    <End Role="Person" Type="MedDB1Model.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Patient" Type="MedDB1Model.Store.PersonSet_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operator_inherits_Person">
+    <End Role="Person" Type="MedDB1Model.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Operator" Type="MedDB1Model.Store.PersonSet_Operator" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="Operator">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_inherits_Person">
+    <End Role="Person" Type="MedDB1Model.Store.PersonSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Doctor" Type="MedDB1Model.Store.PersonSet_Doctor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="FullName" />
+        <PropertyRef Name="BirthDate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedDB1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MedDB1Entities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="IllnessSet" EntityType="MedDB1Model.Illness" />
+          <EntitySet Name="MedCardSet" EntityType="MedDB1Model.MedCard" />
+          <EntitySet Name="DocumentsSet" EntityType="MedDB1Model.Documents" />
+          <EntitySet Name="PersonSet" EntityType="MedDB1Model.Person" />
+          <EntitySet Name="DoctorRecordSet" EntityType="MedDB1Model.DoctorRecord" />
+          <EntitySet Name="VisitInfoSet" EntityType="MedDB1Model.VisitInfo" />
+          <AssociationSet Name="Have" Association="MedDB1Model.PatientHaveIllness">
+            <End Role="Illness" EntitySet="IllnessSet" />
+            <End Role="Patient" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="PatientHaveMedCard" Association="MedDB1Model.PatientHaveMedCard">
+            <End Role="MedCard" EntitySet="MedCardSet" />
+            <End Role="Patient" EntitySet="PersonSet" />
+          </AssociationSet>
+          <AssociationSet Name="MedCardHaveDoctorRecord" Association="MedDB1Model.MedCardHaveDoctorRecord">
+            <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
+            <End Role="MedCard" EntitySet="MedCardSet" />
+          </AssociationSet>
+          <AssociationSet Name="PersonHaveDocuments" Association="MedDB1Model.PersonHaveDocuments">
+            <End Role="Person" EntitySet="PersonSet" />
+            <End Role="Documents" EntitySet="DocumentsSet" />
+          </AssociationSet>
+          <AssociationSet Name="OperatorMakesVisitInfo" Association="MedDB1Model.OperatorMakesVisitInfo">
+            <End Role="Operator" EntitySet="PersonSet" />
+            <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorMakesDoctorRecord" Association="MedDB1Model.DoctorMakesDoctorRecord">
+            <End Role="Doctor" EntitySet="PersonSet" />
+            <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
+          </AssociationSet>
+          <EntitySet Name="FreeTimeSet" EntityType="MedDB1Model.FreeTime" />
+          <EntitySet Name="WorkTimeSet" EntityType="MedDB1Model.WorkTime" />
+          <AssociationSet Name="DoctorFreeTime" Association="MedDB1Model.DoctorFreeTime">
+            <End Role="Doctor" EntitySet="PersonSet" />
+            <End Role="FreeTime" EntitySet="FreeTimeSet" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorWorkTime" Association="MedDB1Model.DoctorWorkTime">
+            <End Role="Doctor" EntitySet="PersonSet" />
+            <End Role="WorkTime" EntitySet="WorkTimeSet" />
+          </AssociationSet>
+          <AssociationSet Name="WorkTimeVisitInfo" Association="MedDB1Model.WorkTimeVisitInfo">
+            <End Role="WorkTime" EntitySet="WorkTimeSet" />
+            <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Illness">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="MedDB1Model.PatientHaveIllness" FromRole="Illness" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="MedCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Patient" Relationship="MedDB1Model.PatientHaveMedCard" FromRole="MedCard" ToRole="Patient" />
+          <NavigationProperty Name="DoctorRecord" Relationship="MedDB1Model.MedCardHaveDoctorRecord" FromRole="MedCard" ToRole="DoctorRecord" />
+        </EntityType>
+        <EntityType Name="Patient" BaseType="MedDB1Model.Person">
+          <Property Name="InsurancePolicyNum" Type="String" Nullable="false" />
+          <Property Name="WorkIncapacityListNum" Type="String" Nullable="false" />
+          <Property Name="BloodType" Type="Byte" Nullable="false" />
+          <Property Name="Rhesus" Type="String" Nullable="false" />
+          <NavigationProperty Name="Illness" Relationship="MedDB1Model.PatientHaveIllness" FromRole="Patient" ToRole="Illness" />
+          <NavigationProperty Name="MedCard" Relationship="MedDB1Model.PatientHaveMedCard" FromRole="Patient" ToRole="MedCard" />
+        </EntityType>
+        <EntityType Name="Operator" BaseType="MedDB1Model.Person">
+          <Property Name="Login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="VisitInfo" Relationship="MedDB1Model.OperatorMakesVisitInfo" FromRole="Operator" ToRole="VisitInfo" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DocumentName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="MedDB1Model.PersonHaveDocuments" FromRole="Documents" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person" Abstract="true">
+          <Key>
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="BirthDate" />
+          </Key>
+          <Property Name="FullName" Type="String" Nullable="false" />
+          <Property Name="Gender" Type="String" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" />
+          <Property Name="Nationality" Type="String" Nullable="false" />
+          <Property Name="LiveAdress" Type="String" Nullable="false" />
+          <Property Name="RegAdress" Type="String" Nullable="false" />
+          <Property Name="RegDate" Type="DateTime" Nullable="false" />
+          <Property Name="InsuranceBillNum" Type="String" Nullable="false" />
+          <NavigationProperty Name="Documents" Relationship="MedDB1Model.PersonHaveDocuments" FromRole="Person" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="Doctor" BaseType="MedDB1Model.Person">
+          <Property Name="Education" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job" Type="String" Nullable="false" />
+          <Property Name="Memberships" Type="String" Nullable="false" />
+          <NavigationProperty Name="DoctorRecord" Relationship="MedDB1Model.DoctorMakesDoctorRecord" FromRole="Doctor" ToRole="DoctorRecord" />
+          <NavigationProperty Name="FreeTime" Relationship="MedDB1Model.DoctorFreeTime" FromRole="Doctor" ToRole="FreeTime" />
+          <NavigationProperty Name="WorkTime" Relationship="MedDB1Model.DoctorWorkTime" FromRole="Doctor" ToRole="WorkTime" />
+        </EntityType>
+        <EntityType Name="DoctorRecord">
+          <Key>
+            <PropertyRef Name="DoctorInfo" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Anamnesis" Type="String" Nullable="false" />
+          <Property Name="Diagnosis" Type="String" Nullable="false" />
+          <Property Name="HelpType" Type="String" Nullable="false" />
+          <Property Name="HelpAmount" Type="String" Nullable="false" />
+          <Property Name="Result" Type="String" Nullable="false" />
+          <Property Name="Standarts" Type="String" Nullable="false" />
+          <Property Name="DoctorInfo" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <NavigationProperty Name="MedCard" Relationship="MedDB1Model.MedCardHaveDoctorRecord" FromRole="DoctorRecord" ToRole="MedCard" />
+          <NavigationProperty Name="Doctor" Relationship="MedDB1Model.DoctorMakesDoctorRecord" FromRole="DoctorRecord" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="VisitInfo">
+          <Key>
+            <PropertyRef Name="Doctor" />
+            <PropertyRef Name="DateStart" />
+            <PropertyRef Name="DateFinish" />
+          </Key>
+          <Property Name="Doctor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Operator" Relationship="MedDB1Model.OperatorMakesVisitInfo" FromRole="VisitInfo" ToRole="Operator" />
+          <Property Name="OperatorFullName" Type="String" Nullable="false" />
+          <Property Name="OperatorBirthDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="WorkTime" Relationship="MedDB1Model.WorkTimeVisitInfo" FromRole="VisitInfo" ToRole="WorkTime" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" />
+          <Property Name="DateFinish" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="PatientHaveIllness">
+          <End Type="MedDB1Model.Illness" Role="Illness" Multiplicity="*" />
+          <End Type="MedDB1Model.Patient" Role="Patient" Multiplicity="1" />
+        </Association>
+        <Association Name="PatientHaveMedCard">
+          <End Type="MedDB1Model.MedCard" Role="MedCard" Multiplicity="0..1" />
+          <End Type="MedDB1Model.Patient" Role="Patient" Multiplicity="1" />
+        </Association>
+        <Association Name="MedCardHaveDoctorRecord">
+          <End Type="MedDB1Model.DoctorRecord" Role="DoctorRecord" Multiplicity="*" />
+          <End Type="MedDB1Model.MedCard" Role="MedCard" Multiplicity="1" />
+        </Association>
+        <Association Name="PersonHaveDocuments">
+          <End Type="MedDB1Model.Person" Role="Person" Multiplicity="1" />
+          <End Type="MedDB1Model.Documents" Role="Documents" Multiplicity="1" />
+        </Association>
+        <Association Name="OperatorMakesVisitInfo">
+          <End Type="MedDB1Model.Operator" Role="Operator" Multiplicity="1" />
+          <End Type="MedDB1Model.VisitInfo" Role="VisitInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operator">
+              <PropertyRef Name="FullName" />
+              <PropertyRef Name="BirthDate" />
+            </Principal>
+            <Dependent Role="VisitInfo">
+              <PropertyRef Name="OperatorFullName" />
+              <PropertyRef Name="OperatorBirthDate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DoctorMakesDoctorRecord">
+          <End Type="MedDB1Model.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="MedDB1Model.DoctorRecord" Role="DoctorRecord" Multiplicity="*" />
+        </Association>
+        <EntityType Name="FreeTime">
+          <Key>
+            <PropertyRef Name="Start" />
+            <PropertyRef Name="Finish" />
+          </Key>
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="Finish" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="MedDB1Model.DoctorFreeTime" FromRole="FreeTime" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="WorkTime">
+          <Key>
+            <PropertyRef Name="Start" />
+            <PropertyRef Name="Finish" />
+          </Key>
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="Finish" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="MedDB1Model.DoctorWorkTime" FromRole="WorkTime" ToRole="Doctor" />
+          <NavigationProperty Name="VisitInfo" Relationship="MedDB1Model.WorkTimeVisitInfo" FromRole="WorkTime" ToRole="VisitInfo" />
+        </EntityType>
+        <Association Name="DoctorFreeTime">
+          <End Type="MedDB1Model.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="MedDB1Model.FreeTime" Role="FreeTime" Multiplicity="*" />
+        </Association>
+        <Association Name="DoctorWorkTime">
+          <End Type="MedDB1Model.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="MedDB1Model.WorkTime" Role="WorkTime" Multiplicity="*" />
+        </Association>
+        <Association Name="WorkTimeVisitInfo">
+          <End Type="MedDB1Model.WorkTime" Role="WorkTime" Multiplicity="1" />
+          <End Type="MedDB1Model.VisitInfo" Role="VisitInfo" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedDB1ModelStoreContainer" CdmEntityContainer="MedDB1Entities">
+    <EntitySetMapping Name="IllnessSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.Illness)">
+        <MappingFragment StoreEntitySet="IllnessSet">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedCardSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.MedCard)">
+        <MappingFragment StoreEntitySet="MedCardSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.Documents)">
+        <MappingFragment StoreEntitySet="DocumentsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.Person)">
+        <MappingFragment StoreEntitySet="PersonSet">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="LiveAdress" ColumnName="LiveAdress" />
+          <ScalarProperty Name="RegAdress" ColumnName="RegAdress" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="InsuranceBillNum" ColumnName="InsuranceBillNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.Patient)">
+        <MappingFragment StoreEntitySet="PersonSet_Patient">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="InsurancePolicyNum" ColumnName="InsurancePolicyNum" />
+          <ScalarProperty Name="WorkIncapacityListNum" ColumnName="WorkIncapacityListNum" />
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+          <ScalarProperty Name="Rhesus" ColumnName="Rhesus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.Operator)">
+        <MappingFragment StoreEntitySet="PersonSet_Operator">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.Doctor)">
+        <MappingFragment StoreEntitySet="PersonSet_Doctor">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+          <ScalarProperty Name="Memberships" ColumnName="Memberships" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DoctorRecordSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.DoctorRecord)">
+        <MappingFragment StoreEntitySet="DoctorRecordSet">
+          <ScalarProperty Name="DoctorInfo" ColumnName="DoctorInfo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Anamnesis" ColumnName="Anamnesis" />
+          <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+          <ScalarProperty Name="HelpType" ColumnName="HelpType" />
+          <ScalarProperty Name="HelpAmount" ColumnName="HelpAmount" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Standarts" ColumnName="Standarts" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VisitInfoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.VisitInfo)">
+        <MappingFragment StoreEntitySet="VisitInfoSet">
+          <ScalarProperty Name="Doctor" ColumnName="Doctor" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+          <ScalarProperty Name="OperatorFullName" ColumnName="OperatorFullName" />
+          <ScalarProperty Name="OperatorBirthDate" ColumnName="OperatorBirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FreeTimeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.FreeTime)">
+        <MappingFragment StoreEntitySet="FreeTimeSet">
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Finish" ColumnName="Finish" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTimeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(MedDB1Model.WorkTime)">
+        <MappingFragment StoreEntitySet="WorkTimeSet">
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Finish" ColumnName="Finish" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Have" TypeName="MedDB1Model.PatientHaveIllness" StoreEntitySet="IllnessSet">
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="FullName" ColumnName="Patient_FullName" />
+        <ScalarProperty Name="BirthDate" ColumnName="Patient_BirthDate" />
+      </EndProperty>
+      <EndProperty Name="Illness">
+        <ScalarProperty Name="Name" ColumnName="Name" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PatientHaveMedCard" TypeName="MedDB1Model.PatientHaveMedCard" StoreEntitySet="MedCardSet">
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="FullName" ColumnName="Patient_FullName" />
+        <ScalarProperty Name="BirthDate" ColumnName="Patient_BirthDate" />
+      </EndProperty>
+      <EndProperty Name="MedCard">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MedCardHaveDoctorRecord" TypeName="MedDB1Model.MedCardHaveDoctorRecord" StoreEntitySet="DoctorRecordSet">
+      <EndProperty Name="MedCard">
+        <ScalarProperty Name="Id" ColumnName="MedCard_Id" />
+      </EndProperty>
+      <EndProperty Name="DoctorRecord">
+        <ScalarProperty Name="DoctorInfo" ColumnName="DoctorInfo" />
+        <ScalarProperty Name="Date" ColumnName="Date" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PersonHaveDocuments" TypeName="MedDB1Model.PersonHaveDocuments" StoreEntitySet="PersonSet">
+      <EndProperty Name="Documents">
+        <ScalarProperty Name="Id" ColumnName="Documents_Id" />
+        <ScalarProperty Name="DocumentName" ColumnName="Documents_DocumentName" />
+      </EndProperty>
+      <EndProperty Name="Person">
+        <ScalarProperty Name="FullName" ColumnName="FullName" />
+        <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DoctorMakesDoctorRecord" TypeName="MedDB1Model.DoctorMakesDoctorRecord" StoreEntitySet="DoctorRecordSet">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="FullName" ColumnName="Doctor_FullName" />
+        <ScalarProperty Name="BirthDate" ColumnName="Doctor_BirthDate" />
+      </EndProperty>
+      <EndProperty Name="DoctorRecord">
+        <ScalarProperty Name="DoctorInfo" ColumnName="DoctorInfo" />
+        <ScalarProperty Name="Date" ColumnName="Date" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DoctorFreeTime" TypeName="MedDB1Model.DoctorFreeTime" StoreEntitySet="FreeTimeSet">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="FullName" ColumnName="Doctor_FullName" />
+        <ScalarProperty Name="BirthDate" ColumnName="Doctor_BirthDate" />
+      </EndProperty>
+      <EndProperty Name="FreeTime">
+        <ScalarProperty Name="Start" ColumnName="Start" />
+        <ScalarProperty Name="Finish" ColumnName="Finish" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DoctorWorkTime" TypeName="MedDB1Model.DoctorWorkTime" StoreEntitySet="WorkTimeSet">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="FullName" ColumnName="Doctor_FullName" />
+        <ScalarProperty Name="BirthDate" ColumnName="Doctor_BirthDate" />
+      </EndProperty>
+      <EndProperty Name="WorkTime">
+        <ScalarProperty Name="Start" ColumnName="Start" />
+        <ScalarProperty Name="Finish" ColumnName="Finish" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WorkTimeVisitInfo" TypeName="MedDB1Model.WorkTimeVisitInfo" StoreEntitySet="WorkTimeSet">
+      <EndProperty Name="VisitInfo">
+        <ScalarProperty Name="Doctor" ColumnName="VisitInfo_Doctor" />
+        <ScalarProperty Name="DateStart" ColumnName="VisitInfo_DateStart" />
+        <ScalarProperty Name="DateFinish" ColumnName="VisitInfo_DateFinish" />
+      </EndProperty>
+      <EndProperty Name="WorkTime">
+        <ScalarProperty Name="Start" ColumnName="Start" />
+        <ScalarProperty Name="Finish" ColumnName="Finish" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

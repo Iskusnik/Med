@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Med
 {
-    public partial class Form1 : Form
+    public partial class MenuForm : Form
     {
-        public Form1()
+        public MenuForm()
         {
             InitializeComponent();
+        }
+
+        private void входВСистемуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

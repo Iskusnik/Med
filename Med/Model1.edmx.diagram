@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="170b7e77f93446d0adafebde65d839ad" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="MedDB1Model.Illness" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="MedDB1Model.MedCard" Width="1.5" PointX="0.875" PointY="3" />
+        <EntityTypeShape EntityType="MedDB1Model.Patient" Width="1.5" PointX="3.625" PointY="0.625" />
+        <EntityTypeShape EntityType="MedDB1Model.Operator" Width="1.5" PointX="8.75" PointY="2.75" />
+        <EntityTypeShape EntityType="MedDB1Model.Documents" Width="1.5" PointX="9.375" PointY="0.625" />
+        <EntityTypeShape EntityType="MedDB1Model.Person" Width="1.5" PointX="6.25" PointY="0.5" />
+        <EntityTypeShape EntityType="MedDB1Model.Doctor" Width="1.625" PointX="3.875" PointY="3" />
+        <EntityTypeShape EntityType="MedDB1Model.DoctorRecord" Width="1.5" PointX="3.5" PointY="5.625" />
+        <EntityTypeShape EntityType="MedDB1Model.VisitInfo" Width="2.375" PointX="8.625" PointY="5" />
+        <InheritanceConnector EntityType="MedDB1Model.Doctor" />
+        <InheritanceConnector EntityType="MedDB1Model.Patient" />
+        <AssociationConnector Association="MedDB1Model.PatientHaveIllness" />
+        <AssociationConnector Association="MedDB1Model.PatientHaveMedCard" />
+        <AssociationConnector Association="MedDB1Model.MedCardHaveDoctorRecord" />
+        <AssociationConnector Association="MedDB1Model.PersonHaveDocuments" />
+        <InheritanceConnector EntityType="MedDB1Model.Operator" />
+        <AssociationConnector Association="MedDB1Model.OperatorMakesVisitInfo" />
+        <AssociationConnector Association="MedDB1Model.DoctorMakesDoctorRecord" />
+        <EntityTypeShape EntityType="MedDB1Model.FreeTime" Width="1.5" PointX="6.25" PointY="3.5" />
+        <EntityTypeShape EntityType="MedDB1Model.WorkTime" Width="1.5" PointX="6.25" PointY="5.625" />
+        <AssociationConnector Association="MedDB1Model.DoctorFreeTime" />
+        <AssociationConnector Association="MedDB1Model.DoctorWorkTime" />
+        <AssociationConnector Association="MedDB1Model.WorkTimeVisitInfo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
