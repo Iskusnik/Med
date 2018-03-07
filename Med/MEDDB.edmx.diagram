@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="85abe8efa6894fe18da273d6bcf2505b" Name="Diagram1" ZoomLevel="101" >
         <EntityTypeShape EntityType="MEDDB.Illness" Width="1.5" PointX="6.875" PointY="4.375" />
-        <EntityTypeShape EntityType="MEDDB.MedCard" Width="1.5" PointX="9.125" PointY="6.875" />
+        <EntityTypeShape EntityType="MEDDB.MedCard" Width="1.5" PointX="9.125" PointY="7.125" />
         <EntityTypeShape EntityType="MEDDB.Patient" Width="1.5" PointX="9.125" PointY="4.375" />
         <EntityTypeShape EntityType="MEDDB.Operator" Width="1.5" PointX="18" PointY="4" />
         <EntityTypeShape EntityType="MEDDB.Documents" Width="1.5" PointX="13.125" PointY="2.25" />
@@ -28,6 +28,7 @@
         <InheritanceConnector EntityType="MEDDB.Operator" />
         <InheritanceConnector EntityType="MEDDB.Doctor" ManuallyRouted="false" >
         </InheritanceConnector>
+        <AssociationConnector Association="MEDDB.VisitInfoWorkTime" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -49,6 +49,10 @@
       <End Role="Doctor" EntitySet="PersonSet_Doctor" />
       <End Role="WorkTime" EntitySet="WorkTimeSet" />
     </AssociationSet>
+    <AssociationSet Name="VisitInfoWorkTime" Association="MEDDB.Store.VisitInfoWorkTime">
+      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+      <End Role="WorkTime" EntitySet="WorkTimeSet" />
+    </AssociationSet>
     <AssociationSet Name="FK_Patient_inherits_Person" Association="MEDDB.Store.FK_Patient_inherits_Person">
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Patient" EntitySet="PersonSet_Patient" />
@@ -126,14 +130,15 @@
       <PropertyRef Name="DateFinish" />
       <PropertyRef Name="DoctorID" />
     </Key>
-    <Property Name="Doctor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OperatorFullName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="OperatorBirthDate" Type="datetime" Nullable="false" />
+    <Property Name="PatientFullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PatientBirthDate" Type="datetime" Nullable="false" />
     <Property Name="DateStart" Type="datetime" Nullable="false" />
     <Property Name="DateFinish" Type="datetime" Nullable="false" />
     <Property Name="DoctorID" Type="bigint" Nullable="false" />
     <Property Name="Operator_BirthDate" Type="datetime" Nullable="false" />
     <Property Name="Operator_NameHashID" Type="bigint" Nullable="false" />
+    <Property Name="WorkTime_Start" Type="datetime" Nullable="false" />
+    <Property Name="WorkTime_Finish" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="FreeTimeSet">
     <Key>
@@ -174,6 +179,8 @@
     </Key>
     <Property Name="Login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDoctor" Type="bit" Nullable="false" />
+    <Property Name="LogPasHash" Type="bigint" Nullable="false" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="NameHashID" Type="bigint" Nullable="false" />
   </EntityType>
@@ -296,6 +303,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="VisitInfoWorkTime">
+    <End Role="VisitInfo" Type="MEDDB.Store.VisitInfoSet" Multiplicity="*" />
+    <End Role="WorkTime" Type="MEDDB.Store.WorkTimeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WorkTime">
+        <PropertyRef Name="Start" />
+        <PropertyRef Name="Finish" />
+      </Principal>
+      <Dependent Role="VisitInfo">
+        <PropertyRef Name="WorkTime_Start" />
+        <PropertyRef Name="WorkTime_Finish" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Patient_inherits_Person">
     <End Role="Person" Type="MEDDB.Store.PersonSet" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -389,6 +410,10 @@
             <End Role="Doctor" EntitySet="PersonSet" />
             <End Role="WorkTime" EntitySet="WorkTimeSet" />
           </AssociationSet>
+          <AssociationSet Name="VisitInfoWorkTime" Association="MEDDB.VisitInfoWorkTime">
+            <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+            <End Role="WorkTime" EntitySet="WorkTimeSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Illness">
           <Key>
@@ -418,6 +443,8 @@
           <Property Name="Login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Password" Type="String" Nullable="false" />
           <NavigationProperty Name="VisitInfo" Relationship="MEDDB.OperatorMakesVisitInfo" FromRole="Operator" ToRole="VisitInfo" />
+          <Property Name="IsDoctor" Type="Boolean" Nullable="false" />
+          <Property Name="LogPasHash" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="Documents">
           <Key>
@@ -474,13 +501,13 @@
             <PropertyRef Name="DateFinish" />
             <PropertyRef Name="DoctorID" />
           </Key>
-          <Property Name="Doctor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OperatorFullName" Type="String" Nullable="false" />
-          <Property Name="OperatorBirthDate" Type="DateTime" Nullable="false" />
+          <Property Name="PatientFullName" Type="String" Nullable="false" />
+          <Property Name="PatientBirthDate" Type="DateTime" Nullable="false" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" />
           <Property Name="DateFinish" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Operator" Relationship="MEDDB.OperatorMakesVisitInfo" FromRole="VisitInfo" ToRole="Operator" />
           <Property Name="DoctorID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="WorkTime" Relationship="MEDDB.VisitInfoWorkTime" FromRole="VisitInfo" ToRole="WorkTime" />
         </EntityType>
         <EntityType Name="FreeTime">
           <Key>
@@ -499,6 +526,7 @@
           <Property Name="Start" Type="DateTime" Nullable="false" />
           <Property Name="Finish" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Doctor" Relationship="MEDDB.DoctorWorkTime" FromRole="WorkTime" ToRole="Doctor" />
+          <NavigationProperty Name="VisitInfo" Relationship="MEDDB.VisitInfoWorkTime" FromRole="WorkTime" ToRole="VisitInfo" />
         </EntityType>
         <Association Name="PatientHaveIllness">
           <End Type="MEDDB.Illness" Role="Illness" Multiplicity="*" />
@@ -531,6 +559,10 @@
         <Association Name="DoctorWorkTime">
           <End Type="MEDDB.Doctor" Role="Doctor" Multiplicity="1" />
           <End Type="MEDDB.WorkTime" Role="WorkTime" Multiplicity="*" />
+        </Association>
+        <Association Name="VisitInfoWorkTime">
+          <End Type="MEDDB.VisitInfo" Role="VisitInfo" Multiplicity="1" />
+          <End Type="MEDDB.WorkTime" Role="WorkTime" Multiplicity="1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -591,6 +623,8 @@
           <ScalarProperty Name="NameHashID" ColumnName="NameHashID" />
           <ScalarProperty Name="Login" ColumnName="Login" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsDoctor" ColumnName="IsDoctor" />
+          <ScalarProperty Name="LogPasHash" ColumnName="LogPasHash" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(MEDDB.Doctor)">
@@ -624,9 +658,8 @@
           <ScalarProperty Name="DateStart" ColumnName="DateStart" />
           <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
           <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
-          <ScalarProperty Name="Doctor" ColumnName="Doctor" />
-          <ScalarProperty Name="OperatorFullName" ColumnName="OperatorFullName" />
-          <ScalarProperty Name="OperatorBirthDate" ColumnName="OperatorBirthDate" />
+          <ScalarProperty Name="PatientFullName" ColumnName="PatientFullName" />
+          <ScalarProperty Name="PatientBirthDate" ColumnName="PatientBirthDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -721,6 +754,17 @@
       <EndProperty Name="WorkTime">
         <ScalarProperty Name="Start" ColumnName="Start" />
         <ScalarProperty Name="Finish" ColumnName="Finish" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VisitInfoWorkTime" TypeName="MEDDB.VisitInfoWorkTime" StoreEntitySet="VisitInfoSet">
+      <EndProperty Name="WorkTime">
+        <ScalarProperty Name="Start" ColumnName="WorkTime_Start" />
+        <ScalarProperty Name="Finish" ColumnName="WorkTime_Finish" />
+      </EndProperty>
+      <EndProperty Name="VisitInfo">
+        <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+        <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+        <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

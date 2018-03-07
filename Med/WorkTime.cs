@@ -18,5 +18,6 @@ namespace Med
         public System.DateTime Finish { get; set; }
     
         public virtual Doctor Doctor { get; set; }
+        public virtual VisitInfo VisitInfo { get; set; }
     }
 }

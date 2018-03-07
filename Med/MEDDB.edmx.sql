@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/06/2018 19:14:44
+-- Date Created: 03/07/2018 18:41:38
 -- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med\MEDDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [WorkingMedDB];
+USE [LastMedDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -40,6 +40,9 @@ IF OBJECT_ID(N'[dbo].[FK_DoctorFreeTime]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_DoctorWorkTime]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[WorkTimeSet] DROP CONSTRAINT [FK_DoctorWorkTime];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VisitInfoWorkTime]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_VisitInfoWorkTime];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Patient_inherits_Person]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonSet_Patient] DROP CONSTRAINT [FK_Patient_inherits_Person];
@@ -151,14 +154,15 @@ GO
 
 -- Creating table 'VisitInfoSet'
 CREATE TABLE [dbo].[VisitInfoSet] (
-    [Doctor] int IDENTITY(1,1) NOT NULL,
-    [OperatorFullName] nvarchar(max)  NOT NULL,
-    [OperatorBirthDate] datetime  NOT NULL,
+    [PatientFullName] nvarchar(max)  NOT NULL,
+    [PatientBirthDate] datetime  NOT NULL,
     [DateStart] datetime  NOT NULL,
     [DateFinish] datetime  NOT NULL,
     [DoctorID] bigint  NOT NULL,
     [Operator_BirthDate] datetime  NOT NULL,
-    [Operator_NameHashID] bigint  NOT NULL
+    [Operator_NameHashID] bigint  NOT NULL,
+    [WorkTime_Start] datetime  NOT NULL,
+    [WorkTime_Finish] datetime  NOT NULL
 );
 GO
 
@@ -195,6 +199,8 @@ GO
 CREATE TABLE [dbo].[PersonSet_Operator] (
     [Login] int IDENTITY(1,1) NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
+    [IsDoctor] bit  NOT NULL,
+    [LogPasHash] bigint  NOT NULL,
     [BirthDate] datetime  NOT NULL,
     [NameHashID] bigint  NOT NULL
 );
@@ -402,6 +408,21 @@ GO
 CREATE INDEX [IX_FK_DoctorWorkTime]
 ON [dbo].[WorkTimeSet]
     ([Doctor_BirthDate], [Doctor_NameHashID]);
+GO
+
+-- Creating foreign key on [WorkTime_Start], [WorkTime_Finish] in table 'VisitInfoSet'
+ALTER TABLE [dbo].[VisitInfoSet]
+ADD CONSTRAINT [FK_VisitInfoWorkTime]
+    FOREIGN KEY ([WorkTime_Start], [WorkTime_Finish])
+    REFERENCES [dbo].[WorkTimeSet]
+        ([Start], [Finish])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VisitInfoWorkTime'
+CREATE INDEX [IX_FK_VisitInfoWorkTime]
+ON [dbo].[VisitInfoSet]
+    ([WorkTime_Start], [WorkTime_Finish]);
 GO
 
 -- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Patient'

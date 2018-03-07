@@ -22,6 +22,8 @@ namespace Med
     
         public int Login { get; set; }
         public string Password { get; set; }
+        public bool IsDoctor { get; set; }
+        public long LogPasHash { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VisitInfo> VisitInfo { get; set; }

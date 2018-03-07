@@ -14,13 +14,13 @@ namespace Med
     
     public partial class VisitInfo
     {
-        public int Doctor { get; set; }
-        public string OperatorFullName { get; set; }
-        public System.DateTime OperatorBirthDate { get; set; }
+        public string PatientFullName { get; set; }
+        public System.DateTime PatientBirthDate { get; set; }
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateFinish { get; set; }
         public long DoctorID { get; set; }
     
         public virtual Operator Operator { get; set; }
+        public virtual WorkTime WorkTime { get; set; }
     }
 }
