@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Med
+namespace Med2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Documents
+    public partial class Illness
     {
-        public long Id { get; set; }
-        public string DocumentName { get; set; }
+        public string Name { get; set; }
+        public long Hash { get; set; }
     
-        public virtual Person Person { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

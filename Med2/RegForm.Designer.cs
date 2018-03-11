@@ -1,4 +1,4 @@
-﻿namespace Med
+﻿namespace Med2
 {
     partial class RegForm
     {
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textName2 = new System.Windows.Forms.TextBox();
             this.textName = new System.Windows.Forms.TextBox();
@@ -64,18 +63,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxWorkIncapacity = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.comboBoxGender = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // comboBoxGender
-            // 
-            this.comboBoxGender.FormattingEnabled = true;
-            this.comboBoxGender.Items.AddRange(new object[] {
-            "Мужской",
-            "Женский"});
-            this.comboBoxGender.Location = new System.Drawing.Point(143, 96);
-            this.comboBoxGender.Name = "comboBoxGender";
-            this.comboBoxGender.Size = new System.Drawing.Size(137, 21);
-            this.comboBoxGender.TabIndex = 1;
             // 
             // label1
             // 
@@ -92,6 +81,7 @@
             this.textName2.Name = "textName2";
             this.textName2.Size = new System.Drawing.Size(137, 20);
             this.textName2.TabIndex = 3;
+            this.textName2.Text = "1";
             // 
             // textName
             // 
@@ -99,6 +89,7 @@
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(137, 20);
             this.textName.TabIndex = 4;
+            this.textName.Text = "1";
             // 
             // textSurname
             // 
@@ -137,6 +128,7 @@
             // dateTimePickerBirthDate
             // 
             this.dateTimePickerBirthDate.Location = new System.Drawing.Point(143, 125);
+            this.dateTimePickerBirthDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
             this.dateTimePickerBirthDate.Size = new System.Drawing.Size(137, 20);
             this.dateTimePickerBirthDate.TabIndex = 9;
@@ -156,6 +148,7 @@
             this.textNation.Name = "textNation";
             this.textNation.Size = new System.Drawing.Size(137, 20);
             this.textNation.TabIndex = 11;
+            this.textNation.Text = "1";
             // 
             // label6
             // 
@@ -172,6 +165,7 @@
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.Size = new System.Drawing.Size(137, 20);
             this.textLiveAdress.TabIndex = 13;
+            this.textLiveAdress.Text = "1";
             // 
             // textRegAdress
             // 
@@ -179,6 +173,7 @@
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.Size = new System.Drawing.Size(137, 20);
             this.textRegAdress.TabIndex = 14;
+            this.textRegAdress.Text = "1";
             // 
             // label7
             // 
@@ -210,6 +205,7 @@
             // dateTimePickerRegDate
             // 
             this.dateTimePickerRegDate.Location = new System.Drawing.Point(143, 255);
+            this.dateTimePickerRegDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerRegDate.Name = "dateTimePickerRegDate";
             this.dateTimePickerRegDate.Size = new System.Drawing.Size(137, 20);
             this.dateTimePickerRegDate.TabIndex = 17;
@@ -229,6 +225,7 @@
             this.textDocument.Name = "textDocument";
             this.textDocument.Size = new System.Drawing.Size(137, 20);
             this.textDocument.TabIndex = 20;
+            this.textDocument.Text = "1";
             // 
             // label11
             // 
@@ -254,6 +251,7 @@
             this.textDocumentN.Name = "textDocumentN";
             this.textDocumentN.Size = new System.Drawing.Size(137, 20);
             this.textDocumentN.TabIndex = 23;
+            this.textDocumentN.Text = "1";
             // 
             // label13
             // 
@@ -279,6 +277,7 @@
             this.textBoxInsuranceBillNum.Name = "textBoxInsuranceBillNum";
             this.textBoxInsuranceBillNum.Size = new System.Drawing.Size(264, 20);
             this.textBoxInsuranceBillNum.TabIndex = 26;
+            this.textBoxInsuranceBillNum.Text = "1";
             // 
             // textInsurancePolicyNum
             // 
@@ -286,6 +285,7 @@
             this.textInsurancePolicyNum.Name = "textInsurancePolicyNum";
             this.textInsurancePolicyNum.Size = new System.Drawing.Size(264, 20);
             this.textInsurancePolicyNum.TabIndex = 28;
+            this.textInsurancePolicyNum.Text = "1";
             // 
             // label15
             // 
@@ -312,6 +312,7 @@
             this.textBoxPassword2.Name = "textBoxPassword2";
             this.textBoxPassword2.Size = new System.Drawing.Size(264, 20);
             this.textBoxPassword2.TabIndex = 34;
+            this.textBoxPassword2.Text = "1";
             // 
             // label16
             // 
@@ -328,6 +329,7 @@
             this.textBoxPassword1.Name = "textBoxPassword1";
             this.textBoxPassword1.Size = new System.Drawing.Size(264, 20);
             this.textBoxPassword1.TabIndex = 32;
+            this.textBoxPassword1.Text = "1";
             // 
             // label17
             // 
@@ -353,6 +355,7 @@
             this.textBoxWorkIncapacity.Name = "textBoxWorkIncapacity";
             this.textBoxWorkIncapacity.Size = new System.Drawing.Size(264, 20);
             this.textBoxWorkIncapacity.TabIndex = 36;
+            this.textBoxWorkIncapacity.Text = "1";
             // 
             // label19
             // 
@@ -363,12 +366,25 @@
             this.label19.TabIndex = 35;
             this.label19.Text = "Серия и номер листка нетрудоспособности";
             // 
+            // comboBoxGender
+            // 
+            this.comboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxGender.FormattingEnabled = true;
+            this.comboBoxGender.Items.AddRange(new object[] {
+            "Мужской",
+            "Женский"});
+            this.comboBoxGender.Location = new System.Drawing.Point(143, 96);
+            this.comboBoxGender.Name = "comboBoxGender";
+            this.comboBoxGender.Size = new System.Drawing.Size(137, 21);
+            this.comboBoxGender.TabIndex = 38;
+            // 
             // RegForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(306, 741);
+            this.Controls.Add(this.comboBoxGender);
             this.Controls.Add(this.textBoxWorkIncapacity);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.textBoxPassword2);
@@ -404,9 +420,8 @@
             this.Controls.Add(this.textName);
             this.Controls.Add(this.textName2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBoxGender);
             this.MaximumSize = new System.Drawing.Size(322, 780);
-            this.MinimumSize = new System.Drawing.Size(322, 0);
+            this.MinimumSize = new System.Drawing.Size(322, 39);
             this.Name = "RegForm";
             this.Text = "Регистрация";
             this.Load += new System.EventHandler(this.RegForm_Load);
@@ -442,7 +457,6 @@
         public System.Windows.Forms.TextBox textInsurancePolicyNum;
         public System.Windows.Forms.TextBox textBoxPassword2;
         public System.Windows.Forms.TextBox textBoxPassword1;
-        public System.Windows.Forms.ComboBox comboBoxGender;
         public System.Windows.Forms.TextBox textName2;
         public System.Windows.Forms.TextBox textName;
         public System.Windows.Forms.TextBox textSurname;
@@ -452,5 +466,6 @@
         public System.Windows.Forms.TextBox textRegAdress;
         public System.Windows.Forms.TextBox textBoxWorkIncapacity;
         private System.Windows.Forms.Label label19;
+        public System.Windows.Forms.ComboBox comboBoxGender;
     }
 }

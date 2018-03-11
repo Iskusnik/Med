@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="295cdc13782d4260bc81e62b3841db7e" Name="Diagram1" ZoomLevel="121" >
+        <EntityTypeShape EntityType="ModelMedDB.Illness" Width="1.5" PointX="9.625" PointY="7.25" />
+        <EntityTypeShape EntityType="ModelMedDB.MedCard" Width="1.5" PointX="12" PointY="10.375" />
+        <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="12.25" PointY="7" />
+        <EntityTypeShape EntityType="ModelMedDB.Documents" Width="1.5" PointX="13.5" PointY="2.25" />
+        <EntityTypeShape EntityType="ModelMedDB.Person" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelMedDB.Doctor" Width="1.5" PointX="18.625" PointY="1.375" />
+        <EntityTypeShape EntityType="ModelMedDB.DoctorRecord" Width="1.5" PointX="15.5" PointY="8.5" />
+        <EntityTypeShape EntityType="ModelMedDB.VisitInfo" Width="1.5" PointX="21.375" PointY="6.875" />
+        <EntityTypeShape EntityType="ModelMedDB.FreeTime" Width="1.5" PointX="19.375" PointY="4.625" />
+        <EntityTypeShape EntityType="ModelMedDB.WorkTime" Width="1.5" PointX="21.375" PointY="4" />
+        <AssociationConnector Association="ModelMedDB.PatientHaveIllness" />
+        <AssociationConnector Association="ModelMedDB.PatientHaveMedCard" />
+        <AssociationConnector Association="ModelMedDB.MedCardHaveDoctorRecord" />
+        <AssociationConnector Association="ModelMedDB.PersonHaveDocuments" />
+        <AssociationConnector Association="ModelMedDB.DoctorMakesDoctorRecord" />
+        <AssociationConnector Association="ModelMedDB.DoctorFreeTime" />
+        <AssociationConnector Association="ModelMedDB.DoctorWorkTime" />
+        <AssociationConnector Association="ModelMedDB.VisitInfoWorkTime" />
+        <AssociationConnector Association="ModelMedDB.PatientVisitInfo" />
+        <InheritanceConnector EntityType="ModelMedDB.Patient" />
+        <InheritanceConnector EntityType="ModelMedDB.Doctor" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

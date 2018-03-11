@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Med {
+namespace Med2 {
     
     
     /// <summary>
@@ -20,9 +20,9 @@ namespace Med {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("FinallyWorkingDBDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("NewMedDBDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class FinallyWorkingDBDataSet : global::System.Data.DataSet {
+    public partial class NewMedDBDataSet : global::System.Data.DataSet {
         
         private DoctorRecordSetDataTable tableDoctorRecordSet;
         
@@ -70,7 +70,7 @@ namespace Med {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public FinallyWorkingDBDataSet() {
+        public NewMedDBDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -81,7 +81,7 @@ namespace Med {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected FinallyWorkingDBDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected NewMedDBDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -284,7 +284,7 @@ namespace Med {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            FinallyWorkingDBDataSet cln = ((FinallyWorkingDBDataSet)(base.Clone()));
+            NewMedDBDataSet cln = ((NewMedDBDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -448,9 +448,9 @@ namespace Med {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "FinallyWorkingDBDataSet";
+            this.DataSetName = "NewMedDBDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/FinallyWorkingDBDataSet.xsd";
+            this.Namespace = "http://tempuri.org/NewMedDBDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableDoctorRecordSet = new DoctorRecordSetDataTable();
@@ -608,7 +608,7 @@ namespace Med {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+            NewMedDBDataSet ds = new NewMedDBDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -1057,7 +1057,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1225,7 +1225,7 @@ namespace Med {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DocumentsSetRow FindById(int Id) {
+            public DocumentsSetRow FindById(long Id) {
                 return ((DocumentsSetRow)(this.Rows.Find(new object[] {
                             Id})));
             }
@@ -1254,7 +1254,7 @@ namespace Med {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
                 this.columnDocumentName = new global::System.Data.DataColumn("DocumentName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDocumentName);
@@ -1335,7 +1335,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1639,7 +1639,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1943,7 +1943,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2235,7 +2235,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2564,7 +2564,7 @@ namespace Med {
                 base.Columns.Add(this.columnNameHashID);
                 this.columnPassword = new global::System.Data.DataColumn("Password", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPassword);
-                this.columnDocuments_Id = new global::System.Data.DataColumn("Documents_Id", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnDocuments_Id = new global::System.Data.DataColumn("Documents_Id", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDocuments_Id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBirthDate,
@@ -2654,7 +2654,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2979,7 +2979,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3316,7 +3316,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3698,7 +3698,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4002,7 +4002,7 @@ namespace Med {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FinallyWorkingDBDataSet ds = new FinallyWorkingDBDataSet();
+                NewMedDBDataSet ds = new NewMedDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4246,9 +4246,9 @@ namespace Med {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Id {
+            public long Id {
                 get {
-                    return ((int)(this[this.tableDocumentsSet.IdColumn]));
+                    return ((long)(this[this.tableDocumentsSet.IdColumn]));
                 }
                 set {
                     this[this.tableDocumentsSet.IdColumn] = value;
@@ -4614,9 +4614,9 @@ namespace Med {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Documents_Id {
+            public long Documents_Id {
                 get {
-                    return ((int)(this[this.tablePersonSet.Documents_IdColumn]));
+                    return ((long)(this[this.tablePersonSet.Documents_IdColumn]));
                 }
                 set {
                     this[this.tablePersonSet.Documents_IdColumn] = value;
@@ -5454,7 +5454,7 @@ namespace Med {
         }
     }
 }
-namespace Med.FinallyWorkingDBDataSetTableAdapters {
+namespace Med2.NewMedDBDataSetTableAdapters {
     
     
     /// <summary>
@@ -5645,7 +5645,7 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5664,7 +5664,7 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.DoctorRecordSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.DoctorRecordSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5677,9 +5677,9 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.DoctorRecordSetDataTable GetData() {
+        public virtual NewMedDBDataSet.DoctorRecordSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.DoctorRecordSetDataTable dataTable = new FinallyWorkingDBDataSet.DoctorRecordSetDataTable();
+            NewMedDBDataSet.DoctorRecordSetDataTable dataTable = new NewMedDBDataSet.DoctorRecordSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -5687,14 +5687,14 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.DoctorRecordSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.DoctorRecordSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "DoctorRecordSet");
         }
         
@@ -6034,7 +6034,7 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DocumentsSet] WHERE (([Id] = @Original_Id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DocumentsSet] ([DocumentName]) VALUES (@DocumentName);\r\nSELECT" +
@@ -6047,15 +6047,15 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
                 "iginal_Id));\r\nSELECT Id, DocumentName FROM DocumentsSet WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DocumentName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6072,7 +6072,7 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.DocumentsSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.DocumentsSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6085,9 +6085,9 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.DocumentsSetDataTable GetData() {
+        public virtual NewMedDBDataSet.DocumentsSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.DocumentsSetDataTable dataTable = new FinallyWorkingDBDataSet.DocumentsSetDataTable();
+            NewMedDBDataSet.DocumentsSetDataTable dataTable = new NewMedDBDataSet.DocumentsSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -6095,14 +6095,14 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.DocumentsSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.DocumentsSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "DocumentsSet");
         }
         
@@ -6125,8 +6125,8 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
+        public virtual int Delete(long Original_Id) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6174,15 +6174,15 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string DocumentName, int Original_Id, int Id) {
+        public virtual int Update(string DocumentName, long Original_Id, long Id) {
             if ((DocumentName == null)) {
                 throw new global::System.ArgumentNullException("DocumentName");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(DocumentName));
             }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((long)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6203,7 +6203,7 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string DocumentName, int Original_Id) {
+        public virtual int Update(string DocumentName, long Original_Id) {
             return this.Update(DocumentName, Original_Id, Original_Id);
         }
     }
@@ -6372,7 +6372,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6389,7 +6389,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.FreeTimeSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.FreeTimeSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6402,9 +6402,9 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.FreeTimeSetDataTable GetData() {
+        public virtual NewMedDBDataSet.FreeTimeSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.FreeTimeSetDataTable dataTable = new FinallyWorkingDBDataSet.FreeTimeSetDataTable();
+            NewMedDBDataSet.FreeTimeSetDataTable dataTable = new NewMedDBDataSet.FreeTimeSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -6412,14 +6412,14 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.FreeTimeSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.FreeTimeSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "FreeTimeSet");
         }
         
@@ -6690,7 +6690,7 @@ SELECT Name, Hash, Patient_BirthDate, Patient_NameHashID FROM IllnessSet WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6707,7 +6707,7 @@ SELECT Name, Hash, Patient_BirthDate, Patient_NameHashID FROM IllnessSet WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.IllnessSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.IllnessSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6720,9 +6720,9 @@ SELECT Name, Hash, Patient_BirthDate, Patient_NameHashID FROM IllnessSet WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.IllnessSetDataTable GetData() {
+        public virtual NewMedDBDataSet.IllnessSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.IllnessSetDataTable dataTable = new FinallyWorkingDBDataSet.IllnessSetDataTable();
+            NewMedDBDataSet.IllnessSetDataTable dataTable = new NewMedDBDataSet.IllnessSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -6730,14 +6730,14 @@ SELECT Name, Hash, Patient_BirthDate, Patient_NameHashID FROM IllnessSet WHERE (
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.IllnessSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.IllnessSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "IllnessSet");
         }
         
@@ -7011,7 +7011,7 @@ SELECT Id, Patient_BirthDate, Patient_NameHashID FROM MedCardSet WHERE (Id = @Id
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7028,7 +7028,7 @@ SELECT Id, Patient_BirthDate, Patient_NameHashID FROM MedCardSet WHERE (Id = @Id
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.MedCardSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.MedCardSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -7041,9 +7041,9 @@ SELECT Id, Patient_BirthDate, Patient_NameHashID FROM MedCardSet WHERE (Id = @Id
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.MedCardSetDataTable GetData() {
+        public virtual NewMedDBDataSet.MedCardSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.MedCardSetDataTable dataTable = new FinallyWorkingDBDataSet.MedCardSetDataTable();
+            NewMedDBDataSet.MedCardSetDataTable dataTable = new NewMedDBDataSet.MedCardSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -7051,14 +7051,14 @@ SELECT Id, Patient_BirthDate, Patient_NameHashID FROM MedCardSet WHERE (Id = @Id
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.MedCardSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.MedCardSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "MedCardSet");
         }
         
@@ -7302,7 +7302,7 @@ SELECT Id, Patient_BirthDate, Patient_NameHashID FROM MedCardSet WHERE (Id = @Id
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RegDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Documents_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PersonSet] ([FullName], [Gender], [BirthDate], [Nationality], [LiveAdress], [RegAdress], [RegDate], [InsuranceBillNum], [NameHashID], [Password], [Documents_Id]) VALUES (@FullName, @Gender, @BirthDate, @Nationality, @LiveAdress, @RegAdress, @RegDate, @InsuranceBillNum, @NameHashID, @Password, @Documents_Id);
@@ -7318,7 +7318,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InsuranceBillNum", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsuranceBillNum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Documents_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PersonSet] SET [FullName] = @FullName, [Gender] = @Gender, [BirthDate] = @BirthDate, [Nationality] = @Nationality, [LiveAdress] = @LiveAdress, [RegAdress] = @RegAdress, [RegDate] = @RegDate, [InsuranceBillNum] = @InsuranceBillNum, [NameHashID] = @NameHashID, [Password] = @Password, [Documents_Id] = @Documents_Id WHERE (([BirthDate] = @Original_BirthDate) AND ([RegDate] = @Original_RegDate) AND ([NameHashID] = @Original_NameHashID) AND ([Documents_Id] = @Original_Documents_Id));
@@ -7334,18 +7334,18 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InsuranceBillNum", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsuranceBillNum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Documents_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RegDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Documents_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7363,7 +7363,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.PersonSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.PersonSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -7376,9 +7376,9 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.PersonSetDataTable GetData() {
+        public virtual NewMedDBDataSet.PersonSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.PersonSetDataTable dataTable = new FinallyWorkingDBDataSet.PersonSetDataTable();
+            NewMedDBDataSet.PersonSetDataTable dataTable = new NewMedDBDataSet.PersonSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -7386,14 +7386,14 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.PersonSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.PersonSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "PersonSet");
         }
         
@@ -7416,11 +7416,11 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, int Original_Documents_Id) {
+        public virtual int Delete(System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, long Original_Documents_Id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((System.DateTime)(Original_BirthDate));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_RegDate));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((long)(Original_NameHashID));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_Documents_Id));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((long)(Original_Documents_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7441,7 +7441,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, int Documents_Id) {
+        public virtual int Insert(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, long Documents_Id) {
             if ((FullName == null)) {
                 throw new global::System.ArgumentNullException("FullName");
             }
@@ -7487,7 +7487,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = ((string)(Password));
             }
-            this.Adapter.InsertCommand.Parameters[10].Value = ((int)(Documents_Id));
+            this.Adapter.InsertCommand.Parameters[10].Value = ((long)(Documents_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7508,7 +7508,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, int Documents_Id, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, int Original_Documents_Id) {
+        public virtual int Update(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, long Documents_Id, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, long Original_Documents_Id) {
             if ((FullName == null)) {
                 throw new global::System.ArgumentNullException("FullName");
             }
@@ -7554,11 +7554,11 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Password));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Documents_Id));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((long)(Documents_Id));
             this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_BirthDate));
             this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_RegDate));
             this.Adapter.UpdateCommand.Parameters[13].Value = ((long)(Original_NameHashID));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_Documents_Id));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((long)(Original_Documents_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7579,7 +7579,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FullName, string Gender, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, string Password, int Documents_Id, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, int Original_Documents_Id) {
+        public virtual int Update(string FullName, string Gender, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, string Password, long Documents_Id, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, long Original_Documents_Id) {
             return this.Update(FullName, Gender, Original_BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, Original_NameHashID, Password, Documents_Id, Original_BirthDate, Original_RegDate, Original_NameHashID, Original_Documents_Id);
         }
     }
@@ -7747,7 +7747,7 @@ SELECT Education, Job, Memberships, BirthDate, NameHashID FROM PersonSet_Doctor 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7765,7 +7765,7 @@ SELECT Education, Job, Memberships, BirthDate, NameHashID FROM PersonSet_Doctor 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.PersonSet_DoctorDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.PersonSet_DoctorDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -7778,9 +7778,9 @@ SELECT Education, Job, Memberships, BirthDate, NameHashID FROM PersonSet_Doctor 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.PersonSet_DoctorDataTable GetData() {
+        public virtual NewMedDBDataSet.PersonSet_DoctorDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.PersonSet_DoctorDataTable dataTable = new FinallyWorkingDBDataSet.PersonSet_DoctorDataTable();
+            NewMedDBDataSet.PersonSet_DoctorDataTable dataTable = new NewMedDBDataSet.PersonSet_DoctorDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -7788,14 +7788,14 @@ SELECT Education, Job, Memberships, BirthDate, NameHashID FROM PersonSet_Doctor 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.PersonSet_DoctorDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.PersonSet_DoctorDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "PersonSet_Doctor");
         }
         
@@ -8088,7 +8088,7 @@ SELECT InsurancePolicyNum, WorkIncapacityListNum, BloodType, Rhesus, BirthDate, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8106,7 +8106,7 @@ SELECT InsurancePolicyNum, WorkIncapacityListNum, BloodType, Rhesus, BirthDate, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.PersonSet_PatientDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.PersonSet_PatientDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -8119,9 +8119,9 @@ SELECT InsurancePolicyNum, WorkIncapacityListNum, BloodType, Rhesus, BirthDate, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.PersonSet_PatientDataTable GetData() {
+        public virtual NewMedDBDataSet.PersonSet_PatientDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.PersonSet_PatientDataTable dataTable = new FinallyWorkingDBDataSet.PersonSet_PatientDataTable();
+            NewMedDBDataSet.PersonSet_PatientDataTable dataTable = new NewMedDBDataSet.PersonSet_PatientDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -8129,14 +8129,14 @@ SELECT InsurancePolicyNum, WorkIncapacityListNum, BloodType, Rhesus, BirthDate, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.PersonSet_PatientDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.PersonSet_PatientDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "PersonSet_Patient");
         }
         
@@ -8460,7 +8460,7 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8479,7 +8479,7 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.VisitInfoSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.VisitInfoSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -8492,9 +8492,9 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.VisitInfoSetDataTable GetData() {
+        public virtual NewMedDBDataSet.VisitInfoSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.VisitInfoSetDataTable dataTable = new FinallyWorkingDBDataSet.VisitInfoSetDataTable();
+            NewMedDBDataSet.VisitInfoSetDataTable dataTable = new NewMedDBDataSet.VisitInfoSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -8502,14 +8502,14 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.VisitInfoSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.VisitInfoSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "VisitInfoSet");
         }
         
@@ -8825,7 +8825,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Med.Properties.Settings.Default.FinallyWorkingDBConnectionString;
+            this._connection.ConnectionString = global::Med2.Properties.Settings.Default.NewMedDBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8842,7 +8842,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FinallyWorkingDBDataSet.WorkTimeSetDataTable dataTable) {
+        public virtual int Fill(NewMedDBDataSet.WorkTimeSetDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -8855,9 +8855,9 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FinallyWorkingDBDataSet.WorkTimeSetDataTable GetData() {
+        public virtual NewMedDBDataSet.WorkTimeSetDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            FinallyWorkingDBDataSet.WorkTimeSetDataTable dataTable = new FinallyWorkingDBDataSet.WorkTimeSetDataTable();
+            NewMedDBDataSet.WorkTimeSetDataTable dataTable = new NewMedDBDataSet.WorkTimeSetDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -8865,14 +8865,14 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet.WorkTimeSetDataTable dataTable) {
+        public virtual int Update(NewMedDBDataSet.WorkTimeSetDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FinallyWorkingDBDataSet dataSet) {
+        public virtual int Update(NewMedDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "WorkTimeSet");
         }
         
@@ -9277,7 +9277,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(FinallyWorkingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(NewMedDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._documentsSetTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -9377,7 +9377,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(FinallyWorkingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(NewMedDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._documentsSetTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -9467,7 +9467,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(FinallyWorkingDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(NewMedDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._visitInfoSetTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.VisitInfoSet.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -9581,7 +9581,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(FinallyWorkingDBDataSet dataSet) {
+        public virtual int UpdateAll(NewMedDBDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

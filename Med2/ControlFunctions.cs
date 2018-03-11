@@ -8,7 +8,7 @@ using System.Data;
 using System.Configuration;
 using System.Windows.Forms;
 
-namespace Med
+namespace Med2
 {
     public class ControlFunctions
     {
@@ -17,7 +17,7 @@ namespace Med
         //public static SqlConnection connection = new SqlConnection(connectionString);
         //static public LastMedDBDataSet db = new LastMedDBDataSet();
         //db.PersonSet_Operator.FindByBirthDateNameHashID()
-        public static string connectionString = @"Data Source=ISKUSNIK;Initial Catalog=FinallyWorkingDB;Integrated Security=True";
+        public static string connectionString = @"Data Source=ISKUSNIK;Initial Catalog=NewMedDB;Integrated Security=True";
         public static SqlConnection connection = new SqlConnection(connectionString);
         
 
@@ -25,7 +25,7 @@ namespace Med
         {
             using (connection)
             {
-                using (MEDDBContainer db = new MEDDBContainer())
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     connection.Open();
                     
@@ -39,33 +39,26 @@ namespace Med
         public static bool RegistrationCall(object obj)
         {
             RegForm regForm = (RegForm)obj;
-            /*
-            string sqlExpression = "INSERT INTO PersonSet (FullName, Gender) VALUES ('Tom Tommy Tomphson', 'M')";
-            using (connection)
+            
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                using (MEDDBContainer db = new MEDDBContainer())
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExpression, connection);
-                   // int number = command.ExecuteNonQuery();
-
-                    db.PersonSet.Add(new Patient { FullName = "Фёдоров Фёдор Фёдорович" });
-                    db.PersonSet.Add(new Patient { FullName = "Иванов Фёдор Фёдорович" });
-                    db.SaveChanges();
-                }
-            }*/
-            using (MEDDBContainer db = new MEDDBContainer())
-            {
+                Patient newPatient = new Patient();
                 try
                 {
-                    Patient newPatient = new Patient();
+                    if (regForm.comboBoxGender.Text == "" || regForm.textSurname.Text == "" 
+                          || regForm.textName.Text == "" || regForm.textBoxPassword2.Text == ""
+                          || regForm.textNation.Text == "" || regForm.textLiveAdress.Text == ""
+                          || regForm.textRegAdress.Text == ""  || regForm.textDocument.Text == "" 
+                          || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == "")
+                        throw (new ArgumentNullException());
+
                     newPatient.FullName = regForm.textSurname.Text + " " + regForm.textName.Text + " " + regForm.textName2.Text;
                     newPatient.Gender = regForm.comboBoxGender.Text;
-                    newPatient.BirthDate = regForm.dateTimePickerBirthDate.Value;
+                    newPatient.BirthDate = regForm.dateTimePickerBirthDate.Value.Date;
                     newPatient.Nationality = regForm.textNation.Text;
                     newPatient.LiveAdress = regForm.textLiveAdress.Text;
                     newPatient.RegAdress = regForm.textRegAdress.Text;
-                    newPatient.RegDate = regForm.dateTimePickerRegDate.Value;
+                    newPatient.RegDate = regForm.dateTimePickerRegDate.Value.Date;
                     newPatient.InsuranceBillNum = regForm.textBoxInsuranceBillNum.Text;
                     newPatient.InsurancePolicyNum = regForm.textInsurancePolicyNum.Text;
                     newPatient.WorkIncapacityListNum = regForm.textBoxWorkIncapacity.Text;
@@ -85,9 +78,9 @@ namespace Med
                     else
                         throw new Exception("Пароль не совпадает с введённым во второй раз");
 
-
                     if (db.PersonSet.Find(newPatient.BirthDate, newPatient.NameHashID) != null)
                         throw new Exception("Данный человек уже зарегистрирован");
+                    newPatient.MedCard = new MedCard();
                     db.PersonSet.Add(newPatient);
                     db.SaveChanges();
 
@@ -96,17 +89,35 @@ namespace Med
                 catch(ArgumentNullException)
                 {
                     MessageBox.Show("Заполните пустые поля");
+                    return false;
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     MessageBox.Show("Данные в полях выходят за границы возможных значений");
+                    return false;
                 }
                 catch (Exception a)
                 {
                     MessageBox.Show(a.Message);
+                    return false;
                 }
-                return false;
+                
             }
         }
     }
 }
+/*
+            string sqlExpression = "INSERT INTO PersonSet (FullName, Gender) VALUES ('Tom Tommy Tomphson', 'M')";
+            using (connection)
+            {
+                using (MEDDBContainer db = new MEDDBContainer())
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                   // int number = command.ExecuteNonQuery();
+
+                    db.PersonSet.Add(new Patient { FullName = "Фёдоров Фёдор Фёдорович" });
+                    db.PersonSet.Add(new Patient { FullName = "Иванов Фёдор Фёдорович" });
+                    db.SaveChanges();
+                }
+            }*/

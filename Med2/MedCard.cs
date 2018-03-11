@@ -7,16 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Med
+namespace Med2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Documents
+    public partial class MedCard
     {
-        public long Id { get; set; }
-        public string DocumentName { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MedCard()
+        {
+            this.DoctorRecord = new HashSet<DoctorRecord>();
+        }
     
-        public virtual Person Person { get; set; }
+        public int Id { get; set; }
+    
+        public virtual Patient Patient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DoctorRecord> DoctorRecord { get; set; }
     }
 }

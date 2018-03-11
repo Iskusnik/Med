@@ -7,16 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Med
+namespace Med2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Documents
+    public partial class WorkTime
     {
-        public long Id { get; set; }
-        public string DocumentName { get; set; }
+        public System.DateTime Start { get; set; }
+        public System.DateTime Finish { get; set; }
     
-        public virtual Person Person { get; set; }
+        public virtual Doctor Doctor { get; set; }
+        public virtual VisitInfo VisitInfo { get; set; }
     }
 }

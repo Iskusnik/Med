@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/11/2018 18:15:34
--- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med\MEDDB.edmx
+-- Date Created: 03/11/2018 18:36:25
+-- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med2\ModelMedDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [MEDdbFixedOnceAgain];
+USE [NewMedDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,74 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PatientHaveIllness]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IllnessSet] DROP CONSTRAINT [FK_PatientHaveIllness];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PatientHaveMedCard]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MedCardSet] DROP CONSTRAINT [FK_PatientHaveMedCard];
-GO
-IF OBJECT_ID(N'[dbo].[FK_MedCardHaveDoctorRecord]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DoctorRecordSet] DROP CONSTRAINT [FK_MedCardHaveDoctorRecord];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PersonHaveDocuments]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_PersonHaveDocuments];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DoctorMakesDoctorRecord]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DoctorRecordSet] DROP CONSTRAINT [FK_DoctorMakesDoctorRecord];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DoctorFreeTime]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FreeTimeSet] DROP CONSTRAINT [FK_DoctorFreeTime];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DoctorWorkTime]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[WorkTimeSet] DROP CONSTRAINT [FK_DoctorWorkTime];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VisitInfoWorkTime]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_VisitInfoWorkTime];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PatientVisitInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_PatientVisitInfo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Patient_inherits_Person]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet_Patient] DROP CONSTRAINT [FK_Patient_inherits_Person];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Doctor_inherits_Person]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet_Doctor] DROP CONSTRAINT [FK_Doctor_inherits_Person];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[IllnessSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[IllnessSet];
-GO
-IF OBJECT_ID(N'[dbo].[MedCardSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MedCardSet];
-GO
-IF OBJECT_ID(N'[dbo].[DocumentsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DocumentsSet];
-GO
-IF OBJECT_ID(N'[dbo].[PersonSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonSet];
-GO
-IF OBJECT_ID(N'[dbo].[DoctorRecordSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DoctorRecordSet];
-GO
-IF OBJECT_ID(N'[dbo].[VisitInfoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[VisitInfoSet];
-GO
-IF OBJECT_ID(N'[dbo].[FreeTimeSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FreeTimeSet];
-GO
-IF OBJECT_ID(N'[dbo].[WorkTimeSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[WorkTimeSet];
-GO
-IF OBJECT_ID(N'[dbo].[PersonSet_Patient]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonSet_Patient];
-GO
-IF OBJECT_ID(N'[dbo].[PersonSet_Doctor]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonSet_Doctor];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables

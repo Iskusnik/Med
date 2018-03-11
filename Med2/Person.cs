@@ -7,16 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Med
+namespace Med2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Documents
+    public partial class Person
     {
-        public long Id { get; set; }
-        public string DocumentName { get; set; }
+        public string FullName { get; set; }
+        public string Gender { get; set; }
+        public System.DateTime BirthDate { get; set; }
+        public string Nationality { get; set; }
+        public string LiveAdress { get; set; }
+        public string RegAdress { get; set; }
+        public System.DateTime RegDate { get; set; }
+        public string InsuranceBillNum { get; set; }
+        public long NameHashID { get; set; }
+        public string Password { get; set; }
     
-        public virtual Person Person { get; set; }
+        public virtual Documents Documents { get; set; }
     }
 }

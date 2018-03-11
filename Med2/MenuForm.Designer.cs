@@ -1,4 +1,4 @@
-﻿namespace Med
+﻿namespace Med2
 {
     partial class MenuForm
     {

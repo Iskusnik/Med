@@ -7,16 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Med
+namespace Med2
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Documents
+    public partial class DoctorRecord
     {
-        public long Id { get; set; }
-        public string DocumentName { get; set; }
+        public string Anamnesis { get; set; }
+        public string Diagnosis { get; set; }
+        public string HelpType { get; set; }
+        public string HelpAmount { get; set; }
+        public string Result { get; set; }
+        public string Standarts { get; set; }
+        public string DoctorInfo { get; set; }
+        public System.DateTime Date { get; set; }
+        public long DoctorID { get; set; }
     
-        public virtual Person Person { get; set; }
+        public virtual MedCard MedCard { get; set; }
+        public virtual Doctor Doctor { get; set; }
     }
 }

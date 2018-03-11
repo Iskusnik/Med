@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54B6CB02-DF23-4D9A-B43A-191B3E20DEFD}</ProjectGuid>
+    <ProjectGuid>{83B77955-3C65-45FF-884B-41BFA02DDF51}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Med</RootNamespace>
-    <AssemblyName>Med</AssemblyName>
+    <RootNamespace>Med2</RootNamespace>
+    <AssemblyName>Med2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,8 +42,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -56,52 +54,26 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlFunctions.cs" />
     <Compile Include="Doctor.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DoctorRecord.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Documents.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="FreeTime.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Illness.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MedCard.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MEDDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MEDDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MEDDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MEDDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MEDDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MEDDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="MEDdbFixedOnceAgainDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MEDdbFixedOnceAgainDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="MEDdbFixedOnceAgainDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MEDdbFixedOnceAgainDataSet1.xsd</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
@@ -109,11 +81,31 @@
     <Compile Include="MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelMedDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMedDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMedDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMedDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelMedDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="NewMedDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewMedDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Patient.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,10 +116,10 @@
       <DependentUpon>RegForm.cs</DependentUpon>
     </Compile>
     <Compile Include="VisitInfo.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkTime.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
+      <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
@@ -144,34 +136,23 @@
     <EmbeddedResource Include="RegForm.resx">
       <DependentUpon>RegForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="MEDDB.edmx">
+    <EntityDeploy Include="ModelMedDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MEDDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelMedDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="MEDDB.edmx.diagram">
-      <DependentUpon>MEDDB.edmx</DependentUpon>
+    <None Include="ModelMedDB.edmx.diagram">
+      <DependentUpon>ModelMedDB.edmx</DependentUpon>
     </None>
-    <None Include="MEDdbFixedOnceAgainDataSet.xsc">
-      <DependentUpon>MEDdbFixedOnceAgainDataSet.xsd</DependentUpon>
+    <None Include="NewMedDBDataSet.xsc">
+      <DependentUpon>NewMedDBDataSet.xsd</DependentUpon>
     </None>
-    <None Include="MEDdbFixedOnceAgainDataSet.xsd">
+    <None Include="NewMedDBDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MEDdbFixedOnceAgainDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>NewMedDBDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="MEDdbFixedOnceAgainDataSet.xss">
-      <DependentUpon>MEDdbFixedOnceAgainDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="MEDdbFixedOnceAgainDataSet1.xsc">
-      <DependentUpon>MEDdbFixedOnceAgainDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="MEDdbFixedOnceAgainDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MEDdbFixedOnceAgainDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="MEDdbFixedOnceAgainDataSet1.xss">
-      <DependentUpon>MEDdbFixedOnceAgainDataSet1.xsd</DependentUpon>
+    <None Include="NewMedDBDataSet.xss">
+      <DependentUpon>NewMedDBDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -188,16 +169,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MEDDB.Context.tt">
+    <Content Include="ModelMedDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MEDDB.Context.cs</LastGenOutput>
-      <DependentUpon>MEDDB.edmx</DependentUpon>
+      <LastGenOutput>ModelMedDB.Context.cs</LastGenOutput>
+      <DependentUpon>ModelMedDB.edmx</DependentUpon>
     </Content>
-    <Content Include="MEDDB.edmx.sql" />
-    <Content Include="MEDDB.tt">
+    <Content Include="ModelMedDB.edmx.sql" />
+    <Content Include="ModelMedDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MEDDB.cs</LastGenOutput>
-      <DependentUpon>MEDDB.edmx</DependentUpon>
+      <LastGenOutput>ModelMedDB.cs</LastGenOutput>
+      <DependentUpon>ModelMedDB.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
