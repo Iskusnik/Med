@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/07/2018 18:41:38
+-- Date Created: 03/11/2018 00:41:22
 -- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med\MEDDB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [LastMedDB];
+USE [FinallyWorkingDB];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -26,9 +26,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MedCardHaveDoctorRecord]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DoctorRecordSet] DROP CONSTRAINT [FK_MedCardHaveDoctorRecord];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OperatorMakesVisitInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_OperatorMakesVisitInfo];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PersonHaveDocuments]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonSet] DROP CONSTRAINT [FK_PersonHaveDocuments];
 GO
@@ -44,11 +41,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_VisitInfoWorkTime]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_VisitInfoWorkTime];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PatientVisitInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VisitInfoSet] DROP CONSTRAINT [FK_PatientVisitInfo];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Patient_inherits_Person]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonSet_Patient] DROP CONSTRAINT [FK_Patient_inherits_Person];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Operator_inherits_Person]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PersonSet_Operator] DROP CONSTRAINT [FK_Operator_inherits_Person];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Doctor_inherits_Person]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PersonSet_Doctor] DROP CONSTRAINT [FK_Doctor_inherits_Person];
@@ -84,9 +81,6 @@ IF OBJECT_ID(N'[dbo].[WorkTimeSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PersonSet_Patient]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PersonSet_Patient];
-GO
-IF OBJECT_ID(N'[dbo].[PersonSet_Operator]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PersonSet_Operator];
 GO
 IF OBJECT_ID(N'[dbo].[PersonSet_Doctor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PersonSet_Doctor];
@@ -131,6 +125,7 @@ CREATE TABLE [dbo].[PersonSet] (
     [RegDate] datetime  NOT NULL,
     [InsuranceBillNum] nvarchar(max)  NOT NULL,
     [NameHashID] bigint  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
     [Documents_Id] int  NOT NULL
 );
 GO
@@ -159,10 +154,10 @@ CREATE TABLE [dbo].[VisitInfoSet] (
     [DateStart] datetime  NOT NULL,
     [DateFinish] datetime  NOT NULL,
     [DoctorID] bigint  NOT NULL,
-    [Operator_BirthDate] datetime  NOT NULL,
-    [Operator_NameHashID] bigint  NOT NULL,
     [WorkTime_Start] datetime  NOT NULL,
-    [WorkTime_Finish] datetime  NOT NULL
+    [WorkTime_Finish] datetime  NOT NULL,
+    [Patient_BirthDate] datetime  NOT NULL,
+    [Patient_NameHashID] bigint  NOT NULL
 );
 GO
 
@@ -190,17 +185,6 @@ CREATE TABLE [dbo].[PersonSet_Patient] (
     [WorkIncapacityListNum] nvarchar(max)  NOT NULL,
     [BloodType] tinyint  NOT NULL,
     [Rhesus] nvarchar(max)  NOT NULL,
-    [BirthDate] datetime  NOT NULL,
-    [NameHashID] bigint  NOT NULL
-);
-GO
-
--- Creating table 'PersonSet_Operator'
-CREATE TABLE [dbo].[PersonSet_Operator] (
-    [Login] int IDENTITY(1,1) NOT NULL,
-    [Password] nvarchar(max)  NOT NULL,
-    [IsDoctor] bit  NOT NULL,
-    [LogPasHash] bigint  NOT NULL,
     [BirthDate] datetime  NOT NULL,
     [NameHashID] bigint  NOT NULL
 );
@@ -274,12 +258,6 @@ ADD CONSTRAINT [PK_PersonSet_Patient]
     PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
 GO
 
--- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet_Operator'
-ALTER TABLE [dbo].[PersonSet_Operator]
-ADD CONSTRAINT [PK_PersonSet_Operator]
-    PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
-GO
-
 -- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet_Doctor'
 ALTER TABLE [dbo].[PersonSet_Doctor]
 ADD CONSTRAINT [PK_PersonSet_Doctor]
@@ -333,21 +311,6 @@ GO
 CREATE INDEX [IX_FK_MedCardHaveDoctorRecord]
 ON [dbo].[DoctorRecordSet]
     ([MedCard_Id]);
-GO
-
--- Creating foreign key on [Operator_BirthDate], [Operator_NameHashID] in table 'VisitInfoSet'
-ALTER TABLE [dbo].[VisitInfoSet]
-ADD CONSTRAINT [FK_OperatorMakesVisitInfo]
-    FOREIGN KEY ([Operator_BirthDate], [Operator_NameHashID])
-    REFERENCES [dbo].[PersonSet_Operator]
-        ([BirthDate], [NameHashID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OperatorMakesVisitInfo'
-CREATE INDEX [IX_FK_OperatorMakesVisitInfo]
-ON [dbo].[VisitInfoSet]
-    ([Operator_BirthDate], [Operator_NameHashID]);
 GO
 
 -- Creating foreign key on [Documents_Id] in table 'PersonSet'
@@ -425,18 +388,24 @@ ON [dbo].[VisitInfoSet]
     ([WorkTime_Start], [WorkTime_Finish]);
 GO
 
+-- Creating foreign key on [Patient_BirthDate], [Patient_NameHashID] in table 'VisitInfoSet'
+ALTER TABLE [dbo].[VisitInfoSet]
+ADD CONSTRAINT [FK_PatientVisitInfo]
+    FOREIGN KEY ([Patient_BirthDate], [Patient_NameHashID])
+    REFERENCES [dbo].[PersonSet_Patient]
+        ([BirthDate], [NameHashID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PatientVisitInfo'
+CREATE INDEX [IX_FK_PatientVisitInfo]
+ON [dbo].[VisitInfoSet]
+    ([Patient_BirthDate], [Patient_NameHashID]);
+GO
+
 -- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Patient'
 ALTER TABLE [dbo].[PersonSet_Patient]
 ADD CONSTRAINT [FK_Patient_inherits_Person]
-    FOREIGN KEY ([BirthDate], [NameHashID])
-    REFERENCES [dbo].[PersonSet]
-        ([BirthDate], [NameHashID])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Operator'
-ALTER TABLE [dbo].[PersonSet_Operator]
-ADD CONSTRAINT [FK_Operator_inherits_Person]
     FOREIGN KEY ([BirthDate], [NameHashID])
     REFERENCES [dbo].[PersonSet]
         ([BirthDate], [NameHashID])

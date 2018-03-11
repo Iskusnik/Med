@@ -32,6 +32,8 @@
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.registrationButton = new System.Windows.Forms.Button();
+            this.finallyWorkingDBDataSet1 = new Med.FinallyWorkingDBDataSet();
+            ((System.ComponentModel.ISupportInitialize)(this.finallyWorkingDBDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // authorizeButton
@@ -66,6 +68,12 @@
             this.registrationButton.TabIndex = 3;
             this.registrationButton.Text = "Регистрация";
             this.registrationButton.UseVisualStyleBackColor = true;
+            this.registrationButton.Click += new System.EventHandler(this.registrationButton_Click);
+            // 
+            // finallyWorkingDBDataSet1
+            // 
+            this.finallyWorkingDBDataSet1.DataSetName = "FinallyWorkingDBDataSet";
+            this.finallyWorkingDBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // MenuForm
             // 
@@ -78,6 +86,7 @@
             this.Controls.Add(this.authorizeButton);
             this.Name = "MenuForm";
             this.Text = "MenuForm";
+            ((System.ComponentModel.ISupportInitialize)(this.finallyWorkingDBDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,5 +98,6 @@
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button registrationButton;
+        private FinallyWorkingDBDataSet finallyWorkingDBDataSet1;
     }
 }

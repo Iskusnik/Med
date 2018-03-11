@@ -15,7 +15,6 @@
     <EntitySet Name="FreeTimeSet" EntityType="MEDDB.Store.FreeTimeSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="WorkTimeSet" EntityType="MEDDB.Store.WorkTimeSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet_Patient" EntityType="MEDDB.Store.PersonSet_Patient" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PersonSet_Operator" EntityType="MEDDB.Store.PersonSet_Operator" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet_Doctor" EntityType="MEDDB.Store.PersonSet_Doctor" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="PatientHaveIllness" Association="MEDDB.Store.PatientHaveIllness">
       <End Role="Illness" EntitySet="IllnessSet" />
@@ -28,10 +27,6 @@
     <AssociationSet Name="MedCardHaveDoctorRecord" Association="MEDDB.Store.MedCardHaveDoctorRecord">
       <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
       <End Role="MedCard" EntitySet="MedCardSet" />
-    </AssociationSet>
-    <AssociationSet Name="OperatorMakesVisitInfo" Association="MEDDB.Store.OperatorMakesVisitInfo">
-      <End Role="Operator" EntitySet="PersonSet_Operator" />
-      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
     </AssociationSet>
     <AssociationSet Name="PersonHaveDocuments" Association="MEDDB.Store.PersonHaveDocuments">
       <End Role="Person" EntitySet="PersonSet" />
@@ -53,13 +48,13 @@
       <End Role="VisitInfo" EntitySet="VisitInfoSet" />
       <End Role="WorkTime" EntitySet="WorkTimeSet" />
     </AssociationSet>
+    <AssociationSet Name="PatientVisitInfo" Association="MEDDB.Store.PatientVisitInfo">
+      <End Role="Patient" EntitySet="PersonSet_Patient" />
+      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+    </AssociationSet>
     <AssociationSet Name="FK_Patient_inherits_Person" Association="MEDDB.Store.FK_Patient_inherits_Person">
       <End Role="Person" EntitySet="PersonSet" />
       <End Role="Patient" EntitySet="PersonSet_Patient" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Operator_inherits_Person" Association="MEDDB.Store.FK_Operator_inherits_Person">
-      <End Role="Person" EntitySet="PersonSet" />
-      <End Role="Operator" EntitySet="PersonSet_Operator" />
     </AssociationSet>
     <AssociationSet Name="FK_Doctor_inherits_Person" Association="MEDDB.Store.FK_Doctor_inherits_Person">
       <End Role="Person" EntitySet="PersonSet" />
@@ -104,6 +99,7 @@
     <Property Name="RegDate" Type="datetime" Nullable="false" />
     <Property Name="InsuranceBillNum" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NameHashID" Type="bigint" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Documents_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DoctorRecordSet">
@@ -135,10 +131,10 @@
     <Property Name="DateStart" Type="datetime" Nullable="false" />
     <Property Name="DateFinish" Type="datetime" Nullable="false" />
     <Property Name="DoctorID" Type="bigint" Nullable="false" />
-    <Property Name="Operator_BirthDate" Type="datetime" Nullable="false" />
-    <Property Name="Operator_NameHashID" Type="bigint" Nullable="false" />
     <Property Name="WorkTime_Start" Type="datetime" Nullable="false" />
     <Property Name="WorkTime_Finish" Type="datetime" Nullable="false" />
+    <Property Name="Patient_BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Patient_NameHashID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="FreeTimeSet">
     <Key>
@@ -169,18 +165,6 @@
     <Property Name="WorkIncapacityListNum" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BloodType" Type="tinyint" Nullable="false" />
     <Property Name="Rhesus" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BirthDate" Type="datetime" Nullable="false" />
-    <Property Name="NameHashID" Type="bigint" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PersonSet_Operator">
-    <Key>
-      <PropertyRef Name="BirthDate" />
-      <PropertyRef Name="NameHashID" />
-    </Key>
-    <Property Name="Login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="IsDoctor" Type="bit" Nullable="false" />
-    <Property Name="LogPasHash" Type="bigint" Nullable="false" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="NameHashID" Type="bigint" Nullable="false" />
   </EntityType>
@@ -232,20 +216,6 @@
       </Principal>
       <Dependent Role="DoctorRecord">
         <PropertyRef Name="MedCard_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="OperatorMakesVisitInfo">
-    <End Role="Operator" Type="MEDDB.Store.PersonSet_Operator" Multiplicity="1" />
-    <End Role="VisitInfo" Type="MEDDB.Store.VisitInfoSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Operator">
-        <PropertyRef Name="BirthDate" />
-        <PropertyRef Name="NameHashID" />
-      </Principal>
-      <Dependent Role="VisitInfo">
-        <PropertyRef Name="Operator_BirthDate" />
-        <PropertyRef Name="Operator_NameHashID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -317,6 +287,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PatientVisitInfo">
+    <End Role="Patient" Type="MEDDB.Store.PersonSet_Patient" Multiplicity="1" />
+    <End Role="VisitInfo" Type="MEDDB.Store.VisitInfoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="BirthDate" />
+        <PropertyRef Name="NameHashID" />
+      </Principal>
+      <Dependent Role="VisitInfo">
+        <PropertyRef Name="Patient_BirthDate" />
+        <PropertyRef Name="Patient_NameHashID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Patient_inherits_Person">
     <End Role="Person" Type="MEDDB.Store.PersonSet" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -328,22 +312,6 @@
         <PropertyRef Name="NameHashID" />
       </Principal>
       <Dependent Role="Patient">
-        <PropertyRef Name="BirthDate" />
-        <PropertyRef Name="NameHashID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Operator_inherits_Person">
-    <End Role="Person" Type="MEDDB.Store.PersonSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Operator" Type="MEDDB.Store.PersonSet_Operator" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Person">
-        <PropertyRef Name="BirthDate" />
-        <PropertyRef Name="NameHashID" />
-      </Principal>
-      <Dependent Role="Operator">
         <PropertyRef Name="BirthDate" />
         <PropertyRef Name="NameHashID" />
       </Dependent>
@@ -390,10 +358,6 @@
             <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
             <End Role="MedCard" EntitySet="MedCardSet" />
           </AssociationSet>
-          <AssociationSet Name="OperatorMakesVisitInfo" Association="MEDDB.OperatorMakesVisitInfo">
-            <End Role="Operator" EntitySet="PersonSet" />
-            <End Role="VisitInfo" EntitySet="VisitInfoSet" />
-          </AssociationSet>
           <AssociationSet Name="PersonHaveDocuments" Association="MEDDB.PersonHaveDocuments">
             <End Role="Person" EntitySet="PersonSet" />
             <End Role="Documents" EntitySet="DocumentsSet" />
@@ -414,7 +378,11 @@
             <End Role="VisitInfo" EntitySet="VisitInfoSet" />
             <End Role="WorkTime" EntitySet="WorkTimeSet" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="PatientVisitInfo" Association="MEDDB.PatientVisitInfo">
+            <End Role="Patient" EntitySet="PersonSet" />
+            <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Illness">
           <Key>
             <PropertyRef Name="Hash" />
@@ -438,13 +406,7 @@
           <Property Name="Rhesus" Type="String" Nullable="false" />
           <NavigationProperty Name="Illness" Relationship="MEDDB.PatientHaveIllness" FromRole="Patient" ToRole="Illness" />
           <NavigationProperty Name="MedCard" Relationship="MEDDB.PatientHaveMedCard" FromRole="Patient" ToRole="MedCard" />
-        </EntityType>
-        <EntityType Name="Operator" BaseType="MEDDB.Person">
-          <Property Name="Login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Password" Type="String" Nullable="false" />
-          <NavigationProperty Name="VisitInfo" Relationship="MEDDB.OperatorMakesVisitInfo" FromRole="Operator" ToRole="VisitInfo" />
-          <Property Name="IsDoctor" Type="Boolean" Nullable="false" />
-          <Property Name="LogPasHash" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="VisitInfo" Relationship="MEDDB.PatientVisitInfo" FromRole="Patient" ToRole="VisitInfo" />
         </EntityType>
         <EntityType Name="Documents">
           <Key>
@@ -469,6 +431,7 @@
           <Property Name="InsuranceBillNum" Type="String" Nullable="false" />
           <NavigationProperty Name="Documents" Relationship="MEDDB.PersonHaveDocuments" FromRole="Person" ToRole="Documents" />
           <Property Name="NameHashID" Type="Int64" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" cg:SetterAccess="Public" cg:GetterAccess="Public" />
         </EntityType>
         <EntityType Name="Doctor" BaseType="MEDDB.Person">
           <Property Name="Education" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
@@ -505,9 +468,9 @@
           <Property Name="PatientBirthDate" Type="DateTime" Nullable="false" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" />
           <Property Name="DateFinish" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Operator" Relationship="MEDDB.OperatorMakesVisitInfo" FromRole="VisitInfo" ToRole="Operator" />
           <Property Name="DoctorID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="WorkTime" Relationship="MEDDB.VisitInfoWorkTime" FromRole="VisitInfo" ToRole="WorkTime" />
+          <NavigationProperty Name="Patient" Relationship="MEDDB.PatientVisitInfo" FromRole="VisitInfo" ToRole="Patient" />
         </EntityType>
         <EntityType Name="FreeTime">
           <Key>
@@ -540,10 +503,6 @@
           <End Type="MEDDB.DoctorRecord" Role="DoctorRecord" Multiplicity="*" />
           <End Type="MEDDB.MedCard" Role="MedCard" Multiplicity="1" />
         </Association>
-        <Association Name="OperatorMakesVisitInfo">
-          <End Type="MEDDB.Operator" Role="Operator" Multiplicity="1" />
-          <End Type="MEDDB.VisitInfo" Role="VisitInfo" Multiplicity="*" />
-        </Association>
         <Association Name="PersonHaveDocuments">
           <End Type="MEDDB.Person" Role="Person" Multiplicity="1" />
           <End Type="MEDDB.Documents" Role="Documents" Multiplicity="1" />
@@ -563,6 +522,10 @@
         <Association Name="VisitInfoWorkTime">
           <End Type="MEDDB.VisitInfo" Role="VisitInfo" Multiplicity="1" />
           <End Type="MEDDB.WorkTime" Role="WorkTime" Multiplicity="1" />
+        </Association>
+        <Association Name="PatientVisitInfo">
+          <End Type="MEDDB.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="MEDDB.VisitInfo" Role="VisitInfo" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -605,6 +568,7 @@
           <ScalarProperty Name="RegAdress" ColumnName="RegAdress" />
           <ScalarProperty Name="RegDate" ColumnName="RegDate" />
           <ScalarProperty Name="InsuranceBillNum" ColumnName="InsuranceBillNum" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(MEDDB.Patient)">
@@ -615,16 +579,6 @@
           <ScalarProperty Name="WorkIncapacityListNum" ColumnName="WorkIncapacityListNum" />
           <ScalarProperty Name="BloodType" ColumnName="BloodType" />
           <ScalarProperty Name="Rhesus" ColumnName="Rhesus" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(MEDDB.Operator)">
-        <MappingFragment StoreEntitySet="PersonSet_Operator">
-          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-          <ScalarProperty Name="NameHashID" ColumnName="NameHashID" />
-          <ScalarProperty Name="Login" ColumnName="Login" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="IsDoctor" ColumnName="IsDoctor" />
-          <ScalarProperty Name="LogPasHash" ColumnName="LogPasHash" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(MEDDB.Doctor)">
@@ -706,17 +660,6 @@
         <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="OperatorMakesVisitInfo" TypeName="MEDDB.OperatorMakesVisitInfo" StoreEntitySet="VisitInfoSet">
-      <EndProperty Name="Operator">
-        <ScalarProperty Name="BirthDate" ColumnName="Operator_BirthDate" />
-        <ScalarProperty Name="NameHashID" ColumnName="Operator_NameHashID" />
-      </EndProperty>
-      <EndProperty Name="VisitInfo">
-        <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-        <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
-        <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="PersonHaveDocuments" TypeName="MEDDB.PersonHaveDocuments" StoreEntitySet="PersonSet">
       <EndProperty Name="Documents">
         <ScalarProperty Name="Id" ColumnName="Documents_Id" />
@@ -760,6 +703,17 @@
       <EndProperty Name="WorkTime">
         <ScalarProperty Name="Start" ColumnName="WorkTime_Start" />
         <ScalarProperty Name="Finish" ColumnName="WorkTime_Finish" />
+      </EndProperty>
+      <EndProperty Name="VisitInfo">
+        <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+        <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+        <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PatientVisitInfo" TypeName="MEDDB.PatientVisitInfo" StoreEntitySet="VisitInfoSet">
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="BirthDate" ColumnName="Patient_BirthDate" />
+        <ScalarProperty Name="NameHashID" ColumnName="Patient_NameHashID" />
       </EndProperty>
       <EndProperty Name="VisitInfo">
         <ScalarProperty Name="DateStart" ColumnName="DateStart" />

@@ -19,8 +19,15 @@ namespace Med
 
         private void authorizeButton_Click(object sender, EventArgs e)
         {
-            if(!ControlFunctions.LoginPasswordCheck("1","1"))
-                MessageBox.Show("Заполните поля");
+            //finallyWorkingDBDataSet1.PersonSet.AddPersonSetRow()
+                if (!ControlFunctions.LoginPasswordCheck("1", "1"))
+                    MessageBox.Show("Заполните поля");
+        }
+
+        private void registrationButton_Click(object sender, EventArgs e)
+        {
+
+            ControlFunctions.RegistrationCall(this);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Med
         public Patient()
         {
             this.Illness = new HashSet<Illness>();
+            this.VisitInfo = new HashSet<VisitInfo>();
         }
     
         public string InsurancePolicyNum { get; set; }
@@ -28,5 +29,7 @@ namespace Med
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Illness> Illness { get; set; }
         public virtual MedCard MedCard { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VisitInfo> VisitInfo { get; set; }
     }
 }

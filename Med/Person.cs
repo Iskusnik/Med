@@ -23,6 +23,7 @@ namespace Med
         public System.DateTime RegDate { get; set; }
         public string InsuranceBillNum { get; set; }
         public long NameHashID { get; set; }
+        public string Password { get; set; }
     
         public virtual Documents Documents { get; set; }
     }

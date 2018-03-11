@@ -69,16 +69,16 @@
     <Compile Include="Documents.cs">
       <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="FinallyWorkingDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinallyWorkingDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FreeTime.cs">
       <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Illness.cs">
       <DependentUpon>MEDDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LastMedDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LastMedDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="MedCard.cs">
       <DependentUpon>MEDDB.tt</DependentUpon>
@@ -104,9 +104,6 @@
     <Compile Include="MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operator.cs">
-      <DependentUpon>MEDDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Patient.cs">
       <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
@@ -115,6 +112,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegForm.Designer.cs">
+      <DependentUpon>RegForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VisitInfo.cs">
       <DependentUpon>MEDDB.tt</DependentUpon>
     </Compile>
@@ -133,20 +136,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RegForm.resx">
+      <DependentUpon>RegForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="MEDDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MEDDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="LastMedDBDataSet.xsc">
-      <DependentUpon>LastMedDBDataSet.xsd</DependentUpon>
+    <None Include="FinallyWorkingDBDataSet.xsc">
+      <DependentUpon>FinallyWorkingDBDataSet.xsd</DependentUpon>
     </None>
-    <None Include="LastMedDBDataSet.xsd">
+    <None Include="FinallyWorkingDBDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LastMedDBDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>FinallyWorkingDBDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="LastMedDBDataSet.xss">
-      <DependentUpon>LastMedDBDataSet.xsd</DependentUpon>
+    <None Include="FinallyWorkingDBDataSet.xss">
+      <DependentUpon>FinallyWorkingDBDataSet.xsd</DependentUpon>
     </None>
     <None Include="MEDDB.edmx.diagram">
       <DependentUpon>MEDDB.edmx</DependentUpon>

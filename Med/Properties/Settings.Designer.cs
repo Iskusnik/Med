@@ -53,5 +53,15 @@ namespace Med.Properties {
                 return ((string)(this["LastMedDBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ISKUSNIK;Initial Catalog=FinallyWorkingDB;Integrated Security=True")]
+        public string FinallyWorkingDBConnectionString {
+            get {
+                return ((string)(this["FinallyWorkingDBConnectionString"]));
+            }
+        }
     }
 }
