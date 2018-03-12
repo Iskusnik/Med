@@ -81,7 +81,6 @@
             this.textName2.Name = "textName2";
             this.textName2.Size = new System.Drawing.Size(137, 20);
             this.textName2.TabIndex = 3;
-            this.textName2.Text = "1";
             // 
             // textName
             // 
@@ -89,7 +88,6 @@
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(137, 20);
             this.textName.TabIndex = 4;
-            this.textName.Text = "1";
             // 
             // textSurname
             // 
@@ -148,7 +146,6 @@
             this.textNation.Name = "textNation";
             this.textNation.Size = new System.Drawing.Size(137, 20);
             this.textNation.TabIndex = 11;
-            this.textNation.Text = "1";
             // 
             // label6
             // 
@@ -165,7 +162,6 @@
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.Size = new System.Drawing.Size(137, 20);
             this.textLiveAdress.TabIndex = 13;
-            this.textLiveAdress.Text = "1";
             // 
             // textRegAdress
             // 
@@ -173,7 +169,6 @@
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.Size = new System.Drawing.Size(137, 20);
             this.textRegAdress.TabIndex = 14;
-            this.textRegAdress.Text = "1";
             // 
             // label7
             // 
@@ -225,7 +220,6 @@
             this.textDocument.Name = "textDocument";
             this.textDocument.Size = new System.Drawing.Size(137, 20);
             this.textDocument.TabIndex = 20;
-            this.textDocument.Text = "1";
             // 
             // label11
             // 
@@ -251,7 +245,6 @@
             this.textDocumentN.Name = "textDocumentN";
             this.textDocumentN.Size = new System.Drawing.Size(137, 20);
             this.textDocumentN.TabIndex = 23;
-            this.textDocumentN.Text = "1";
             // 
             // label13
             // 
@@ -277,7 +270,6 @@
             this.textBoxInsuranceBillNum.Name = "textBoxInsuranceBillNum";
             this.textBoxInsuranceBillNum.Size = new System.Drawing.Size(264, 20);
             this.textBoxInsuranceBillNum.TabIndex = 26;
-            this.textBoxInsuranceBillNum.Text = "1";
             // 
             // textInsurancePolicyNum
             // 
@@ -285,7 +277,6 @@
             this.textInsurancePolicyNum.Name = "textInsurancePolicyNum";
             this.textInsurancePolicyNum.Size = new System.Drawing.Size(264, 20);
             this.textInsurancePolicyNum.TabIndex = 28;
-            this.textInsurancePolicyNum.Text = "1";
             // 
             // label15
             // 
@@ -312,7 +303,6 @@
             this.textBoxPassword2.Name = "textBoxPassword2";
             this.textBoxPassword2.Size = new System.Drawing.Size(264, 20);
             this.textBoxPassword2.TabIndex = 34;
-            this.textBoxPassword2.Text = "1";
             // 
             // label16
             // 
@@ -329,7 +319,6 @@
             this.textBoxPassword1.Name = "textBoxPassword1";
             this.textBoxPassword1.Size = new System.Drawing.Size(264, 20);
             this.textBoxPassword1.TabIndex = 32;
-            this.textBoxPassword1.Text = "1";
             // 
             // label17
             // 
@@ -355,7 +344,6 @@
             this.textBoxWorkIncapacity.Name = "textBoxWorkIncapacity";
             this.textBoxWorkIncapacity.Size = new System.Drawing.Size(264, 20);
             this.textBoxWorkIncapacity.TabIndex = 36;
-            this.textBoxWorkIncapacity.Text = "1";
             // 
             // label19
             // 

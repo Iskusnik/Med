@@ -24,7 +24,16 @@ namespace Med2
 
         private void buttonReg_Click(object sender, EventArgs e)
         {
-            ControlFunctions.RegistrationCall(this);
+            string log, pas;
+            if(ControlFunctions.RegistrationCall(this, out log, out pas))
+            {
+                MessageBox.Show("Регистрация успешно завершена. \n Логин: " + log + "\n Пароль: " + pas);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Регистрация не завершена. Исправьте указанные ошибки");
+            }
         }
     }
 }

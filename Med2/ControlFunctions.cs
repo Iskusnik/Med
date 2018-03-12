@@ -17,29 +17,32 @@ namespace Med2
         //public static SqlConnection connection = new SqlConnection(connectionString);
         //static public LastMedDBDataSet db = new LastMedDBDataSet();
         //db.PersonSet_Operator.FindByBirthDateNameHashID()
-        public static string connectionString = @"Data Source=ISKUSNIK;Initial Catalog=NewMedDB;Integrated Security=True";
+
+        /*public static string connectionString = @"Data Source=ISKUSNIK;Initial Catalog=NewMedDB;Integrated Security=True";
         public static SqlConnection connection = new SqlConnection(connectionString);
         
+             using (connection)
+            {}*/
+
 
         public static bool LoginPasswordCheck(string login, string password)
         {
-            using (connection)
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                using (ModelMedDBContainer db = new ModelMedDBContainer())
-                {
-                    connection.Open();
-                    
-                    db.PersonSet.Add(new Patient { FullName = "Фёдоров Фёдор Фёдорович" });
-                    db.PersonSet.Add(new Patient { FullName = "Иванов Фёдор Фёдорович" });
-                    db.SaveChanges();
+                string[] personInfo = login.Split('_');
+                string[] birthInfo = personInfo[1].Split('.');
+                Person t = db.PersonSet.Find(personInfo[0].GetHashCode(), new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0])));
+                if (t == null)
                     return false;
-                }
+                else
+                    return true;
             }
         }
-        public static bool RegistrationCall(object obj)
+        public static bool RegistrationCall(object obj, out string login,  out string password)
         {
             RegForm regForm = (RegForm)obj;
-            
+            login = "";
+            password = "";
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 Patient newPatient = new Patient();
@@ -83,6 +86,9 @@ namespace Med2
                     newPatient.MedCard = new MedCard();
                     db.PersonSet.Add(newPatient);
                     db.SaveChanges();
+
+                    login = newPatient.FullName + "_" + newPatient.BirthDate;
+                    password = newPatient.Password;
 
                     return true;
                 }
