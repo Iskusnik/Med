@@ -25,15 +25,24 @@ namespace Med2
             {}*/
 
 
-        public static bool LoginPasswordCheck(string login, string password)
+        public static bool LoginPasswordCheck(string login, string password, out string mes)
         {
+            mes = "";
+            if (login == "" || password == "")
+            {
+                mes = "Заполните поля";
+                return false;
+            }
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 string[] personInfo = login.Split('_');
                 string[] birthInfo = personInfo[1].Split('.');
                 Person t = db.PersonSet.Find(personInfo[0].GetHashCode(), new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0])));
                 if (t == null)
+                {
+                    mes = "Логин или пароль введены неверно";
                     return false;
+                }
                 else
                     return true;
             }
@@ -70,11 +79,13 @@ namespace Med2
                     newPatient.NameHashID = newPatient.FullName.GetHashCode();
                     try
                     {
-                        newPatient.Documents = new Documents { DocumentName = regForm.textDocument.Text, Id = long.Parse(regForm.textDocumentN.Text), Person = newPatient };   
+                        long id = long.Parse(regForm.textDocumentN.Text);
+                        string docName = regForm.textDocument.Text;
+                        newPatient.Documents = new Documents { DocumentName = docName, Id = id, Person = newPatient };   
                     }
                     catch (FormatException)
                     {
-                        MessageBox.Show("В номере документа могут быть только цифры");
+                        throw new Exception("В номере документа могут быть только цифры");
                     }
                     if (regForm.textBoxPassword1.Text == regForm.textBoxPassword2.Text)
                         newPatient.Password = regForm.textBoxPassword1.Text;

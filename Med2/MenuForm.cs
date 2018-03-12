@@ -20,8 +20,11 @@ namespace Med2
         private void authorizeButton_Click(object sender, EventArgs e)
         {
             //finallyWorkingDBDataSet1.PersonSet.AddPersonSetRow()
-                if (!ControlFunctions.LoginPasswordCheck("1", "1"))
-                    MessageBox.Show("Заполните поля");
+            string mes;
+            if (!ControlFunctions.LoginPasswordCheck(this.loginTextBox.Text, this.passwordTextBox.Text, out mes))
+                MessageBox.Show(mes);
+            else
+                ;//передача упралвления форме меню
         }
 
         private void registrationButton_Click(object sender, EventArgs e)
