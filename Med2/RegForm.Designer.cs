@@ -46,7 +46,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.dateTimePickerRegDate = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
-            this.textDocument = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.textDocumentN = new System.Windows.Forms.TextBox();
@@ -64,6 +63,7 @@
             this.textBoxWorkIncapacity = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.comboBoxGender = new System.Windows.Forms.ComboBox();
+            this.comboBoxDocType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -81,6 +81,7 @@
             this.textName2.Name = "textName2";
             this.textName2.Size = new System.Drawing.Size(137, 20);
             this.textName2.TabIndex = 3;
+            this.textName2.Text = "a";
             // 
             // textName
             // 
@@ -88,6 +89,7 @@
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(137, 20);
             this.textName.TabIndex = 4;
+            this.textName.Text = "a";
             // 
             // textSurname
             // 
@@ -95,6 +97,7 @@
             this.textSurname.Name = "textSurname";
             this.textSurname.Size = new System.Drawing.Size(137, 20);
             this.textSurname.TabIndex = 5;
+            this.textSurname.Text = "a";
             // 
             // label2
             // 
@@ -146,6 +149,7 @@
             this.textNation.Name = "textNation";
             this.textNation.Size = new System.Drawing.Size(137, 20);
             this.textNation.TabIndex = 11;
+            this.textNation.Text = "a";
             // 
             // label6
             // 
@@ -162,6 +166,7 @@
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.Size = new System.Drawing.Size(137, 20);
             this.textLiveAdress.TabIndex = 13;
+            this.textLiveAdress.Text = "a";
             // 
             // textRegAdress
             // 
@@ -169,6 +174,7 @@
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.Size = new System.Drawing.Size(137, 20);
             this.textRegAdress.TabIndex = 14;
+            this.textRegAdress.Text = "a";
             // 
             // label7
             // 
@@ -214,13 +220,6 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Вид документа";
             // 
-            // textDocument
-            // 
-            this.textDocument.Location = new System.Drawing.Point(143, 323);
-            this.textDocument.Name = "textDocument";
-            this.textDocument.Size = new System.Drawing.Size(137, 20);
-            this.textDocument.TabIndex = 20;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -245,6 +244,7 @@
             this.textDocumentN.Name = "textDocumentN";
             this.textDocumentN.Size = new System.Drawing.Size(137, 20);
             this.textDocumentN.TabIndex = 23;
+            this.textDocumentN.Text = "1";
             // 
             // label13
             // 
@@ -270,6 +270,7 @@
             this.textBoxInsuranceBillNum.Name = "textBoxInsuranceBillNum";
             this.textBoxInsuranceBillNum.Size = new System.Drawing.Size(264, 20);
             this.textBoxInsuranceBillNum.TabIndex = 26;
+            this.textBoxInsuranceBillNum.Text = "a";
             // 
             // textInsurancePolicyNum
             // 
@@ -277,6 +278,7 @@
             this.textInsurancePolicyNum.Name = "textInsurancePolicyNum";
             this.textInsurancePolicyNum.Size = new System.Drawing.Size(264, 20);
             this.textInsurancePolicyNum.TabIndex = 28;
+            this.textInsurancePolicyNum.Text = "a";
             // 
             // label15
             // 
@@ -303,6 +305,7 @@
             this.textBoxPassword2.Name = "textBoxPassword2";
             this.textBoxPassword2.Size = new System.Drawing.Size(264, 20);
             this.textBoxPassword2.TabIndex = 34;
+            this.textBoxPassword2.Text = "a";
             // 
             // label16
             // 
@@ -319,6 +322,7 @@
             this.textBoxPassword1.Name = "textBoxPassword1";
             this.textBoxPassword1.Size = new System.Drawing.Size(264, 20);
             this.textBoxPassword1.TabIndex = 32;
+            this.textBoxPassword1.Text = "a";
             // 
             // label17
             // 
@@ -344,6 +348,7 @@
             this.textBoxWorkIncapacity.Name = "textBoxWorkIncapacity";
             this.textBoxWorkIncapacity.Size = new System.Drawing.Size(264, 20);
             this.textBoxWorkIncapacity.TabIndex = 36;
+            this.textBoxWorkIncapacity.Text = "a";
             // 
             // label19
             // 
@@ -366,12 +371,31 @@
             this.comboBoxGender.Size = new System.Drawing.Size(137, 21);
             this.comboBoxGender.TabIndex = 38;
             // 
+            // comboBoxDocType
+            // 
+            this.comboBoxDocType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDocType.FormattingEnabled = true;
+            this.comboBoxDocType.Items.AddRange(new object[] {
+            "Паспорт гражданина РФ",
+            "Свидетельство о рождении",
+            "Дипломатический паспорт",
+            "Паспорт моряка",
+            "Военный билет",
+            "Удостоверение личности военнослужащего",
+            "Удостоверение беженца",
+            "Служебное удостоверение работника прокуратуры"});
+            this.comboBoxDocType.Location = new System.Drawing.Point(143, 323);
+            this.comboBoxDocType.Name = "comboBoxDocType";
+            this.comboBoxDocType.Size = new System.Drawing.Size(137, 21);
+            this.comboBoxDocType.TabIndex = 39;
+            // 
             // RegForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(306, 741);
+            this.Controls.Add(this.comboBoxDocType);
             this.Controls.Add(this.comboBoxGender);
             this.Controls.Add(this.textBoxWorkIncapacity);
             this.Controls.Add(this.label19);
@@ -389,7 +413,6 @@
             this.Controls.Add(this.textDocumentN);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textDocument);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.dateTimePickerRegDate);
@@ -437,7 +460,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         public System.Windows.Forms.DateTimePicker dateTimePickerRegDate;
-        public System.Windows.Forms.TextBox textDocument;
         public System.Windows.Forms.Label label11;
         public System.Windows.Forms.TextBox textDocumentN;
         public System.Windows.Forms.Label label14;
@@ -455,5 +477,6 @@
         public System.Windows.Forms.TextBox textBoxWorkIncapacity;
         private System.Windows.Forms.Label label19;
         public System.Windows.Forms.ComboBox comboBoxGender;
+        public System.Windows.Forms.ComboBox comboBoxDocType;
     }
 }

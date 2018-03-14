@@ -80,12 +80,20 @@ namespace Med2
                     try
                     {
                         long id = long.Parse(regForm.textDocumentN.Text);
-                        string docName = regForm.textDocument.Text;
-                        newPatient.Documents = new Documents { DocumentName = docName, Id = id, Person = newPatient };   
+                        string docName = regForm.comboBoxDocType.Text;
+                        
+                        if (???)
+                            newPatient.Documents = new Documents { DocumentName = docName, Id = id, Person = newPatient };
+                        else
+                            throw new Exception("Данные документы уже приписаны к другой персоне");
                     }
                     catch (FormatException)
                     {
                         throw new Exception("В номере документа могут быть только цифры");
+                    }
+                    catch (Exception a)
+                    {
+                        throw a;
                     }
                     if (regForm.textBoxPassword1.Text == regForm.textBoxPassword2.Text)
                         newPatient.Password = regForm.textBoxPassword1.Text;
