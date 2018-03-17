@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Med2
 {
-    public partial class RegForm : Form
+    public partial class RegPatForm : Form
     {
-        public RegForm()
+        public RegPatForm()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace Med2
         private void buttonReg_Click(object sender, EventArgs e)
         {
             string log, pas;
-            if(ControlFunctions.RegistrationCall(this, out log, out pas))
+            if(ControlFunctions.PatientRegistrationCall(this, out log, out pas))
             {
                 MessageBox.Show("Регистрация успешно завершена. \n Логин: " + log + "\n Пароль: " + pas);
                 this.Close();

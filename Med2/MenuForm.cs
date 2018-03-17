@@ -39,8 +39,7 @@ namespace Med2
 
         private void registrationButton_Click(object sender, EventArgs e)
         {
-            
-            Form regForm = new RegForm();
+            Form regForm = new RegPatForm();
             regForm.Owner = this;
             regForm.ShowDialog();
         }

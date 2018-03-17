@@ -1,6 +1,6 @@
 ﻿namespace Med2
 {
-    partial class RegForm
+    partial class RegPatForm
     {
         /// <summary>
         /// Required designer variable.

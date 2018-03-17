@@ -23,8 +23,8 @@ namespace Med2
         {
 
         }
-
-        private void записатьсяToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form regDocForm = new RegDocForm();
             regDocForm.Owner = this;
