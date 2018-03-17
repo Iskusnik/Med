@@ -16,6 +16,7 @@ namespace Med2
     {
         public long Id { get; set; }
         public string DocumentName { get; set; }
+        public long DocumentNum { get; set; }
     
         public virtual Person Person { get; set; }
     }

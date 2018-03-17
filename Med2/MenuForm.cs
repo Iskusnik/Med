@@ -21,10 +21,20 @@ namespace Med2
         {
             //finallyWorkingDBDataSet1.PersonSet.AddPersonSetRow()
             string mes;
-            if (!ControlFunctions.LoginPasswordCheck(this.loginTextBox.Text, this.passwordTextBox.Text, out mes))
+            Person pers;
+            if (!ControlFunctions.LoginPasswordCheck(this.loginTextBox.Text, this.passwordTextBox.Text, out mes, out pers))
                 MessageBox.Show(mes);
             else
-                ;//передача упралвления форме меню
+                if (pers is Patient)
+            {
+                PatientMenu patientMenu = new PatientMenu((Patient)pers);
+                patientMenu.ShowDialog();
+            }   
+            else
+            {
+                DoctorMenu patientMenu = new DoctorMenu((Doctor)pers);
+                patientMenu.ShowDialog();
+            }
         }
 
         private void registrationButton_Click(object sender, EventArgs e)

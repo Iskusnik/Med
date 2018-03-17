@@ -54,8 +54,6 @@ namespace Med2 {
         
         private global::System.Data.DataRelation relationFK_PatientHaveMedCard;
         
-        private global::System.Data.DataRelation relationFK_PersonHaveDocuments;
-        
         private global::System.Data.DataRelation relationFK_Doctor_inherits_Person;
         
         private global::System.Data.DataRelation relationFK_Patient_inherits_Person;
@@ -65,6 +63,8 @@ namespace Med2 {
         private global::System.Data.DataRelation relationFK_VisitInfoWorkTime;
         
         private global::System.Data.DataRelation relationFK_DoctorWorkTime;
+        
+        private global::System.Data.DataRelation relationFK_DocumentsPerson;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -437,12 +437,12 @@ namespace Med2 {
             this.relationFK_DoctorFreeTime = this.Relations["FK_DoctorFreeTime"];
             this.relationFK_PatientHaveIllness = this.Relations["FK_PatientHaveIllness"];
             this.relationFK_PatientHaveMedCard = this.Relations["FK_PatientHaveMedCard"];
-            this.relationFK_PersonHaveDocuments = this.Relations["FK_PersonHaveDocuments"];
             this.relationFK_Doctor_inherits_Person = this.Relations["FK_Doctor_inherits_Person"];
             this.relationFK_Patient_inherits_Person = this.Relations["FK_Patient_inherits_Person"];
             this.relationFK_PatientVisitInfo = this.Relations["FK_PatientVisitInfo"];
             this.relationFK_VisitInfoWorkTime = this.Relations["FK_VisitInfoWorkTime"];
             this.relationFK_DoctorWorkTime = this.Relations["FK_DoctorWorkTime"];
+            this.relationFK_DocumentsPerson = this.Relations["FK_DocumentsPerson"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -501,10 +501,6 @@ namespace Med2 {
                         this.tableMedCardSet.Patient_BirthDateColumn,
                         this.tableMedCardSet.Patient_NameHashIDColumn}, false);
             this.Relations.Add(this.relationFK_PatientHaveMedCard);
-            this.relationFK_PersonHaveDocuments = new global::System.Data.DataRelation("FK_PersonHaveDocuments", new global::System.Data.DataColumn[] {
-                        this.tableDocumentsSet.IdColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePersonSet.Documents_IdColumn}, false);
-            this.Relations.Add(this.relationFK_PersonHaveDocuments);
             this.relationFK_Doctor_inherits_Person = new global::System.Data.DataRelation("FK_Doctor_inherits_Person", new global::System.Data.DataColumn[] {
                         this.tablePersonSet.BirthDateColumn,
                         this.tablePersonSet.NameHashIDColumn}, new global::System.Data.DataColumn[] {
@@ -535,6 +531,12 @@ namespace Med2 {
                         this.tableWorkTimeSet.Doctor_BirthDateColumn,
                         this.tableWorkTimeSet.Doctor_NameHashIDColumn}, false);
             this.Relations.Add(this.relationFK_DoctorWorkTime);
+            this.relationFK_DocumentsPerson = new global::System.Data.DataRelation("FK_DocumentsPerson", new global::System.Data.DataColumn[] {
+                        this.tablePersonSet.BirthDateColumn,
+                        this.tablePersonSet.NameHashIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDocumentsSet.Person_BirthDateColumn,
+                        this.tableDocumentsSet.Person_NameHashIDColumn}, false);
+            this.Relations.Add(this.relationFK_DocumentsPerson);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1127,6 +1129,12 @@ namespace Med2 {
             
             private global::System.Data.DataColumn columnDocumentName;
             
+            private global::System.Data.DataColumn columnDocumentNum;
+            
+            private global::System.Data.DataColumn columnPerson_BirthDate;
+            
+            private global::System.Data.DataColumn columnPerson_NameHashID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DocumentsSetDataTable() {
@@ -1178,6 +1186,30 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DocumentNumColumn {
+                get {
+                    return this.columnDocumentNum;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Person_BirthDateColumn {
+                get {
+                    return this.columnPerson_BirthDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Person_NameHashIDColumn {
+                get {
+                    return this.columnPerson_NameHashID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1213,21 +1245,17 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DocumentsSetRow AddDocumentsSetRow(string DocumentName) {
+            public DocumentsSetRow AddDocumentsSetRow(string DocumentName, long DocumentNum, System.DateTime Person_BirthDate, long Person_NameHashID) {
                 DocumentsSetRow rowDocumentsSetRow = ((DocumentsSetRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        DocumentName};
+                        DocumentName,
+                        DocumentNum,
+                        Person_BirthDate,
+                        Person_NameHashID};
                 rowDocumentsSetRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDocumentsSetRow);
                 return rowDocumentsSetRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DocumentsSetRow FindById(long Id) {
-                return ((DocumentsSetRow)(this.Rows.Find(new object[] {
-                            Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1249,6 +1277,9 @@ namespace Med2 {
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
                 this.columnDocumentName = base.Columns["DocumentName"];
+                this.columnDocumentNum = base.Columns["DocumentNum"];
+                this.columnPerson_BirthDate = base.Columns["Person_BirthDate"];
+                this.columnPerson_NameHashID = base.Columns["Person_NameHashID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1258,8 +1289,14 @@ namespace Med2 {
                 base.Columns.Add(this.columnId);
                 this.columnDocumentName = new global::System.Data.DataColumn("DocumentName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDocumentName);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnId}, true));
+                this.columnDocumentNum = new global::System.Data.DataColumn("DocumentNum", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDocumentNum);
+                this.columnPerson_BirthDate = new global::System.Data.DataColumn("Person_BirthDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPerson_BirthDate);
+                this.columnPerson_NameHashID = new global::System.Data.DataColumn("Person_NameHashID", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPerson_NameHashID);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint2", new global::System.Data.DataColumn[] {
+                                this.columnId}, false));
                 this.columnId.AutoIncrement = true;
                 this.columnId.AutoIncrementSeed = -1;
                 this.columnId.AutoIncrementStep = -1;
@@ -1268,6 +1305,9 @@ namespace Med2 {
                 this.columnId.Unique = true;
                 this.columnDocumentName.AllowDBNull = false;
                 this.columnDocumentName.MaxLength = 2147483647;
+                this.columnDocumentNum.AllowDBNull = false;
+                this.columnPerson_BirthDate.AllowDBNull = false;
+                this.columnPerson_NameHashID.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2321,8 +2361,6 @@ namespace Med2 {
             
             private global::System.Data.DataColumn columnPassword;
             
-            private global::System.Data.DataColumn columnDocuments_Id;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PersonSetDataTable() {
@@ -2438,14 +2476,6 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Documents_IdColumn {
-                get {
-                    return this.columnDocuments_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2481,7 +2511,7 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PersonSetRow AddPersonSetRow(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, DocumentsSetRow parentDocumentsSetRowByFK_PersonHaveDocuments) {
+            public PersonSetRow AddPersonSetRow(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password) {
                 PersonSetRow rowPersonSetRow = ((PersonSetRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FullName,
@@ -2493,11 +2523,7 @@ namespace Med2 {
                         RegDate,
                         InsuranceBillNum,
                         NameHashID,
-                        Password,
-                        null};
-                if ((parentDocumentsSetRowByFK_PersonHaveDocuments != null)) {
-                    columnValuesArray[10] = parentDocumentsSetRowByFK_PersonHaveDocuments[0];
-                }
+                        Password};
                 rowPersonSetRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPersonSetRow);
                 return rowPersonSetRow;
@@ -2538,7 +2564,6 @@ namespace Med2 {
                 this.columnInsuranceBillNum = base.Columns["InsuranceBillNum"];
                 this.columnNameHashID = base.Columns["NameHashID"];
                 this.columnPassword = base.Columns["Password"];
-                this.columnDocuments_Id = base.Columns["Documents_Id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2564,8 +2589,6 @@ namespace Med2 {
                 base.Columns.Add(this.columnNameHashID);
                 this.columnPassword = new global::System.Data.DataColumn("Password", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPassword);
-                this.columnDocuments_Id = new global::System.Data.DataColumn("Documents_Id", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDocuments_Id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBirthDate,
                                 this.columnNameHashID}, true));
@@ -2586,7 +2609,6 @@ namespace Med2 {
                 this.columnNameHashID.AllowDBNull = false;
                 this.columnPassword.AllowDBNull = false;
                 this.columnPassword.MaxLength = 2147483647;
-                this.columnDocuments_Id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4268,12 +4290,45 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PersonSetRow[] GetPersonSetRows() {
-                if ((this.Table.ChildRelations["FK_PersonHaveDocuments"] == null)) {
-                    return new PersonSetRow[0];
+            public long DocumentNum {
+                get {
+                    return ((long)(this[this.tableDocumentsSet.DocumentNumColumn]));
                 }
-                else {
-                    return ((PersonSetRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PersonHaveDocuments"])));
+                set {
+                    this[this.tableDocumentsSet.DocumentNumColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime Person_BirthDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableDocumentsSet.Person_BirthDateColumn]));
+                }
+                set {
+                    this[this.tableDocumentsSet.Person_BirthDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long Person_NameHashID {
+                get {
+                    return ((long)(this[this.tableDocumentsSet.Person_NameHashIDColumn]));
+                }
+                set {
+                    this[this.tableDocumentsSet.Person_NameHashIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersonSetRow PersonSetRowParent {
+                get {
+                    return ((PersonSetRow)(this.GetParentRow(this.Table.ParentRelations["FK_DocumentsPerson"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DocumentsPerson"]);
                 }
             }
         }
@@ -4614,28 +4669,6 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public long Documents_Id {
-                get {
-                    return ((long)(this[this.tablePersonSet.Documents_IdColumn]));
-                }
-                set {
-                    this[this.tablePersonSet.Documents_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DocumentsSetRow DocumentsSetRow {
-                get {
-                    return ((DocumentsSetRow)(this.GetParentRow(this.Table.ParentRelations["FK_PersonHaveDocuments"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PersonHaveDocuments"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PersonSet_DoctorRow[] GetPersonSet_DoctorRows() {
                 if ((this.Table.ChildRelations["FK_Doctor_inherits_Person"] == null)) {
                     return new PersonSet_DoctorRow[0];
@@ -4653,6 +4686,17 @@ namespace Med2 {
                 }
                 else {
                     return ((PersonSet_PatientRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Patient_inherits_Person"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public DocumentsSetRow[] GetDocumentsSetRows() {
+                if ((this.Table.ChildRelations["FK_DocumentsPerson"] == null)) {
+                    return new DocumentsSetRow[0];
+                }
+                else {
+                    return ((DocumentsSetRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DocumentsPerson"])));
                 }
             }
         }
@@ -6029,25 +6073,42 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
             tableMapping.DataSetTable = "DocumentsSet";
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("DocumentName", "DocumentName");
+            tableMapping.ColumnMappings.Add("DocumentNum", "DocumentNum");
+            tableMapping.ColumnMappings.Add("Person_BirthDate", "Person_BirthDate");
+            tableMapping.ColumnMappings.Add("Person_NameHashID", "Person_NameHashID");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DocumentsSet] WHERE (([Id] = @Original_Id))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DocumentsSet] WHERE (([Id] = @Original_Id) AND ([DocumentNum] " +
+                "= @Original_DocumentNum) AND ([Person_BirthDate] = @Original_Person_BirthDate) A" +
+                "ND ([Person_NameHashID] = @Original_Person_NameHashID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DocumentNum", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentNum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Person_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Person_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DocumentsSet] ([DocumentName]) VALUES (@DocumentName);\r\nSELECT" +
-                " Id, DocumentName FROM DocumentsSet WHERE (Id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[DocumentsSet] ([DocumentName], [DocumentNum], [Person_BirthDate], [Person_NameHashID]) VALUES (@DocumentName, @DocumentNum, @Person_BirthDate, @Person_NameHashID);
+SELECT Id, DocumentName, DocumentNum, Person_BirthDate, Person_NameHashID FROM DocumentsSet WHERE (Id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DocumentName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DocumentNum", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentNum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Person_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_BirthDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Person_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[DocumentsSet] SET [DocumentName] = @DocumentName WHERE (([Id] = @Or" +
-                "iginal_Id));\r\nSELECT Id, DocumentName FROM DocumentsSet WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[DocumentsSet] SET [DocumentName] = @DocumentName, [DocumentNum] = @DocumentNum, [Person_BirthDate] = @Person_BirthDate, [Person_NameHashID] = @Person_NameHashID WHERE (([Id] = @Original_Id) AND ([DocumentNum] = @Original_DocumentNum) AND ([Person_BirthDate] = @Original_Person_BirthDate) AND ([Person_NameHashID] = @Original_Person_NameHashID));
+SELECT Id, DocumentName, DocumentNum, Person_BirthDate, Person_NameHashID FROM DocumentsSet WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DocumentName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DocumentNum", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentNum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Person_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_BirthDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Person_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DocumentNum", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DocumentNum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Person_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Person_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Person_NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -6064,7 +6125,8 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, DocumentName FROM dbo.DocumentsSet";
+            this._commandCollection[0].CommandText = "SELECT Id, DocumentName, DocumentNum, Person_BirthDate, Person_NameHashID FROM db" +
+                "o.DocumentsSet";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6125,8 +6187,11 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_Id) {
+        public virtual int Delete(long Original_Id, long Original_DocumentNum, System.DateTime Original_Person_BirthDate, long Original_Person_NameHashID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_Id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((long)(Original_DocumentNum));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_Person_BirthDate));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((long)(Original_Person_NameHashID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6147,13 +6212,16 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string DocumentName) {
+        public virtual int Insert(string DocumentName, long DocumentNum, System.DateTime Person_BirthDate, long Person_NameHashID) {
             if ((DocumentName == null)) {
                 throw new global::System.ArgumentNullException("DocumentName");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(DocumentName));
             }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((long)(DocumentNum));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(Person_BirthDate));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((long)(Person_NameHashID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6174,15 +6242,21 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string DocumentName, long Original_Id, long Id) {
+        public virtual int Update(string DocumentName, long DocumentNum, System.DateTime Person_BirthDate, long Person_NameHashID, long Original_Id, long Original_DocumentNum, System.DateTime Original_Person_BirthDate, long Original_Person_NameHashID, long Id) {
             if ((DocumentName == null)) {
                 throw new global::System.ArgumentNullException("DocumentName");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(DocumentName));
             }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((long)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(Id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((long)(DocumentNum));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(Person_BirthDate));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(Person_NameHashID));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(Original_Id));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((long)(Original_DocumentNum));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_Person_BirthDate));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_Person_NameHashID));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6197,14 +6271,6 @@ SELECT Anamnesis, Diagnosis, HelpType, HelpAmount, Result, Standarts, DoctorInfo
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string DocumentName, long Original_Id) {
-            return this.Update(DocumentName, Original_Id, Original_Id);
         }
     }
     
@@ -7291,22 +7357,19 @@ SELECT Id, Patient_BirthDate, Patient_NameHashID FROM MedCardSet WHERE (Id = @Id
             tableMapping.ColumnMappings.Add("InsuranceBillNum", "InsuranceBillNum");
             tableMapping.ColumnMappings.Add("NameHashID", "NameHashID");
             tableMapping.ColumnMappings.Add("Password", "Password");
-            tableMapping.ColumnMappings.Add("Documents_Id", "Documents_Id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[PersonSet] WHERE (([BirthDate] = @Original_BirthDate) AND ([Re" +
-                "gDate] = @Original_RegDate) AND ([NameHashID] = @Original_NameHashID) AND ([Docu" +
-                "ments_Id] = @Original_Documents_Id))";
+                "gDate] = @Original_RegDate) AND ([NameHashID] = @Original_NameHashID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RegDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PersonSet] ([FullName], [Gender], [BirthDate], [Nationality], [LiveAdress], [RegAdress], [RegDate], [InsuranceBillNum], [NameHashID], [Password], [Documents_Id]) VALUES (@FullName, @Gender, @BirthDate, @Nationality, @LiveAdress, @RegAdress, @RegDate, @InsuranceBillNum, @NameHashID, @Password, @Documents_Id);
-SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, NameHashID, Password, Documents_Id FROM PersonSet WHERE (BirthDate = @BirthDate) AND (NameHashID = @NameHashID)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[PersonSet] ([FullName], [Gender], [BirthDate], [Nationality], [LiveAdress], [RegAdress], [RegDate], [InsuranceBillNum], [NameHashID], [Password]) VALUES (@FullName, @Gender, @BirthDate, @Nationality, @LiveAdress, @RegAdress, @RegDate, @InsuranceBillNum, @NameHashID, @Password);
+SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, NameHashID, Password FROM PersonSet WHERE (BirthDate = @BirthDate) AND (NameHashID = @NameHashID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FullName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FullName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Gender", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Gender", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7318,11 +7381,10 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InsuranceBillNum", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsuranceBillNum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PersonSet] SET [FullName] = @FullName, [Gender] = @Gender, [BirthDate] = @BirthDate, [Nationality] = @Nationality, [LiveAdress] = @LiveAdress, [RegAdress] = @RegAdress, [RegDate] = @RegDate, [InsuranceBillNum] = @InsuranceBillNum, [NameHashID] = @NameHashID, [Password] = @Password, [Documents_Id] = @Documents_Id WHERE (([BirthDate] = @Original_BirthDate) AND ([RegDate] = @Original_RegDate) AND ([NameHashID] = @Original_NameHashID) AND ([Documents_Id] = @Original_Documents_Id));
-SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, NameHashID, Password, Documents_Id FROM PersonSet WHERE (BirthDate = @BirthDate) AND (NameHashID = @NameHashID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PersonSet] SET [FullName] = @FullName, [Gender] = @Gender, [BirthDate] = @BirthDate, [Nationality] = @Nationality, [LiveAdress] = @LiveAdress, [RegAdress] = @RegAdress, [RegDate] = @RegDate, [InsuranceBillNum] = @InsuranceBillNum, [NameHashID] = @NameHashID, [Password] = @Password WHERE (([BirthDate] = @Original_BirthDate) AND ([RegDate] = @Original_RegDate) AND ([NameHashID] = @Original_NameHashID));
+SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, NameHashID, Password FROM PersonSet WHERE (BirthDate = @BirthDate) AND (NameHashID = @NameHashID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FullName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FullName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Gender", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Gender", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7334,11 +7396,9 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InsuranceBillNum", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "InsuranceBillNum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RegDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RegDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Documents_Id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Documents_Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7355,7 +7415,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate, " +
-                "InsuranceBillNum, NameHashID, Password, Documents_Id FROM dbo.PersonSet";
+                "InsuranceBillNum, NameHashID, Password FROM dbo.PersonSet";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7416,11 +7476,10 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, long Original_Documents_Id) {
+        public virtual int Delete(System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((System.DateTime)(Original_BirthDate));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_RegDate));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((long)(Original_NameHashID));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((long)(Original_Documents_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7441,7 +7500,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, long Documents_Id) {
+        public virtual int Insert(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password) {
             if ((FullName == null)) {
                 throw new global::System.ArgumentNullException("FullName");
             }
@@ -7487,7 +7546,6 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = ((string)(Password));
             }
-            this.Adapter.InsertCommand.Parameters[10].Value = ((long)(Documents_Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7508,7 +7566,7 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, long Documents_Id, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, long Original_Documents_Id) {
+        public virtual int Update(string FullName, string Gender, System.DateTime BirthDate, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, long NameHashID, string Password, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID) {
             if ((FullName == null)) {
                 throw new global::System.ArgumentNullException("FullName");
             }
@@ -7554,11 +7612,9 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Password));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((long)(Documents_Id));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_BirthDate));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_RegDate));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((long)(Original_NameHashID));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((long)(Original_Documents_Id));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_BirthDate));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_RegDate));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((long)(Original_NameHashID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7579,8 +7635,8 @@ SELECT FullName, Gender, BirthDate, Nationality, LiveAdress, RegAdress, RegDate,
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FullName, string Gender, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, string Password, long Documents_Id, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID, long Original_Documents_Id) {
-            return this.Update(FullName, Gender, Original_BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, Original_NameHashID, Password, Documents_Id, Original_BirthDate, Original_RegDate, Original_NameHashID, Original_Documents_Id);
+        public virtual int Update(string FullName, string Gender, string Nationality, string LiveAdress, string RegAdress, System.DateTime RegDate, string InsuranceBillNum, string Password, System.DateTime Original_BirthDate, System.DateTime Original_RegDate, long Original_NameHashID) {
+            return this.Update(FullName, Gender, Original_BirthDate, Nationality, LiveAdress, RegAdress, RegDate, InsuranceBillNum, Original_NameHashID, Password, Original_BirthDate, Original_RegDate, Original_NameHashID);
         }
     }
     
@@ -9279,15 +9335,6 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(NewMedDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._documentsSetTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._documentsSetTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._personSetTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PersonSet.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -9342,6 +9389,15 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._documentsSetTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._documentsSetTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._freeTimeSetTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.FreeTimeSet.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -9379,14 +9435,6 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(NewMedDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._documentsSetTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._documentsSetTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._personSetTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PersonSet.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -9432,6 +9480,14 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._doctorRecordSetTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._documentsSetTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._documentsSetTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -9493,6 +9549,14 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._documentsSetTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._documentsSetTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._doctorRecordSetTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.DoctorRecordSet.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -9538,14 +9602,6 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._personSetTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._documentsSetTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DocumentsSet.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._documentsSetTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

@@ -25,9 +25,10 @@ namespace Med2
             {}*/
 
 
-        public static bool LoginPasswordCheck(string login, string password, out string mes)
+        public static bool LoginPasswordCheck(string login, string password, out string mes, out Person pers)
         {
             mes = "";
+            pers = null;
             if (login == "" || password == "")
             {
                 mes = "Заполните поля";
@@ -37,8 +38,8 @@ namespace Med2
             {
                 string[] personInfo = login.Split('_');
                 string[] birthInfo = personInfo[1].Split('.');
-                Person t = db.PersonSet.Find(personInfo[0].GetHashCode(), new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0])));
-                if (t == null)
+                pers = db.PersonSet.Find(personInfo[0].GetHashCode(), new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0])));
+                if (pers == null)
                 {
                     mes = "Логин или пароль введены неверно";
                     return false;
@@ -60,7 +61,7 @@ namespace Med2
                     if (regForm.comboBoxGender.Text == "" || regForm.textSurname.Text == "" 
                           || regForm.textName.Text == "" || regForm.textBoxPassword2.Text == ""
                           || regForm.textNation.Text == "" || regForm.textLiveAdress.Text == ""
-                          || regForm.textRegAdress.Text == ""  || regForm.textDocument.Text == "" 
+                          || regForm.textRegAdress.Text == ""  || regForm.comboBoxDocType.Text == "" 
                           || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == "")
                         throw (new ArgumentNullException());
 
@@ -79,11 +80,12 @@ namespace Med2
                     newPatient.NameHashID = newPatient.FullName.GetHashCode();
                     try
                     {
-                        long id = long.Parse(regForm.textDocumentN.Text);
+                        long docNum = long.Parse(regForm.textDocumentN.Text);
                         string docName = regForm.comboBoxDocType.Text;
+                        var doc = from d in db.DocumentsSet where (d.DocumentName == docName && d.DocumentNum == docNum) select d;
                         
-                        if (???)
-                            newPatient.Documents = new Documents { DocumentName = docName, Id = id, Person = newPatient };
+                        if (doc.Count() == 0)
+                            newPatient.Documents = new Documents { DocumentName = docName, DocumentNum = docNum, Person = newPatient };
                         else
                             throw new Exception("Данные документы уже приписаны к другой персоне");
                     }

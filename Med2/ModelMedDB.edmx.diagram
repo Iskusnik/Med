@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="295cdc13782d4260bc81e62b3841db7e" Name="Diagram1" ZoomLevel="121" >
+      <Diagram DiagramId="295cdc13782d4260bc81e62b3841db7e" Name="Diagram1" ZoomLevel="118" >
         <EntityTypeShape EntityType="ModelMedDB.Illness" Width="1.5" PointX="9.625" PointY="7.25" />
         <EntityTypeShape EntityType="ModelMedDB.MedCard" Width="1.5" PointX="12" PointY="10.375" />
         <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="12.25" PointY="7" />
@@ -18,7 +18,6 @@
         <AssociationConnector Association="ModelMedDB.PatientHaveIllness" />
         <AssociationConnector Association="ModelMedDB.PatientHaveMedCard" />
         <AssociationConnector Association="ModelMedDB.MedCardHaveDoctorRecord" />
-        <AssociationConnector Association="ModelMedDB.PersonHaveDocuments" />
         <AssociationConnector Association="ModelMedDB.DoctorMakesDoctorRecord" />
         <AssociationConnector Association="ModelMedDB.DoctorFreeTime" />
         <AssociationConnector Association="ModelMedDB.DoctorWorkTime" />
@@ -26,6 +25,7 @@
         <AssociationConnector Association="ModelMedDB.PatientVisitInfo" />
         <InheritanceConnector EntityType="ModelMedDB.Patient" />
         <InheritanceConnector EntityType="ModelMedDB.Doctor" />
+        <AssociationConnector Association="ModelMedDB.DocumentsPerson" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
