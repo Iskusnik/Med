@@ -439,7 +439,7 @@
           <NavigationProperty Name="Documents" Relationship="ModelMedDB.DocumentsPerson" FromRole="Person" ToRole="Documents" />
         </EntityType>
         <EntityType Name="Doctor" BaseType="ModelMedDB.Person">
-          <Property Name="Education" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Education" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Job" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Memberships" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="DoctorRecord" Relationship="ModelMedDB.DoctorMakesDoctorRecord" FromRole="Doctor" ToRole="DoctorRecord" />

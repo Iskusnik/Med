@@ -2862,10 +2862,10 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PersonSet_DoctorRow AddPersonSet_DoctorRow(string Job, string Memberships, System.DateTime BirthDate, long NameHashID) {
+            public PersonSet_DoctorRow AddPersonSet_DoctorRow(string Education, string Job, string Memberships, System.DateTime BirthDate, long NameHashID) {
                 PersonSet_DoctorRow rowPersonSet_DoctorRow = ((PersonSet_DoctorRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        Education,
                         Job,
                         Memberships,
                         BirthDate,
@@ -2910,7 +2910,7 @@ namespace Med2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnEducation = new global::System.Data.DataColumn("Education", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnEducation = new global::System.Data.DataColumn("Education", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEducation);
                 this.columnJob = new global::System.Data.DataColumn("Job", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnJob);
@@ -2923,7 +2923,6 @@ namespace Med2 {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnBirthDate,
                                 this.columnNameHashID}, true));
-                this.columnEducation.AutoIncrement = true;
                 this.columnEducation.AutoIncrementSeed = -1;
                 this.columnEducation.AutoIncrementStep = -1;
                 this.columnEducation.AllowDBNull = false;
@@ -4717,9 +4716,9 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Education {
+            public string Education {
                 get {
-                    return ((int)(this[this.tablePersonSet_Doctor.EducationColumn]));
+                    return ((string)(this[this.tablePersonSet_Doctor.EducationColumn]));
                 }
                 set {
                     this[this.tablePersonSet_Doctor.EducationColumn] = value;

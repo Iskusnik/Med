@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Med2
 {
@@ -19,7 +20,40 @@ namespace Med2
 
         private void RegDocForm_Load(object sender, EventArgs e)
         {
+            //собриаем все возможные значения профессий
+            try
+            {
+                string[] jobs = File.ReadAllLines("Работы.txt");
+                if (!(jobs == null || jobs.Length == 0))
+                    foreach (string job in jobs)
+                        this.comboBoxJob.Items.Add(job);
+            }
+            catch(FileNotFoundException)
+            {
+                MessageBox.Show("На данный момент вакансий нет. Главврач должен создать вакансии");
+            }
+            /*using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                string[] distinct = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor as Doctor).Job).Distinct().ToArray();
 
+                this.comboBoxJob.Items.Add("Главврач");
+                foreach (string job in distinct)
+                    this.comboBoxJob.Items.Add(job);
+            }*/
+        }
+
+        private void buttonReg_Click(object sender, EventArgs e)
+        {
+            string log, pas;
+            if (ControlFunctions.DoctorRegistrationCall(this, out log, out pas))
+            {
+                MessageBox.Show("Регистрация успешно завершена. \n Логин: " + log + "\n Пароль: " + pas);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Регистрация не завершена. Исправьте указанные ошибки");
+            }
         }
     }
 }

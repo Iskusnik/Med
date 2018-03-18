@@ -60,7 +60,7 @@
             this.textName = new System.Windows.Forms.TextBox();
             this.textName2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxMemberships = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.comboBoxJob = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -149,6 +149,7 @@
             this.buttonReg.TabIndex = 66;
             this.buttonReg.Text = "Зарегистрироваться";
             this.buttonReg.UseVisualStyleBackColor = true;
+            this.buttonReg.Click += new System.EventHandler(this.buttonReg_Click);
             // 
             // textBoxInsuranceBillNum
             // 
@@ -356,13 +357,13 @@
             this.label1.TabIndex = 40;
             this.label1.Text = "Пол";
             // 
-            // textBox1
+            // textBoxMemberships
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 546);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(264, 20);
-            this.textBox1.TabIndex = 77;
-            this.textBox1.Text = "a";
+            this.textBoxMemberships.Location = new System.Drawing.Point(24, 546);
+            this.textBoxMemberships.Name = "textBoxMemberships";
+            this.textBoxMemberships.Size = new System.Drawing.Size(264, 20);
+            this.textBoxMemberships.TabIndex = 77;
+            this.textBoxMemberships.Text = "a";
             // 
             // label15
             // 
@@ -425,7 +426,7 @@
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.comboBoxJob);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxMemberships);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.comboBoxDocType);
             this.Controls.Add(this.comboBoxGender);
@@ -503,7 +504,7 @@
         public System.Windows.Forms.TextBox textName;
         public System.Windows.Forms.TextBox textName2;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBoxMemberships;
         public System.Windows.Forms.Label label15;
         public System.Windows.Forms.ComboBox comboBoxJob;
         private System.Windows.Forms.Label label19;

@@ -29,11 +29,11 @@ namespace Med2
             {
                 PatientMenu patientMenu = new PatientMenu((Patient)pers);
                 patientMenu.ShowDialog();
-            }   
+            }
             else
             {
-                DoctorMenu patientMenu = new DoctorMenu((Doctor)pers);
-                patientMenu.ShowDialog();
+                DoctorMenu doctorMenu = new DoctorMenu((Doctor)pers);
+                doctorMenu.ShowDialog();
             }
         }
 
@@ -42,6 +42,36 @@ namespace Med2
             Form regForm = new RegPatForm();
             regForm.Owner = this;
             regForm.ShowDialog();
+        }
+
+        private void MenuForm_Load(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                int doctorsCount = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor as Doctor)).Count();
+                if (doctorsCount == 0)
+                {
+                    Doctor newDoctor = new Doctor();
+                    newDoctor.FullName = "Администратор";
+                    newDoctor.Gender = "Администратор";
+                    newDoctor.BirthDate = new DateTime(1, 1, 1);
+                    newDoctor.Nationality = "Администратор";
+                    newDoctor.LiveAdress = "Администратор";
+                    newDoctor.RegAdress = "Администратор";
+                    newDoctor.RegDate = new DateTime(1, 1, 1); ;
+                    newDoctor.InsuranceBillNum = "Администратор";
+                    newDoctor.Education = "Администратор";
+                    newDoctor.Job = "Главврач";
+                    newDoctor.Memberships = "Администратор";
+
+                    newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -1, Person = newDoctor };
+                    newDoctor.WorkTime = new List<WorkTime>();
+                    newDoctor.DoctorRecord = new List<DoctorRecord>();
+                    newDoctor.NameHashID = newDoctor.FullName.GetHashCode();
+
+                    db.PersonSet.Add(newDoctor);
+                }
+            }
         }
     }
 }

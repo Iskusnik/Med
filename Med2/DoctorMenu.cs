@@ -20,8 +20,8 @@ namespace Med2
         }
 
         private void DoctorMenu_Load(object sender, EventArgs e)
-        {//собриаем все возможные значения профессий
-            var distinct = objs.GroupBy(car => car.typeID).Select(g => g.First()).ToList();
+        {
+            ClinicManageToolStripMenuItem.Enabled = thisDoctor.Job == "Главврач";
         }
         
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)

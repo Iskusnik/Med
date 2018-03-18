@@ -22,7 +22,7 @@ namespace Med2
             this.WorkTime = new HashSet<WorkTime>();
         }
     
-        public int Education { get; set; }
+        public string Education { get; set; }
         public string Job { get; set; }
         public string Memberships { get; set; }
     
