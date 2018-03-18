@@ -175,7 +175,7 @@
       <PropertyRef Name="BirthDate" />
       <PropertyRef Name="NameHashID" />
     </Key>
-    <Property Name="Education" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Education" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Job" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Memberships" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
@@ -439,7 +439,7 @@
           <NavigationProperty Name="Documents" Relationship="ModelMedDB.DocumentsPerson" FromRole="Person" ToRole="Documents" />
         </EntityType>
         <EntityType Name="Doctor" BaseType="ModelMedDB.Person">
-          <Property Name="Education" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Education" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" />
           <Property Name="Job" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Memberships" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="DoctorRecord" Relationship="ModelMedDB.DoctorMakesDoctorRecord" FromRole="Doctor" ToRole="DoctorRecord" />

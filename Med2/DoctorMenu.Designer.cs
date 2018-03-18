@@ -104,22 +104,24 @@
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
             // изменитьToolStripMenuItem
             // 
             this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.изменитьToolStripMenuItem.Text = "Изменить";
+            this.изменитьToolStripMenuItem.Click += new System.EventHandler(this.изменитьToolStripMenuItem_Click);
             // 
             // ClinicManageToolStripMenuItem
             // 
             this.ClinicManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.врачиToolStripMenuItem,
+            this.изменитьСписокСпециальностейToolStripMenuItem,
             this.просмотретьИсториюЗаписейToolStripMenuItem,
             this.изменитьРасписаниеToolStripMenuItem,
-            this.изменитьСписокСпециальностейToolStripMenuItem,
             this.запросыToolStripMenuItem,
             this.статистикаОбращенийToolStripMenuItem});
             this.ClinicManageToolStripMenuItem.Name = "ClinicManageToolStripMenuItem";
@@ -137,6 +139,7 @@
             this.изменитьСписокСпециальностейToolStripMenuItem.Name = "изменитьСписокСпециальностейToolStripMenuItem";
             this.изменитьСписокСпециальностейToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.изменитьСписокСпециальностейToolStripMenuItem.Text = "Изменить список специальностей";
+            this.изменитьСписокСпециальностейToolStripMenuItem.Click += new System.EventHandler(this.изменитьСписокСпециальностейToolStripMenuItem_Click);
             // 
             // запросыToolStripMenuItem
             // 

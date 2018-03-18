@@ -23,7 +23,7 @@ namespace Med2
             //собриаем все возможные значения профессий
             try
             {
-                string[] jobs = File.ReadAllLines("Работы.txt");
+                string[] jobs = File.ReadAllLines(@"C:\Users\IskusnikXD\Source\Repos\Med\Med2\Работы.txt");//"Работы.txt");
                 if (!(jobs == null || jobs.Length == 0))
                     foreach (string job in jobs)
                         this.comboBoxJob.Items.Add(job);
@@ -31,6 +31,7 @@ namespace Med2
             catch(FileNotFoundException)
             {
                 MessageBox.Show("На данный момент вакансий нет. Главврач должен создать вакансии");
+                this.Close();
             }
             /*using (ModelMedDBContainer db = new ModelMedDBContainer())
             {

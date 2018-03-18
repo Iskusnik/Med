@@ -30,5 +30,24 @@ namespace Med2
             regDocForm.Owner = this;
             regDocForm.ShowDialog();
         }
+
+        private void изменитьСписокСпециальностейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form vac = new ChangeVacancies();
+            vac.Owner = this;
+            vac.ShowDialog();
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form del = new DeleteDoctor();
+            del.Owner = this;
+            del.ShowDialog();
+        }
+
+        private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

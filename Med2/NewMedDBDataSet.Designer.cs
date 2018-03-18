@@ -2926,7 +2926,6 @@ namespace Med2 {
                 this.columnEducation.AutoIncrementSeed = -1;
                 this.columnEducation.AutoIncrementStep = -1;
                 this.columnEducation.AllowDBNull = false;
-                this.columnEducation.ReadOnly = true;
                 this.columnJob.AllowDBNull = false;
                 this.columnJob.MaxLength = 2147483647;
                 this.columnMemberships.AllowDBNull = false;

@@ -368,7 +368,6 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Enabled = false;
             this.label15.Location = new System.Drawing.Point(21, 530);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(270, 13);
@@ -379,15 +378,6 @@
             // 
             this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxJob.FormattingEnabled = true;
-            this.comboBoxJob.Items.AddRange(new object[] {
-            "Паспорт гражданина РФ",
-            "Свидетельство о рождении",
-            "Дипломатический паспорт",
-            "Паспорт моряка",
-            "Военный билет",
-            "Удостоверение личности военнослужащего",
-            "Удостоверение беженца",
-            "Служебное удостоверение работника прокуратуры"});
             this.comboBoxJob.Location = new System.Drawing.Point(145, 265);
             this.comboBoxJob.Name = "comboBoxJob";
             this.comboBoxJob.Size = new System.Drawing.Size(137, 21);

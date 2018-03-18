@@ -54,22 +54,25 @@ namespace Med2
                     Doctor newDoctor = new Doctor();
                     newDoctor.FullName = "Администратор";
                     newDoctor.Gender = "Администратор";
-                    newDoctor.BirthDate = new DateTime(1, 1, 1);
+                    newDoctor.BirthDate = new DateTime(2000, 1, 1);
                     newDoctor.Nationality = "Администратор";
                     newDoctor.LiveAdress = "Администратор";
                     newDoctor.RegAdress = "Администратор";
-                    newDoctor.RegDate = new DateTime(1, 1, 1); ;
+                    newDoctor.RegDate = new DateTime(2000, 1, 1); ;
                     newDoctor.InsuranceBillNum = "Администратор";
                     newDoctor.Education = "Администратор";
                     newDoctor.Job = "Главврач";
                     newDoctor.Memberships = "Администратор";
 
-                    newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -1, Person = newDoctor };
+                    newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = 1, Person = newDoctor };
                     newDoctor.WorkTime = new List<WorkTime>();
+                    newDoctor.FreeTime = new List<FreeTime>();
                     newDoctor.DoctorRecord = new List<DoctorRecord>();
+                    newDoctor.Password = "123qwe";
                     newDoctor.NameHashID = newDoctor.FullName.GetHashCode();
 
                     db.PersonSet.Add(newDoctor);
+                    db.SaveChanges();
                 }
             }
         }

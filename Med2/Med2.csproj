@@ -56,7 +56,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeDocInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeDocInfo.Designer.cs">
+      <DependentUpon>ChangeDocInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeVacancies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeVacancies.Designer.cs">
+      <DependentUpon>ChangeVacancies.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlFunctions.cs" />
+    <Compile Include="DeleteDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteDoctor.Designer.cs">
+      <DependentUpon>DeleteDoctor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Doctor.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
@@ -145,6 +163,15 @@
     <Compile Include="WorkTime.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangeDocInfo.resx">
+      <DependentUpon>ChangeDocInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeVacancies.resx">
+      <DependentUpon>ChangeVacancies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeleteDoctor.resx">
+      <DependentUpon>DeleteDoctor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DoctorMenu.resx">
       <DependentUpon>DoctorMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +243,7 @@
       <LastGenOutput>ModelMedDB.cs</LastGenOutput>
       <DependentUpon>ModelMedDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Работы.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/15/2018 02:07:41
+-- Date Created: 03/19/2018 03:04:00
 -- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med2\ModelMedDB.edmx
 -- --------------------------------------------------
 
@@ -194,7 +194,7 @@ GO
 
 -- Creating table 'PersonSet_Doctor'
 CREATE TABLE [dbo].[PersonSet_Doctor] (
-    [Education] int IDENTITY(1,1) NOT NULL,
+    [Education] nvarchar(max)  NULL,
     [Job] nvarchar(max)  NOT NULL,
     [Memberships] nvarchar(max)  NOT NULL,
     [BirthDate] datetime  NOT NULL,

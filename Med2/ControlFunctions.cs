@@ -27,7 +27,9 @@ namespace Med2
             {
                 string[] personInfo = login.Split('_');
                 string[] birthInfo = personInfo[1].Split('.');
-                pers = db.PersonSet.Find(personInfo[0].GetHashCode(), new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0])));
+                long hash = (long)personInfo[0].GetHashCode();
+                DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
+                pers = db.PersonSet.Find(birth, hash);
                 if (pers == null)
                 {
                     mes = "Логин или пароль введены неверно";
@@ -73,7 +75,10 @@ namespace Med2
                         long docNum = long.Parse(regForm.textDocumentN.Text);
                         string docName = regForm.comboBoxDocType.Text;
                         var doc = from d in db.DocumentsSet where (d.DocumentName == docName && d.DocumentNum == docNum) select d;
-                        
+
+                        if (docNum < 0)
+                            throw new FormatException();
+
                         if (doc.Count() == 0)
                             newPatient.Documents = new Documents { DocumentName = docName, DocumentNum = docNum, Person = newPatient };
                         else
@@ -98,7 +103,7 @@ namespace Med2
                     db.PersonSet.Add(newPatient);
                     db.SaveChanges();
 
-                    login = newPatient.FullName + "_" + newPatient.BirthDate;
+                    login = newPatient.FullName + "_" + newPatient.BirthDate.Day + "." + newPatient.BirthDate.Month + "." + newPatient.BirthDate.Year;
                     password = newPatient.Password;
 
                     return true;
@@ -156,6 +161,10 @@ namespace Med2
                     try
                     {
                         long docNum = long.Parse(regForm.textDocumentN.Text);
+
+                        if (docNum < 0)
+                            throw new FormatException();
+
                         string docName = regForm.comboBoxDocType.Text;
                         var doc = from d in db.DocumentsSet where (d.DocumentName == docName && d.DocumentNum == docNum) select d;
 
@@ -188,7 +197,7 @@ namespace Med2
                     db.PersonSet.Add(newDoctor);
                     db.SaveChanges();
 
-                    login = newDoctor.FullName + "_" + newDoctor.BirthDate;
+                    login = newDoctor.FullName + "_" + newDoctor.BirthDate.Day +"." + newDoctor.BirthDate.Month + "." + newDoctor.BirthDate.Year;
                     password = newDoctor.Password;
 
                     return true;
