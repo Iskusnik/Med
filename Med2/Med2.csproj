@@ -56,11 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeDocInfo.cs">
+    <Compile Include="ChangePersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeDocInfo.Designer.cs">
-      <DependentUpon>ChangeDocInfo.cs</DependentUpon>
+    <Compile Include="ChangePersonInfo.Designer.cs">
+      <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangeVacancies.cs">
       <SubType>Form</SubType>
@@ -157,14 +157,20 @@
     <Compile Include="RegPatForm.Designer.cs">
       <DependentUpon>RegPatForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectPerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPerson.Designer.cs">
+      <DependentUpon>SelectPerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="VisitInfo.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
     <Compile Include="WorkTime.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ChangeDocInfo.resx">
-      <DependentUpon>ChangeDocInfo.cs</DependentUpon>
+    <EmbeddedResource Include="ChangePersonInfo.resx">
+      <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeVacancies.resx">
       <DependentUpon>ChangeVacancies.cs</DependentUpon>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegPatForm.resx">
       <DependentUpon>RegPatForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPerson.resx">
+      <DependentUpon>SelectPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="ModelMedDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

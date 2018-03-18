@@ -21,6 +21,27 @@ namespace Med2
 
         private void DoctorMenu_Load(object sender, EventArgs e)
         {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                thisDoctor = (Doctor)db.PersonSet.Find(thisDoctor.BirthDate, thisDoctor.NameHashID);
+
+                this.Text += thisDoctor.FullName;
+                this.textBoxName.Text = thisDoctor.FullName;
+                this.textBoxGender.Text = thisDoctor.Gender;
+                this.textBoxBirthDate.Text = thisDoctor.BirthDate.Date.ToShortDateString();
+                this.textNation.Text = thisDoctor.Nationality;
+                this.textLiveAdress.Text = thisDoctor.LiveAdress;
+                this.textRegAdress.Text = thisDoctor.RegAdress;
+                this.textBoxRegDate.Text = thisDoctor.RegDate.Date.ToShortDateString();
+                this.textBoxInsuranceBillNum.Text = thisDoctor.InsuranceBillNum;
+                this.textBoxEducation.Text = thisDoctor.Education;
+                this.textBoxJob.Text = thisDoctor.Job;
+                this.textInsuranceMemberships.Text = thisDoctor.Memberships;
+
+                this.textBoxDocType.Text = thisDoctor.Documents.DocumentName;
+                this.textDocumentN.Text = thisDoctor.Documents.DocumentNum.ToString();
+            }
+
             ClinicManageToolStripMenuItem.Enabled = thisDoctor.Job == "Главврач";
         }
         
@@ -45,7 +66,14 @@ namespace Med2
             del.ShowDialog();
         }
 
-        private void изменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        
+
+        private void изменитьРасписаниеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

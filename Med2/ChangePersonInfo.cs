@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Med2
 {
-    public partial class ChangeDocInfo : Form
+    public partial class ChangePersonInfo : Form
     {
-        public ChangeDocInfo()
+        public ChangePersonInfo()
         {
             InitializeComponent();
         }

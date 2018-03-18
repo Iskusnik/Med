@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             this.редактироватьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.просмотретьИсториюЗаписейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.врачиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.изменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClinicManageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьРасписаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьСписокСпециальностейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,11 +42,9 @@
             this.textBoxBirthDate = new System.Windows.Forms.TextBox();
             this.textBoxGender = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBoxBloodType = new System.Windows.Forms.TextBox();
+            this.textBoxJob = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBoxWorkIncapacity = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textInsurancePolicyNum = new System.Windows.Forms.TextBox();
+            this.textInsuranceMemberships = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBoxInsuranceBillNum = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -69,6 +65,9 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.textBoxEducation = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,26 +77,19 @@
             this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.редактироватьДанныеToolStripMenuItem.Text = "Медицинская карта";
             // 
-            // просмотретьИсториюЗаписейToolStripMenuItem
-            // 
-            this.просмотретьИсториюЗаписейToolStripMenuItem.Name = "просмотретьИсториюЗаписейToolStripMenuItem";
-            this.просмотретьИсториюЗаписейToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.просмотретьИсториюЗаписейToolStripMenuItem.Text = "Просмотреть историю приёмов";
-            // 
             // врачиToolStripMenuItem
             // 
             this.врачиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.добавитьToolStripMenuItem,
-            this.удалитьToolStripMenuItem,
-            this.изменитьToolStripMenuItem});
+            this.удалитьToolStripMenuItem});
             this.врачиToolStripMenuItem.Name = "врачиToolStripMenuItem";
-            this.врачиToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.врачиToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.врачиToolStripMenuItem.Text = "Врачи";
             // 
             // добавитьToolStripMenuItem
             // 
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
             this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
@@ -108,20 +100,13 @@
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
-            // изменитьToolStripMenuItem
-            // 
-            this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.изменитьToolStripMenuItem.Text = "Изменить";
-            this.изменитьToolStripMenuItem.Click += new System.EventHandler(this.изменитьToolStripMenuItem_Click);
-            // 
             // ClinicManageToolStripMenuItem
             // 
             this.ClinicManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.врачиToolStripMenuItem,
             this.изменитьСписокСпециальностейToolStripMenuItem,
-            this.просмотретьИсториюЗаписейToolStripMenuItem,
             this.изменитьРасписаниеToolStripMenuItem,
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem,
             this.запросыToolStripMenuItem,
             this.статистикаОбращенийToolStripMenuItem});
             this.ClinicManageToolStripMenuItem.Name = "ClinicManageToolStripMenuItem";
@@ -133,6 +118,7 @@
             this.изменитьРасписаниеToolStripMenuItem.Name = "изменитьРасписаниеToolStripMenuItem";
             this.изменитьРасписаниеToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.изменитьРасписаниеToolStripMenuItem.Text = "Изменить расписание";
+            this.изменитьРасписаниеToolStripMenuItem.Click += new System.EventHandler(this.изменитьРасписаниеToolStripMenuItem_Click);
             // 
             // изменитьСписокСпециальностейToolStripMenuItem
             // 
@@ -192,20 +178,20 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(30, 293);
+            this.label17.Location = new System.Drawing.Point(30, 280);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(75, 13);
+            this.label17.Size = new System.Drawing.Size(65, 13);
             this.label17.TabIndex = 109;
-            this.label17.Text = "Группа крови";
+            this.label17.Text = "Должность";
             // 
-            // textBoxBloodType
+            // textBoxJob
             // 
-            this.textBoxBloodType.Location = new System.Drawing.Point(154, 290);
-            this.textBoxBloodType.Name = "textBoxBloodType";
-            this.textBoxBloodType.ReadOnly = true;
-            this.textBoxBloodType.Size = new System.Drawing.Size(223, 20);
-            this.textBoxBloodType.TabIndex = 108;
-            this.textBoxBloodType.Text = "a";
+            this.textBoxJob.Location = new System.Drawing.Point(154, 277);
+            this.textBoxJob.Name = "textBoxJob";
+            this.textBoxJob.ReadOnly = true;
+            this.textBoxJob.Size = new System.Drawing.Size(223, 20);
+            this.textBoxJob.TabIndex = 108;
+            this.textBoxJob.Text = "a";
             // 
             // label16
             // 
@@ -216,45 +202,27 @@
             this.label16.TabIndex = 107;
             this.label16.Text = "Общие сведения";
             // 
-            // textBoxWorkIncapacity
+            // textInsuranceMemberships
             // 
-            this.textBoxWorkIncapacity.Location = new System.Drawing.Point(440, 247);
-            this.textBoxWorkIncapacity.Name = "textBoxWorkIncapacity";
-            this.textBoxWorkIncapacity.ReadOnly = true;
-            this.textBoxWorkIncapacity.Size = new System.Drawing.Size(301, 20);
-            this.textBoxWorkIncapacity.TabIndex = 105;
-            this.textBoxWorkIncapacity.Text = "a";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(437, 231);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(228, 13);
-            this.label19.TabIndex = 104;
-            this.label19.Text = "Серия и номер листка нетрудоспособности";
-            // 
-            // textInsurancePolicyNum
-            // 
-            this.textInsurancePolicyNum.Location = new System.Drawing.Point(440, 195);
-            this.textInsurancePolicyNum.Name = "textInsurancePolicyNum";
-            this.textInsurancePolicyNum.ReadOnly = true;
-            this.textInsurancePolicyNum.Size = new System.Drawing.Size(301, 20);
-            this.textInsurancePolicyNum.TabIndex = 103;
-            this.textInsurancePolicyNum.Text = "a";
+            this.textInsuranceMemberships.Location = new System.Drawing.Point(440, 293);
+            this.textInsuranceMemberships.Name = "textInsuranceMemberships";
+            this.textInsuranceMemberships.ReadOnly = true;
+            this.textInsuranceMemberships.Size = new System.Drawing.Size(301, 20);
+            this.textInsuranceMemberships.TabIndex = 103;
+            this.textInsuranceMemberships.Text = "a";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(437, 179);
+            this.label15.Location = new System.Drawing.Point(437, 277);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 13);
+            this.label15.Size = new System.Drawing.Size(270, 13);
             this.label15.TabIndex = 102;
-            this.label15.Text = "Номер полиса ОМС";
+            this.label15.Text = "Сведения о членстве в мед. проф. неком-их орг-иях";
             // 
             // textBoxInsuranceBillNum
             // 
-            this.textBoxInsuranceBillNum.Location = new System.Drawing.Point(440, 147);
+            this.textBoxInsuranceBillNum.Location = new System.Drawing.Point(440, 245);
             this.textBoxInsuranceBillNum.Name = "textBoxInsuranceBillNum";
             this.textBoxInsuranceBillNum.ReadOnly = true;
             this.textBoxInsuranceBillNum.Size = new System.Drawing.Size(301, 20);
@@ -264,7 +232,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(437, 131);
+            this.label14.Location = new System.Drawing.Point(437, 229);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(267, 13);
             this.label14.TabIndex = 100;
@@ -273,7 +241,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(428, 113);
+            this.label13.Location = new System.Drawing.Point(428, 211);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(74, 13);
             this.label13.TabIndex = 99;
@@ -425,21 +393,46 @@
             this.menuStrip1.TabIndex = 106;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // textBoxEducation
+            // 
+            this.textBoxEducation.Location = new System.Drawing.Point(154, 308);
+            this.textBoxEducation.Name = "textBoxEducation";
+            this.textBoxEducation.ReadOnly = true;
+            this.textBoxEducation.Size = new System.Drawing.Size(223, 20);
+            this.textBoxEducation.TabIndex = 115;
+            this.textBoxEducation.Text = "a";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(30, 311);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(75, 13);
+            this.label20.TabIndex = 114;
+            this.label20.Text = "Образование";
+            // 
+            // найтиЧеловекаИИзменитьДанныеToolStripMenuItem
+            // 
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Name = "найтиЧеловекаИИзменитьДанныеToolStripMenuItem";
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Text = "Найти человека и изменить данные";
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click);
+            // 
             // DoctorMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 340);
+            this.ClientSize = new System.Drawing.Size(765, 353);
+            this.Controls.Add(this.textBoxEducation);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.textBoxDocType);
             this.Controls.Add(this.textBoxRegDate);
             this.Controls.Add(this.textBoxBirthDate);
             this.Controls.Add(this.textBoxGender);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.textBoxBloodType);
+            this.Controls.Add(this.textBoxJob);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.textBoxWorkIncapacity);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.textInsurancePolicyNum);
+            this.Controls.Add(this.textInsuranceMemberships);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.textBoxInsuranceBillNum);
             this.Controls.Add(this.label14);
@@ -472,7 +465,6 @@
 
         #endregion
         private System.Windows.Forms.ToolStripMenuItem редактироватьДанныеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem просмотретьИсториюЗаписейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem врачиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClinicManageToolStripMenuItem;
         public System.Windows.Forms.TextBox textBoxDocType;
@@ -480,11 +472,9 @@
         public System.Windows.Forms.TextBox textBoxBirthDate;
         public System.Windows.Forms.TextBox textBoxGender;
         private System.Windows.Forms.Label label17;
-        public System.Windows.Forms.TextBox textBoxBloodType;
+        public System.Windows.Forms.TextBox textBoxJob;
         public System.Windows.Forms.Label label16;
-        public System.Windows.Forms.TextBox textBoxWorkIncapacity;
-        private System.Windows.Forms.Label label19;
-        public System.Windows.Forms.TextBox textInsurancePolicyNum;
+        public System.Windows.Forms.TextBox textInsuranceMemberships;
         private System.Windows.Forms.Label label15;
         public System.Windows.Forms.TextBox textBoxInsuranceBillNum;
         public System.Windows.Forms.Label label14;
@@ -509,8 +499,10 @@
         private System.Windows.Forms.ToolStripMenuItem изменитьСписокСпециальностейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem изменитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запросыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem статистикаОбращенийToolStripMenuItem;
+        public System.Windows.Forms.TextBox textBoxEducation;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ToolStripMenuItem найтиЧеловекаИИзменитьДанныеToolStripMenuItem;
     }
 }

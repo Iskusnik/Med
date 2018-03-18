@@ -1,6 +1,6 @@
 ﻿namespace Med2
 {
-    partial class ChangeDocInfo
+    partial class ChangePersonInfo
     {
         /// <summary>
         /// Required designer variable.
