@@ -62,6 +62,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.comboBoxJob = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxEducation = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // comboBoxDocType
@@ -77,7 +81,7 @@
             "Удостоверение личности военнослужащего",
             "Удостоверение беженца",
             "Служебное удостоверение работника прокуратуры"});
-            this.comboBoxDocType.Location = new System.Drawing.Point(145, 319);
+            this.comboBoxDocType.Location = new System.Drawing.Point(145, 407);
             this.comboBoxDocType.Name = "comboBoxDocType";
             this.comboBoxDocType.Size = new System.Drawing.Size(137, 21);
             this.comboBoxDocType.TabIndex = 75;
@@ -174,7 +178,7 @@
             // 
             // textDocumentN
             // 
-            this.textDocumentN.Location = new System.Drawing.Point(145, 345);
+            this.textDocumentN.Location = new System.Drawing.Point(145, 433);
             this.textDocumentN.Name = "textDocumentN";
             this.textDocumentN.Size = new System.Drawing.Size(137, 20);
             this.textDocumentN.TabIndex = 60;
@@ -183,7 +187,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(21, 345);
+            this.label12.Location = new System.Drawing.Point(21, 433);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(98, 13);
             this.label12.TabIndex = 59;
@@ -192,7 +196,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 296);
+            this.label11.Location = new System.Drawing.Point(13, 384);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(138, 13);
             this.label11.TabIndex = 58;
@@ -201,7 +205,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(21, 319);
+            this.label10.Location = new System.Drawing.Point(21, 407);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(83, 13);
             this.label10.TabIndex = 57;
@@ -210,7 +214,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(21, 251);
+            this.label9.Location = new System.Drawing.Point(21, 239);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 56;
@@ -218,7 +222,7 @@
             // 
             // dateTimePickerRegDate
             // 
-            this.dateTimePickerRegDate.Location = new System.Drawing.Point(145, 251);
+            this.dateTimePickerRegDate.Location = new System.Drawing.Point(145, 239);
             this.dateTimePickerRegDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerRegDate.Name = "dateTimePickerRegDate";
             this.dateTimePickerRegDate.Size = new System.Drawing.Size(137, 20);
@@ -227,7 +231,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 225);
+            this.label8.Location = new System.Drawing.Point(21, 213);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 54;
@@ -236,7 +240,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 199);
+            this.label7.Location = new System.Drawing.Point(21, 187);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
             this.label7.TabIndex = 53;
@@ -244,7 +248,7 @@
             // 
             // textRegAdress
             // 
-            this.textRegAdress.Location = new System.Drawing.Point(145, 225);
+            this.textRegAdress.Location = new System.Drawing.Point(145, 213);
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.Size = new System.Drawing.Size(137, 20);
             this.textRegAdress.TabIndex = 52;
@@ -252,7 +256,7 @@
             // 
             // textLiveAdress
             // 
-            this.textLiveAdress.Location = new System.Drawing.Point(145, 199);
+            this.textLiveAdress.Location = new System.Drawing.Point(145, 187);
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.Size = new System.Drawing.Size(137, 20);
             this.textLiveAdress.TabIndex = 51;
@@ -261,7 +265,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 173);
+            this.label6.Location = new System.Drawing.Point(21, 161);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 50;
@@ -269,7 +273,7 @@
             // 
             // textNation
             // 
-            this.textNation.Location = new System.Drawing.Point(145, 173);
+            this.textNation.Location = new System.Drawing.Point(145, 161);
             this.textNation.Name = "textNation";
             this.textNation.Size = new System.Drawing.Size(137, 20);
             this.textNation.TabIndex = 49;
@@ -370,9 +374,57 @@
             this.label15.TabIndex = 76;
             this.label15.Text = "Сведения о членстве в мед. проф. неком-их орг-иях";
             // 
+            // comboBoxJob
+            // 
+            this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxJob.FormattingEnabled = true;
+            this.comboBoxJob.Items.AddRange(new object[] {
+            "Паспорт гражданина РФ",
+            "Свидетельство о рождении",
+            "Дипломатический паспорт",
+            "Паспорт моряка",
+            "Военный билет",
+            "Удостоверение личности военнослужащего",
+            "Удостоверение беженца",
+            "Служебное удостоверение работника прокуратуры"});
+            this.comboBoxJob.Location = new System.Drawing.Point(145, 265);
+            this.comboBoxJob.Name = "comboBoxJob";
+            this.comboBoxJob.Size = new System.Drawing.Size(137, 21);
+            this.comboBoxJob.TabIndex = 78;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(21, 268);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 13);
+            this.label19.TabIndex = 79;
+            this.label19.Text = "Должность";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(21, 297);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(75, 13);
+            this.label20.TabIndex = 80;
+            this.label20.Text = "Образование";
+            // 
+            // textBoxEducation
+            // 
+            this.textBoxEducation.Location = new System.Drawing.Point(145, 294);
+            this.textBoxEducation.Name = "textBoxEducation";
+            this.textBoxEducation.Size = new System.Drawing.Size(137, 20);
+            this.textBoxEducation.TabIndex = 81;
+            this.textBoxEducation.Text = "a";
+            // 
             // RegDocForm
             // 
             this.ClientSize = new System.Drawing.Size(306, 741);
+            this.Controls.Add(this.textBoxEducation);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.comboBoxJob);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.comboBoxDocType);
@@ -453,5 +505,9 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.Label label15;
+        public System.Windows.Forms.ComboBox comboBoxJob;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        public System.Windows.Forms.TextBox textBoxEducation;
     }
 }
