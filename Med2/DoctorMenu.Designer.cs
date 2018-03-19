@@ -105,8 +105,8 @@
             this.ClinicManageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.врачиToolStripMenuItem,
             this.изменитьСписокСпециальностейToolStripMenuItem,
-            this.изменитьРасписаниеToolStripMenuItem,
             this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem,
+            this.изменитьРасписаниеToolStripMenuItem,
             this.запросыToolStripMenuItem,
             this.статистикаОбращенийToolStripMenuItem});
             this.ClinicManageToolStripMenuItem.Name = "ClinicManageToolStripMenuItem";

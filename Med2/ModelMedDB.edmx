@@ -407,7 +407,7 @@
           <Property Name="InsurancePolicyNum" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="WorkIncapacityListNum" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="BloodType" Type="Byte" Nullable="false" />
-          <Property Name="Rhesus" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Rhesus" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="Illness" Relationship="ModelMedDB.PatientHaveIllness" FromRole="Patient" ToRole="Illness" />
           <NavigationProperty Name="MedCard" Relationship="ModelMedDB.PatientHaveMedCard" FromRole="Patient" ToRole="MedCard" />
           <NavigationProperty Name="VisitInfo" Relationship="ModelMedDB.PatientVisitInfo" FromRole="Patient" ToRole="VisitInfo" />

@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Med2
+{
+    public partial class PatientToDoctor : Form
+    {
+
+        Doctor[] DoctorsList;
+        int index;
+        public PatientToDoctor()
+        {
+            DoctorsList = null;
+            InitializeComponent();
+        }
+
+        private void PatientToDoctor_Load(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                string[] distinct = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor as Doctor).Job).Distinct().ToArray();
+
+                this.comboBoxJob.Items.Remove("Главврач");
+                foreach (string job in distinct)
+                    this.comboBoxJob.Items.Add(job);
+            }
+            if (comboBoxJob.Items.Count == 0)
+            {
+                MessageBox.Show("Врачей нет");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBoxTime.Text == "")
+                MessageBox.Show("Выберите специальность, врача, день и время");
+        }
+
+        private void comboBoxJob_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                DoctorsList = (from doctor in db.PersonSet where ((doctor is Doctor) && ((Doctor)doctor).Job == comboBoxJob.Text) select (doctor as Doctor)).ToArray();
+            }
+            foreach (Doctor doct in DoctorsList)
+                this.comboBoxDoctor.Items.Add(doct);
+        }
+
+        private void comboBoxDoctor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            index = comboBoxDoctor.SelectedIndex;
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].FullName);
+                string[] distinct = (from dates in d.FreeTime select dates.Start.ToShortDateString()).Distinct().ToArray();
+
+                foreach (string doct in distinct)
+                    this.comboBoxDate.Items.Add(doct);
+            }
+        }
+
+        private void comboBoxDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].FullName);
+                string[] distinct = (from dates in d.FreeTime select dates.Start.ToShortDateString()).Distinct().ToArray();
+
+                foreach (string doct in distinct)
+                    this.comboBoxDate.Items.Add(doct);
+            }
+        }
+    }
+}

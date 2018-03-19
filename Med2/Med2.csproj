@@ -134,11 +134,11 @@
     <Compile Include="PatientMenu.Designer.cs">
       <DependentUpon>PatientMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="PatinetToDoctor.cs">
+    <Compile Include="PatientToDoctor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PatinetToDoctor.Designer.cs">
-      <DependentUpon>PatinetToDoctor.cs</DependentUpon>
+    <Compile Include="PatientToDoctor.Designer.cs">
+      <DependentUpon>PatientToDoctor.cs</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
@@ -187,8 +187,8 @@
     <EmbeddedResource Include="PatientMenu.resx">
       <DependentUpon>PatientMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PatinetToDoctor.resx">
-      <DependentUpon>PatinetToDoctor.cs</DependentUpon>
+    <EmbeddedResource Include="PatientToDoctor.resx">
+      <DependentUpon>PatientToDoctor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -53,7 +53,9 @@ namespace Med2
 
         private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form changeInfo = new ChangePersonInfo(thisPatient);
+            changeInfo.Owner = this;
+            changeInfo.ShowDialog();
         }
 
         private void записатьсяToolStripMenuItem_Click(object sender, EventArgs e)

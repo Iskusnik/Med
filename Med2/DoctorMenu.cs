@@ -75,7 +75,8 @@ namespace Med2
 
         private void найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form selPer = new SelectPerson();
+            selPer.Show();
         }
     }
 }

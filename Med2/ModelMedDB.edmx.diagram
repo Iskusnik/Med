@@ -7,7 +7,7 @@
       <Diagram DiagramId="295cdc13782d4260bc81e62b3841db7e" Name="Diagram1" ZoomLevel="79" >
         <EntityTypeShape EntityType="ModelMedDB.Illness" Width="1.5" PointX="14.125" PointY="8.875" />
         <EntityTypeShape EntityType="ModelMedDB.MedCard" Width="1.5" PointX="24.125" PointY="9" />
-        <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="20.25" PointY="2" />
+        <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="19.125" PointY="11.375" />
         <EntityTypeShape EntityType="ModelMedDB.Documents" Width="1.5" PointX="13.5" PointY="2.25" />
         <EntityTypeShape EntityType="ModelMedDB.Person" Width="1.5" PointX="15.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelMedDB.Doctor" Width="1.5" PointX="18.125" PointY="1.875" />

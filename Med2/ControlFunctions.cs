@@ -103,7 +103,7 @@ namespace Med2
                     db.PersonSet.Add(newPatient);
                     db.SaveChanges();
 
-                    login = newPatient.FullName + "_" + newPatient.BirthDate.Day + "." + newPatient.BirthDate.Month + "." + newPatient.BirthDate.Year;
+                    login = newPatient.FullName + "_" + newPatient.BirthDate.ToShortDateString();
                     password = newPatient.Password;
 
                     return true;
@@ -197,7 +197,7 @@ namespace Med2
                     db.PersonSet.Add(newDoctor);
                     db.SaveChanges();
 
-                    login = newDoctor.FullName + "_" + newDoctor.BirthDate.Day +"." + newDoctor.BirthDate.Month + "." + newDoctor.BirthDate.Year;
+                    login = newDoctor.FullName + "_" + newDoctor.BirthDate.ToShortDateString();
                     password = newDoctor.Password;
 
                     return true;
