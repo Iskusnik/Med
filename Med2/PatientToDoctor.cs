@@ -15,9 +15,12 @@ namespace Med2
 
         Doctor[] DoctorsList;
         int index;
-        public PatientToDoctor()
+        Patient thisPatient;
+
+        public PatientToDoctor(Patient pers)
         {
             DoctorsList = null;
+            thisPatient = pers;
             InitializeComponent();
         }
 
@@ -46,8 +49,21 @@ namespace Med2
                 {
                     DoctorsList[index] = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
                     FreeTime selectedTime = (FreeTime)(from times in DoctorsList[index].FreeTime where (times.Start.Date.ToShortDateString() == comboBoxDate.Text && times.Start.TimeOfDay.ToString() == comboBoxTime.Text) select (times));
-                    DoctorsList[index].WorkTime.Add(new WorkTime{ Doctor = DoctorsList[index], Start = selectedTime.Start, Finish = selectedTime.Finish });
+                    WorkTime temp = new WorkTime { Doctor = DoctorsList[index], Start = selectedTime.Start, Finish = selectedTime.Finish };
+                    DoctorsList[index].WorkTime.Add(temp); 
                     DoctorsList[index].FreeTime.Remove(selectedTime);
+                    thisPatient = (Patient)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
+                    temp.VisitInfo = new VisitInfo
+                    {
+                        DateStart = selectedTime.Start,
+                        DateFinish = selectedTime.Finish,
+                        Patient = thisPatient,
+                        PatientBirthDate = thisPatient.BirthDate,
+                        PatientFullName = thisPatient.FullName,
+                        WorkTime = temp,
+                        DoctorID = DoctorsList[index].NameHashID,
+                    };
+                    thisPatient.VisitInfo.Add(temp.VisitInfo);
                     db.SaveChanges();
                 }
         }

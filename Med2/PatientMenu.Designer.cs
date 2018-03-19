@@ -308,20 +308,21 @@
             // прошедшиеToolStripMenuItem
             // 
             this.прошедшиеToolStripMenuItem.Name = "прошедшиеToolStripMenuItem";
-            this.прошедшиеToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.прошедшиеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.прошедшиеToolStripMenuItem.Text = "Прошедшие";
             // 
             // грядущиеToolStripMenuItem
             // 
             this.грядущиеToolStripMenuItem.Name = "грядущиеToolStripMenuItem";
-            this.грядущиеToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.грядущиеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.грядущиеToolStripMenuItem.Text = "Грядущие";
             // 
             // всеToolStripMenuItem
             // 
             this.всеToolStripMenuItem.Name = "всеToolStripMenuItem";
-            this.всеToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.всеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.всеToolStripMenuItem.Text = "Все";
+            this.всеToolStripMenuItem.Click += new System.EventHandler(this.всеToolStripMenuItem_Click);
             // 
             // редактироватьДанныеToolStripMenuItem
             // 
@@ -344,6 +345,7 @@
             this.просмотретьИсториюБолезнейToolStripMenuItem.Name = "просмотретьИсториюБолезнейToolStripMenuItem";
             this.просмотретьИсториюБолезнейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.просмотретьИсториюБолезнейToolStripMenuItem.Text = "История болезней";
+            this.просмотретьИсториюБолезнейToolStripMenuItem.Click += new System.EventHandler(this.просмотретьИсториюБолезнейToolStripMenuItem_Click);
             // 
             // label16
             // 

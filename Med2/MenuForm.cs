@@ -53,6 +53,7 @@ namespace Med2
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
+                ControlFunctions.ClearDataBase();
                 int doctorsCount = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor as Doctor)).Count();
                 if (doctorsCount == 0)
                 {
@@ -79,6 +80,7 @@ namespace Med2
                     db.PersonSet.Add(newDoctor);
                     db.SaveChanges();
                 }
+                ControlFunctions.GenerateRandomDataBase();
             }
         }
     }

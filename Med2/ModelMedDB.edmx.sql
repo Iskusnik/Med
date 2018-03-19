@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/19/2018 03:04:00
+-- Date Created: 03/19/2018 22:18:37
 -- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med2\ModelMedDB.edmx
 -- --------------------------------------------------
 
@@ -17,8 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PatientHaveIllness]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[IllnessSet] DROP CONSTRAINT [FK_PatientHaveIllness];
+IF OBJECT_ID(N'[dbo].[FK_PatientHaveIllness_Illness]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatientHaveIllness] DROP CONSTRAINT [FK_PatientHaveIllness_Illness];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PatientHaveIllness_Patient]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatientHaveIllness] DROP CONSTRAINT [FK_PatientHaveIllness_Patient];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PatientHaveMedCard]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedCardSet] DROP CONSTRAINT [FK_PatientHaveMedCard];
@@ -85,6 +88,9 @@ GO
 IF OBJECT_ID(N'[dbo].[PersonSet_Doctor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PersonSet_Doctor];
 GO
+IF OBJECT_ID(N'[dbo].[PatientHaveIllness]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PatientHaveIllness];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -93,9 +99,7 @@ GO
 -- Creating table 'IllnessSet'
 CREATE TABLE [dbo].[IllnessSet] (
     [Name] nvarchar(max)  NOT NULL,
-    [Hash] bigint  NOT NULL,
-    [Patient_BirthDate] datetime  NOT NULL,
-    [Patient_NameHashID] bigint  NOT NULL
+    [Hash] bigint  NOT NULL
 );
 GO
 
@@ -202,6 +206,14 @@ CREATE TABLE [dbo].[PersonSet_Doctor] (
 );
 GO
 
+-- Creating table 'PatientHaveIllness'
+CREATE TABLE [dbo].[PatientHaveIllness] (
+    [Illness_Hash] bigint  NOT NULL,
+    [Patient_BirthDate] datetime  NOT NULL,
+    [Patient_NameHashID] bigint  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -266,22 +278,37 @@ ADD CONSTRAINT [PK_PersonSet_Doctor]
     PRIMARY KEY CLUSTERED ([BirthDate], [NameHashID] ASC);
 GO
 
+-- Creating primary key on [Illness_Hash], [Patient_BirthDate], [Patient_NameHashID] in table 'PatientHaveIllness'
+ALTER TABLE [dbo].[PatientHaveIllness]
+ADD CONSTRAINT [PK_PatientHaveIllness]
+    PRIMARY KEY CLUSTERED ([Illness_Hash], [Patient_BirthDate], [Patient_NameHashID] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [Patient_BirthDate], [Patient_NameHashID] in table 'IllnessSet'
-ALTER TABLE [dbo].[IllnessSet]
-ADD CONSTRAINT [FK_PatientHaveIllness]
+-- Creating foreign key on [Illness_Hash] in table 'PatientHaveIllness'
+ALTER TABLE [dbo].[PatientHaveIllness]
+ADD CONSTRAINT [FK_PatientHaveIllness_Illness]
+    FOREIGN KEY ([Illness_Hash])
+    REFERENCES [dbo].[IllnessSet]
+        ([Hash])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Patient_BirthDate], [Patient_NameHashID] in table 'PatientHaveIllness'
+ALTER TABLE [dbo].[PatientHaveIllness]
+ADD CONSTRAINT [FK_PatientHaveIllness_Patient]
     FOREIGN KEY ([Patient_BirthDate], [Patient_NameHashID])
     REFERENCES [dbo].[PersonSet_Patient]
         ([BirthDate], [NameHashID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PatientHaveIllness'
-CREATE INDEX [IX_FK_PatientHaveIllness]
-ON [dbo].[IllnessSet]
+-- Creating non-clustered index for FOREIGN KEY 'FK_PatientHaveIllness_Patient'
+CREATE INDEX [IX_FK_PatientHaveIllness_Patient]
+ON [dbo].[PatientHaveIllness]
     ([Patient_BirthDate], [Patient_NameHashID]);
 GO
 

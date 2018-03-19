@@ -14,9 +14,16 @@ namespace Med2
     
     public partial class Illness
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Illness()
+        {
+            this.Patient = new HashSet<Patient>();
+        }
+    
         public string Name { get; set; }
         public long Hash { get; set; }
     
-        public virtual Patient Patient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Patient> Patient { get; set; }
     }
 }

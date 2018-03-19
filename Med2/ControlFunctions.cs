@@ -13,7 +13,7 @@ namespace Med2
     public class ControlFunctions
     {
 
-       
+
         public static bool LoginPasswordCheck(string login, string password, out string mes, out Person pers)
         {
             mes = "";
@@ -40,7 +40,7 @@ namespace Med2
             }
         }
 
-        public static bool PatientRegistrationCall(object obj, out string login,  out string password)
+        public static bool PatientRegistrationCall(object obj, out string login, out string password)
         {
             RegPatForm regForm = (RegPatForm)obj;
             login = "";
@@ -50,10 +50,10 @@ namespace Med2
                 Patient newPatient = new Patient();
                 try
                 {
-                    if (regForm.comboBoxGender.Text == "" || regForm.textSurname.Text == "" 
+                    if (regForm.comboBoxGender.Text == "" || regForm.textSurname.Text == ""
                           || regForm.textName.Text == "" || regForm.textBoxPassword2.Text == ""
                           || regForm.textNation.Text == "" || regForm.textLiveAdress.Text == ""
-                          || regForm.textRegAdress.Text == ""  || regForm.comboBoxDocType.Text == "" 
+                          || regForm.textRegAdress.Text == "" || regForm.comboBoxDocType.Text == ""
                           || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == "")
                         throw (new ArgumentNullException());
 
@@ -100,6 +100,7 @@ namespace Med2
                     if (db.PersonSet.Find(newPatient.BirthDate, newPatient.NameHashID) != null)
                         throw new Exception("Данный человек уже зарегистрирован");
                     newPatient.MedCard = new MedCard();
+                    newPatient.MedCard.Patient = newPatient;
                     db.PersonSet.Add(newPatient);
                     db.SaveChanges();
 
@@ -108,7 +109,7 @@ namespace Med2
 
                     return true;
                 }
-                catch(ArgumentNullException)
+                catch (ArgumentNullException)
                 {
                     MessageBox.Show("Заполните пустые поля");
                     return false;
@@ -123,7 +124,7 @@ namespace Med2
                     MessageBox.Show(a.Message);
                     return false;
                 }
-                
+
             }
         }
 
@@ -189,9 +190,9 @@ namespace Med2
                     if (db.PersonSet.Find(newDoctor.BirthDate, newDoctor.NameHashID) != null)
                         throw new Exception("Данный человек уже зарегистрирован");
 
-                    
 
-                    newDoctor.FreeTime = makeJob(new int[]{0,1,2,3,4}, DateTime.Today, newDoctor);
+
+                    newDoctor.FreeTime = makeJob(new int[] { 0, 1, 2, 3, 4 }, DateTime.Today, newDoctor);
                     newDoctor.WorkTime = new List<WorkTime>();
                     newDoctor.DoctorRecord = new List<DoctorRecord>();
                     db.PersonSet.Add(newDoctor);
@@ -225,9 +226,9 @@ namespace Med2
         //График работа на ближайшие 30 дней cчитая  со следующего дня
         //start - час и день начала работы
         //
-        static public List<FreeTime> makeJob(int[] week, DateTime start, Doctor doct, int minutes = 5, int hours = 8, int days = 30 )
+        static public List<FreeTime> makeJob(int[] week, DateTime start, Doctor doct, int minutes = 5, int hours = 8, int days = 30)
         {
-            int N = TimeSpan.FromHours(hours).Duration().Minutes/minutes;    //получаем количество приёмов
+            int N = TimeSpan.FromHours(hours).Duration().Minutes / minutes;    //получаем количество приёмов
 
             List<FreeTime> workTable = new List<FreeTime>();
 
@@ -239,8 +240,8 @@ namespace Med2
             for (int day = 1; day <= days; day++)
             {
                 item.Start = start + TimeSpan.FromDays(day);
-                foreach(int d in week)
-                    if(d == (int)item.Start.DayOfWeek)
+                foreach (int d in week)
+                    if (d == (int)item.Start.DayOfWeek)
                         for (int i = 0; i < N; i++)
                         {
                             item.Finish = start + TimeSpan.FromMinutes(minutes);
@@ -249,6 +250,155 @@ namespace Med2
                         }
             }
             return workTable;
+        }
+
+
+        public static void ClearDataBase()
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                db.Database.Delete();
+                //db.PersonSet.RemoveRange(db.PersonSet); и так далее
+                db.Database.Create();
+            }
+        }
+
+
+        static Random random = new Random();
+        public static void GenerateRandomDataBase(int N = 50)
+        {
+            int doctorNum = random.Next(1, N / 5 + 2);
+            string[] Vacancies = { "Главврач", "Хирург", "Эндокринолог", "Невролог", "Участковый врач", "Окуляринголог", "Дантист" };
+            string[] NamesM = { "Иван", "Денис", "Вячеслав", "Владимир", "Константин", "Александр", "Михаил", "Игнат", "Артём" };
+            string[] NamesW = { "Алёна", "Арина", "Елизавета", "Екатерина", "Александра", "Кристина", "Татьяна", "Людмила" };
+            string[] Genders = { "Мужской", "Женский" };
+            string[] Surnames = { "Иванов", "Александров", "Степанов", "Семёнов", "Удальцов", "Молодцов", "Бобров", "Медведев" };
+
+            string[] DocumentTypes = {
+                                        "Паспорт гражданина РФ",
+                                        "Свидетельство о рождении",
+                                        "Дипломатический паспорт",
+                                        "Паспорт моряка",
+                                        "Военный билет",
+                                        "Удостоверение личности военнослужащего",
+                                        "Удостоверение беженца",
+                                        "Служебное удостоверение работника прокуратуры"
+                                    };
+
+            string[] Nationalities = { "Российская Федерация", "Англия", "Бавария", "Российская Федерация" };
+
+            string[] Educations = { "Мед.образование1", "Мед.образование2", "Мед.образование3" };
+
+            for (int i = 0; i < N; i++)
+            {
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
+                {
+                    Person temp = new Person();
+                    temp.BirthDate = new DateTime(random.Next(1950, 2018), random.Next(1, 13), random.Next(1, 28));
+                    temp.RegDate = new DateTime(random.Next(1950, 2018), random.Next(1, 13), random.Next(1, 28));
+                    temp.Documents = new Documents { DocumentName = DocumentTypes[random.Next(0, 8)], DocumentNum = random.Next(0, Int32.MaxValue), Person = temp };
+                    if (random.Next(0, 2) == 0)
+                    {
+                        temp.Gender = Genders[0];
+                        temp.FullName = Surnames[random.Next(0, 8)] + " " + NamesM[random.Next(0, 9)] + " " + NamesM[random.Next(0, 9)] + "ович";
+                    }
+                    else
+                    {
+                        temp.Gender = Genders[1];
+                        temp.FullName = Surnames[random.Next(0, 8)] + "а " + NamesW[random.Next(0, 8)] + " " + NamesM[random.Next(0, 9)] + "овна";
+                    }
+                    temp.InsuranceBillNum = random.Next(0, Int32.MaxValue).ToString();
+                    temp.LiveAdress = random.Next(0, 4).ToString();
+                    temp.RegAdress = random.Next(10, 20).ToString();
+                    temp.NameHashID = temp.FullName.GetHashCode();
+
+                    if (temp.Documents.DocumentName == "Удостоверение беженца")
+                        temp.Nationality = Nationalities[random.Next(1, 4)];
+                    else
+                        temp.Nationality = Nationalities[0];
+
+                    temp.Password = "1";
+
+                    if (doctorNum > 0)
+                    {
+                        doctorNum--;
+
+                        Doctor t = new Doctor();
+                        (t as Person).BirthDate = temp.BirthDate;
+                        (t as Person).Documents = temp.Documents;
+                        (t as Person).Documents.Person = t;
+                        (t as Person).FullName = temp.FullName;
+                        (t as Person).Gender = temp.Gender;
+                        (t as Person).InsuranceBillNum = temp.InsuranceBillNum;
+                        (t as Person).LiveAdress = temp.LiveAdress;
+                        (t as Person).NameHashID = temp.NameHashID;
+                        (t as Person).Nationality = temp.Nationality;
+                        (t as Person).Password = temp.Password;
+                        (t as Person).RegAdress = temp.RegAdress;
+                        (t as Person).RegDate = temp.RegDate;
+
+                        t.Memberships = "";
+                        if (0 == random.Next(0, 6))
+                            t.Memberships = "Médecins Sans Frontières";
+                        t.Education = Educations[random.Next(0, 3)];
+                        t.Job = Vacancies[random.Next(0, 7)];
+
+                        int week = random.Next(0, 4);
+                        if (0 == week)
+                            t.FreeTime = makeJob(new int[] { 0, 3, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                        if (1 == week)
+                            t.FreeTime = makeJob(new int[] { 0, 1, 2, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                        if (2 == week)
+                            t.FreeTime = makeJob(new int[] { 0, 1, 2, 3, 4, 5, 6 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                        if (3 == week)
+                            t.FreeTime = makeJob(new int[] { 4 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+
+                        t.WorkTime = new List<WorkTime>();
+                        t.DoctorRecord = new List<DoctorRecord>();
+                        db.PersonSet.Add(t);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        Patient t = new Patient();
+                        (t as Person).BirthDate = temp.BirthDate;
+                        (t as Person).Documents = temp.Documents;
+                        (t as Person).FullName = temp.FullName;
+                        (t as Person).Gender = temp.Gender;
+                        (t as Person).InsuranceBillNum = temp.InsuranceBillNum;
+                        (t as Person).LiveAdress = temp.LiveAdress;
+                        (t as Person).NameHashID = temp.NameHashID;
+                        (t as Person).Nationality = temp.Nationality;
+                        (t as Person).Password = temp.Password;
+                        (t as Person).RegAdress = temp.RegAdress;
+                        (t as Person).RegDate = temp.RegDate;
+                        (t as Person).Documents.Person = t;
+
+                        t.BloodType = (byte)random.Next(1, 5);
+                        t.Rhesus = "+";
+                        if (random.Next(0, 100) < 50)
+                            t.Rhesus = "-";
+                        t.WorkIncapacityListNum = random.Next(0, int.MaxValue).ToString();
+                        t.InsurancePolicyNum = random.Next(0, int.MaxValue).ToString();
+                        for (int j = 0; j < random.Next(0, 4); j++)
+                        {
+                            Illness ill = new Illness { Name = random.Next(0, 100).ToString()};
+                            ill.Patient.Add(t);
+                            ill.Hash = ill.Name.GetHashCode();
+                            t.Illness.Add(ill);
+                        }
+                        t.MedCard = new MedCard();
+                        t.MedCard.Patient = t;
+                        
+
+                        db.PersonSet.Add(t);
+
+                        db.PersonSet.Find(t.BirthDate, t.NameHashID);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
         }
     }
 }

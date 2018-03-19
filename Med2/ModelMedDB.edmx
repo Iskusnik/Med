@@ -16,9 +16,14 @@
     <EntitySet Name="WorkTimeSet" EntityType="ModelMedDB.Store.WorkTimeSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet_Patient" EntityType="ModelMedDB.Store.PersonSet_Patient" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PersonSet_Doctor" EntityType="ModelMedDB.Store.PersonSet_Doctor" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="PatientHaveIllness" Association="ModelMedDB.Store.PatientHaveIllness">
+    <EntitySet Name="PatientHaveIllness" EntityType="ModelMedDB.Store.PatientHaveIllness" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PatientHaveIllness_Illness" Association="ModelMedDB.Store.FK_PatientHaveIllness_Illness">
       <End Role="Illness" EntitySet="IllnessSet" />
+      <End Role="PatientHaveIllness" EntitySet="PatientHaveIllness" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientHaveIllness_Patient" Association="ModelMedDB.Store.FK_PatientHaveIllness_Patient">
       <End Role="Patient" EntitySet="PersonSet_Patient" />
+      <End Role="PatientHaveIllness" EntitySet="PatientHaveIllness" />
     </AssociationSet>
     <AssociationSet Name="PatientHaveMedCard" Association="ModelMedDB.Store.PatientHaveMedCard">
       <End Role="MedCard" EntitySet="MedCardSet" />
@@ -67,8 +72,6 @@
     </Key>
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Hash" Type="bigint" Nullable="false" />
-    <Property Name="Patient_BirthDate" Type="datetime" Nullable="false" />
-    <Property Name="Patient_NameHashID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="MedCardSet">
     <Key>
@@ -181,20 +184,16 @@
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
     <Property Name="NameHashID" Type="bigint" Nullable="false" />
   </EntityType>
-  <Association Name="PatientHaveIllness">
-    <End Role="Illness" Type="ModelMedDB.Store.IllnessSet" Multiplicity="*" />
-    <End Role="Patient" Type="ModelMedDB.Store.PersonSet_Patient" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Patient">
-        <PropertyRef Name="BirthDate" />
-        <PropertyRef Name="NameHashID" />
-      </Principal>
-      <Dependent Role="Illness">
-        <PropertyRef Name="Patient_BirthDate" />
-        <PropertyRef Name="Patient_NameHashID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityType Name="PatientHaveIllness">
+    <Key>
+      <PropertyRef Name="Illness_Hash" />
+      <PropertyRef Name="Patient_BirthDate" />
+      <PropertyRef Name="Patient_NameHashID" />
+    </Key>
+    <Property Name="Illness_Hash" Type="bigint" Nullable="false" />
+    <Property Name="Patient_BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Patient_NameHashID" Type="bigint" Nullable="false" />
+  </EntityType>
   <Association Name="PatientHaveMedCard">
     <End Role="MedCard" Type="ModelMedDB.Store.MedCardSet" Multiplicity="*" />
     <End Role="Patient" Type="ModelMedDB.Store.PersonSet_Patient" Multiplicity="1" />
@@ -302,6 +301,32 @@
       <Dependent Role="Documents">
         <PropertyRef Name="Person_BirthDate" />
         <PropertyRef Name="Person_NameHashID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientHaveIllness_Illness">
+    <End Role="Illness" Type="ModelMedDB.Store.IllnessSet" Multiplicity="1" />
+    <End Role="PatientHaveIllness" Type="ModelMedDB.Store.PatientHaveIllness" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Illness">
+        <PropertyRef Name="Hash" />
+      </Principal>
+      <Dependent Role="PatientHaveIllness">
+        <PropertyRef Name="Illness_Hash" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientHaveIllness_Patient">
+    <End Role="PatientHaveIllness" Type="ModelMedDB.Store.PatientHaveIllness" Multiplicity="*" />
+    <End Role="Patient" Type="ModelMedDB.Store.PersonSet_Patient" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="BirthDate" />
+        <PropertyRef Name="NameHashID" />
+      </Principal>
+      <Dependent Role="PatientHaveIllness">
+        <PropertyRef Name="Patient_BirthDate" />
+        <PropertyRef Name="Patient_NameHashID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -498,7 +523,7 @@
         </EntityType>
         <Association Name="PatientHaveIllness">
           <End Type="ModelMedDB.Illness" Role="Illness" Multiplicity="*" />
-          <End Type="ModelMedDB.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="ModelMedDB.Patient" Role="Patient" Multiplicity="*" />
         </Association>
         <Association Name="PatientHaveMedCard">
           <End Type="ModelMedDB.MedCard" Role="MedCard" Multiplicity="0..1" />
@@ -639,13 +664,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="PatientHaveIllness" TypeName="ModelMedDB.PatientHaveIllness" StoreEntitySet="IllnessSet">
+    <AssociationSetMapping Name="PatientHaveIllness" TypeName="ModelMedDB.PatientHaveIllness" StoreEntitySet="PatientHaveIllness">
+      <EndProperty Name="Illness">
+        <ScalarProperty Name="Hash" ColumnName="Illness_Hash" />
+      </EndProperty>
       <EndProperty Name="Patient">
         <ScalarProperty Name="BirthDate" ColumnName="Patient_BirthDate" />
         <ScalarProperty Name="NameHashID" ColumnName="Patient_NameHashID" />
-      </EndProperty>
-      <EndProperty Name="Illness">
-        <ScalarProperty Name="Hash" ColumnName="Hash" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PatientHaveMedCard" TypeName="ModelMedDB.PatientHaveMedCard" StoreEntitySet="MedCardSet">

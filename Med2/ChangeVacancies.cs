@@ -57,12 +57,17 @@ namespace Med2
             string[] jobs = File.ReadAllLines(@"C:\Users\IskusnikXD\Source\Repos\Med\Med2\Работы.txt");
 
             string job = textBox1.Text;
-            StreamWriter w = new StreamWriter(@"C:\Users\IskusnikXD\Source\Repos\Med\Med2\Работы.txt");
-            w.WriteLine(job);
-            foreach(string s in jobs)
-                w.WriteLine(s);
-            w.Close();
-            Refresh_Menu();
+            if (!jobs.Contains(job))
+            {
+                StreamWriter w = new StreamWriter(@"C:\Users\IskusnikXD\Source\Repos\Med\Med2\Работы.txt");
+                w.WriteLine(job);
+                foreach (string s in jobs)
+                    w.WriteLine(s);
+                w.Close();
+                Refresh_Menu();
+            }
+            else
+                MessageBox.Show("Данная специальность уже размещена в вакансиях");
         }
     }
 }
