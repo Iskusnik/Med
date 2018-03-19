@@ -41,6 +41,15 @@ namespace Med2
         {
             if (comboBoxTime.Text == "")
                 MessageBox.Show("Выберите специальность, врача, день и время");
+            else
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
+                {
+                    DoctorsList[index] = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
+                    FreeTime selectedTime = (FreeTime)(from times in DoctorsList[index].FreeTime where (times.Start.Date.ToShortDateString() == comboBoxDate.Text && times.Start.TimeOfDay.ToString() == comboBoxTime.Text) select (times));
+                    DoctorsList[index].WorkTime.Add(new WorkTime{ Doctor = DoctorsList[index], Start = selectedTime.Start, Finish = selectedTime.Finish });
+                    DoctorsList[index].FreeTime.Remove(selectedTime);
+                    db.SaveChanges();
+                }
         }
 
         private void comboBoxJob_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,7 +80,7 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].FullName);
-                string[] distinct = (from dates in d.FreeTime select dates.Start.ToShortDateString()).Distinct().ToArray();
+                string[] distinct = (from dates in d.FreeTime where (dates.Start.ToShortDateString() == comboBoxDate.Text) select (dates.Start.TimeOfDay.ToString())).ToArray();
 
                 foreach (string doct in distinct)
                     this.comboBoxDate.Items.Add(doct);

@@ -98,9 +98,9 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(583, 25);
+            this.button1.Location = new System.Drawing.Point(545, 25);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(113, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "Записаться";
             this.button1.UseVisualStyleBackColor = true;

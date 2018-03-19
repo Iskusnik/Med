@@ -18,14 +18,13 @@ namespace Med2
             thisDoctor = doct;
             InitializeComponent();
         }
-
-        private void DoctorMenu_Load(object sender, EventArgs e)
+        private void RefreshMenu()
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 thisDoctor = (Doctor)db.PersonSet.Find(thisDoctor.BirthDate, thisDoctor.NameHashID);
 
-                this.Text += thisDoctor.FullName;
+                this.Text = "Врач:" + thisDoctor.FullName;
                 this.textBoxName.Text = thisDoctor.FullName;
                 this.textBoxGender.Text = thisDoctor.Gender;
                 this.textBoxBirthDate.Text = thisDoctor.BirthDate.Date.ToShortDateString();
@@ -44,12 +43,17 @@ namespace Med2
 
             ClinicManageToolStripMenuItem.Enabled = thisDoctor.Job == "Главврач";
         }
+        private void DoctorMenu_Load(object sender, EventArgs e)
+        {
+            RefreshMenu();
+        }
         
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form regDocForm = new RegDocForm();
             regDocForm.Owner = this;
             regDocForm.ShowDialog();
+            RefreshMenu();
         }
 
         private void изменитьСписокСпециальностейToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,13 +61,15 @@ namespace Med2
             Form vac = new ChangeVacancies();
             vac.Owner = this;
             vac.ShowDialog();
+            RefreshMenu();
         }
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form del = new DeleteDoctor();
+            Form del = new DeleteDoctor(thisDoctor);
             del.Owner = this;
             del.ShowDialog();
+            RefreshMenu();
         }
 
         
@@ -77,6 +83,8 @@ namespace Med2
         {
             Form selPer = new SelectPerson();
             selPer.Show();
+            RefreshMenu();
+
         }
     }
 }

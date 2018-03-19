@@ -50,7 +50,7 @@
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(207, 20);
             this.loginTextBox.TabIndex = 1;
-            this.loginTextBox.Text = "z z z_19.3.2018";
+            this.loginTextBox.Text = "Администратор_1.1.2000";
             // 
             // passwordTextBox
             // 
@@ -58,7 +58,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(207, 20);
             this.passwordTextBox.TabIndex = 2;
-            this.passwordTextBox.Text = "a";
+            this.passwordTextBox.Text = "123qwe";
             // 
             // registrationButton
             // 

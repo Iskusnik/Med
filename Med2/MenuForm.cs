@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Med2
 {
@@ -29,6 +31,9 @@ namespace Med2
             {
                 PatientMenu patientMenu = new PatientMenu((Patient)pers);
                 patientMenu.ShowDialog();
+                //Thread myThread = new Thread(patientMenu.Show);
+                //myThread.IsBackground = false;
+                //myThread.Start();
             }
             else
             {

@@ -125,6 +125,7 @@ namespace Med2
                     (info as Doctor).Memberships = textInsuranceMemberships.Text;
                 }
                 db.SaveChanges();
+               
                 this.Close();
             }
         }

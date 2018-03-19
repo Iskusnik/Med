@@ -23,15 +23,13 @@ namespace Med2
             thisPatient = pers;
             InitializeComponent();
         }
-
-        private void PatientMenu_Load(object sender, EventArgs e)
+        private void RefreshMenu()
         {
-
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
 
-                this.Text += thisPatient.FullName;
+                this.Text = "Пациент:" + thisPatient.FullName;
                 this.textBoxName.Text = thisPatient.FullName;
                 this.textBoxGender.Text = thisPatient.Gender;
                 this.textBoxBirthDate.Text = thisPatient.BirthDate.Date.ToShortDateString();
@@ -48,7 +46,10 @@ namespace Med2
                 this.textBoxDocType.Text = thisPatient.Documents.DocumentName;
                 this.textDocumentN.Text = thisPatient.Documents.DocumentNum.ToString();
             }
-           
+        }
+        private void PatientMenu_Load(object sender, EventArgs e)
+        {
+            RefreshMenu();
         }
 
         private void изменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,6 +57,7 @@ namespace Med2
             Form changeInfo = new ChangePersonInfo(thisPatient);
             changeInfo.Owner = this;
             changeInfo.ShowDialog();
+            RefreshMenu();
         }
 
         private void записатьсяToolStripMenuItem_Click(object sender, EventArgs e)
