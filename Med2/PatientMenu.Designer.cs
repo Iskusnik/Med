@@ -54,9 +54,6 @@
             this.приёмКВрачуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.записатьсяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.просмотретьИсториюЗаписейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.прошедшиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.грядущиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.всеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.просмотретьИсториюБолезнейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -297,32 +294,10 @@
             // 
             // просмотретьИсториюЗаписейToolStripMenuItem
             // 
-            this.просмотретьИсториюЗаписейToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.прошедшиеToolStripMenuItem,
-            this.грядущиеToolStripMenuItem,
-            this.всеToolStripMenuItem});
             this.просмотретьИсториюЗаписейToolStripMenuItem.Name = "просмотретьИсториюЗаписейToolStripMenuItem";
             this.просмотретьИсториюЗаписейToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.просмотретьИсториюЗаписейToolStripMenuItem.Text = "Просмотреть историю записей";
-            // 
-            // прошедшиеToolStripMenuItem
-            // 
-            this.прошедшиеToolStripMenuItem.Name = "прошедшиеToolStripMenuItem";
-            this.прошедшиеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.прошедшиеToolStripMenuItem.Text = "Прошедшие";
-            // 
-            // грядущиеToolStripMenuItem
-            // 
-            this.грядущиеToolStripMenuItem.Name = "грядущиеToolStripMenuItem";
-            this.грядущиеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.грядущиеToolStripMenuItem.Text = "Грядущие";
-            // 
-            // всеToolStripMenuItem
-            // 
-            this.всеToolStripMenuItem.Name = "всеToolStripMenuItem";
-            this.всеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.всеToolStripMenuItem.Text = "Все";
-            this.всеToolStripMenuItem.Click += new System.EventHandler(this.всеToolStripMenuItem_Click);
+            this.просмотретьИсториюЗаписейToolStripMenuItem.Click += new System.EventHandler(this.просмотретьИсториюЗаписейToolStripMenuItem_Click);
             // 
             // редактироватьДанныеToolStripMenuItem
             // 
@@ -484,9 +459,6 @@
         private System.Windows.Forms.ToolStripMenuItem приёмКВрачуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem записатьсяToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem просмотретьИсториюЗаписейToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem прошедшиеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem грядущиеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem всеToolStripMenuItem;
         public System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox textBoxBloodType;
         private System.Windows.Forms.Label label17;

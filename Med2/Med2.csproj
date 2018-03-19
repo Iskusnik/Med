@@ -56,6 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddInfoAboutVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddInfoAboutVisit.Designer.cs">
+      <DependentUpon>AddInfoAboutVisit.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangePersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,12 @@
     <Compile Include="SelectPerson.Designer.cs">
       <DependentUpon>SelectPerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowInfoAboutVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowInfoAboutVisit.Designer.cs">
+      <DependentUpon>ShowInfoAboutVisit.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowVisitRecords.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +187,9 @@
     <Compile Include="WorkTime.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddInfoAboutVisit.resx">
+      <DependentUpon>AddInfoAboutVisit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangePersonInfo.resx">
       <DependentUpon>ChangePersonInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectPerson.resx">
       <DependentUpon>SelectPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowInfoAboutVisit.resx">
+      <DependentUpon>ShowInfoAboutVisit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowVisitRecords.resx">
       <DependentUpon>ShowVisitRecords.cs</DependentUpon>

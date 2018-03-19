@@ -257,7 +257,7 @@ namespace Med2
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                db.Database.Delete();
+                
                 //db.PersonSet.RemoveRange(db.PersonSet); и так далее
                 db.Database.Create();
             }
@@ -382,9 +382,11 @@ namespace Med2
                         t.InsurancePolicyNum = random.Next(0, int.MaxValue).ToString();
                         for (int j = 0; j < random.Next(0, 4); j++)
                         {
-                            Illness ill = new Illness { Name = random.Next(0, 100).ToString()};
-                            ill.Patient.Add(t);
+                            Illness ill = new Illness{ Name = random.Next(0, 100).ToString()};
                             ill.Hash = ill.Name.GetHashCode();
+                            if (db.IllnessSet.Find(ill.Hash) != null)
+                                ill = db.IllnessSet.Find(ill.Hash);
+                            ill.Patient.Add(t);
                             t.Illness.Add(ill);
                         }
                         t.MedCard = new MedCard();

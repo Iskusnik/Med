@@ -75,5 +75,10 @@ namespace Med2
         {
 
         }
+
+        private void просмотретьИсториюЗаписейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -12,16 +12,65 @@ namespace Med2
 {
     public partial class ShowVisitRecords : Form
     {
-        public ShowVisitRecords()
+        Patient thisPatient;
+        public ShowVisitRecords(Patient pat)
         {
+            thisPatient = pat;
             InitializeComponent();
         }
 
         private void ShowVisitRecords_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "newMedDBDataSet.VisitInfoSet". При необходимости она может быть перемещена или удалена.
-            this.visitInfoSetTableAdapter.Fill(this.newMedDBDataSet.VisitInfoSet);
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
+                var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
+                //this.visitInfoSetTableAdapter.Fill(thisPersonVisits);
+                dataGridView1.DataSource = thisPersonVisits;
+            }
+            //var thisPersonVisits = from visit in thisPatient.VisitInfo;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
+                switch (comboBox1.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
+                            dataGridView1.DataSource = thisPersonVisits;
+                            break;
+                        }
+                    case 1:
+                        {
+                            var thisPersonVisits = (from visit in thisPatient.VisitInfo where (visit.DateStart > DateTime.Today) select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
+                            dataGridView1.DataSource = thisPersonVisits;
+                            break;
+                        }
+                    case 2:
+                        {
+                            var thisPersonVisits = (from visit in thisPatient.VisitInfo where (visit.DateStart < DateTime.Today) select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
+                            dataGridView1.DataSource = thisPersonVisits;
+                            break;
+                        }
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
+                var info = new { dateSt = dataGridView1.SelectedCells[0], dateFn = dataGridView1.SelectedCells[1], s = dataGridView1.SelectedCells[2] };
+                VisitInfo vInfo = db.VisitInfoSet.Find(info.dateSt, info.dateFn, info.s);
+                var dR = (from dRecs in vInfo.Patient.MedCard.DoctorRecord where (dRecs.DoctorID == vInfo.DoctorID && dRecs.Date == vInfo.DateStart) select dRecs).ToList();
+                DoctorRecord temp = dR[0];
+            }
         }
     }
 }

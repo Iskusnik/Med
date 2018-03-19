@@ -40,8 +40,18 @@ namespace Med2
                 {
                     if (checkBoxName.Checked)
                         searchResult = (from d in searchResult where (d.FullName == name) select d).ToList();
+
                     if (checkBoxBirth.Checked)
-                        searchResult = (from d in searchResult where (d.BirthDate == date) select d).ToList();
+                    {
+                        switch(comboBoxBirth.SelectedIndex)
+                        {
+                            case 0: searchResult = (from d in searchResult where (d.BirthDate < date) select d).ToList(); break;
+                            case 1: searchResult = (from d in searchResult where (d.BirthDate <= date) select d).ToList(); break;
+                            case 2: searchResult = (from d in searchResult where (d.BirthDate == date) select d).ToList(); break;
+                            case 3: searchResult = (from d in searchResult where (d.BirthDate > date) select d).ToList(); break;
+                            case 4: searchResult = (from d in searchResult where (d.BirthDate >= date) select d).ToList(); break;
+                        }
+                    }
                     if (checkBoxDocs.Checked)
                         searchResult = (from d in searchResult where (d is Doctor) select d).ToList();
                     if (checkBoxPat.Checked)
@@ -50,7 +60,8 @@ namespace Med2
                     comboBox1.Items.Clear();
                     foreach (Person per in searchResult)
                         comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
-                    comboBox1.SelectedIndex = 0;
+                    if (comboBox1.Items.Count != 0)
+                        comboBox1.SelectedIndex = 0;
                 }
                 catch (NullReferenceException)
                 {
@@ -61,17 +72,58 @@ namespace Med2
 
         private void buttonSelectPerson_Click(object sender, EventArgs e)
         {
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
-            {
-                string[] personInfo = comboBox1.Text.Split('_');
-                string[] birthInfo = personInfo[1].Split('.');
-                long hash = (long)(personInfo[0]).GetHashCode();
-                DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
-                Person pers = db.PersonSet.Find(birth, hash);
-                Form changeInfo = new ChangePersonInfo(pers);
-                changeInfo.Owner = this;
-                changeInfo.ShowDialog();
-            }
+            if (comboBox1.Text != "")
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
+                {
+                    string[] personInfo = comboBox1.Text.Split('_');
+                    string[] birthInfo = personInfo[1].Split('.');
+                    long hash = (long)(personInfo[0]).GetHashCode();
+                    DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
+                    Person pers = db.PersonSet.Find(birth, hash);
+                    Form changeInfo = new ChangePersonInfo(pers);
+                    changeInfo.Owner = this;
+                    changeInfo.ShowDialog();
+                }
+            else
+                MessageBox.Show("Человек не выбран");
+        }
+
+        private void checkBoxName_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxDocs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDocs.Checked)
+                checkBoxPat.Checked = false;
+        }
+
+        private void checkBoxPat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxPat.Checked)
+                checkBoxDocs.Checked = false;
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.Text != "")
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
+                {
+                    string[] personInfo = comboBox1.Text.Split('_');
+                    string[] birthInfo = personInfo[1].Split('.');
+                    long hash = (long)(personInfo[0]).GetHashCode();
+                    DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
+                    Person pers = db.PersonSet.Find(birth, hash);
+                    db.PersonSet.Remove(pers);
+                }
+            else
+                MessageBox.Show("Человек не выбран");
+        }
+
+        private void SelectPerson_Load(object sender, EventArgs e)
+        {
+            comboBoxBirth.SelectedIndex = 2;
         }
     }
 }
