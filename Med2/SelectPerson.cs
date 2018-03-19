@@ -15,6 +15,12 @@ namespace Med2
         public SelectPerson()
         {
             InitializeComponent();
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                foreach (Person per in db.PersonSet)
+                    comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
+                comboBox1.SelectedIndex = 0;
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,8 +47,10 @@ namespace Med2
                     if (checkBoxPat.Checked)
                         searchResult = (from d in searchResult where (d is Patient) select d).ToList();
 
+                    comboBox1.Items.Clear();
                     foreach (Person per in searchResult)
-                        comboBox1.Items.Add(per.FullName + " " + per.BirthDate);
+                        comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
+                    comboBox1.SelectedIndex = 0;
                 }
                 catch (NullReferenceException)
                 {
@@ -57,13 +65,12 @@ namespace Med2
             {
                 string[] personInfo = comboBox1.Text.Split('_');
                 string[] birthInfo = personInfo[1].Split('.');
-                long hash = (long)personInfo[0].GetHashCode();
+                long hash = (long)(personInfo[0]).GetHashCode();
                 DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
                 Person pers = db.PersonSet.Find(birth, hash);
                 Form changeInfo = new ChangePersonInfo(pers);
                 changeInfo.Owner = this;
-                changeInfo.Show();
-                this.Close();
+                changeInfo.ShowDialog();
             }
         }
     }

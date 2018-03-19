@@ -56,10 +56,12 @@ namespace Med2
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                DoctorsList = (from doctor in db.PersonSet where ((doctor is Doctor) && ((Doctor)doctor).Job == comboBoxJob.Text) select (doctor as Doctor)).ToArray();
+                object[] temp = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor)).ToArray();
+                DoctorsList = (from doctor in temp where ((Doctor)doctor).Job == comboBoxJob.Text select (Doctor)doctor).ToArray();
+                
             }
             foreach (Doctor doct in DoctorsList)
-                this.comboBoxDoctor.Items.Add(doct);
+                this.comboBoxDoctor.Items.Add(doct.FullName);
         }
 
         private void comboBoxDoctor_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,11 +69,19 @@ namespace Med2
             index = comboBoxDoctor.SelectedIndex;
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].FullName);
-                string[] distinct = (from dates in d.FreeTime select dates.Start.ToShortDateString()).Distinct().ToArray();
+                try
+                {
+                    Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].GetHashCode());
 
-                foreach (string doct in distinct)
-                    this.comboBoxDate.Items.Add(doct);
+                    string[] distinct = (from dates in d.FreeTime select dates.Start.ToShortDateString()).Distinct().ToArray();
+
+                    foreach (string doct in distinct)
+                        this.comboBoxDate.Items.Add(doct);
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("На данный момент нет времени для записи к этому врачу");
+                }
             }
         }
 

@@ -62,7 +62,8 @@ namespace Med2
 
         private void записатьсяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form record = new PatientToDoctor();
+            record.Show();
         }
     }
 }

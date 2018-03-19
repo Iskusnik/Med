@@ -21,20 +21,25 @@ namespace Med2
 
         private void ChangePersonInfo_Load(object sender, EventArgs e)
         {
-            this.Text += " " + person.FullName;
+            this.Text =  "Изменение данных:" + person.FullName;
             if (person is Doctor)
             {
                 this.textInsurancePolicyNum.Hide();
                 this.textBoxWorkIncapacity.Hide();
                 this.textBoxBloodType.Hide();
+                this.label20.Show();
+                this.label15.Show();
+                this.label19.Hide();
+                this.label2.Hide();
+                this.label3.Hide();
+                this.label17.Show();
                 this.textBoxJob.Show();
                 this.textInsuranceMemberships.Show();
                 this.textBoxEducation.Show();
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     Doctor thisDoctor = (Doctor)db.PersonSet.Find(person.BirthDate, person.NameHashID);
-
-                    this.Text += thisDoctor.FullName;
+                    
                     this.textBoxName.Text = thisDoctor.FullName;
                     this.textBoxGender.Text = thisDoctor.Gender;
                     this.textBoxBirthDate.Text = thisDoctor.BirthDate.Date.ToShortDateString();
@@ -65,13 +70,16 @@ namespace Med2
                 this.textBoxJob.Hide();
                 this.textInsuranceMemberships.Hide();
                 this.textBoxEducation.Hide();
-
-
+                this.label20.Hide();
+                this.label15.Hide();
+                this.label3.Show();
+                this.label19.Show();
+                this.label2.Show();
+                this.label17.Hide();
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     Patient thisPatient = (Patient)db.PersonSet.Find(person.BirthDate, person.NameHashID);
-
-                    this.Text += thisPatient.FullName;
+                    
                     this.textBoxName.Text = thisPatient.FullName;
                     this.textBoxGender.Text = thisPatient.Gender;
                     this.textBoxBirthDate.Text = thisPatient.BirthDate.Date.ToShortDateString();
