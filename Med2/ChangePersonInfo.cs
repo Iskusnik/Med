@@ -35,6 +35,7 @@ namespace Med2
                 this.label3.Hide();
                 this.label17.Show();
                 this.textBoxJob.Show();
+                this.button3.Show();
                 this.textInsuranceMemberships.Show();
                 this.textBoxEducation.Show();
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
@@ -61,10 +62,16 @@ namespace Med2
             else
             {
                 if (this.Owner is DoctorMenu)
+                {
                     textBoxBloodType.ReadOnly = false;
+                    this.button3.Show();
+                }
                 else
+                {
                     textBoxBloodType.ReadOnly = true;
-
+                    this.button3.Hide();
+                }
+            
                 this.textInsurancePolicyNum.Show();
                 this.textBoxWorkIncapacity.Show();
                 this.textBoxBloodType.Show();
@@ -142,6 +149,12 @@ namespace Med2
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form patToDoc = new PatientToDoctor((Patient)person);
+            patToDoc.ShowDialog();
         }
     }
 }
