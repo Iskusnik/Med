@@ -64,6 +64,7 @@
             this.textBoxBirthDate = new System.Windows.Forms.TextBox();
             this.textBoxRegDate = new System.Windows.Forms.TextBox();
             this.textBoxDocType = new System.Windows.Forms.TextBox();
+            this.записиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -303,7 +304,8 @@
             // 
             this.редактироватьДанныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.изменитьДанныеToolStripMenuItem,
-            this.просмотретьИсториюБолезнейToolStripMenuItem});
+            this.просмотретьИсториюБолезнейToolStripMenuItem,
+            this.записиВрачейToolStripMenuItem});
             this.редактироватьДанныеToolStripMenuItem.Name = "редактироватьДанныеToolStripMenuItem";
             this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.редактироватьДанныеToolStripMenuItem.Text = "Мед карта";
@@ -384,6 +386,13 @@
             this.textBoxDocType.Size = new System.Drawing.Size(180, 20);
             this.textBoxDocType.TabIndex = 83;
             this.textBoxDocType.Text = "a";
+            // 
+            // записиВрачейToolStripMenuItem
+            // 
+            this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
+            this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
+            this.записиВрачейToolStripMenuItem.Click += new System.EventHandler(this.записиВрачейToolStripMenuItem_Click);
             // 
             // PatientMenu
             // 
@@ -469,5 +478,6 @@
         public System.Windows.Forms.TextBox textBoxBirthDate;
         public System.Windows.Forms.TextBox textBoxRegDate;
         public System.Windows.Forms.TextBox textBoxDocType;
+        private System.Windows.Forms.ToolStripMenuItem записиВрачейToolStripMenuItem;
     }
 }

@@ -104,7 +104,6 @@ namespace Med2
                     newPatient.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -2, Person = newPatient };
                     newPatient.MedCard = new MedCard();
                     Illness ill = new Illness { Name = "Пациент" };
-                    ill.Cured = true;
                     ill.Hash = ill.Name.GetHashCode();
                     if (db.IllnessSet.Find(ill.Hash) != null)
                         ill = db.IllnessSet.Find(ill.Hash);
@@ -121,7 +120,7 @@ namespace Med2
                     db.SaveChanges();}}
         
                     
-                    //ControlFunctions.GenerateRandomDataBase();
+                    ControlFunctions.GenerateRandomDataBase();
             
         }
     }

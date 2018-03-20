@@ -5,27 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="295cdc13782d4260bc81e62b3841db7e" Name="Diagram1" ZoomLevel="79" >
-        <EntityTypeShape EntityType="ModelMedDB.Illness" Width="1.5" PointX="14.125" PointY="8.875" />
-        <EntityTypeShape EntityType="ModelMedDB.MedCard" Width="1.5" PointX="24.125" PointY="9" />
-        <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="19.125" PointY="11.375" />
-        <EntityTypeShape EntityType="ModelMedDB.Documents" Width="1.5" PointX="13.5" PointY="2.25" />
-        <EntityTypeShape EntityType="ModelMedDB.Person" Width="1.5" PointX="15.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelMedDB.Doctor" Width="1.5" PointX="18.125" PointY="1.875" />
+        <EntityTypeShape EntityType="ModelMedDB.Illness" Width="1.5" PointX="16.375" PointY="8.625" />
+        <EntityTypeShape EntityType="ModelMedDB.MedCard" Width="1.5" PointX="23.125" PointY="9" />
+        <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="18.875" PointY="7.625" />
+        <EntityTypeShape EntityType="ModelMedDB.Documents" Width="1.5" PointX="14.625" PointY="1.875" />
+        <EntityTypeShape EntityType="ModelMedDB.Person" Width="1.5" PointX="14.5" PointY="4.875" />
+        <EntityTypeShape EntityType="ModelMedDB.Doctor" Width="1.5" PointX="16.375" PointY="5.125" />
         <EntityTypeShape EntityType="ModelMedDB.DoctorRecord" Width="1.5" PointX="23.125" PointY="0.5" />
         <EntityTypeShape EntityType="ModelMedDB.VisitInfo" Width="1.5" PointX="22.25" PointY="5.375" />
-        <EntityTypeShape EntityType="ModelMedDB.FreeTime" Width="1.5" PointX="17.25" PointY="5.125" />
-        <EntityTypeShape EntityType="ModelMedDB.WorkTime" Width="1.5" PointX="19.625" PointY="5" />
+        <EntityTypeShape EntityType="ModelMedDB.FreeTime" Width="1.5" PointX="18.875" PointY="2.625" />
+        <EntityTypeShape EntityType="ModelMedDB.WorkTime" Width="1.5" PointX="18.875" PointY="5.125" />
         <AssociationConnector Association="ModelMedDB.PatientHaveIllness" />
         <AssociationConnector Association="ModelMedDB.PatientHaveMedCard" ></AssociationConnector>
         <AssociationConnector Association="ModelMedDB.MedCardHaveDoctorRecord" />
         <AssociationConnector Association="ModelMedDB.DoctorMakesDoctorRecord" />
-        <AssociationConnector Association="ModelMedDB.DoctorFreeTime" />
-        <AssociationConnector Association="ModelMedDB.DoctorWorkTime" />
-        <AssociationConnector Association="ModelMedDB.VisitInfoWorkTime" />
         <AssociationConnector Association="ModelMedDB.PatientVisitInfo" />
         <InheritanceConnector EntityType="ModelMedDB.Patient" />
         <InheritanceConnector EntityType="ModelMedDB.Doctor" />
         <AssociationConnector Association="ModelMedDB.DocumentsPerson" />
+        <AssociationConnector Association="ModelMedDB.DoctorWorkTime" />
+        <AssociationConnector Association="ModelMedDB.DoctorFreeTime" />
+        <AssociationConnector Association="ModelMedDB.VisitInfoWorkTime" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

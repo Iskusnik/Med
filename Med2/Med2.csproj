@@ -75,11 +75,11 @@
       <DependentUpon>ChangeVacancies.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlFunctions.cs" />
-    <Compile Include="DeleteDoctor.cs">
+    <Compile Include="ChangeWorkTable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteDoctor.Designer.cs">
-      <DependentUpon>DeleteDoctor.cs</DependentUpon>
+    <Compile Include="ChangeWorkTable.Designer.cs">
+      <DependentUpon>ChangeWorkTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Doctor.cs">
       <DependentUpon>ModelMedDB.tt</DependentUpon>
@@ -187,6 +187,18 @@
     <Compile Include="ShowInfoAboutVisit.Designer.cs">
       <DependentUpon>ShowInfoAboutVisit.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowDocsVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowDocsVisits.Designer.cs">
+      <DependentUpon>ShowDocsVisits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowVisits.Designer.cs">
+      <DependentUpon>ShowVisits.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowVisitRecords.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,8 +223,8 @@
     <EmbeddedResource Include="ChangeVacancies.resx">
       <DependentUpon>ChangeVacancies.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteDoctor.resx">
-      <DependentUpon>DeleteDoctor.cs</DependentUpon>
+    <EmbeddedResource Include="ChangeWorkTable.resx">
+      <DependentUpon>ChangeWorkTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DoctorMenu.resx">
       <DependentUpon>DoctorMenu.cs</DependentUpon>
@@ -249,6 +261,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShowInfoAboutVisit.resx">
       <DependentUpon>ShowInfoAboutVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowDocsVisits.resx">
+      <DependentUpon>ShowDocsVisits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowVisits.resx">
+      <DependentUpon>ShowVisits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowVisitRecords.resx">
       <DependentUpon>ShowVisitRecords.cs</DependentUpon>

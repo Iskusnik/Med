@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Med2
 {
-    public partial class DeleteDoctor : Form
+    public partial class ChangeWorkTable : Form
     {
         Doctor Head;
-        public DeleteDoctor(Doctor head)
+        public ChangeWorkTable(Doctor head)
         {
             Head = head;
             InitializeComponent();
@@ -24,13 +24,8 @@ namespace Med2
             if (comboBox1.Text != null && comboBox1.Text != "")
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
-                    string name = comboBox1.Text.Split('_')[0];
-                    string[] date = (comboBox1.Text.Split('_')[1]).Split('.');
-                    DateTime birth = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]));
-                    db.DocumentsSet.Remove(db.PersonSet.Find(birth, (long)name.GetHashCode()).Documents);
-                    db.PersonSet.Remove(db.PersonSet.Find(birth, (long)name.GetHashCode()));
-                    db.SaveChanges();
-                    this.Close();
+                    Head = (Doctor)db.PersonSet.Find(Head.BirthDate, Head.NameHashID);
+                    
                 }
             else
                 MessageBox.Show("Удалять некого");
@@ -44,10 +39,12 @@ namespace Med2
                 var temp = (from docs in db.PersonSet where (docs is Doctor && docs.NameHashID != Head.NameHashID && docs.BirthDate != Head.BirthDate) select docs).ToList();
                 List<Person> doctors = (List<Person>)temp;
                 if (doctors != null)
-                foreach (Doctor d in doctors)
-                    comboBox1.Items.Add(d.FullName + "_" + d.BirthDate.ToShortDateString());
+                    foreach (Doctor d in doctors)
+                        comboBox1.Items.Add(d.FullName + "_" + d.BirthDate.ToShortDateString());
                 else
-                    MessageBox.Show("Удалять некого");
+                {
+                    MessageBox.Show("Врачей нет");
+                }
             }
             
         }

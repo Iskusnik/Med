@@ -18,8 +18,8 @@ namespace Med2
         public Doctor()
         {
             this.DoctorRecord = new HashSet<DoctorRecord>();
-            this.FreeTime = new HashSet<FreeTime>();
-            this.WorkTime = new HashSet<WorkTime>();
+            this.WorkTimes = new HashSet<WorkTime>();
+            this.FreeTimes = new HashSet<FreeTime>();
         }
     
         public string Education { get; set; }
@@ -29,8 +29,8 @@ namespace Med2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoctorRecord> DoctorRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FreeTime> FreeTime { get; set; }
+        public virtual ICollection<WorkTime> WorkTimes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkTime> WorkTime { get; set; }
+        public virtual ICollection<FreeTime> FreeTimes { get; set; }
     }
 }

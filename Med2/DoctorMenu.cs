@@ -66,7 +66,7 @@ namespace Med2
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form del = new DeleteDoctor(thisDoctor);
+            Form del = new ChangeWorkTable(thisDoctor);
             del.Owner = this;
             del.ShowDialog();
             RefreshMenu();
@@ -76,7 +76,8 @@ namespace Med2
 
         private void изменитьРасписаниеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form changeWork = new ChangeWorkTable(thisDoctor);
+            changeWork.Show();
         }
 
         private void найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,6 +93,19 @@ namespace Med2
             Form selectPerson = new SelectPerson(1);
             selectPerson.Owner = this;
             selectPerson.ShowDialog();
+        }
+
+        private void просмотретьЗапланированныеПриёмыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form docsVisits = new ShowDocsVisits(thisDoctor);
+            docsVisits.Show();
+        }
+
+        private void статистикаОбращенийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+
+
         }
     }
 }

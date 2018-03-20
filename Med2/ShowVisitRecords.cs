@@ -21,49 +21,24 @@ namespace Med2
 
         private void ShowVisitRecords_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "newMedDBDataSet.VisitInfoSet". При необходимости она может быть перемещена или удалена.
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
-                //this.visitInfoSetTableAdapter.Fill(thisPersonVisits);
+                var thisPersonVisits = (from visit in thisPatient.MedCard.DoctorRecord select new { visit.Date, visit.Doctor.FullName}).ToList();
+                
+                dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
+                dataGridView1.Columns.Add("Имя врача", "Имя врача");
+                foreach (var s in thisPersonVisits)
+                    dataGridView1.Rows.Add(s.Date.ToString(), s.FullName);
+
+                dataGridView1.RowHeadersVisible = false;
+                dataGridView1.Refresh();
                 dataGridView1.DataSource = thisPersonVisits;
                 dataGridView1.Refresh();
             }
-            //var thisPersonVisits = from visit in thisPatient.VisitInfo;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
-            {
-                thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                switch (comboBox1.SelectedIndex)
-                {
-                    case 0:
-                        {
-                            var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
-                            dataGridView1.DataSource = thisPersonVisits;
-                            break;
-                        }
-                    case 1:
-                        {
-                            var thisPersonVisits = (from visit in thisPatient.VisitInfo where (visit.DateStart > DateTime.Today) select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
-                            dataGridView1.DataSource = thisPersonVisits;
-                            break;
-                        }
-                    case 2:
-                        {
-                            var thisPersonVisits = (from visit in thisPatient.VisitInfo where (visit.DateStart < DateTime.Today) select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
-                            dataGridView1.DataSource = thisPersonVisits;
-                            break;
-                        }
-                }
-                dataGridView1.Columns[0].Name = "Начало приёма";
-                dataGridView1.Columns[0].Name = "Конец приёма";
-                dataGridView1.Columns[0].Name = "Имя врача";
-            }
-        }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -80,6 +55,11 @@ namespace Med2
                     showInfoAboutVisit.Show();
                 }
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

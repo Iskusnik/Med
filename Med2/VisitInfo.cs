@@ -20,7 +20,7 @@ namespace Med2
         public System.DateTime DateFinish { get; set; }
         public long DoctorID { get; set; }
     
-        public virtual WorkTime WorkTime { get; set; }
         public virtual Patient Patient { get; set; }
+        public virtual WorkTime WorkTimes { get; set; }
     }
 }

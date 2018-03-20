@@ -82,5 +82,11 @@ namespace Med2
             Form showVisits = new ShowVisitRecords(thisPatient);
             showVisits.Show();
         }
+
+        private void записиВрачейToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form showVisits = new ShowVisits(thisPatient);
+            showVisits.Show();
+        }
     }
 }

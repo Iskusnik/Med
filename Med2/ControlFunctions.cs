@@ -379,7 +379,6 @@ namespace Med2
                         for (int j = 0; j < random.Next(0, 4); j++)
                         {
                             Illness ill = new Illness{ Name = random.Next(0, 100).ToString()};
-                            ill.Cured = random.Next(0, 10) < 3;
                             ill.Hash = ill.Name.GetHashCode();
                             if (db.IllnessSet.Find(ill.Hash) != null)
                                 ill = db.IllnessSet.Find(ill.Hash);

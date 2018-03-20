@@ -1740,8 +1740,6 @@ namespace Med2 {
             
             private global::System.Data.DataColumn columnHash;
             
-            private global::System.Data.DataColumn columnCured;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public IllnessSetDataTable() {
@@ -1793,14 +1791,6 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CuredColumn {
-                get {
-                    return this.columnCured;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1836,12 +1826,11 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public IllnessSetRow AddIllnessSetRow(string Name, long Hash, bool Cured) {
+            public IllnessSetRow AddIllnessSetRow(string Name, long Hash) {
                 IllnessSetRow rowIllnessSetRow = ((IllnessSetRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Name,
-                        Hash,
-                        Cured};
+                        Hash};
                 rowIllnessSetRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowIllnessSetRow);
                 return rowIllnessSetRow;
@@ -1873,7 +1862,6 @@ namespace Med2 {
             internal void InitVars() {
                 this.columnName = base.Columns["Name"];
                 this.columnHash = base.Columns["Hash"];
-                this.columnCured = base.Columns["Cured"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1883,8 +1871,6 @@ namespace Med2 {
                 base.Columns.Add(this.columnName);
                 this.columnHash = new global::System.Data.DataColumn("Hash", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHash);
-                this.columnCured = new global::System.Data.DataColumn("Cured", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCured);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnHash}, true));
                 this.columnName.AllowDBNull = false;
@@ -4411,34 +4397,6 @@ namespace Med2 {
                     this[this.tableIllnessSet.HashColumn] = value;
                 }
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Cured {
-                get {
-                    try {
-                        return ((bool)(this[this.tableIllnessSet.CuredColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Cured\' в таблице \'IllnessSet\' равно DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableIllnessSet.CuredColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCuredNull() {
-                return this.IsNull(this.tableIllnessSet.CuredColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCuredNull() {
-                this[this.tableIllnessSet.CuredColumn] = global::System.Convert.DBNull;
-            }
         }
         
         /// <summary>
@@ -6672,37 +6630,27 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
             tableMapping.DataSetTable = "IllnessSet";
             tableMapping.ColumnMappings.Add("Name", "Name");
             tableMapping.ColumnMappings.Add("Hash", "Hash");
-            tableMapping.ColumnMappings.Add("Cured", "Cured");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [IllnessSet] WHERE (([Hash] = @Original_Hash) AND ((@IsNull_Cured = 1" +
-                " AND [Cured] IS NULL) OR ([Cured] = @Original_Cured)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [IllnessSet] WHERE (([Hash] = @Original_Hash))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Hash", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hash", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Cured", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cured", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Cured", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cured", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [IllnessSet] ([Name], [Hash], [Cured]) VALUES (@Name, @Hash, @Cured);" +
-                "\r\nSELECT Name, Hash, Cured FROM IllnessSet WHERE (Hash = @Hash)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [IllnessSet] ([Name], [Hash]) VALUES (@Name, @Hash);\r\nSELECT Name, Ha" +
+                "sh FROM IllnessSet WHERE (Hash = @Hash)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Hash", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hash", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Cured", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cured", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [IllnessSet] SET [Name] = @Name, [Hash] = @Hash, [Cured] = @Cured WHERE ((" +
-                "[Hash] = @Original_Hash) AND ((@IsNull_Cured = 1 AND [Cured] IS NULL) OR ([Cured" +
-                "] = @Original_Cured)));\r\nSELECT Name, Hash, Cured FROM IllnessSet WHERE (Hash = " +
-                "@Hash)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [IllnessSet] SET [Name] = @Name, [Hash] = @Hash WHERE (([Hash] = @Original" +
+                "_Hash));\r\nSELECT Name, Hash FROM IllnessSet WHERE (Hash = @Hash)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Hash", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hash", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Cured", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cured", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Hash", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hash", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Cured", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cured", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Cured", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cured", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6718,7 +6666,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Name, Hash, Cured FROM IllnessSet";
+            this._commandCollection[0].CommandText = "SELECT Name, Hash FROM IllnessSet";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6779,16 +6727,8 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_Hash, global::System.Nullable<bool> Original_Cured) {
+        public virtual int Delete(long Original_Hash) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_Hash));
-            if ((Original_Cured.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((bool)(Original_Cured.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6809,7 +6749,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Name, long Hash, global::System.Nullable<bool> Cured) {
+        public virtual int Insert(string Name, long Hash) {
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
@@ -6817,12 +6757,6 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Name));
             }
             this.Adapter.InsertCommand.Parameters[1].Value = ((long)(Hash));
-            if ((Cured.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((bool)(Cured.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6843,7 +6777,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, long Hash, global::System.Nullable<bool> Cured, long Original_Hash, global::System.Nullable<bool> Original_Cured) {
+        public virtual int Update(string Name, long Hash, long Original_Hash) {
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
@@ -6851,21 +6785,7 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Name));
             }
             this.Adapter.UpdateCommand.Parameters[1].Value = ((long)(Hash));
-            if ((Cured.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((bool)(Cured.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(Original_Hash));
-            if ((Original_Cured.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((bool)(Original_Cured.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(Original_Hash));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6886,8 +6806,8 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Name, global::System.Nullable<bool> Cured, long Original_Hash, global::System.Nullable<bool> Original_Cured) {
-            return this.Update(Name, Original_Hash, Cured, Original_Hash, Original_Cured);
+        public virtual int Update(string Name, long Original_Hash) {
+            return this.Update(Name, Original_Hash, Original_Hash);
         }
     }
     
