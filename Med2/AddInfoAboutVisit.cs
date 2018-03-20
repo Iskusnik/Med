@@ -12,9 +12,42 @@ namespace Med2
 {
     public partial class AddInfoAboutVisit : Form
     {
-        public AddInfoAboutVisit()
+        Patient patient;
+        Doctor doctor;
+        public AddInfoAboutVisit(Patient pat, Doctor doct)
         {
+            patient = pat;
+            doctor = doct;
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                patient = (Patient)db.PersonSet.Find(patient.BirthDate, patient.NameHashID);
+                doctor = (Doctor)db.PersonSet.Find(doctor.BirthDate, doctor.NameHashID);
+                patient.MedCard.DoctorRecord.Add(new DoctorRecord
+                {
+                    Anamnesis = richTextBoxAnamnes.Text,
+                    Diagnosis = richTextBoxDiagnos.Text,
+                    Date = dateTimePicker1.Value,
+                    HelpAmount = richTextBoxHelpAmount.Text,
+                    HelpType = richTextBoxHelpType.Text,
+                    Result = richTextBoxResult.Text,
+                    DoctorInfo = doctor.FullName,
+                    Doctor = doctor,
+                    DoctorID = doctor.NameHashID,
+                    Standarts = richTextBoxStand.Text
+                });
+                db.SaveChangesAsync();
+            }
+            this.Close();
+        }
+
+        private void AddInfoAboutVisit_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

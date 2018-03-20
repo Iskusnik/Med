@@ -72,6 +72,7 @@
     </Key>
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Hash" Type="bigint" Nullable="false" />
+    <Property Name="Cured" Type="bit" Nullable="true" DefaultValue="false" />
   </EntityType>
   <EntityType Name="MedCardSet">
     <Key>
@@ -419,6 +420,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Hash" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Patient" Relationship="ModelMedDB.PatientHaveIllness" FromRole="Illness" ToRole="Patient" />
+          <Property Name="Cured" Type="Boolean" Nullable="true" DefaultValue="false" />
         </EntityType>
         <EntityType Name="MedCard">
           <Key>
@@ -464,7 +466,7 @@
           <NavigationProperty Name="Documents" Relationship="ModelMedDB.DocumentsPerson" FromRole="Person" ToRole="Documents" />
         </EntityType>
         <EntityType Name="Doctor" BaseType="ModelMedDB.Person">
-          <Property Name="Education" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Education" Type="String" Nullable="true" annotation:StoreGeneratedPattern="None" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Job" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Memberships" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="DoctorRecord" Relationship="ModelMedDB.DoctorMakesDoctorRecord" FromRole="Doctor" ToRole="DoctorRecord" />
@@ -568,6 +570,7 @@
         <MappingFragment StoreEntitySet="IllnessSet">
           <ScalarProperty Name="Hash" ColumnName="Hash" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Cured" ColumnName="Cured" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

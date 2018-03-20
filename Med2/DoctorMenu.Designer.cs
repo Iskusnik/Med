@@ -33,8 +33,9 @@
             this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClinicManageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.изменитьРасписаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьСписокСпециальностейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьРасписаниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запросыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.статистикаОбращенийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxDocType = new System.Windows.Forms.TextBox();
@@ -67,12 +68,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.textBoxEducation = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьМедицинскуюКартуПациентаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // редактироватьДанныеToolStripMenuItem
             // 
+            this.редактироватьДанныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьМедицинскуюКартуПациентаToolStripMenuItem});
             this.редактироватьДанныеToolStripMenuItem.Name = "редактироватьДанныеToolStripMenuItem";
             this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.редактироватьДанныеToolStripMenuItem.Text = "Медицинская карта";
@@ -89,14 +92,14 @@
             // добавитьToolStripMenuItem
             // 
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
             this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
             // 
@@ -113,30 +116,37 @@
             this.ClinicManageToolStripMenuItem.Size = new System.Drawing.Size(170, 20);
             this.ClinicManageToolStripMenuItem.Text = "Управление поликлиникой";
             // 
-            // изменитьРасписаниеToolStripMenuItem
-            // 
-            this.изменитьРасписаниеToolStripMenuItem.Name = "изменитьРасписаниеToolStripMenuItem";
-            this.изменитьРасписаниеToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
-            this.изменитьРасписаниеToolStripMenuItem.Text = "Изменить расписание";
-            this.изменитьРасписаниеToolStripMenuItem.Click += new System.EventHandler(this.изменитьРасписаниеToolStripMenuItem_Click);
-            // 
             // изменитьСписокСпециальностейToolStripMenuItem
             // 
             this.изменитьСписокСпециальностейToolStripMenuItem.Name = "изменитьСписокСпециальностейToolStripMenuItem";
-            this.изменитьСписокСпециальностейToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.изменитьСписокСпециальностейToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.изменитьСписокСпециальностейToolStripMenuItem.Text = "Изменить список специальностей";
             this.изменитьСписокСпециальностейToolStripMenuItem.Click += new System.EventHandler(this.изменитьСписокСпециальностейToolStripMenuItem_Click);
+            // 
+            // найтиЧеловекаИИзменитьДанныеToolStripMenuItem
+            // 
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Name = "найтиЧеловекаИИзменитьДанныеToolStripMenuItem";
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Text = "Найти человека и изменить данные";
+            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click);
+            // 
+            // изменитьРасписаниеToolStripMenuItem
+            // 
+            this.изменитьРасписаниеToolStripMenuItem.Name = "изменитьРасписаниеToolStripMenuItem";
+            this.изменитьРасписаниеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.изменитьРасписаниеToolStripMenuItem.Text = "Изменить расписание";
+            this.изменитьРасписаниеToolStripMenuItem.Click += new System.EventHandler(this.изменитьРасписаниеToolStripMenuItem_Click);
             // 
             // запросыToolStripMenuItem
             // 
             this.запросыToolStripMenuItem.Name = "запросыToolStripMenuItem";
-            this.запросыToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.запросыToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.запросыToolStripMenuItem.Text = ",,,,,!!!Запросы";
             // 
             // статистикаОбращенийToolStripMenuItem
             // 
             this.статистикаОбращенийToolStripMenuItem.Name = "статистикаОбращенийToolStripMenuItem";
-            this.статистикаОбращенийToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.статистикаОбращенийToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.статистикаОбращенийToolStripMenuItem.Text = "Статистика обращений";
             // 
             // textBoxDocType
@@ -411,12 +421,12 @@
             this.label20.TabIndex = 114;
             this.label20.Text = "Образование";
             // 
-            // найтиЧеловекаИИзменитьДанныеToolStripMenuItem
+            // открытьМедицинскуюКартуПациентаToolStripMenuItem
             // 
-            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Name = "найтиЧеловекаИИзменитьДанныеToolStripMenuItem";
-            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
-            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Text = "Найти человека и изменить данные";
-            this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.найтиЧеловекаИИзменитьДанныеToolStripMenuItem_Click);
+            this.открытьМедицинскуюКартуПациентаToolStripMenuItem.Name = "открытьМедицинскуюКартуПациентаToolStripMenuItem";
+            this.открытьМедицинскуюКартуПациентаToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.открытьМедицинскуюКартуПациентаToolStripMenuItem.Text = "Открыть медицинскую карту пациента";
+            this.открытьМедицинскуюКартуПациентаToolStripMenuItem.Click += new System.EventHandler(this.открытьМедицинскуюКартуПациентаToolStripMenuItem_Click);
             // 
             // DoctorMenu
             // 
@@ -504,5 +514,6 @@
         public System.Windows.Forms.TextBox textBoxEducation;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ToolStripMenuItem найтиЧеловекаИИзменитьДанныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьМедицинскуюКартуПациентаToolStripMenuItem;
     }
 }

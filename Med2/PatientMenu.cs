@@ -68,7 +68,8 @@ namespace Med2
 
         private void просмотретьИсториюБолезнейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form showIll = new Showillnesses (thisPatient);
+            showIll.Show();
         }
 
         private void всеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,7 +79,8 @@ namespace Med2
 
         private void просмотретьИсториюЗаписейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form showVisits = new ShowVisitRecords(thisPatient);
+            showVisits.Show();
         }
     }
 }

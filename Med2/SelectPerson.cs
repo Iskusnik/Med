@@ -12,14 +12,29 @@ namespace Med2
 {
     public partial class SelectPerson : Form
     {
-        public SelectPerson()
+        int function;
+        public SelectPerson(int func = 0)
         {
+            function = func;
             InitializeComponent();
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            if (func == 0)
             {
-                foreach (Person per in db.PersonSet)
-                    comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
-                comboBox1.SelectedIndex = 0;
+                checkBoxDocs.Show();
+                checkBoxPat.Show();
+                buttonDelete.Show();
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
+                {
+                    foreach (Person per in db.PersonSet)
+                        comboBox1.Items.Add(per.FullName + "_" + per.BirthDate.ToShortDateString());
+                    comboBox1.SelectedIndex = 0;
+                }
+            }
+            if (func == 1)
+            {
+                checkBoxDocs.Hide();
+                checkBoxPat.Hide();
+                buttonDelete.Hide();
+                checkBoxPat.Checked = true;
             }
         }
 
@@ -30,6 +45,7 @@ namespace Med2
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
+
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 string name = textBoxName.Text;
@@ -43,7 +59,7 @@ namespace Med2
 
                     if (checkBoxBirth.Checked)
                     {
-                        switch(comboBoxBirth.SelectedIndex)
+                        switch (comboBoxBirth.SelectedIndex)
                         {
                             case 0: searchResult = (from d in searchResult where (d.BirthDate < date) select d).ToList(); break;
                             case 1: searchResult = (from d in searchResult where (d.BirthDate <= date) select d).ToList(); break;
@@ -80,9 +96,17 @@ namespace Med2
                     long hash = (long)(personInfo[0]).GetHashCode();
                     DateTime birth = new DateTime(int.Parse(birthInfo[2]), int.Parse(birthInfo[1]), int.Parse(birthInfo[0]));
                     Person pers = db.PersonSet.Find(birth, hash);
-                    Form changeInfo = new ChangePersonInfo(pers);
-                    changeInfo.Owner = this;
-                    changeInfo.ShowDialog();
+                    if (function == 0)
+                    {
+                        Form changeInfo = new ChangePersonInfo(pers);
+                        changeInfo.Owner = this;
+                        changeInfo.ShowDialog();
+                    }
+                    if (function == 1)
+                    {
+                        Form changeMedCard = new ChangeMedCard(((DoctorMenu)Owner).thisDoctor, (Patient)pers);
+                        changeMedCard.Show();
+                    }
                 }
             else
                 MessageBox.Show("Человек не выбран");

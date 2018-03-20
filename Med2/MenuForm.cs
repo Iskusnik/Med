@@ -69,7 +69,7 @@ namespace Med2
                     newDoctor.Job = "Главврач";
                     newDoctor.Memberships = "Администратор";
 
-                    newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = 1, Person = newDoctor };
+                    newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -1, Person = newDoctor };
                     newDoctor.WorkTime = new List<WorkTime>();
                     newDoctor.FreeTime = new List<FreeTime>();
                     newDoctor.DoctorRecord = new List<DoctorRecord>();
@@ -79,9 +79,50 @@ namespace Med2
                     db.PersonSet.Add(newDoctor);
                     db.SaveChanges();
                 }
-                //ControlFunctions.ClearDataBase();
-                //ControlFunctions.GenerateRandomDataBase();
             }
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                int patientCount = (from patient in db.PersonSet where (patient is Patient && patient.FullName == "Пациент") select (patient as Patient)).Count();
+                if (patientCount == 0)
+                {
+                    Patient newPatient = new Patient();
+                    newPatient.FullName = "Пациент";
+                    newPatient.Gender = "Пациент";
+                    newPatient.BirthDate = new DateTime(2000, 1, 1);
+                    newPatient.Nationality = "Пациент";
+                    newPatient.LiveAdress = "Пациент";
+                    newPatient.RegAdress = "Пациент";
+                    newPatient.RegDate = new DateTime(2000, 1, 1);
+                    newPatient.InsuranceBillNum = "Пациент";
+                    newPatient.BloodType = 255;
+                    newPatient.Rhesus = "Пациент";
+                    newPatient.WorkIncapacityListNum = "Пациент";
+                    newPatient.InsurancePolicyNum = "Пациент";
+                    
+                    newPatient.Password = "1";
+
+                    newPatient.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -2, Person = newPatient };
+                    newPatient.MedCard = new MedCard();
+                    Illness ill = new Illness { Name = "Пациент" };
+                    ill.Cured = true;
+                    ill.Hash = ill.Name.GetHashCode();
+                    if (db.IllnessSet.Find(ill.Hash) != null)
+                        ill = db.IllnessSet.Find(ill.Hash);
+                    ill.Patient.Add(newPatient);
+                    newPatient.Illness.Add(ill);
+
+                    newPatient.NameHashID = newPatient.FullName.GetHashCode();
+
+                    db.PersonSet.Add(newPatient);
+                    //db.IllnessSet.Add(newPatient.Illness.First());
+                    //db.IllnessSet.Find(newPatient.Illness.First().Hash).Patient.Add(newPatient);
+                    //newPatient.Illness.Add(new Illness { Cured = true, Name = "Пациент", Hash = Name.GetHashCode()});
+
+                    db.SaveChanges();}}
+        
+                    
+                    //ControlFunctions.GenerateRandomDataBase();
+            
         }
     }
 }

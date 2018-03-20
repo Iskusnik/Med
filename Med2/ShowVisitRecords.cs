@@ -28,6 +28,7 @@ namespace Med2
                 var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { visit.DateStart, visit.DateFinish, visit.WorkTime.Doctor.FullName }).ToList();
                 //this.visitInfoSetTableAdapter.Fill(thisPersonVisits);
                 dataGridView1.DataSource = thisPersonVisits;
+                dataGridView1.Refresh();
             }
             //var thisPersonVisits = from visit in thisPatient.VisitInfo;
         }
@@ -58,18 +59,26 @@ namespace Med2
                             break;
                         }
                 }
+                dataGridView1.Columns[0].Name = "Начало приёма";
+                dataGridView1.Columns[0].Name = "Конец приёма";
+                dataGridView1.Columns[0].Name = "Имя врача";
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            if (dataGridView1.SelectedCells == null || dataGridView1.SelectedCells.Count == 0)
             {
-                thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                var info = new { dateSt = dataGridView1.SelectedCells[0], dateFn = dataGridView1.SelectedCells[1], s = dataGridView1.SelectedCells[2] };
-                VisitInfo vInfo = db.VisitInfoSet.Find(info.dateSt, info.dateFn, info.s);
-                var dR = (from dRecs in vInfo.Patient.MedCard.DoctorRecord where (dRecs.DoctorID == vInfo.DoctorID && dRecs.Date == vInfo.DateStart) select dRecs).ToList();
-                DoctorRecord temp = dR[0];
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
+                {
+                    thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
+                    var info = new { dateSt = dataGridView1.SelectedRows[0], dateFn = dataGridView1.SelectedCells[1], s = dataGridView1.SelectedCells[2] };
+                    VisitInfo vInfo = db.VisitInfoSet.Find(info.dateSt, info.dateFn, info.s);
+                    var dR = (from dRecs in vInfo.Patient.MedCard.DoctorRecord where (dRecs.DoctorID == vInfo.DoctorID && dRecs.Date == vInfo.DateStart) select dRecs).ToList();
+                    DoctorRecord temp = dR[0];
+                    Form showInfoAboutVisit = new ShowInfoAboutVisit(temp);
+                    showInfoAboutVisit.Show();
+                }
             }
         }
     }

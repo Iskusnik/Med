@@ -28,39 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxAnamnes = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxDiagnos = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxHelpType = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.richTextBoxHelpAmount = new System.Windows.Forms.RichTextBox();
+            this.textBoxDate = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxResult = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxDoctor = new System.Windows.Forms.TextBox();
+            this.richTextBoxStand = new System.Windows.Forms.RichTextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // richTextBoxAnamnes
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(124, 111);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(229, 104);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBoxAnamnes.Location = new System.Drawing.Point(124, 111);
+            this.richTextBoxAnamnes.Name = "richTextBoxAnamnes";
+            this.richTextBoxAnamnes.ReadOnly = true;
+            this.richTextBoxAnamnes.Size = new System.Drawing.Size(229, 104);
+            this.richTextBoxAnamnes.TabIndex = 0;
+            this.richTextBoxAnamnes.Text = "";
             // 
-            // richTextBox2
+            // richTextBoxDiagnos
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(124, 221);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(229, 104);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.richTextBoxDiagnos.Location = new System.Drawing.Point(124, 221);
+            this.richTextBoxDiagnos.Name = "richTextBoxDiagnos";
+            this.richTextBoxDiagnos.ReadOnly = true;
+            this.richTextBoxDiagnos.Size = new System.Drawing.Size(229, 104);
+            this.richTextBoxDiagnos.TabIndex = 1;
+            this.richTextBoxDiagnos.Text = "";
             // 
             // label1
             // 
@@ -90,14 +92,14 @@
             this.label3.Text = "Вид помощи";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // richTextBox3
+            // richTextBoxHelpType
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(124, 331);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(229, 104);
-            this.richTextBox3.TabIndex = 4;
-            this.richTextBox3.Text = "";
+            this.richTextBoxHelpType.Location = new System.Drawing.Point(124, 331);
+            this.richTextBoxHelpType.Name = "richTextBoxHelpType";
+            this.richTextBoxHelpType.ReadOnly = true;
+            this.richTextBoxHelpType.Size = new System.Drawing.Size(229, 104);
+            this.richTextBoxHelpType.TabIndex = 4;
+            this.richTextBoxHelpType.Text = "";
             // 
             // label4
             // 
@@ -109,22 +111,22 @@
             this.label4.Text = "Объём помощи";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // richTextBox4
+            // richTextBoxHelpAmount
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(124, 444);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.Size = new System.Drawing.Size(229, 104);
-            this.richTextBox4.TabIndex = 6;
-            this.richTextBox4.Text = "";
+            this.richTextBoxHelpAmount.Location = new System.Drawing.Point(124, 444);
+            this.richTextBoxHelpAmount.Name = "richTextBoxHelpAmount";
+            this.richTextBoxHelpAmount.ReadOnly = true;
+            this.richTextBoxHelpAmount.Size = new System.Drawing.Size(229, 104);
+            this.richTextBoxHelpAmount.TabIndex = 6;
+            this.richTextBoxHelpAmount.Text = "";
             // 
-            // textBox1
+            // textBoxDate
             // 
-            this.textBox1.Location = new System.Drawing.Point(124, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(229, 20);
-            this.textBox1.TabIndex = 8;
+            this.textBoxDate.Location = new System.Drawing.Point(124, 20);
+            this.textBoxDate.Name = "textBoxDate";
+            this.textBoxDate.ReadOnly = true;
+            this.textBoxDate.Size = new System.Drawing.Size(229, 20);
+            this.textBoxDate.TabIndex = 8;
             // 
             // label5
             // 
@@ -138,20 +140,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 555);
+            this.label6.Location = new System.Drawing.Point(21, 664);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 11;
             this.label6.Text = "Результат";
             // 
-            // richTextBox5
+            // richTextBoxResult
             // 
-            this.richTextBox5.Location = new System.Drawing.Point(124, 555);
-            this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.ReadOnly = true;
-            this.richTextBox5.Size = new System.Drawing.Size(229, 104);
-            this.richTextBox5.TabIndex = 12;
-            this.richTextBox5.Text = "";
+            this.richTextBoxResult.Location = new System.Drawing.Point(124, 664);
+            this.richTextBoxResult.Name = "richTextBoxResult";
+            this.richTextBoxResult.ReadOnly = true;
+            this.richTextBoxResult.Size = new System.Drawing.Size(229, 104);
+            this.richTextBoxResult.TabIndex = 12;
+            this.richTextBoxResult.Text = "";
             // 
             // label7
             // 
@@ -162,33 +164,53 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Врач";
             // 
-            // textBox2
+            // textBoxDoctor
             // 
-            this.textBox2.Location = new System.Drawing.Point(124, 46);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(229, 20);
-            this.textBox2.TabIndex = 13;
+            this.textBoxDoctor.Location = new System.Drawing.Point(124, 46);
+            this.textBoxDoctor.Name = "textBoxDoctor";
+            this.textBoxDoctor.ReadOnly = true;
+            this.textBoxDoctor.Size = new System.Drawing.Size(229, 20);
+            this.textBoxDoctor.TabIndex = 13;
+            // 
+            // richTextBoxStand
+            // 
+            this.richTextBoxStand.Location = new System.Drawing.Point(124, 554);
+            this.richTextBoxStand.Name = "richTextBoxStand";
+            this.richTextBoxStand.ReadOnly = true;
+            this.richTextBoxStand.Size = new System.Drawing.Size(229, 104);
+            this.richTextBoxStand.TabIndex = 16;
+            this.richTextBoxStand.Text = "";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(21, 554);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Стандарты";
             // 
             // ShowInfoAboutVisit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 672);
+            this.ClientSize = new System.Drawing.Size(370, 782);
+            this.Controls.Add(this.richTextBoxStand);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.richTextBox5);
+            this.Controls.Add(this.textBoxDoctor);
+            this.Controls.Add(this.richTextBoxResult);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxDate);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.richTextBox4);
+            this.Controls.Add(this.richTextBoxHelpAmount);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.richTextBox3);
+            this.Controls.Add(this.richTextBoxHelpType);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.richTextBoxDiagnos);
+            this.Controls.Add(this.richTextBoxAnamnes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ShowInfoAboutVisit";
             this.Text = "Информация о приёме врача";
@@ -200,19 +222,21 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBoxAnamnes;
+        private System.Windows.Forms.RichTextBox richTextBoxDiagnos;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox richTextBoxHelpType;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox richTextBoxHelpAmount;
+        private System.Windows.Forms.TextBox textBoxDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RichTextBox richTextBox5;
+        private System.Windows.Forms.RichTextBox richTextBoxResult;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxDoctor;
+        private System.Windows.Forms.RichTextBox richTextBoxStand;
+        private System.Windows.Forms.Label label8;
     }
 }

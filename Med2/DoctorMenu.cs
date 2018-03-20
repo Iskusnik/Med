@@ -12,7 +12,7 @@ namespace Med2
 {
     public partial class DoctorMenu : Form
     {
-        Doctor thisDoctor;
+        public Doctor thisDoctor;
         public DoctorMenu(Doctor doct)
         {
             thisDoctor = doct;
@@ -85,6 +85,13 @@ namespace Med2
             selPer.Show();
             RefreshMenu();
 
+        }
+
+        private void открытьМедицинскуюКартуПациентаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form selectPerson = new SelectPerson(1);
+            selectPerson.Owner = this;
+            selectPerson.ShowDialog();
         }
     }
 }

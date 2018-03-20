@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Med2
 {
@@ -111,7 +112,7 @@ namespace Med2
                 if (info is Patient)
                 {
                     
-                    if (textBoxBloodType.Text != "Неизвестно0")
+                    if (Regex.IsMatch(textBoxBloodType.Text, @"(-|\+)[1-4]"))
                     {
                         if (textBoxBloodType.Text[0] == '-')
                         {

@@ -255,12 +255,8 @@ namespace Med2
 
         public static void ClearDataBase()
         {
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
-            {
-                
-                //db.PersonSet.RemoveRange(db.PersonSet); и так далее
-                db.Database.Create();
-            }
+            
+            
         }
 
 
@@ -383,6 +379,7 @@ namespace Med2
                         for (int j = 0; j < random.Next(0, 4); j++)
                         {
                             Illness ill = new Illness{ Name = random.Next(0, 100).ToString()};
+                            ill.Cured = random.Next(0, 10) < 3;
                             ill.Hash = ill.Name.GetHashCode();
                             if (db.IllnessSet.Find(ill.Hash) != null)
                                 ill = db.IllnessSet.Find(ill.Hash);
@@ -394,8 +391,7 @@ namespace Med2
                         
 
                         db.PersonSet.Add(t);
-
-                        db.PersonSet.Find(t.BirthDate, t.NameHashID);
+                        
                         db.SaveChanges();
                     }
 
