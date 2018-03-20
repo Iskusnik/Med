@@ -19,6 +19,8 @@ namespace Med2
             InitializeComponent();
             thisDoctor = d;
             thisPatient = p;
+            Form showPatientInfo = new ShowPatientInfo(thisPatient);
+            showPatientInfo.Show();
             this.Text = "Медицинская карта" + thisPatient.FullName;
         }
 
