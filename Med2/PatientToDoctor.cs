@@ -48,10 +48,10 @@ namespace Med2
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     DoctorsList[index] = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
-                    FreeTime selectedTime = (FreeTime)(from times in DoctorsList[index].FreeTime where (times.Start.Date.ToShortDateString() == comboBoxDate.Text && times.Start.TimeOfDay.ToString() == comboBoxTime.Text) select (times));
+                    FreeTime selectedTime = (FreeTime)(from times in DoctorsList[index].FreeTimes where (times.Start.Date.ToShortDateString() == comboBoxDate.Text && times.Start.TimeOfDay.ToString() == comboBoxTime.Text) select (times));
                     WorkTime temp = new WorkTime { Doctor = DoctorsList[index], Start = selectedTime.Start, Finish = selectedTime.Finish };
-                    DoctorsList[index].WorkTime.Add(temp); 
-                    DoctorsList[index].FreeTime.Remove(selectedTime);
+                    DoctorsList[index].WorkTimes.Add(temp); 
+                    DoctorsList[index].FreeTimes.Remove(selectedTime);
                     thisPatient = (Patient)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
                     temp.VisitInfo = new VisitInfo
                     {
@@ -60,7 +60,7 @@ namespace Med2
                         Patient = thisPatient,
                         PatientBirthDate = thisPatient.BirthDate,
                         PatientFullName = thisPatient.FullName,
-                        WorkTime = temp,
+                        WorkTimes = temp,
                         DoctorID = DoctorsList[index].NameHashID,
                     };
                     thisPatient.VisitInfo.Add(temp.VisitInfo);
@@ -89,7 +89,7 @@ namespace Med2
                 {
                     Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].GetHashCode());
 
-                    string[] distinct = (from dates in d.FreeTime select dates.Start.ToShortDateString()).Distinct().ToArray();
+                    string[] distinct = (from dates in d.FreeTimes select dates.Start.ToShortDateString()).Distinct().ToArray();
 
                     foreach (string doct in distinct)
                         this.comboBoxDate.Items.Add(doct);
@@ -106,7 +106,7 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].FullName);
-                string[] distinct = (from dates in d.FreeTime where (dates.Start.ToShortDateString() == comboBoxDate.Text) select (dates.Start.TimeOfDay.ToString())).ToArray();
+                string[] distinct = (from dates in d.FreeTimes where (dates.Start.ToShortDateString() == comboBoxDate.Text) select (dates.Start.TimeOfDay.ToString())).ToArray();
 
                 foreach (string doct in distinct)
                     this.comboBoxDate.Items.Add(doct);

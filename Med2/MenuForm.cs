@@ -70,8 +70,8 @@ namespace Med2
                     newDoctor.Memberships = "Администратор";
 
                     newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -1, Person = newDoctor };
-                    newDoctor.WorkTime = new List<WorkTime>();
-                    newDoctor.FreeTime = new List<FreeTime>();
+                    newDoctor.WorkTimes = new List<WorkTime>();
+                    newDoctor.FreeTimes = new List<FreeTime>();
                     newDoctor.DoctorRecord = new List<DoctorRecord>();
                     newDoctor.Password = "123qwe";
                     newDoctor.NameHashID = newDoctor.FullName.GetHashCode();
