@@ -37,18 +37,6 @@
       <End Role="Doctor" EntitySet="PersonSet_Doctor" />
       <End Role="DoctorRecord" EntitySet="DoctorRecordSet" />
     </AssociationSet>
-    <AssociationSet Name="DoctorFreeTime" Association="ModelMedDB.Store.DoctorFreeTime">
-      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
-      <End Role="FreeTime" EntitySet="FreeTimeSet" />
-    </AssociationSet>
-    <AssociationSet Name="DoctorWorkTime" Association="ModelMedDB.Store.DoctorWorkTime">
-      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
-      <End Role="WorkTime" EntitySet="WorkTimeSet" />
-    </AssociationSet>
-    <AssociationSet Name="VisitInfoWorkTime" Association="ModelMedDB.Store.VisitInfoWorkTime">
-      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
-      <End Role="WorkTime" EntitySet="WorkTimeSet" />
-    </AssociationSet>
     <AssociationSet Name="PatientVisitInfo" Association="ModelMedDB.Store.PatientVisitInfo">
       <End Role="Patient" EntitySet="PersonSet_Patient" />
       <End Role="VisitInfo" EntitySet="VisitInfoSet" />
@@ -56,6 +44,18 @@
     <AssociationSet Name="DocumentsPerson" Association="ModelMedDB.Store.DocumentsPerson">
       <End Role="Documents" EntitySet="DocumentsSet" />
       <End Role="Person" EntitySet="PersonSet" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorWorkTime" Association="ModelMedDB.Store.DoctorWorkTime">
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="WorkTime" EntitySet="WorkTimeSet" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorFreeTime" Association="ModelMedDB.Store.DoctorFreeTime">
+      <End Role="Doctor" EntitySet="PersonSet_Doctor" />
+      <End Role="FreeTime" EntitySet="FreeTimeSet" />
+    </AssociationSet>
+    <AssociationSet Name="VisitInfoWorkTime" Association="ModelMedDB.Store.VisitInfoWorkTime">
+      <End Role="VisitInfo" EntitySet="VisitInfoSet" />
+      <End Role="WorkTime" EntitySet="WorkTimeSet" />
     </AssociationSet>
     <AssociationSet Name="FK_Patient_inherits_Person" Association="ModelMedDB.Store.FK_Patient_inherits_Person">
       <End Role="Person" EntitySet="PersonSet" />
@@ -136,15 +136,13 @@
     <Property Name="DateStart" Type="datetime" Nullable="false" />
     <Property Name="DateFinish" Type="datetime" Nullable="false" />
     <Property Name="DoctorID" Type="bigint" Nullable="false" />
-    <Property Name="WorkTime_Start" Type="datetime" Nullable="false" />
-    <Property Name="WorkTime_Finish" Type="datetime" Nullable="false" />
     <Property Name="Patient_BirthDate" Type="datetime" Nullable="false" />
     <Property Name="Patient_NameHashID" Type="bigint" Nullable="false" />
+    <Property Name="WorkTimes_Start" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="FreeTimeSet">
     <Key>
       <PropertyRef Name="Start" />
-      <PropertyRef Name="Finish" />
     </Key>
     <Property Name="Start" Type="datetime" Nullable="false" />
     <Property Name="Finish" Type="datetime" Nullable="false" />
@@ -154,7 +152,6 @@
   <EntityType Name="WorkTimeSet">
     <Key>
       <PropertyRef Name="Start" />
-      <PropertyRef Name="Finish" />
     </Key>
     <Property Name="Start" Type="datetime" Nullable="false" />
     <Property Name="Finish" Type="datetime" Nullable="false" />
@@ -234,48 +231,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DoctorFreeTime">
-    <End Role="Doctor" Type="ModelMedDB.Store.PersonSet_Doctor" Multiplicity="1" />
-    <End Role="FreeTime" Type="ModelMedDB.Store.FreeTimeSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Doctor">
-        <PropertyRef Name="BirthDate" />
-        <PropertyRef Name="NameHashID" />
-      </Principal>
-      <Dependent Role="FreeTime">
-        <PropertyRef Name="Doctor_BirthDate" />
-        <PropertyRef Name="Doctor_NameHashID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="DoctorWorkTime">
-    <End Role="Doctor" Type="ModelMedDB.Store.PersonSet_Doctor" Multiplicity="1" />
-    <End Role="WorkTime" Type="ModelMedDB.Store.WorkTimeSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Doctor">
-        <PropertyRef Name="BirthDate" />
-        <PropertyRef Name="NameHashID" />
-      </Principal>
-      <Dependent Role="WorkTime">
-        <PropertyRef Name="Doctor_BirthDate" />
-        <PropertyRef Name="Doctor_NameHashID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="VisitInfoWorkTime">
-    <End Role="VisitInfo" Type="ModelMedDB.Store.VisitInfoSet" Multiplicity="*" />
-    <End Role="WorkTime" Type="ModelMedDB.Store.WorkTimeSet" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="WorkTime">
-        <PropertyRef Name="Start" />
-        <PropertyRef Name="Finish" />
-      </Principal>
-      <Dependent Role="VisitInfo">
-        <PropertyRef Name="WorkTime_Start" />
-        <PropertyRef Name="WorkTime_Finish" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="PatientVisitInfo">
     <End Role="Patient" Type="ModelMedDB.Store.PersonSet_Patient" Multiplicity="1" />
     <End Role="VisitInfo" Type="ModelMedDB.Store.VisitInfoSet" Multiplicity="*" />
@@ -301,6 +256,46 @@
       <Dependent Role="Documents">
         <PropertyRef Name="Person_BirthDate" />
         <PropertyRef Name="Person_NameHashID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorWorkTime">
+    <End Role="Doctor" Type="ModelMedDB.Store.PersonSet_Doctor" Multiplicity="1" />
+    <End Role="WorkTime" Type="ModelMedDB.Store.WorkTimeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="BirthDate" />
+        <PropertyRef Name="NameHashID" />
+      </Principal>
+      <Dependent Role="WorkTime">
+        <PropertyRef Name="Doctor_BirthDate" />
+        <PropertyRef Name="Doctor_NameHashID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorFreeTime">
+    <End Role="Doctor" Type="ModelMedDB.Store.PersonSet_Doctor" Multiplicity="1" />
+    <End Role="FreeTime" Type="ModelMedDB.Store.FreeTimeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="BirthDate" />
+        <PropertyRef Name="NameHashID" />
+      </Principal>
+      <Dependent Role="FreeTime">
+        <PropertyRef Name="Doctor_BirthDate" />
+        <PropertyRef Name="Doctor_NameHashID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VisitInfoWorkTime">
+    <End Role="VisitInfo" Type="ModelMedDB.Store.VisitInfoSet" Multiplicity="*" />
+    <End Role="WorkTime" Type="ModelMedDB.Store.WorkTimeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="WorkTime">
+        <PropertyRef Name="Start" />
+      </Principal>
+      <Dependent Role="VisitInfo">
+        <PropertyRef Name="WorkTimes_Start" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -505,21 +500,17 @@
         <EntityType Name="FreeTime">
           <Key>
             <PropertyRef Name="Start" />
-            <PropertyRef Name="DoctorID" />
           </Key>
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Finish" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DoctorID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Doctor" Relationship="ModelMedDB.DoctorFreeTime" FromRole="FreeTime" ToRole="Doctor" />
         </EntityType>
         <EntityType Name="WorkTime">
           <Key>
             <PropertyRef Name="Start" />
-            <PropertyRef Name="DoctorID" />
           </Key>
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Finish" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DoctorID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Doctor" Relationship="ModelMedDB.DoctorWorkTime" FromRole="WorkTime" ToRole="Doctor" />
           <NavigationProperty Name="VisitInfo" Relationship="ModelMedDB.VisitInfoWorkTime" FromRole="WorkTime" ToRole="VisitInfo" />
         </EntityType>
@@ -721,6 +712,34 @@
       </EndProperty>
       <EndProperty Name="Documents">
         <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DoctorWorkTime" TypeName="ModelMedDB.DoctorWorkTime" StoreEntitySet="WorkTimeSet">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="BirthDate" ColumnName="Doctor_BirthDate" />
+        <ScalarProperty Name="NameHashID" ColumnName="Doctor_NameHashID" />
+      </EndProperty>
+      <EndProperty Name="WorkTime">
+        <ScalarProperty Name="Start" ColumnName="Start" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DoctorFreeTime" TypeName="ModelMedDB.DoctorFreeTime" StoreEntitySet="FreeTimeSet">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="BirthDate" ColumnName="Doctor_BirthDate" />
+        <ScalarProperty Name="NameHashID" ColumnName="Doctor_NameHashID" />
+      </EndProperty>
+      <EndProperty Name="FreeTime">
+        <ScalarProperty Name="Start" ColumnName="Start" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VisitInfoWorkTime" TypeName="ModelMedDB.VisitInfoWorkTime" StoreEntitySet="VisitInfoSet">
+      <EndProperty Name="WorkTime">
+        <ScalarProperty Name="Start" ColumnName="WorkTimes_Start" />
+      </EndProperty>
+      <EndProperty Name="VisitInfo">
+        <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+        <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+        <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

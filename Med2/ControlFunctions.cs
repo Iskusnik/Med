@@ -192,8 +192,8 @@ namespace Med2
 
 
 
-                    newDoctor.FreeTime = makeJob(new int[] { 0, 1, 2, 3, 4 }, DateTime.Today, newDoctor);
-                    newDoctor.WorkTime = new List<WorkTime>();
+                    newDoctor.FreeTimes = makeJob(new int[] { 0, 1, 2, 3, 4 }, DateTime.Today, newDoctor);
+                    newDoctor.WorkTimes = new List<WorkTime>();
                     newDoctor.DoctorRecord = new List<DoctorRecord>();
                     db.PersonSet.Add(newDoctor);
                     db.SaveChanges();
@@ -229,6 +229,46 @@ namespace Med2
         static public List<FreeTime> makeJob(int[] week, DateTime start, Doctor doct, int minutes = 5, int hours = 8, int days = 30)
         {
             int N = TimeSpan.FromHours(hours).Duration().Minutes / minutes;    //получаем количество приёмов
+
+            List<FreeTime> workTable = new List<FreeTime>();
+
+            DateTime startingTime = start;
+
+            FreeTime item = new FreeTime();
+            item.Doctor = doct;
+
+            for (int day = 1; day <= days; day++)
+            {
+                item.Start = start + TimeSpan.FromDays(day);
+                foreach (int d in week)
+                    if (d == (int)item.Start.DayOfWeek)
+                        for (int i = 0; i < N; i++)
+                        {
+                            item.Finish = start + TimeSpan.FromMinutes(minutes);
+                            workTable.Add(item);
+                            item.Start = item.Finish;
+                        }
+            }
+            return workTable;
+        }
+        static public List<FreeTime> makeJob(bool[] weekCheck, DateTime start, Doctor doct, int minutes = 5, int hours = 8, int days = 30)
+        {
+            
+            int count = 0;
+            for (int i = 0; i < 7; i++)
+                if (weekCheck[i])
+                    count++;
+
+            int[] week = new int[count];
+            count = 0;
+
+            for (int i = 0; i < 7; i++)
+                if (weekCheck[i])
+                {
+                    week[count] = i;
+                    count++;
+                }
+                int N = TimeSpan.FromHours(hours).Duration().Minutes / minutes;    //получаем количество приёмов
 
             List<FreeTime> workTable = new List<FreeTime>();
 
@@ -341,15 +381,15 @@ namespace Med2
 
                         int week = random.Next(0, 4);
                         if (0 == week)
-                            t.FreeTime = makeJob(new int[] { 0, 3, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 0, 3, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
                         if (1 == week)
-                            t.FreeTime = makeJob(new int[] { 0, 1, 2, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 0, 1, 2, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
                         if (2 == week)
-                            t.FreeTime = makeJob(new int[] { 0, 1, 2, 3, 4, 5, 6 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 0, 1, 2, 3, 4, 5, 6 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
                         if (3 == week)
-                            t.FreeTime = makeJob(new int[] { 4 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
-
-                        t.WorkTime = new List<WorkTime>();
+                            t.FreeTimes = makeJob(new int[] { 4 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                        
+                        t.WorkTimes = new List<WorkTime>();
                         t.DoctorRecord = new List<DoctorRecord>();
                         db.PersonSet.Add(t);
                         db.SaveChanges();

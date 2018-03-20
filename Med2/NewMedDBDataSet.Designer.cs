@@ -58,11 +58,11 @@ namespace Med2 {
         
         private global::System.Data.DataRelation relationFK_PatientVisitInfo;
         
-        private global::System.Data.DataRelation relationFK_VisitInfoWorkTime;
-        
         private global::System.Data.DataRelation relationFK_DoctorWorkTime;
         
         private global::System.Data.DataRelation relationFK_DocumentsPerson;
+        
+        private global::System.Data.DataRelation relationFK_VisitInfoWorkTime;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -437,9 +437,9 @@ namespace Med2 {
             this.relationFK_Doctor_inherits_Person = this.Relations["FK_Doctor_inherits_Person"];
             this.relationFK_Patient_inherits_Person = this.Relations["FK_Patient_inherits_Person"];
             this.relationFK_PatientVisitInfo = this.Relations["FK_PatientVisitInfo"];
-            this.relationFK_VisitInfoWorkTime = this.Relations["FK_VisitInfoWorkTime"];
             this.relationFK_DoctorWorkTime = this.Relations["FK_DoctorWorkTime"];
             this.relationFK_DocumentsPerson = this.Relations["FK_DocumentsPerson"];
+            this.relationFK_VisitInfoWorkTime = this.Relations["FK_VisitInfoWorkTime"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -510,12 +510,6 @@ namespace Med2 {
                         this.tableVisitInfoSet.Patient_BirthDateColumn,
                         this.tableVisitInfoSet.Patient_NameHashIDColumn}, false);
             this.Relations.Add(this.relationFK_PatientVisitInfo);
-            this.relationFK_VisitInfoWorkTime = new global::System.Data.DataRelation("FK_VisitInfoWorkTime", new global::System.Data.DataColumn[] {
-                        this.tableWorkTimeSet.StartColumn,
-                        this.tableWorkTimeSet.FinishColumn}, new global::System.Data.DataColumn[] {
-                        this.tableVisitInfoSet.WorkTime_StartColumn,
-                        this.tableVisitInfoSet.WorkTime_FinishColumn}, false);
-            this.Relations.Add(this.relationFK_VisitInfoWorkTime);
             this.relationFK_DoctorWorkTime = new global::System.Data.DataRelation("FK_DoctorWorkTime", new global::System.Data.DataColumn[] {
                         this.tablePersonSet_Doctor.BirthDateColumn,
                         this.tablePersonSet_Doctor.NameHashIDColumn}, new global::System.Data.DataColumn[] {
@@ -528,6 +522,10 @@ namespace Med2 {
                         this.tableDocumentsSet.Person_BirthDateColumn,
                         this.tableDocumentsSet.Person_NameHashIDColumn}, false);
             this.Relations.Add(this.relationFK_DocumentsPerson);
+            this.relationFK_VisitInfoWorkTime = new global::System.Data.DataRelation("FK_VisitInfoWorkTime", new global::System.Data.DataColumn[] {
+                        this.tableWorkTimeSet.StartColumn}, new global::System.Data.DataColumn[] {
+                        this.tableVisitInfoSet.WorkTimes_StartColumn}, false);
+            this.Relations.Add(this.relationFK_VisitInfoWorkTime);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1556,10 +1554,11 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FreeTimeSetRow FindByStartFinish(System.DateTime Start, System.DateTime Finish) {
+            public FreeTimeSetRow FindByDoctor_NameHashIDDoctor_BirthDateStart(long Doctor_NameHashID, System.DateTime Doctor_BirthDate, System.DateTime Start) {
                 return ((FreeTimeSetRow)(this.Rows.Find(new object[] {
-                            Start,
-                            Finish})));
+                            Doctor_NameHashID,
+                            Doctor_BirthDate,
+                            Start})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1597,8 +1596,9 @@ namespace Med2 {
                 this.columnDoctor_NameHashID = new global::System.Data.DataColumn("Doctor_NameHashID", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDoctor_NameHashID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnStart,
-                                this.columnFinish}, true));
+                                this.columnDoctor_NameHashID,
+                                this.columnDoctor_BirthDate,
+                                this.columnStart}, true));
                 this.columnStart.AllowDBNull = false;
                 this.columnFinish.AllowDBNull = false;
                 this.columnDoctor_BirthDate.AllowDBNull = false;
@@ -3373,13 +3373,11 @@ namespace Med2 {
             
             private global::System.Data.DataColumn columnDoctorID;
             
-            private global::System.Data.DataColumn columnWorkTime_Start;
-            
-            private global::System.Data.DataColumn columnWorkTime_Finish;
-            
             private global::System.Data.DataColumn columnPatient_BirthDate;
             
             private global::System.Data.DataColumn columnPatient_NameHashID;
+            
+            private global::System.Data.DataColumn columnWorkTimes_Start;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -3456,22 +3454,6 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn WorkTime_StartColumn {
-                get {
-                    return this.columnWorkTime_Start;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn WorkTime_FinishColumn {
-                get {
-                    return this.columnWorkTime_Finish;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn Patient_BirthDateColumn {
                 get {
                     return this.columnPatient_BirthDate;
@@ -3483,6 +3465,14 @@ namespace Med2 {
             public global::System.Data.DataColumn Patient_NameHashIDColumn {
                 get {
                     return this.columnPatient_NameHashID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn WorkTimes_StartColumn {
+                get {
+                    return this.columnWorkTimes_Start;
                 }
             }
             
@@ -3523,7 +3513,7 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VisitInfoSetRow AddVisitInfoSetRow(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime DateStart, System.DateTime DateFinish, long DoctorID, System.DateTime WorkTime_Start, System.DateTime WorkTime_Finish, System.DateTime Patient_BirthDate, long Patient_NameHashID) {
+            public VisitInfoSetRow AddVisitInfoSetRow(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime DateStart, System.DateTime DateFinish, long DoctorID, System.DateTime Patient_BirthDate, long Patient_NameHashID, WorkTimeSetRow parentWorkTimeSetRowByFK_VisitInfoWorkTime) {
                 VisitInfoSetRow rowVisitInfoSetRow = ((VisitInfoSetRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PatientFullName,
@@ -3531,10 +3521,12 @@ namespace Med2 {
                         DateStart,
                         DateFinish,
                         DoctorID,
-                        WorkTime_Start,
-                        WorkTime_Finish,
                         Patient_BirthDate,
-                        Patient_NameHashID};
+                        Patient_NameHashID,
+                        null};
+                if ((parentWorkTimeSetRowByFK_VisitInfoWorkTime != null)) {
+                    columnValuesArray[7] = parentWorkTimeSetRowByFK_VisitInfoWorkTime[0];
+                }
                 rowVisitInfoSetRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVisitInfoSetRow);
                 return rowVisitInfoSetRow;
@@ -3571,10 +3563,9 @@ namespace Med2 {
                 this.columnDateStart = base.Columns["DateStart"];
                 this.columnDateFinish = base.Columns["DateFinish"];
                 this.columnDoctorID = base.Columns["DoctorID"];
-                this.columnWorkTime_Start = base.Columns["WorkTime_Start"];
-                this.columnWorkTime_Finish = base.Columns["WorkTime_Finish"];
                 this.columnPatient_BirthDate = base.Columns["Patient_BirthDate"];
                 this.columnPatient_NameHashID = base.Columns["Patient_NameHashID"];
+                this.columnWorkTimes_Start = base.Columns["WorkTimes_Start"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3590,14 +3581,12 @@ namespace Med2 {
                 base.Columns.Add(this.columnDateFinish);
                 this.columnDoctorID = new global::System.Data.DataColumn("DoctorID", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDoctorID);
-                this.columnWorkTime_Start = new global::System.Data.DataColumn("WorkTime_Start", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWorkTime_Start);
-                this.columnWorkTime_Finish = new global::System.Data.DataColumn("WorkTime_Finish", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWorkTime_Finish);
                 this.columnPatient_BirthDate = new global::System.Data.DataColumn("Patient_BirthDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPatient_BirthDate);
                 this.columnPatient_NameHashID = new global::System.Data.DataColumn("Patient_NameHashID", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPatient_NameHashID);
+                this.columnWorkTimes_Start = new global::System.Data.DataColumn("WorkTimes_Start", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWorkTimes_Start);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDateStart,
                                 this.columnDateFinish,
@@ -3608,10 +3597,9 @@ namespace Med2 {
                 this.columnDateStart.AllowDBNull = false;
                 this.columnDateFinish.AllowDBNull = false;
                 this.columnDoctorID.AllowDBNull = false;
-                this.columnWorkTime_Start.AllowDBNull = false;
-                this.columnWorkTime_Finish.AllowDBNull = false;
                 this.columnPatient_BirthDate.AllowDBNull = false;
                 this.columnPatient_NameHashID.AllowDBNull = false;
+                this.columnWorkTimes_Start.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3869,10 +3857,11 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WorkTimeSetRow FindByStartFinish(System.DateTime Start, System.DateTime Finish) {
+            public WorkTimeSetRow FindByStartDoctor_BirthDateDoctor_NameHashID(System.DateTime Start, System.DateTime Doctor_BirthDate, long Doctor_NameHashID) {
                 return ((WorkTimeSetRow)(this.Rows.Find(new object[] {
                             Start,
-                            Finish})));
+                            Doctor_BirthDate,
+                            Doctor_NameHashID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3911,7 +3900,8 @@ namespace Med2 {
                 base.Columns.Add(this.columnDoctor_NameHashID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStart,
-                                this.columnFinish}, true));
+                                this.columnDoctor_BirthDate,
+                                this.columnDoctor_NameHashID}, true));
                 this.columnStart.AllowDBNull = false;
                 this.columnFinish.AllowDBNull = false;
                 this.columnDoctor_BirthDate.AllowDBNull = false;
@@ -4926,28 +4916,6 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime WorkTime_Start {
-                get {
-                    return ((global::System.DateTime)(this[this.tableVisitInfoSet.WorkTime_StartColumn]));
-                }
-                set {
-                    this[this.tableVisitInfoSet.WorkTime_StartColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime WorkTime_Finish {
-                get {
-                    return ((global::System.DateTime)(this[this.tableVisitInfoSet.WorkTime_FinishColumn]));
-                }
-                set {
-                    this[this.tableVisitInfoSet.WorkTime_FinishColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime Patient_BirthDate {
                 get {
                     return ((global::System.DateTime)(this[this.tableVisitInfoSet.Patient_BirthDateColumn]));
@@ -4970,6 +4938,17 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime WorkTimes_Start {
+                get {
+                    return ((global::System.DateTime)(this[this.tableVisitInfoSet.WorkTimes_StartColumn]));
+                }
+                set {
+                    this[this.tableVisitInfoSet.WorkTimes_StartColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PersonSet_PatientRow PersonSet_PatientRowParent {
                 get {
                     return ((PersonSet_PatientRow)(this.GetParentRow(this.Table.ParentRelations["FK_PatientVisitInfo"])));
@@ -4981,7 +4960,7 @@ namespace Med2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public WorkTimeSetRow WorkTimeSetRowParent {
+            public WorkTimeSetRow WorkTimeSetRow {
                 get {
                     return ((WorkTimeSetRow)(this.GetParentRow(this.Table.ParentRelations["FK_VisitInfoWorkTime"])));
                 }
@@ -6502,8 +6481,8 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM FreeTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime Doctor_BirthDate, long Doctor_NameHashID, System.DateTime Original_Start, System.DateTime Original_Finish, System.DateTime Original_Doctor_BirthDate, long Original_Doctor_NameHashID) {
-            return this.Update(Original_Start, Original_Finish, Doctor_BirthDate, Doctor_NameHashID, Original_Start, Original_Finish, Original_Doctor_BirthDate, Original_Doctor_NameHashID);
+        public virtual int Update(System.DateTime Finish, System.DateTime Original_Start, System.DateTime Original_Finish, System.DateTime Original_Doctor_BirthDate, long Original_Doctor_NameHashID) {
+            return this.Update(Original_Start, Finish, Original_Doctor_BirthDate, Original_Doctor_NameHashID, Original_Start, Original_Finish, Original_Doctor_BirthDate, Original_Doctor_NameHashID);
         }
     }
     
@@ -8350,59 +8329,54 @@ SELECT InsurancePolicyNum, WorkIncapacityListNum, BloodType, Rhesus, BirthDate, 
             tableMapping.ColumnMappings.Add("DateStart", "DateStart");
             tableMapping.ColumnMappings.Add("DateFinish", "DateFinish");
             tableMapping.ColumnMappings.Add("DoctorID", "DoctorID");
-            tableMapping.ColumnMappings.Add("WorkTime_Start", "WorkTime_Start");
-            tableMapping.ColumnMappings.Add("WorkTime_Finish", "WorkTime_Finish");
             tableMapping.ColumnMappings.Add("Patient_BirthDate", "Patient_BirthDate");
             tableMapping.ColumnMappings.Add("Patient_NameHashID", "Patient_NameHashID");
+            tableMapping.ColumnMappings.Add("WorkTimes_Start", "WorkTimes_Start");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[VisitInfoSet] WHERE (([PatientBirthDate] = @Original_PatientBirthDate) AND ([DateStart] = @Original_DateStart) AND ([DateFinish] = @Original_DateFinish) AND ([DoctorID] = @Original_DoctorID) AND ([WorkTime_Start] = @Original_WorkTime_Start) AND ([WorkTime_Finish] = @Original_WorkTime_Finish) AND ([Patient_BirthDate] = @Original_Patient_BirthDate) AND ([Patient_NameHashID] = @Original_Patient_NameHashID))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [VisitInfoSet] WHERE (([PatientBirthDate] = @Original_PatientBirthDate) AND ([DateStart] = @Original_DateStart) AND ([DateFinish] = @Original_DateFinish) AND ([DoctorID] = @Original_DoctorID) AND ([Patient_BirthDate] = @Original_Patient_BirthDate) AND ([Patient_NameHashID] = @Original_Patient_NameHashID) AND ([WorkTimes_Start] = @Original_WorkTimes_Start))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PatientBirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PatientBirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DateStart", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateStart", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DateFinish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateFinish", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DoctorID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DoctorID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkTime_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Start", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkTime_Finish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Finish", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Patient_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Patient_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkTimes_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTimes_Start", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[VisitInfoSet] ([PatientFullName], [PatientBirthDate], [DateStart], [DateFinish], [DoctorID], [WorkTime_Start], [WorkTime_Finish], [Patient_BirthDate], [Patient_NameHashID]) VALUES (@PatientFullName, @PatientBirthDate, @DateStart, @DateFinish, @DoctorID, @WorkTime_Start, @WorkTime_Finish, @Patient_BirthDate, @Patient_NameHashID);
-SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkTime_Start, WorkTime_Finish, Patient_BirthDate, Patient_NameHashID FROM VisitInfoSet WHERE (DateFinish = @DateFinish) AND (DateStart = @DateStart) AND (DoctorID = @DoctorID)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [VisitInfoSet] ([PatientFullName], [PatientBirthDate], [DateStart], [DateFinish], [DoctorID], [Patient_BirthDate], [Patient_NameHashID], [WorkTimes_Start]) VALUES (@PatientFullName, @PatientBirthDate, @DateStart, @DateFinish, @DoctorID, @Patient_BirthDate, @Patient_NameHashID, @WorkTimes_Start);
+SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, Patient_BirthDate, Patient_NameHashID, WorkTimes_Start FROM VisitInfoSet WHERE (DateFinish = @DateFinish) AND (DateStart = @DateStart) AND (DoctorID = @DoctorID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PatientFullName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PatientFullName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PatientBirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PatientBirthDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DateStart", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateStart", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DateFinish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateFinish", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DoctorID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DoctorID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkTime_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Start", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkTime_Finish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Finish", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Patient_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_BirthDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Patient_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkTimes_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTimes_Start", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[VisitInfoSet] SET [PatientFullName] = @PatientFullName, [PatientBirthDate] = @PatientBirthDate, [DateStart] = @DateStart, [DateFinish] = @DateFinish, [DoctorID] = @DoctorID, [WorkTime_Start] = @WorkTime_Start, [WorkTime_Finish] = @WorkTime_Finish, [Patient_BirthDate] = @Patient_BirthDate, [Patient_NameHashID] = @Patient_NameHashID WHERE (([PatientBirthDate] = @Original_PatientBirthDate) AND ([DateStart] = @Original_DateStart) AND ([DateFinish] = @Original_DateFinish) AND ([DoctorID] = @Original_DoctorID) AND ([WorkTime_Start] = @Original_WorkTime_Start) AND ([WorkTime_Finish] = @Original_WorkTime_Finish) AND ([Patient_BirthDate] = @Original_Patient_BirthDate) AND ([Patient_NameHashID] = @Original_Patient_NameHashID));
-SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkTime_Start, WorkTime_Finish, Patient_BirthDate, Patient_NameHashID FROM VisitInfoSet WHERE (DateFinish = @DateFinish) AND (DateStart = @DateStart) AND (DoctorID = @DoctorID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [VisitInfoSet] SET [PatientFullName] = @PatientFullName, [PatientBirthDate] = @PatientBirthDate, [DateStart] = @DateStart, [DateFinish] = @DateFinish, [DoctorID] = @DoctorID, [Patient_BirthDate] = @Patient_BirthDate, [Patient_NameHashID] = @Patient_NameHashID, [WorkTimes_Start] = @WorkTimes_Start WHERE (([PatientBirthDate] = @Original_PatientBirthDate) AND ([DateStart] = @Original_DateStart) AND ([DateFinish] = @Original_DateFinish) AND ([DoctorID] = @Original_DoctorID) AND ([Patient_BirthDate] = @Original_Patient_BirthDate) AND ([Patient_NameHashID] = @Original_Patient_NameHashID) AND ([WorkTimes_Start] = @Original_WorkTimes_Start));
+SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, Patient_BirthDate, Patient_NameHashID, WorkTimes_Start FROM VisitInfoSet WHERE (DateFinish = @DateFinish) AND (DateStart = @DateStart) AND (DoctorID = @DoctorID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PatientFullName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PatientFullName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PatientBirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PatientBirthDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DateStart", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateStart", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DateFinish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateFinish", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DoctorID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DoctorID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkTime_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Start", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkTime_Finish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Finish", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Patient_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_BirthDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Patient_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_NameHashID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkTimes_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTimes_Start", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PatientBirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PatientBirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DateStart", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateStart", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DateFinish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DateFinish", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DoctorID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DoctorID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkTime_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Start", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkTime_Finish", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTime_Finish", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Patient_BirthDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_BirthDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Patient_NameHashID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Patient_NameHashID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkTimes_Start", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WorkTimes_Start", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8418,9 +8392,8 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkTi" +
-                "me_Start, WorkTime_Finish, Patient_BirthDate, Patient_NameHashID FROM dbo.VisitI" +
-                "nfoSet";
+            this._commandCollection[0].CommandText = "SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, Patien" +
+                "t_BirthDate, Patient_NameHashID, WorkTimes_Start FROM VisitInfoSet";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8481,15 +8454,14 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(System.DateTime Original_PatientBirthDate, System.DateTime Original_DateStart, System.DateTime Original_DateFinish, long Original_DoctorID, System.DateTime Original_WorkTime_Start, System.DateTime Original_WorkTime_Finish, System.DateTime Original_Patient_BirthDate, long Original_Patient_NameHashID) {
+        public virtual int Delete(System.DateTime Original_PatientBirthDate, System.DateTime Original_DateStart, System.DateTime Original_DateFinish, long Original_DoctorID, System.DateTime Original_Patient_BirthDate, long Original_Patient_NameHashID, System.DateTime Original_WorkTimes_Start) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((System.DateTime)(Original_PatientBirthDate));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_DateStart));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_DateFinish));
             this.Adapter.DeleteCommand.Parameters[3].Value = ((long)(Original_DoctorID));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_WorkTime_Start));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_WorkTime_Finish));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_Patient_BirthDate));
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((long)(Original_Patient_NameHashID));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_Patient_BirthDate));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((long)(Original_Patient_NameHashID));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_WorkTimes_Start));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8510,7 +8482,7 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime DateStart, System.DateTime DateFinish, long DoctorID, System.DateTime WorkTime_Start, System.DateTime WorkTime_Finish, System.DateTime Patient_BirthDate, long Patient_NameHashID) {
+        public virtual int Insert(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime DateStart, System.DateTime DateFinish, long DoctorID, System.DateTime Patient_BirthDate, long Patient_NameHashID, System.DateTime WorkTimes_Start) {
             if ((PatientFullName == null)) {
                 throw new global::System.ArgumentNullException("PatientFullName");
             }
@@ -8521,10 +8493,9 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
             this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(DateStart));
             this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(DateFinish));
             this.Adapter.InsertCommand.Parameters[4].Value = ((long)(DoctorID));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(WorkTime_Start));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(WorkTime_Finish));
-            this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(Patient_BirthDate));
-            this.Adapter.InsertCommand.Parameters[8].Value = ((long)(Patient_NameHashID));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(Patient_BirthDate));
+            this.Adapter.InsertCommand.Parameters[6].Value = ((long)(Patient_NameHashID));
+            this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(WorkTimes_Start));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8545,24 +8516,7 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string PatientFullName, 
-                    System.DateTime PatientBirthDate, 
-                    System.DateTime DateStart, 
-                    System.DateTime DateFinish, 
-                    long DoctorID, 
-                    System.DateTime WorkTime_Start, 
-                    System.DateTime WorkTime_Finish, 
-                    System.DateTime Patient_BirthDate, 
-                    long Patient_NameHashID, 
-                    System.DateTime Original_PatientBirthDate, 
-                    System.DateTime Original_DateStart, 
-                    System.DateTime Original_DateFinish, 
-                    long Original_DoctorID, 
-                    System.DateTime Original_WorkTime_Start, 
-                    System.DateTime Original_WorkTime_Finish, 
-                    System.DateTime Original_Patient_BirthDate, 
-                    long Original_Patient_NameHashID) {
+        public virtual int Update(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime DateStart, System.DateTime DateFinish, long DoctorID, System.DateTime Patient_BirthDate, long Patient_NameHashID, System.DateTime WorkTimes_Start, System.DateTime Original_PatientBirthDate, System.DateTime Original_DateStart, System.DateTime Original_DateFinish, long Original_DoctorID, System.DateTime Original_Patient_BirthDate, long Original_Patient_NameHashID, System.DateTime Original_WorkTimes_Start) {
             if ((PatientFullName == null)) {
                 throw new global::System.ArgumentNullException("PatientFullName");
             }
@@ -8573,18 +8527,16 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
             this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(DateStart));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(DateFinish));
             this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(DoctorID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(WorkTime_Start));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(WorkTime_Finish));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Patient_BirthDate));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Patient_NameHashID));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(Original_PatientBirthDate));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_DateStart));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_DateFinish));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((long)(Original_DoctorID));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((System.DateTime)(Original_WorkTime_Start));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_WorkTime_Finish));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_Patient_BirthDate));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((long)(Original_Patient_NameHashID));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Patient_BirthDate));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(Patient_NameHashID));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(WorkTimes_Start));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_PatientBirthDate));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(Original_DateStart));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_DateFinish));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((long)(Original_DoctorID));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_Patient_BirthDate));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((long)(Original_Patient_NameHashID));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_WorkTimes_Start));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8605,8 +8557,8 @@ SELECT PatientFullName, PatientBirthDate, DateStart, DateFinish, DoctorID, WorkT
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime WorkTime_Start, System.DateTime WorkTime_Finish, System.DateTime Patient_BirthDate, long Patient_NameHashID, System.DateTime Original_PatientBirthDate, System.DateTime Original_DateStart, System.DateTime Original_DateFinish, long Original_DoctorID, System.DateTime Original_WorkTime_Start, System.DateTime Original_WorkTime_Finish, System.DateTime Original_Patient_BirthDate, long Original_Patient_NameHashID) {
-            return this.Update(PatientFullName, PatientBirthDate, Original_DateStart, Original_DateFinish, Original_DoctorID, WorkTime_Start, WorkTime_Finish, Patient_BirthDate, Patient_NameHashID, Original_PatientBirthDate, Original_DateStart, Original_DateFinish, Original_DoctorID, Original_WorkTime_Start, Original_WorkTime_Finish, Original_Patient_BirthDate, Original_Patient_NameHashID);
+        public virtual int Update(string PatientFullName, System.DateTime PatientBirthDate, System.DateTime Patient_BirthDate, long Patient_NameHashID, System.DateTime WorkTimes_Start, System.DateTime Original_PatientBirthDate, System.DateTime Original_DateStart, System.DateTime Original_DateFinish, long Original_DoctorID, System.DateTime Original_Patient_BirthDate, long Original_Patient_NameHashID, System.DateTime Original_WorkTimes_Start) {
+            return this.Update(PatientFullName, PatientBirthDate, Original_DateStart, Original_DateFinish, Original_DoctorID, Patient_BirthDate, Patient_NameHashID, WorkTimes_Start, Original_PatientBirthDate, Original_DateStart, Original_DateFinish, Original_DoctorID, Original_Patient_BirthDate, Original_Patient_NameHashID, Original_WorkTimes_Start);
         }
     }
     
@@ -8923,8 +8875,8 @@ SELECT Start, Finish, Doctor_BirthDate, Doctor_NameHashID FROM WorkTimeSet WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(System.DateTime Doctor_BirthDate, long Doctor_NameHashID, System.DateTime Original_Start, System.DateTime Original_Finish, System.DateTime Original_Doctor_BirthDate, long Original_Doctor_NameHashID) {
-            return this.Update(Original_Start, Original_Finish, Doctor_BirthDate, Doctor_NameHashID, Original_Start, Original_Finish, Original_Doctor_BirthDate, Original_Doctor_NameHashID);
+        public virtual int Update(System.DateTime Finish, System.DateTime Original_Start, System.DateTime Original_Finish, System.DateTime Original_Doctor_BirthDate, long Original_Doctor_NameHashID) {
+            return this.Update(Original_Start, Finish, Original_Doctor_BirthDate, Original_Doctor_NameHashID, Original_Start, Original_Finish, Original_Doctor_BirthDate, Original_Doctor_NameHashID);
         }
     }
     

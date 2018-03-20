@@ -63,9 +63,9 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.просмотретьЗапланированныеПриёмыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxEducation = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.просмотретьЗапланированныеПриёмыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -378,6 +378,13 @@
             this.menuStrip1.TabIndex = 106;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // просмотретьЗапланированныеПриёмыToolStripMenuItem
+            // 
+            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Name = "просмотретьЗапланированныеПриёмыToolStripMenuItem";
+            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Size = new System.Drawing.Size(244, 20);
+            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Text = "Просмотреть запланированные приёмы";
+            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Click += new System.EventHandler(this.просмотретьЗапланированныеПриёмыToolStripMenuItem_Click);
+            // 
             // textBoxEducation
             // 
             this.textBoxEducation.Location = new System.Drawing.Point(154, 308);
@@ -395,13 +402,6 @@
             this.label20.Size = new System.Drawing.Size(75, 13);
             this.label20.TabIndex = 114;
             this.label20.Text = "Образование";
-            // 
-            // просмотретьЗапланированныеПриёмыToolStripMenuItem
-            // 
-            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Name = "просмотретьЗапланированныеПриёмыToolStripMenuItem";
-            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Size = new System.Drawing.Size(244, 20);
-            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Text = "Просмотреть запланированные приёмы";
-            this.просмотретьЗапланированныеПриёмыToolStripMenuItem.Click += new System.EventHandler(this.просмотретьЗапланированныеПриёмыToolStripMenuItem_Click);
             // 
             // DoctorMenu
             // 
@@ -438,6 +438,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DoctorMenu";
             this.Text = "Врач: ";
             this.Load += new System.EventHandler(this.DoctorMenu_Load);

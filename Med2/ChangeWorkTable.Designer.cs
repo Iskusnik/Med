@@ -30,7 +30,7 @@
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonDel = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownPeriod = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -43,11 +43,12 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownDays = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.numericUpDownHours = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriod)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -68,12 +69,22 @@
             this.buttonDel.UseVisualStyleBackColor = true;
             this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
-            // numericUpDown1
+            // numericUpDownPeriod
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(150, 39);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(171, 20);
-            this.numericUpDown1.TabIndex = 2;
+            this.numericUpDownPeriod.Location = new System.Drawing.Point(150, 39);
+            this.numericUpDownPeriod.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownPeriod.Name = "numericUpDownPeriod";
+            this.numericUpDownPeriod.Size = new System.Drawing.Size(171, 20);
+            this.numericUpDownPeriod.TabIndex = 2;
+            this.numericUpDownPeriod.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -165,7 +176,6 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePicker1.Location = new System.Drawing.Point(545, 13);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(120, 20);
@@ -183,26 +193,28 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(419, 39);
+            this.label4.Location = new System.Drawing.Point(419, 41);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.Size = new System.Drawing.Size(114, 13);
             this.label4.TabIndex = 18;
-            this.label4.Text = "Конец работы";
+            this.label4.Text = "Число рабочих часов";
             // 
-            // dateTimePicker2
+            // numericUpDownDays
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(545, 39);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(120, 20);
-            this.dateTimePicker2.TabIndex = 19;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(545, 65);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown2.TabIndex = 20;
+            this.numericUpDownDays.Location = new System.Drawing.Point(545, 65);
+            this.numericUpDownDays.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownDays.Name = "numericUpDownDays";
+            this.numericUpDownDays.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownDays.TabIndex = 20;
+            this.numericUpDownDays.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
@@ -213,14 +225,36 @@
             this.label5.TabIndex = 21;
             this.label5.Text = "Число дней для плана";
             // 
+            // numericUpDownHours
+            // 
+            this.numericUpDownHours.Location = new System.Drawing.Point(545, 41);
+            this.numericUpDownHours.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.numericUpDownHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownHours.Name = "numericUpDownHours";
+            this.numericUpDownHours.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownHours.TabIndex = 22;
+            this.numericUpDownHours.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // ChangeWorkTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 134);
+            this.Controls.Add(this.numericUpDownHours);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.numericUpDownDays);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateTimePicker1);
@@ -233,14 +267,16 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDownPeriod);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.comboBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ChangeWorkTable";
             this.Text = "Выбрать врача";
             this.Load += new System.EventHandler(this.DeleteDoctor_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriod)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,7 +286,7 @@
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button buttonDel;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownPeriod;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -263,8 +299,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDownDays;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDownHours;
     }
 }
