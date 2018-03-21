@@ -19,6 +19,7 @@ namespace Med2
         {
             patient = pat;
             doctor = doct;
+            doctorRecord = rec;
             InitializeComponent();
         }
 
@@ -44,7 +45,7 @@ namespace Med2
                     });
                 else
                 {
-                    doctorRecord = db.DoctorRecordSet.Find(doctorRecord.DoctorID, doctorRecord.Date);
+                    doctorRecord = db.DoctorRecordSet.Find(doctorRecord.Date, doctorRecord.DoctorID);
                     doctorRecord.Anamnesis = richTextBoxAnamnes.Text;
                     doctorRecord.Diagnosis = richTextBoxDiagnos.Text;
                     doctorRecord.Date = dateTimePicker1.Value;
@@ -56,7 +57,7 @@ namespace Med2
                     doctorRecord.DoctorID = doctor.NameHashID;
                     doctorRecord.Standarts = richTextBoxStand.Text;
                 }
-                db.SaveChangesAsync();
+                db.SaveChanges();
             }
             this.Close();
         }

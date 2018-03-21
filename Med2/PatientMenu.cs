@@ -79,13 +79,13 @@ namespace Med2
 
         private void просмотретьИсториюЗаписейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form showVisits = new ShowVisitRecords(thisPatient);
+            Form showVisits = new ShowVisits(thisPatient);
             showVisits.Show();
         }
 
         private void записиВрачейToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form showVisits = new ShowVisits(thisPatient);
+            Form showVisits = new ShowVisitRecords(thisPatient);
             showVisits.Show();
         }
 

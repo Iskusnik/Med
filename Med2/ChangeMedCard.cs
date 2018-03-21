@@ -32,6 +32,11 @@ namespace Med2
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
+                comboBox1.Items.Clear();
+                dataGridViewDocRecs.Columns.Clear();
+                dataGWIllness.Columns.Clear();
+                dataGWVisitInfo.Columns.Clear();
+
                 var illnesses = (from ill in db.IllnessSet select ill.Name).Distinct().ToList();
                 foreach (string ill in illnesses)
                     comboBox1.Items.Add(ill);
@@ -56,7 +61,7 @@ namespace Med2
                 var visitInfo = (from visits in thisPatient.VisitInfo
                                  where (visits.DateStart < DateTime.Today)
                                  select visits.DateStart).ToList();
-
+                dataGWVisitInfo.Columns.Clear();
                 dataGWVisitInfo.Columns.Add("Время приёма", "Время приёма");
                 foreach (DateTime s in visitInfo)
                     dataGWVisitInfo.Rows.Add(s.ToString());
@@ -65,7 +70,7 @@ namespace Med2
 
 
                 var doctorRecords = (from recs in thisPatient.MedCard.DoctorRecord select recs).ToList();
-
+                dataGridViewDocRecs.Columns.Clear();
                 dataGridViewDocRecs.Columns.Add("Время оказания помощи", "Время оказания помощи");
                 dataGridViewDocRecs.Columns.Add("Доктор", "Доктор");
                 dataGridViewDocRecs.Columns.Add("Диагноз", "Диагноз");
@@ -111,19 +116,19 @@ namespace Med2
         private void button1_Click(object sender, EventArgs e)
         {
             Form newDocRec = new AddInfoAboutVisit(thisPatient, thisDoctor);
-            newDocRec.Show();
+            newDocRec.ShowDialog();
             ReloadForm();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (dataGWIllness.SelectedCells[0].ToString() != "")
+            if (dataGridViewDocRecs.SelectedCells[0] != null && dataGridViewDocRecs.SelectedCells[0].ToString() != "")
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
-                    DoctorRecord dr = db.DoctorRecordSet.Find(dataGridViewDocRecs.SelectedRows[0].Cells[0].Value, thisDoctor.GetHashCode());
+                    DoctorRecord dr = db.DoctorRecordSet.Find(dataGridViewDocRecs.SelectedRows[0].Cells[0].Value, thisDoctor.NameHashID);
                     Form newDocRec = new AddInfoAboutVisit(thisPatient, thisDoctor, dr);
-                    newDocRec.Show();
+                    newDocRec.ShowDialog();
                 }
             ReloadForm();
         }
@@ -155,7 +160,7 @@ namespace Med2
             if (dataGWIllness.SelectedCells[0].Value != null && dataGWIllness.SelectedCells[0].Value.ToString() != "")
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
-                    DoctorRecord dr = db.DoctorRecordSet.Find(dataGridViewDocRecs.SelectedRows[0].Cells[0].Value, thisDoctor.GetHashCode());
+                    DoctorRecord dr = db.DoctorRecordSet.Find(dataGridViewDocRecs.SelectedRows[0].Cells[0].Value, thisDoctor.NameHashID);
 
 
                     Form showInfo = new ShowInfoAboutVisit(dr);

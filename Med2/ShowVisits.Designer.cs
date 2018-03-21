@@ -28,15 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.newMedDBDataSet = new Med2.NewMedDBDataSet();
-            this.visitInfoSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.visitInfoSetTableAdapter = new Med2.NewMedDBDataSetTableAdapters.VisitInfoSetTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.newMedDBDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.visitInfoSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,15 +40,6 @@
             // 
             this.newMedDBDataSet.DataSetName = "NewMedDBDataSet";
             this.newMedDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // visitInfoSetBindingSource
-            // 
-            this.visitInfoSetBindingSource.DataMember = "VisitInfoSet";
-            this.visitInfoSetBindingSource.DataSource = this.newMedDBDataSet;
-            // 
-            // visitInfoSetTableAdapter
-            // 
-            this.visitInfoSetTableAdapter.ClearBeforeFill = true;
             // 
             // dataGridView1
             // 
@@ -63,7 +50,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(13, 13);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullColumnSelect;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(275, 212);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -101,10 +88,9 @@
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ShowVisits";
-            this.Text = "ShowVisitRecords";
+            this.Text = "Записи на приём";
             this.Load += new System.EventHandler(this.ShowVisits_Load);
             ((System.ComponentModel.ISupportInitialize)(this.newMedDBDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.visitInfoSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -112,8 +98,6 @@
 
         #endregion
         private NewMedDBDataSet newMedDBDataSet;
-        private System.Windows.Forms.BindingSource visitInfoSetBindingSource;
-        private NewMedDBDataSetTableAdapters.VisitInfoSetTableAdapter visitInfoSetTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
