@@ -311,6 +311,7 @@
             this.редактироватьДанныеToolStripMenuItem.Name = "редактироватьДанныеToolStripMenuItem";
             this.редактироватьДанныеToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.редактироватьДанныеToolStripMenuItem.Text = "Мед карта";
+            this.редактироватьДанныеToolStripMenuItem.Click += new System.EventHandler(this.редактироватьДанныеToolStripMenuItem_Click);
             // 
             // изменитьДанныеToolStripMenuItem
             // 

@@ -26,6 +26,10 @@ namespace Med2
 
         private void ChangeMedCard_Load(object sender, EventArgs e)
         {
+            ReloadForm();
+        }
+        private void ReloadForm()
+        {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 var illnesses = (from ill in db.IllnessSet select ill.Name).Distinct().ToList();
@@ -34,7 +38,7 @@ namespace Med2
 
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
 
-                illnesses = null; 
+                illnesses = null;
                 illnesses = (from ill in thisPatient.Illness select ill.Name).ToList();
                 if (illnesses != null)
                 {
@@ -52,7 +56,7 @@ namespace Med2
                 var visitInfo = (from visits in thisPatient.VisitInfo
                                  where (visits.DateStart < DateTime.Today)
                                  select visits.DateStart).ToList();
-                
+
                 dataGWVisitInfo.Columns.Add("Время приёма", "Время приёма");
                 foreach (DateTime s in visitInfo)
                     dataGWVisitInfo.Rows.Add(s.ToString());
@@ -74,16 +78,15 @@ namespace Med2
                 dataGridViewDocRecs.Refresh();
             }
         }
-
         private void buttonAddIllness_Click(object sender, EventArgs e)
         {
             if (comboBox1.Text != "")
             {
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
-                    Illness temp = new Illness { Name = comboBox1.Text, Hash = Name.GetHashCode() };
+                    Illness temp = new Illness { Name = comboBox1.Text, Hash = comboBox1.Text.GetHashCode() };
                     thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                    if (!thisPatient.Illness.Contains(temp))
+                    if (!db.IllnessSet.Find(temp.Hash).Patient.Contains(thisPatient))
                     {
                         if (db.IllnessSet.Find(comboBox1.Text.GetHashCode()) != null)
                             thisPatient.Illness.Add(db.IllnessSet.Find(comboBox1.Text.GetHashCode()));
@@ -94,7 +97,8 @@ namespace Med2
                         }
                         db.SaveChanges();
                         dataGWIllness.Rows.Add(comboBox1.Text);
-                        comboBox1.Items.Add(comboBox1.Text);
+                        if(!comboBox1.Items.Contains(comboBox1.Text))
+                            comboBox1.Items.Add(comboBox1.Text);
                     }
                     else
                         MessageBox.Show("Данная болезнь уже есть у данного человека");
@@ -108,6 +112,8 @@ namespace Med2
         {
             Form newDocRec = new AddInfoAboutVisit(thisPatient, thisDoctor);
             newDocRec.Show();
+            ReloadForm();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -119,6 +125,7 @@ namespace Med2
                     Form newDocRec = new AddInfoAboutVisit(thisPatient, thisDoctor, dr);
                     newDocRec.Show();
                 }
+            ReloadForm();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -127,7 +134,7 @@ namespace Med2
                 {
                 Illness temp;
                 
-                    if (dataGWIllness.SelectedCells[0].Value.ToString() != "")
+                    if (dataGWIllness.SelectedCells[0].Value != null && dataGWIllness.SelectedCells[0].Value.ToString() != "")
                     {
                         string s = dataGWIllness.SelectedCells[0].Value.ToString();
                         temp = db.IllnessSet.Find(s.GetHashCode());
@@ -140,11 +147,12 @@ namespace Med2
                         dataGWIllness.Rows.Remove(dataGWIllness.Rows[dataGWIllness.SelectedCells[0].RowIndex]);
                     }
                 }
+            ReloadForm();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (dataGWIllness.SelectedCells[0].Value.ToString() != "")
+            if (dataGWIllness.SelectedCells[0].Value != null && dataGWIllness.SelectedCells[0].Value.ToString() != "")
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     DoctorRecord dr = db.DoctorRecordSet.Find(dataGridViewDocRecs.SelectedRows[0].Cells[0].Value, thisDoctor.GetHashCode());

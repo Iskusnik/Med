@@ -140,8 +140,9 @@
             this.Controls.Add(this.comboBoxTime);
             this.Controls.Add(this.comboBoxDate);
             this.Controls.Add(this.comboBoxDoctor);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PatientToDoctor";
-            this.Text = "PatientToDoctor";
+            this.Text = "Запись к врачу";
             this.Load += new System.EventHandler(this.PatientToDoctor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

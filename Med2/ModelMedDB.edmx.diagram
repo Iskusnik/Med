@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="ModelMedDB.Patient" Width="1.5" PointX="18.875" PointY="7.625" />
         <EntityTypeShape EntityType="ModelMedDB.Documents" Width="1.5" PointX="14.625" PointY="1.875" />
         <EntityTypeShape EntityType="ModelMedDB.Person" Width="1.5" PointX="14.5" PointY="4.875" />
-        <EntityTypeShape EntityType="ModelMedDB.Doctor" Width="1.5" PointX="16.375" PointY="5.125" />
+        <EntityTypeShape EntityType="ModelMedDB.Doctor" Width="1.5" PointX="16.625" PointY="4.625" />
         <EntityTypeShape EntityType="ModelMedDB.DoctorRecord" Width="1.5" PointX="23.125" PointY="0.5" />
         <EntityTypeShape EntityType="ModelMedDB.VisitInfo" Width="1.5" PointX="22.25" PointY="5.375" />
         <EntityTypeShape EntityType="ModelMedDB.FreeTime" Width="1.5" PointX="18.875" PointY="2.625" />

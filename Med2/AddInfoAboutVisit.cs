@@ -63,6 +63,7 @@ namespace Med2
 
         private void AddInfoAboutVisit_Load(object sender, EventArgs e)
         {
+            textBoxDoctor.Text = doctor.FullName;
             if (doctorRecord != null)
             {
                 richTextBoxAnamnes.Text = doctorRecord.Anamnesis;

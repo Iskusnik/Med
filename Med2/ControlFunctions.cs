@@ -298,16 +298,16 @@ namespace Med2
                 Microsoft.Office.Interop.Excel.Application xla = new Microsoft.Office.Interop.Excel.Application();
                 Excel.SeriesCollection seriesCollection = chartPage.SeriesCollection();
 
-                char a = char.ConvertFromUtf32((char.ConvertToUtf32('A',0) + days.GetLength(1)));
+                //char a = char.ConvertFromUtf32((char.ConvertToUtf32('A',0) + days.GetLength(1)));
 
-                Excel.Range rngX = workSheet.Range["A" + (1+ specials.Length).ToString(), ToString()]
-                    workSheet.Cells[specials.Length+1, 1], workSheet.Cells[specials.Length+1, days.GetLength(1)]];
+                //Excel.Range rngX = workSheet.Range["A" + (1+ specials.Length).ToString(), ToString()]
+                //    workSheet.Cells[specials.Length+1, 1], workSheet.Cells[specials.Length+1, days.GetLength(1)]];
 
                 for (int i = 1; i <= specials.Length; i++)
                 {
                     Excel.Series series = seriesCollection.NewSeries();
                     Excel.Range rng = workSheet.Range[workSheet.Cells[i, 2], workSheet.Cells[i, days.GetLength(1)]];
-                    series.XValues = workSheet.get_Range(rngX);
+                  //  series.XValues = workSheet.get_Range(rngX);
                     series.Values = workSheet.get_Range(rng);
                     series.Name = workSheet.Cells[i, 0];
                 }

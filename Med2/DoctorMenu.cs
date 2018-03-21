@@ -43,7 +43,8 @@ namespace Med2
                 this.textDocumentN.Text = thisDoctor.Documents.DocumentNum.ToString();
             }
 
-            ClinicManageToolStripMenuItem.Enabled = thisDoctor.Job == "Главврач";
+            //ClinicManageToolStripMenuItem.Enabled = thisDoctor.Job == "Главврач";
+            ClinicManageToolStripMenuItem.Enabled = true;
         }
         private void DoctorMenu_Load(object sender, EventArgs e)
         {

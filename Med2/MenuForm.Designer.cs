@@ -38,7 +38,7 @@
             // 
             this.authorizeButton.Location = new System.Drawing.Point(12, 63);
             this.authorizeButton.Name = "authorizeButton";
-            this.authorizeButton.Size = new System.Drawing.Size(207, 23);
+            this.authorizeButton.Size = new System.Drawing.Size(242, 23);
             this.authorizeButton.TabIndex = 0;
             this.authorizeButton.Text = "Вход";
             this.authorizeButton.UseVisualStyleBackColor = true;
@@ -48,7 +48,7 @@
             // 
             this.loginTextBox.Location = new System.Drawing.Point(12, 11);
             this.loginTextBox.Name = "loginTextBox";
-            this.loginTextBox.Size = new System.Drawing.Size(207, 20);
+            this.loginTextBox.Size = new System.Drawing.Size(242, 20);
             this.loginTextBox.TabIndex = 1;
             this.loginTextBox.Text = "Администратор_1.1.2000";
             // 
@@ -56,13 +56,13 @@
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(12, 37);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(207, 20);
+            this.passwordTextBox.Size = new System.Drawing.Size(242, 20);
             this.passwordTextBox.TabIndex = 2;
             this.passwordTextBox.Text = "123qwe";
             // 
             // registrationButton
             // 
-            this.registrationButton.Location = new System.Drawing.Point(26, 119);
+            this.registrationButton.Location = new System.Drawing.Point(45, 92);
             this.registrationButton.Name = "registrationButton";
             this.registrationButton.Size = new System.Drawing.Size(176, 23);
             this.registrationButton.TabIndex = 3;
@@ -74,13 +74,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 154);
+            this.ClientSize = new System.Drawing.Size(266, 127);
             this.Controls.Add(this.registrationButton);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.loginTextBox);
             this.Controls.Add(this.authorizeButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MenuForm";
-            this.Text = "MenuForm";
+            this.Text = "Информационная система поликлиники";
             this.Load += new System.EventHandler(this.MenuForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
