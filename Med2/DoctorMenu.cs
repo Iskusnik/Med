@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace Med2
 {
     public partial class DoctorMenu : Form
@@ -36,7 +38,7 @@ namespace Med2
                 this.textBoxEducation.Text = thisDoctor.Education;
                 this.textBoxJob.Text = thisDoctor.Job;
                 this.textInsuranceMemberships.Text = thisDoctor.Memberships;
-
+                this.textBoxBirthPlace.Text = thisDoctor.BirthPlace;
                 this.textBoxDocType.Text = thisDoctor.Documents.DocumentName;
                 this.textDocumentN.Text = thisDoctor.Documents.DocumentNum.ToString();
             }
@@ -104,8 +106,11 @@ namespace Med2
         private void статистикаОбращенийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
-
-
+            string fileName;
+            save.Filter = "Таблиа Excel|*.xlsx";
+            save.ShowDialog();
+            fileName = save.FileName;
+            ControlFunctions.AnalyseVisits(fileName);
         }
     }
 }

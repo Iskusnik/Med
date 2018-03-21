@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.newMedDBDataSet = new Med2.NewMedDBDataSet();
+            
             this.visitInfoSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.visitInfoSetTableAdapter = new Med2.NewMedDBDataSetTableAdapters.VisitInfoSetTableAdapter();
+            
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -43,7 +43,6 @@
             // newMedDBDataSet
             // 
             this.newMedDBDataSet.DataSetName = "NewMedDBDataSet";
-            this.newMedDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // visitInfoSetBindingSource
             // 
@@ -52,7 +51,6 @@
             // 
             // visitInfoSetTableAdapter
             // 
-            this.visitInfoSetTableAdapter.ClearBeforeFill = true;
             // 
             // dataGridView1
             // 

@@ -56,5 +56,15 @@ namespace Med2
                 MessageBox.Show("Регистрация не завершена. Исправьте указанные ошибки");
             }
         }
+
+        private void textBoxBirthPlace_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

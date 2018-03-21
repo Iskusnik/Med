@@ -8,6 +8,11 @@ using System.Data;
 using System.Configuration;
 using System.Windows.Forms;
 
+
+
+using Excel = Microsoft.Office.Interop.Excel;
+using Word = Microsoft.Office.Interop.Word;
+
 namespace Med2
 {
     public class ControlFunctions
@@ -54,7 +59,8 @@ namespace Med2
                           || regForm.textName.Text == "" || regForm.textBoxPassword2.Text == ""
                           || regForm.textNation.Text == "" || regForm.textLiveAdress.Text == ""
                           || regForm.textRegAdress.Text == "" || regForm.comboBoxDocType.Text == ""
-                          || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == "")
+                          || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == ""
+                          || regForm.textBoxBirthPlace.Text == "")
                         throw (new ArgumentNullException());
 
                     newPatient.FullName = regForm.textSurname.Text + " " + regForm.textName.Text + " " + regForm.textName2.Text;
@@ -67,6 +73,7 @@ namespace Med2
                     newPatient.InsuranceBillNum = regForm.textBoxInsuranceBillNum.Text;
                     newPatient.InsurancePolicyNum = regForm.textInsurancePolicyNum.Text;
                     newPatient.WorkIncapacityListNum = regForm.textBoxWorkIncapacity.Text;
+                    newPatient.BirthPlace = regForm.textBoxBirthPlace.Text;
                     newPatient.BloodType = 0;
                     newPatient.Rhesus = "Неизвестно";
                     newPatient.NameHashID = newPatient.FullName.GetHashCode();
@@ -143,7 +150,8 @@ namespace Med2
                           || regForm.textNation.Text == "" || regForm.textLiveAdress.Text == ""
                           || regForm.textRegAdress.Text == "" || regForm.comboBoxDocType.Text == ""
                           || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == ""
-                          || regForm.comboBoxJob.Text == "" || regForm.textBoxEducation.Text == "")
+                          || regForm.comboBoxJob.Text == "" || regForm.textBoxEducation.Text == ""
+                          || regForm.textBoxBirthPlace.Text == "")
                         throw (new ArgumentNullException());
 
                     newDoctor.FullName = regForm.textSurname.Text + " " + regForm.textName.Text + " " + regForm.textName2.Text;
@@ -157,7 +165,7 @@ namespace Med2
                     newDoctor.Education = regForm.textBoxEducation.Text;
                     newDoctor.Job = regForm.comboBoxJob.Text;
                     newDoctor.Memberships = regForm.textBoxMemberships.Text;
-
+                    newDoctor.BirthPlace = regForm.textBoxBirthPlace.Text;
                     newDoctor.NameHashID = newDoctor.FullName.GetHashCode();
                     try
                     {
@@ -222,32 +230,174 @@ namespace Med2
             }
         }
 
+        public static void AnalyseVisits(string fileName)
+        {
+            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            {
+                // Создаём экземпляр нашего приложения
+                Excel.Application excelApp = new Excel.Application();
+                // Создаём экземпляр рабочий книги Excel
+                Excel.Workbook workBook;
+                // Создаём экземпляр листа Excel
+                Excel.Worksheet workSheet;
+
+                workBook = excelApp.Workbooks.Add();
+                workSheet = (Excel.Worksheet)workBook.Worksheets.get_Item(1);
+
+                var specials = (from docs in db.PersonSet where (docs is Doctor) select (docs as Doctor).Job).Distinct().ToArray();
+                //var workTime = (from works in db.WorkTimeSet group works by works.Start.Date);
+                var workT = (from works in db.WorkTimeSet select works.Start).ToList();
+                //List<DateTime> workDays = new List<DateTime>();
+                //foreach (DateTime t in workT)
+                //    workDays.Add(t.Date);
+
+                
+
+                DateTime start = (from works in db.WorkTimeSet select works.Start).Min();
+                DateTime finish = (from works in db.WorkTimeSet select works.Start).Max();
+                int[,] days = new int[specials.Length, (finish.Date - start.Date).Days];
+
+
+                //Подсчёт прёмов по профессиям и по дням
+                for (int i = 0; i < specials.Length; i++)
+                    foreach (DateTime d in workDays)
+                        foreach (WorkTime work in db.WorkTimeSet)
+                            if (work.Start.Date == d && specials[i] == work.Doctor.Job)
+                                days[i, (work.Start - start).Days]++;
+
+                //Заполнение строчек и столбцов посчитанными значениями
+                for (int i = 0; i < specials.Length; i++)
+                {
+                    workSheet.Cells[i, 0] = specials[i];
+
+                    for (int j = 1; j <= days.GetLength(1); j++)
+                        workSheet.Cells[i, j] = days[i, j];
+                }
+
+                workSheet.Cells[specials.Length, 0] = start;
+
+                for (int i = 1; i <= days.GetLength(1); i++)
+                    workSheet.Cells[specials.Length, i] = start.AddDays(1);
+                /*
+                //Вычисляем сумму этих чисел
+                Excel.Range rng = workSheet.Range["A2"];
+                rng.Formula = "=SUM(A1:L1)";
+                rng.FormulaHidden = false;
+
+                // Выделяем границы у этой ячейки
+                Excel.Borders border = rng.Borders;
+                border.LineStyle = Excel.XlLineStyle.xlContinuous;
+                */
+
+                Excel.ChartObjects xlCharts = (Excel.ChartObjects)workSheet.ChartObjects(Type.Missing);
+                Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
+               // Excel.ChartObject chartObj = myChart.Add(5, 50, 300, 300);
+                Excel.Chart chartPage = myChart.Chart;
+                chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
+                Microsoft.Office.Interop.Excel.Application xla = new Microsoft.Office.Interop.Excel.Application();
+                Excel.SeriesCollection seriesCollection = chartPage.SeriesCollection();
+
+                Excel.Range rngX = workSheet.Range[workSheet.Cells[specials.Length, 1], workSheet.Cells[specials.Length, days.GetLength(1)]];
+
+                for (int i = 0; i < specials.Length; i++)
+                {
+                    Excel.Series series = seriesCollection.NewSeries();
+                    Excel.Range rng = workSheet.Range[workSheet.Cells[i, 1], workSheet.Cells[i, days.GetLength(1)]];
+                    series.XValues = workSheet.get_Range(rngX);
+                    series.Values = workSheet.get_Range(rng);
+                    series.Name = workSheet.Cells[i, 0];
+                }
+
+                object misValue = System.Reflection.Missing.Value;
+                workBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+
+                workBook.Close(true, misValue, misValue);
+                excelApp.Quit();
+
+                /*
+                 xlChart.Activate();
+                xlChart.Select(Type.Missing);
+                
+                
+                //Даем названия осей
+                ((Excel.Axis)excelApp.ActiveChart.Axes(Excel.XlAxisType.xlCategory,
+                    Excel.XlAxisGroup.xlPrimary)).HasTitle = true;
+                ((Excel.Axis)excelApp.ActiveChart.Axes(Excel.XlAxisType.xlCategory,
+                    Excel.XlAxisGroup.xlPrimary)).AxisTitle.Text = "Дата";
+                ((Excel.Axis)excelApp.ActiveChart.Axes(Excel.XlAxisType.xlSeriesAxis,
+                    Excel.XlAxisGroup.xlPrimary)).HasTitle = false;
+                ((Excel.Axis)excelApp.ActiveChart.Axes(Excel.XlAxisType.xlValue,
+                    Excel.XlAxisGroup.xlPrimary)).HasTitle = true;
+                ((Excel.Axis)excelApp.ActiveChart.Axes(Excel.XlAxisType.xlValue,
+                    Excel.XlAxisGroup.xlPrimary)).AxisTitle.Text = "Приёмов";
+
+                excelApp.ActiveChart.HasTitle = true;
+                excelApp.ActiveChart.ChartTitle.Text = "Количество приёмов на каждую специальность по дням";
+
+                //Будем отображать легенду 
+                excelApp.ActiveChart.HasLegend = true;
+                //Расположение легенды
+                excelApp.ActiveChart.Legend.Position
+                   = Excel.XlLegendPosition.xlLegendPositionLeft;
+                   */
+
+
+                // Открываем созданный excel-файл
+                //excelApp.Visible = true;
+                //excelApp.UserControl = true;
+                
+            }
+        }
+
 
         //График работа на ближайшие 30 дней cчитая  со следующего дня
         //start - час и день начала работы
         //
         static public List<FreeTime> makeJob(int[] week, DateTime start, Doctor doct, int minutes = 5, int hours = 8, int days = 30)
         {
-            int N = TimeSpan.FromHours(hours).Duration().Minutes / minutes;    //получаем количество приёмов
+            int N = (int)TimeSpan.FromHours(hours).TotalMinutes / minutes;    //получаем количество приёмов
 
             List<FreeTime> workTable = new List<FreeTime>();
-
+            
             DateTime startingTime = start;
 
-            FreeTime item = new FreeTime();
-            item.Doctor = doct;
+
 
             for (int day = 1; day <= days; day++)
             {
-                item.Start = start + TimeSpan.FromDays(day);
+                startingTime = startingTime.AddDays(1);
+                int dayOfWeek = -1;
+                if (startingTime.DayOfWeek == DayOfWeek.Monday)
+                    dayOfWeek = 0;
+                if (startingTime.DayOfWeek == DayOfWeek.Tuesday)
+                    dayOfWeek = 1;
+                if (startingTime.DayOfWeek == DayOfWeek.Wednesday)
+                    dayOfWeek = 2;
+                if (startingTime.DayOfWeek == DayOfWeek.Thursday)
+                    dayOfWeek = 3;
+                if (startingTime.DayOfWeek == DayOfWeek.Friday)
+                    dayOfWeek = 4;
+                if (startingTime.DayOfWeek == DayOfWeek.Saturday)
+                    dayOfWeek = 5;
+                if (startingTime.DayOfWeek == DayOfWeek.Sunday)
+                    dayOfWeek = 6;
+
+                DateTime timeInDay = startingTime;
                 foreach (int d in week)
-                    if (d == (int)item.Start.DayOfWeek)
+                {
+                    if (d == dayOfWeek)
                         for (int i = 0; i < N; i++)
                         {
-                            item.Finish = start + TimeSpan.FromMinutes(minutes);
+                            FreeTime item = new FreeTime();
+                            item.Doctor = doct;
+                            item.BirthDate = doct.BirthDate;
+                            item.NameHashID = doct.NameHashID;
+                            item.Start = timeInDay;
+                            timeInDay = timeInDay.AddMinutes(minutes);
+                            item.Finish = timeInDay;
                             workTable.Add(item);
-                            item.Start = item.Finish;
                         }
+                }
             }
             return workTable;
         }
@@ -268,26 +418,49 @@ namespace Med2
                     week[count] = i;
                     count++;
                 }
-                int N = TimeSpan.FromHours(hours).Duration().Minutes / minutes;    //получаем количество приёмов
+            int N = (int)TimeSpan.FromHours(hours).TotalMinutes / minutes;    //получаем количество приёмов
 
             List<FreeTime> workTable = new List<FreeTime>();
 
             DateTime startingTime = start;
 
-            FreeTime item = new FreeTime();
-            item.Doctor = doct;
+
 
             for (int day = 1; day <= days; day++)
             {
-                item.Start = start + TimeSpan.FromDays(day);
+                startingTime = startingTime.AddDays(1);
+                int dayOfWeek = -1;
+                if (startingTime.DayOfWeek == DayOfWeek.Monday)
+                    dayOfWeek = 0;
+                if (startingTime.DayOfWeek == DayOfWeek.Tuesday)
+                    dayOfWeek = 1;
+                if (startingTime.DayOfWeek == DayOfWeek.Wednesday)
+                    dayOfWeek = 2;
+                if (startingTime.DayOfWeek == DayOfWeek.Thursday)
+                    dayOfWeek = 3;
+                if (startingTime.DayOfWeek == DayOfWeek.Friday)
+                    dayOfWeek = 4;
+                if (startingTime.DayOfWeek == DayOfWeek.Saturday)
+                    dayOfWeek = 5;
+                if (startingTime.DayOfWeek == DayOfWeek.Sunday)
+                    dayOfWeek = 6;
+
+                DateTime timeInDay = startingTime;
                 foreach (int d in week)
-                    if (d == (int)item.Start.DayOfWeek)
+                {
+                    if (d == dayOfWeek)
                         for (int i = 0; i < N; i++)
                         {
-                            item.Finish = start + TimeSpan.FromMinutes(minutes);
+                            FreeTime item = new FreeTime();
+                            item.Doctor = doct;
+                            item.Start = timeInDay;
+                            item.BirthDate = doct.BirthDate;
+                            item.NameHashID = doct.NameHashID;
+                            timeInDay = timeInDay.AddMinutes(minutes);
+                            item.Finish = timeInDay;
                             workTable.Add(item);
-                            item.Start = item.Finish;
                         }
+                }
             }
             return workTable;
         }
@@ -310,6 +483,7 @@ namespace Med2
             string[] Genders = { "Мужской", "Женский" };
             string[] Surnames = { "Иванов", "Александров", "Степанов", "Семёнов", "Удальцов", "Молодцов", "Бобров", "Медведев" };
 
+            string[] BirthPlaces = { "Уфа","Барнаул", "Екатеринбург", "Йошкар-Ола", "Таганрог", "Егоров", "Москва", "Евпатория", "Новороссийск", "Якутск"};
             string[] DocumentTypes = {
                                         "Паспорт гражданина РФ",
                                         "Свидетельство о рождении",
@@ -330,6 +504,7 @@ namespace Med2
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     Person temp = new Person();
+                    temp.BirthPlace = BirthPlaces[random.Next(0, 10)];
                     temp.BirthDate = new DateTime(random.Next(1950, 2018), random.Next(1, 13), random.Next(1, 28));
                     temp.RegDate = new DateTime(random.Next(1950, 2018), random.Next(1, 13), random.Next(1, 28));
                     temp.Documents = new Documents { DocumentName = DocumentTypes[random.Next(0, 8)], DocumentNum = random.Next(0, Int32.MaxValue), Person = temp };
@@ -372,6 +547,7 @@ namespace Med2
                         (t as Person).Password = temp.Password;
                         (t as Person).RegAdress = temp.RegAdress;
                         (t as Person).RegDate = temp.RegDate;
+                        (t as Person).BirthPlace = temp.BirthPlace;
 
                         t.Memberships = "";
                         if (0 == random.Next(0, 6))
@@ -381,13 +557,13 @@ namespace Med2
 
                         int week = random.Next(0, 4);
                         if (0 == week)
-                            t.FreeTimes = makeJob(new int[] { 0, 3, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 0, 3, 5 }, DateTime.Today, t, random.Next(3, 8), random.Next(5, 10), random.Next(10, 20));
                         if (1 == week)
-                            t.FreeTimes = makeJob(new int[] { 0, 1, 2, 5 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 0, 1, 2, 5 }, DateTime.Today, t, random.Next(3, 8), random.Next(5, 10), random.Next(10, 20));
                         if (2 == week)
-                            t.FreeTimes = makeJob(new int[] { 0, 1, 2, 3, 4, 5, 6 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 0, 1, 2, 3, 4, 5, 6 }, DateTime.Today, t, random.Next(3, 8), random.Next(5, 10), random.Next(10, 20));
                         if (3 == week)
-                            t.FreeTimes = makeJob(new int[] { 4 }, DateTime.Today, t, random.Next(3, 10), random.Next(2, 10), random.Next(10, 100));
+                            t.FreeTimes = makeJob(new int[] { 4 }, DateTime.Today, t, random.Next(3, 8), random.Next(5, 10), random.Next(10, 20));
                         
                         t.WorkTimes = new List<WorkTime>();
                         t.DoctorRecord = new List<DoctorRecord>();
@@ -409,6 +585,7 @@ namespace Med2
                         (t as Person).RegAdress = temp.RegAdress;
                         (t as Person).RegDate = temp.RegDate;
                         (t as Person).Documents.Person = t;
+                        (t as Person).BirthPlace = temp.BirthPlace;
 
                         t.BloodType = (byte)random.Next(1, 5);
                         t.Rhesus = "+";
@@ -427,8 +604,34 @@ namespace Med2
                         }
                         t.MedCard = new MedCard();
                         t.MedCard.Patient = t;
-                        
+                        for (int j = 0; j < random.Next(0, 3); j++)
+                        {
+                            int r = random.Next(0, db.FreeTimeSet.Count());
+                            FreeTime freeTi = db.FreeTimeSet.ToArray()[r];
+                            //FreeTime freeTi = db.FreeTimeSet.Local.ToArray()[r];
+                            //Doctor tempDoctor = (Doctor)(from docs in db.PersonSet.Local where (docs.BirthDate == freeTi.Doctor.BirthDate && docs.NameHashID == freeTi.Doctor.NameHashID) select docs).ToList()[0];
 
+                            Doctor tempDoctor = (Doctor)db.PersonSet.Find(freeTi.Doctor.BirthDate, freeTi.Doctor.NameHashID);
+
+                            WorkTime workTi = new WorkTime { Start = freeTi.Start, Doctor = tempDoctor, Finish = freeTi.Finish, BirthDate = tempDoctor.BirthDate, NameHashID = tempDoctor.NameHashID};
+                            
+                            db.FreeTimeSet.Remove(freeTi);
+                            
+                            workTi.VisitInfo = new VisitInfo
+                            {
+                                WorkTimes = workTi,
+                                DateStart = workTi.Start,
+                                DateFinish = workTi.Finish,
+                                DoctorID = tempDoctor.NameHashID,
+                                Patient = t,
+                                PatientBirthDate = t.BirthDate,
+                                PatientFullName = t.FullName
+                            };
+                            t.VisitInfo.Add(workTi.VisitInfo);
+                            tempDoctor.WorkTimes.Add(workTi);
+                            db.WorkTimeSet.Add(workTi);
+                            db.VisitInfoSet.Add(workTi.VisitInfo);
+                        }
                         db.PersonSet.Add(t);
                         
                         db.SaveChanges();

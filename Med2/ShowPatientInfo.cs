@@ -37,7 +37,7 @@ namespace Med2
                 this.textInsurancePolicyNum.Text = thisPatient.InsurancePolicyNum;
                 this.textBoxWorkIncapacity.Text = thisPatient.WorkIncapacityListNum;
                 this.textBoxBloodType.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
-
+                this.textBoxBirthPlace.Text = thisPatient.BirthPlace;
 
                 this.textBoxDocType.Text = thisPatient.Documents.DocumentName;
                 this.textDocumentN.Text = thisPatient.Documents.DocumentNum.ToString();

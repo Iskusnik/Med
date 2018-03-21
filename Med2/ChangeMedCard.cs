@@ -21,7 +21,7 @@ namespace Med2
             thisPatient = p;
             Form showPatientInfo = new ShowPatientInfo(thisPatient);
             showPatientInfo.Show();
-            this.Text = "Медицинская карта" + thisPatient.FullName;
+            this.Text = "Медицинская карта:" + thisPatient.FullName;
         }
 
         private void ChangeMedCard_Load(object sender, EventArgs e)

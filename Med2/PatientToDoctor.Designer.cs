@@ -67,6 +67,7 @@
             this.comboBoxTime.Name = "comboBoxTime";
             this.comboBoxTime.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTime.TabIndex = 2;
+            this.comboBoxTime.SelectedIndexChanged += new System.EventHandler(this.comboBoxTime_SelectedIndexChanged);
             // 
             // label1
             // 

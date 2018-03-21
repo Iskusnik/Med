@@ -68,6 +68,7 @@ namespace Med2
                     newDoctor.Education = "Администратор";
                     newDoctor.Job = "Главврач";
                     newDoctor.Memberships = "Администратор";
+                    newDoctor.BirthPlace = "Администратор";
 
                     newDoctor.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -1, Person = newDoctor };
                     newDoctor.WorkTimes = new List<WorkTime>();
@@ -98,7 +99,9 @@ namespace Med2
                     newPatient.Rhesus = "Пациент";
                     newPatient.WorkIncapacityListNum = "Пациент";
                     newPatient.InsurancePolicyNum = "Пациент";
-                    
+                    newPatient.BirthPlace = "Пациент";
+
+
                     newPatient.Password = "1";
 
                     newPatient.Documents = new Documents { DocumentName = "Паспорт", DocumentNum = -2, Person = newPatient };
@@ -120,7 +123,7 @@ namespace Med2
                     db.SaveChanges();}}
         
                     
-                    ControlFunctions.GenerateRandomDataBase();
+                    //ControlFunctions.GenerateRandomDataBase();
             
         }
     }

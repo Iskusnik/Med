@@ -47,31 +47,49 @@ namespace Med2
             else
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
-                    DoctorsList[index] = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
-                    FreeTime selectedTime = (FreeTime)(from times in DoctorsList[index].FreeTimes where (times.Start.Date.ToShortDateString() == comboBoxDate.Text && times.Start.TimeOfDay.ToString() == comboBoxTime.Text) select (times));
-                    WorkTime temp = new WorkTime { Doctor = DoctorsList[index], Start = selectedTime.Start, Finish = selectedTime.Finish };
-                    DoctorsList[index].WorkTimes.Add(temp); 
-                    DoctorsList[index].FreeTimes.Remove(selectedTime);
-                    thisPatient = (Patient)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
-                    temp.VisitInfo = new VisitInfo
+                    Doctor tempDoctor = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
+
+
+                    FreeTime freeTi = (FreeTime)(from times in tempDoctor.FreeTimes
+                                                                         where (times.Start.Date.ToShortDateString() == comboBoxDate.Text
+                                                                              && times.Start.TimeOfDay.ToString() == comboBoxTime.Text)
+                                                                         select (times)).ToArray()[0]; ;
+                    
+                    
+                    WorkTime workTi = new WorkTime { Start = freeTi.Start, Doctor = tempDoctor, Finish = freeTi.Finish, BirthDate = tempDoctor.BirthDate, NameHashID = tempDoctor.NameHashID };
+
+                    db.FreeTimeSet.Remove(freeTi);
+                    Patient t = (Patient)(db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID));
+                    workTi.VisitInfo = new VisitInfo
                     {
-                        DateStart = selectedTime.Start,
-                        DateFinish = selectedTime.Finish,
-                        Patient = thisPatient,
-                        PatientBirthDate = thisPatient.BirthDate,
-                        PatientFullName = thisPatient.FullName,
-                        WorkTimes = temp,
-                        DoctorID = DoctorsList[index].NameHashID,
+                        WorkTimes = workTi,
+                        DateStart = workTi.Start,
+                        DateFinish = workTi.Finish,
+                        DoctorID = tempDoctor.NameHashID,
+                        Patient = t,
+                        PatientBirthDate = t.BirthDate,
+                        PatientFullName = t.FullName
                     };
-                    thisPatient.VisitInfo.Add(temp.VisitInfo);
+                    t.VisitInfo.Add(workTi.VisitInfo);
+                    tempDoctor.WorkTimes.Add(workTi);
+                    db.WorkTimeSet.Add(workTi);
+                    db.VisitInfoSet.Add(workTi.VisitInfo);
+
+
+
+
                     db.SaveChanges();
+                    MessageBox.Show("Запись совершена");
                 }
         }
 
         private void comboBoxJob_SelectedIndexChanged(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            this.comboBoxDoctor.Items.Clear();
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
+                
                 object[] temp = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor)).ToArray();
                 DoctorsList = (from doctor in temp where ((Doctor)doctor).Job == comboBoxJob.Text select (Doctor)doctor).ToArray();
                 
@@ -82,35 +100,51 @@ namespace Med2
 
         private void comboBoxDoctor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            index = comboBoxDoctor.SelectedIndex;
-            using (ModelMedDBContainer db = new ModelMedDBContainer())
+            if (comboBoxDoctor.SelectedIndex != -1)
             {
-                try
-                {
-                    Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].GetHashCode());
+                button1.Enabled = false;
+                this.comboBoxDate.Items.Clear();
 
-                    string[] distinct = (from dates in d.FreeTimes select dates.Start.ToShortDateString()).Distinct().ToArray();
-
-                    foreach (string doct in distinct)
-                        this.comboBoxDate.Items.Add(doct);
-                }
-                catch (NullReferenceException)
+                index = comboBoxDoctor.SelectedIndex;
+                using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
-                    MessageBox.Show("На данный момент нет времени для записи к этому врачу");
+                    try
+                    {
+                        Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
+
+                        string[] distinct = (from dates in d.FreeTimes select dates.Start.ToShortDateString()).Distinct().ToArray();
+
+                        foreach (string doct in distinct)
+                            this.comboBoxDate.Items.Add(doct);
+                    }
+                    catch (NullReferenceException)
+                    {
+                        MessageBox.Show("На данный момент нет времени для записи к этому врачу");
+                    }
                 }
             }
         }
 
         private void comboBoxDate_SelectedIndexChanged(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            this.comboBoxTime.Items.Clear();
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].FullName);
+                Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
                 string[] distinct = (from dates in d.FreeTimes where (dates.Start.ToShortDateString() == comboBoxDate.Text) select (dates.Start.TimeOfDay.ToString())).ToArray();
 
                 foreach (string doct in distinct)
-                    this.comboBoxDate.Items.Add(doct);
+                    this.comboBoxTime.Items.Add(doct);
             }
+        }
+
+        private void comboBoxTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxTime.Text != "")
+                button1.Enabled = true;
+            else
+                button1.Enabled = false;
         }
     }
 }

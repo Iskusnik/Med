@@ -16,6 +16,8 @@ namespace Med2
     {
         public System.DateTime Start { get; set; }
         public System.DateTime Finish { get; set; }
+        public long NameHashID { get; set; }
+        public System.DateTime BirthDate { get; set; }
     
         public virtual Doctor Doctor { get; set; }
     }

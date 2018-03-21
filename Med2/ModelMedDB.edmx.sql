@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/20/2018 23:54:52
+-- Date Created: 03/21/2018 23:22:20
 -- Generated from EDMX file: C:\Users\IskusnikXD\Source\Repos\Med\Med2\ModelMedDB.edmx
 -- --------------------------------------------------
 
@@ -132,7 +132,8 @@ CREATE TABLE [dbo].[PersonSet] (
     [RegDate] datetime  NOT NULL,
     [InsuranceBillNum] nvarchar(max)  NOT NULL,
     [NameHashID] bigint  NOT NULL,
-    [Password] nvarchar(max)  NOT NULL
+    [Password] nvarchar(max)  NOT NULL,
+    [BirthPlace] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -160,9 +161,12 @@ CREATE TABLE [dbo].[VisitInfoSet] (
     [DateStart] datetime  NOT NULL,
     [DateFinish] datetime  NOT NULL,
     [DoctorID] bigint  NOT NULL,
+    [PatientNameHashID] bigint  NOT NULL,
     [Patient_BirthDate] datetime  NOT NULL,
     [Patient_NameHashID] bigint  NOT NULL,
-    [WorkTimes_Start] datetime  NOT NULL
+    [WorkTimes_Start] datetime  NOT NULL,
+    [WorkTimes_NameHashID] bigint  NOT NULL,
+    [WorkTimes_BirthDate] datetime  NOT NULL
 );
 GO
 
@@ -170,6 +174,8 @@ GO
 CREATE TABLE [dbo].[FreeTimeSet] (
     [Start] datetime  NOT NULL,
     [Finish] datetime  NOT NULL,
+    [NameHashID] bigint  NOT NULL,
+    [BirthDate] datetime  NOT NULL,
     [Doctor_BirthDate] datetime  NOT NULL,
     [Doctor_NameHashID] bigint  NOT NULL
 );
@@ -179,6 +185,8 @@ GO
 CREATE TABLE [dbo].[WorkTimeSet] (
     [Start] datetime  NOT NULL,
     [Finish] datetime  NOT NULL,
+    [NameHashID] bigint  NOT NULL,
+    [BirthDate] datetime  NOT NULL,
     [Doctor_BirthDate] datetime  NOT NULL,
     [Doctor_NameHashID] bigint  NOT NULL
 );
@@ -253,16 +261,16 @@ ADD CONSTRAINT [PK_VisitInfoSet]
     PRIMARY KEY CLUSTERED ([DateStart], [DateFinish], [DoctorID] ASC);
 GO
 
--- Creating primary key on [Start] in table 'FreeTimeSet'
+-- Creating primary key on [Start], [BirthDate], [NameHashID] in table 'FreeTimeSet'
 ALTER TABLE [dbo].[FreeTimeSet]
 ADD CONSTRAINT [PK_FreeTimeSet]
-    PRIMARY KEY CLUSTERED ([Start] ASC);
+    PRIMARY KEY CLUSTERED ([Start], [BirthDate], [NameHashID] ASC);
 GO
 
--- Creating primary key on [Start] in table 'WorkTimeSet'
+-- Creating primary key on [Start], [NameHashID], [BirthDate] in table 'WorkTimeSet'
 ALTER TABLE [dbo].[WorkTimeSet]
 ADD CONSTRAINT [PK_WorkTimeSet]
-    PRIMARY KEY CLUSTERED ([Start] ASC);
+    PRIMARY KEY CLUSTERED ([Start], [NameHashID], [BirthDate] ASC);
 GO
 
 -- Creating primary key on [BirthDate], [NameHashID] in table 'PersonSet_Patient'
@@ -416,19 +424,19 @@ ON [dbo].[FreeTimeSet]
     ([Doctor_BirthDate], [Doctor_NameHashID]);
 GO
 
--- Creating foreign key on [WorkTimes_Start] in table 'VisitInfoSet'
+-- Creating foreign key on [WorkTimes_Start], [WorkTimes_NameHashID], [WorkTimes_BirthDate] in table 'VisitInfoSet'
 ALTER TABLE [dbo].[VisitInfoSet]
 ADD CONSTRAINT [FK_VisitInfoWorkTime]
-    FOREIGN KEY ([WorkTimes_Start])
+    FOREIGN KEY ([WorkTimes_Start], [WorkTimes_NameHashID], [WorkTimes_BirthDate])
     REFERENCES [dbo].[WorkTimeSet]
-        ([Start])
+        ([Start], [NameHashID], [BirthDate])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_VisitInfoWorkTime'
 CREATE INDEX [IX_FK_VisitInfoWorkTime]
 ON [dbo].[VisitInfoSet]
-    ([WorkTimes_Start]);
+    ([WorkTimes_Start], [WorkTimes_NameHashID], [WorkTimes_BirthDate]);
 GO
 
 -- Creating foreign key on [BirthDate], [NameHashID] in table 'PersonSet_Patient'

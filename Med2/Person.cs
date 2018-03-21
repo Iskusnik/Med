@@ -24,6 +24,7 @@ namespace Med2
         public string InsuranceBillNum { get; set; }
         public long NameHashID { get; set; }
         public string Password { get; set; }
+        public string BirthPlace { get; set; }
     
         public virtual Documents Documents { get; set; }
     }

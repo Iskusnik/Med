@@ -66,6 +66,8 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.textBoxEducation = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBoxBirthPlace = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // comboBoxDocType
@@ -215,7 +217,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(21, 239);
+            this.label9.Location = new System.Drawing.Point(21, 271);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 56;
@@ -223,7 +225,7 @@
             // 
             // dateTimePickerRegDate
             // 
-            this.dateTimePickerRegDate.Location = new System.Drawing.Point(145, 239);
+            this.dateTimePickerRegDate.Location = new System.Drawing.Point(145, 271);
             this.dateTimePickerRegDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerRegDate.Name = "dateTimePickerRegDate";
             this.dateTimePickerRegDate.Size = new System.Drawing.Size(137, 20);
@@ -232,7 +234,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 213);
+            this.label8.Location = new System.Drawing.Point(21, 245);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 54;
@@ -241,7 +243,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 187);
+            this.label7.Location = new System.Drawing.Point(21, 219);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
             this.label7.TabIndex = 53;
@@ -249,7 +251,7 @@
             // 
             // textRegAdress
             // 
-            this.textRegAdress.Location = new System.Drawing.Point(145, 213);
+            this.textRegAdress.Location = new System.Drawing.Point(145, 245);
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.Size = new System.Drawing.Size(137, 20);
             this.textRegAdress.TabIndex = 52;
@@ -257,7 +259,7 @@
             // 
             // textLiveAdress
             // 
-            this.textLiveAdress.Location = new System.Drawing.Point(145, 187);
+            this.textLiveAdress.Location = new System.Drawing.Point(145, 219);
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.Size = new System.Drawing.Size(137, 20);
             this.textLiveAdress.TabIndex = 51;
@@ -266,7 +268,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 161);
+            this.label6.Location = new System.Drawing.Point(21, 193);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 50;
@@ -274,7 +276,7 @@
             // 
             // textNation
             // 
-            this.textNation.Location = new System.Drawing.Point(145, 161);
+            this.textNation.Location = new System.Drawing.Point(145, 193);
             this.textNation.Name = "textNation";
             this.textNation.Size = new System.Drawing.Size(137, 20);
             this.textNation.TabIndex = 49;
@@ -378,7 +380,7 @@
             // 
             this.comboBoxJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxJob.FormattingEnabled = true;
-            this.comboBoxJob.Location = new System.Drawing.Point(145, 265);
+            this.comboBoxJob.Location = new System.Drawing.Point(145, 297);
             this.comboBoxJob.Name = "comboBoxJob";
             this.comboBoxJob.Size = new System.Drawing.Size(137, 21);
             this.comboBoxJob.TabIndex = 78;
@@ -386,7 +388,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(21, 268);
+            this.label19.Location = new System.Drawing.Point(21, 300);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(65, 13);
             this.label19.TabIndex = 79;
@@ -395,7 +397,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(21, 297);
+            this.label20.Location = new System.Drawing.Point(21, 329);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(75, 13);
             this.label20.TabIndex = 80;
@@ -403,15 +405,36 @@
             // 
             // textBoxEducation
             // 
-            this.textBoxEducation.Location = new System.Drawing.Point(145, 294);
+            this.textBoxEducation.Location = new System.Drawing.Point(145, 326);
             this.textBoxEducation.Name = "textBoxEducation";
             this.textBoxEducation.Size = new System.Drawing.Size(137, 20);
             this.textBoxEducation.TabIndex = 81;
             this.textBoxEducation.Text = "a";
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(21, 147);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(92, 13);
+            this.label21.TabIndex = 83;
+            this.label21.Text = "Место рождения";
+            this.label21.Click += new System.EventHandler(this.label21_Click);
+            // 
+            // textBoxBirthPlace
+            // 
+            this.textBoxBirthPlace.Location = new System.Drawing.Point(145, 147);
+            this.textBoxBirthPlace.Name = "textBoxBirthPlace";
+            this.textBoxBirthPlace.Size = new System.Drawing.Size(137, 20);
+            this.textBoxBirthPlace.TabIndex = 82;
+            this.textBoxBirthPlace.Text = "a";
+            this.textBoxBirthPlace.TextChanged += new System.EventHandler(this.textBoxBirthPlace_TextChanged);
+            // 
             // RegDocForm
             // 
             this.ClientSize = new System.Drawing.Size(306, 741);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.textBoxBirthPlace);
             this.Controls.Add(this.textBoxEducation);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
@@ -500,5 +523,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.TextBox textBoxEducation;
+        private System.Windows.Forms.Label label21;
+        public System.Windows.Forms.TextBox textBoxBirthPlace;
     }
 }

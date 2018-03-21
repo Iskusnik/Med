@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
+
 namespace Med2
 {
     public partial class ChangePersonInfo : Form
@@ -35,13 +36,13 @@ namespace Med2
                 this.label3.Hide();
                 this.label17.Show();
                 this.textBoxJob.Show();
-                this.button3.Show();
+                this.button3.Hide();
                 this.textInsuranceMemberships.Show();
                 this.textBoxEducation.Show();
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     Doctor thisDoctor = (Doctor)db.PersonSet.Find(person.BirthDate, person.NameHashID);
-                    
+                    this.textBoxBirthPlace.Text = thisDoctor.BirthPlace;
                     this.textBoxName.Text = thisDoctor.FullName;
                     this.textBoxGender.Text = thisDoctor.Gender;
                     this.textBoxBirthDate.Text = thisDoctor.BirthDate.Date.ToShortDateString();
@@ -61,7 +62,7 @@ namespace Med2
             }
             else
             {
-                if (this.Owner is DoctorMenu)
+                if (this.Owner is SelectPerson)
                 {
                     textBoxBloodType.ReadOnly = false;
                     this.button3.Show();
@@ -87,7 +88,7 @@ namespace Med2
                 using (ModelMedDBContainer db = new ModelMedDBContainer())
                 {
                     Patient thisPatient = (Patient)db.PersonSet.Find(person.BirthDate, person.NameHashID);
-                    
+                    this.textBoxBirthPlace.Text = thisPatient.BirthPlace;
                     this.textBoxName.Text = thisPatient.FullName;
                     this.textBoxGender.Text = thisPatient.Gender;
                     this.textBoxBirthDate.Text = thisPatient.BirthDate.Date.ToShortDateString();
@@ -118,8 +119,8 @@ namespace Med2
 
                 if (info is Patient)
                 {
-                    
-                    if (Regex.IsMatch(textBoxBloodType.Text, @"(-|\+)[1-4]"))
+
+                    if (Regex.IsMatch(textBoxBloodType.Text, @"(-|\+)[1-4]{1}$|[1-4]{1}$"))
                     {
                         if (textBoxBloodType.Text[0] == '-')
                         {
@@ -132,6 +133,8 @@ namespace Med2
                             (info as Patient).BloodType = byte.Parse(textBoxBloodType.Text);
                         }
                     }
+                    else
+                        MessageBox.Show("Невозможное значение для группы крови. Изменение группы крови не будет сохранено");
                     (info as Patient).WorkIncapacityListNum = textBoxWorkIncapacity.Text;
                     (info as Patient).InsurancePolicyNum = textInsurancePolicyNum.Text;
                     
@@ -141,8 +144,9 @@ namespace Med2
                     (info as Doctor).Memberships = textInsuranceMemberships.Text;
                 }
                 db.SaveChanges();
-               
+
                 this.Close();
+
             }
         }
 

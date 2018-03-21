@@ -66,6 +66,8 @@
             this.просмотретьЗапланированныеПриёмыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxEducation = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.textBoxBirthPlace = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -134,7 +136,7 @@
             // 
             // textBoxRegDate
             // 
-            this.textBoxRegDate.Location = new System.Drawing.Point(154, 245);
+            this.textBoxRegDate.Location = new System.Drawing.Point(154, 252);
             this.textBoxRegDate.Name = "textBoxRegDate";
             this.textBoxRegDate.ReadOnly = true;
             this.textBoxRegDate.Size = new System.Drawing.Size(223, 20);
@@ -162,7 +164,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(30, 280);
+            this.label17.Location = new System.Drawing.Point(30, 293);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(65, 13);
             this.label17.TabIndex = 109;
@@ -170,7 +172,7 @@
             // 
             // textBoxJob
             // 
-            this.textBoxJob.Location = new System.Drawing.Point(154, 277);
+            this.textBoxJob.Location = new System.Drawing.Point(154, 290);
             this.textBoxJob.Name = "textBoxJob";
             this.textBoxJob.ReadOnly = true;
             this.textBoxJob.Size = new System.Drawing.Size(223, 20);
@@ -270,7 +272,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 245);
+            this.label9.Location = new System.Drawing.Point(30, 252);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 94;
@@ -279,7 +281,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(30, 219);
+            this.label8.Location = new System.Drawing.Point(30, 226);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 93;
@@ -288,7 +290,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 193);
+            this.label7.Location = new System.Drawing.Point(30, 200);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
             this.label7.TabIndex = 92;
@@ -296,7 +298,7 @@
             // 
             // textRegAdress
             // 
-            this.textRegAdress.Location = new System.Drawing.Point(154, 219);
+            this.textRegAdress.Location = new System.Drawing.Point(154, 226);
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.ReadOnly = true;
             this.textRegAdress.Size = new System.Drawing.Size(223, 20);
@@ -305,7 +307,7 @@
             // 
             // textLiveAdress
             // 
-            this.textLiveAdress.Location = new System.Drawing.Point(154, 193);
+            this.textLiveAdress.Location = new System.Drawing.Point(154, 200);
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.ReadOnly = true;
             this.textLiveAdress.Size = new System.Drawing.Size(223, 20);
@@ -315,7 +317,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 167);
+            this.label6.Location = new System.Drawing.Point(30, 174);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 89;
@@ -323,7 +325,7 @@
             // 
             // textNation
             // 
-            this.textNation.Location = new System.Drawing.Point(154, 167);
+            this.textNation.Location = new System.Drawing.Point(154, 174);
             this.textNation.Name = "textNation";
             this.textNation.ReadOnly = true;
             this.textNation.Size = new System.Drawing.Size(223, 20);
@@ -387,7 +389,7 @@
             // 
             // textBoxEducation
             // 
-            this.textBoxEducation.Location = new System.Drawing.Point(154, 308);
+            this.textBoxEducation.Location = new System.Drawing.Point(154, 321);
             this.textBoxEducation.Name = "textBoxEducation";
             this.textBoxEducation.ReadOnly = true;
             this.textBoxEducation.Size = new System.Drawing.Size(223, 20);
@@ -397,17 +399,37 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(30, 311);
+            this.label20.Location = new System.Drawing.Point(30, 324);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(75, 13);
             this.label20.TabIndex = 114;
             this.label20.Text = "Образование";
+            // 
+            // textBoxBirthPlace
+            // 
+            this.textBoxBirthPlace.Location = new System.Drawing.Point(154, 141);
+            this.textBoxBirthPlace.Name = "textBoxBirthPlace";
+            this.textBoxBirthPlace.ReadOnly = true;
+            this.textBoxBirthPlace.Size = new System.Drawing.Size(223, 20);
+            this.textBoxBirthPlace.TabIndex = 117;
+            this.textBoxBirthPlace.Text = "a";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 116;
+            this.label2.Text = "Место рождения";
             // 
             // DoctorMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 353);
+            this.Controls.Add(this.textBoxBirthPlace);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxEducation);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.textBoxDocType);
@@ -488,5 +510,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ToolStripMenuItem найтиЧеловекаИИзменитьДанныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem просмотретьЗапланированныеПриёмыToolStripMenuItem;
+        public System.Windows.Forms.TextBox textBoxBirthPlace;
+        private System.Windows.Forms.Label label2;
     }
 }

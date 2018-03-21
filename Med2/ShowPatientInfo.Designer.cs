@@ -57,6 +57,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxBloodType = new System.Windows.Forms.TextBox();
+            this.textBoxBirthPlace = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label19
@@ -106,7 +108,7 @@
             // 
             // textBoxRegDate
             // 
-            this.textBoxRegDate.Location = new System.Drawing.Point(154, 217);
+            this.textBoxRegDate.Location = new System.Drawing.Point(154, 225);
             this.textBoxRegDate.Name = "textBoxRegDate";
             this.textBoxRegDate.ReadOnly = true;
             this.textBoxRegDate.Size = new System.Drawing.Size(223, 20);
@@ -206,7 +208,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 217);
+            this.label9.Location = new System.Drawing.Point(30, 225);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 163;
@@ -215,7 +217,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(30, 191);
+            this.label8.Location = new System.Drawing.Point(30, 199);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 162;
@@ -224,7 +226,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 165);
+            this.label7.Location = new System.Drawing.Point(30, 173);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
             this.label7.TabIndex = 161;
@@ -232,7 +234,7 @@
             // 
             // textRegAdress
             // 
-            this.textRegAdress.Location = new System.Drawing.Point(154, 191);
+            this.textRegAdress.Location = new System.Drawing.Point(154, 199);
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.ReadOnly = true;
             this.textRegAdress.Size = new System.Drawing.Size(223, 20);
@@ -241,7 +243,7 @@
             // 
             // textLiveAdress
             // 
-            this.textLiveAdress.Location = new System.Drawing.Point(154, 165);
+            this.textLiveAdress.Location = new System.Drawing.Point(154, 173);
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.ReadOnly = true;
             this.textLiveAdress.Size = new System.Drawing.Size(223, 20);
@@ -251,7 +253,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 139);
+            this.label6.Location = new System.Drawing.Point(30, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 158;
@@ -259,7 +261,7 @@
             // 
             // textNation
             // 
-            this.textNation.Location = new System.Drawing.Point(154, 139);
+            this.textNation.Location = new System.Drawing.Point(154, 147);
             this.textNation.Name = "textNation";
             this.textNation.ReadOnly = true;
             this.textNation.Size = new System.Drawing.Size(223, 20);
@@ -305,7 +307,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 252);
+            this.label2.Location = new System.Drawing.Point(30, 260);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 187;
@@ -313,18 +315,38 @@
             // 
             // textBoxBloodType
             // 
-            this.textBoxBloodType.Location = new System.Drawing.Point(154, 249);
+            this.textBoxBloodType.Location = new System.Drawing.Point(154, 257);
             this.textBoxBloodType.Name = "textBoxBloodType";
             this.textBoxBloodType.ReadOnly = true;
             this.textBoxBloodType.Size = new System.Drawing.Size(223, 20);
             this.textBoxBloodType.TabIndex = 186;
             this.textBoxBloodType.Text = "a";
             // 
+            // textBoxBirthPlace
+            // 
+            this.textBoxBirthPlace.Location = new System.Drawing.Point(154, 113);
+            this.textBoxBirthPlace.Name = "textBoxBirthPlace";
+            this.textBoxBirthPlace.ReadOnly = true;
+            this.textBoxBirthPlace.Size = new System.Drawing.Size(223, 20);
+            this.textBoxBirthPlace.TabIndex = 190;
+            this.textBoxBirthPlace.Text = "a";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(30, 113);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(92, 13);
+            this.label15.TabIndex = 189;
+            this.label15.Text = "Место рождения";
+            // 
             // ShowPatientInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 294);
+            this.Controls.Add(this.textBoxBirthPlace);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxBloodType);
@@ -393,5 +415,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.TextBox textBoxBloodType;
+        public System.Windows.Forms.TextBox textBoxBirthPlace;
+        private System.Windows.Forms.Label label15;
     }
 }

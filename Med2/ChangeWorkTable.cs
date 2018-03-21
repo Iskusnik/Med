@@ -51,7 +51,7 @@ namespace Med2
                 Head = (Doctor)db.PersonSet.Find(Head.BirthDate, Head.NameHashID);
                 var temp = (from docs in db.PersonSet where (docs is Doctor && docs.NameHashID != Head.NameHashID && docs.BirthDate != Head.BirthDate) select docs).ToList();
                 List<Person> doctors = (List<Person>)temp;
-
+                docs = new Doctor[doctors.Count];
                 for (int i = 0; i < doctors.Count; i++)
                     docs[i] = (Doctor)doctors[i];
 

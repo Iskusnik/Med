@@ -57,6 +57,7 @@
             this.редактироватьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изменитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.просмотретьИсториюБолезнейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.записиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxBloodType = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -64,7 +65,8 @@
             this.textBoxBirthDate = new System.Windows.Forms.TextBox();
             this.textBoxRegDate = new System.Windows.Forms.TextBox();
             this.textBoxDocType = new System.Windows.Forms.TextBox();
-            this.записиВрачейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxBirthPlace = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -170,7 +172,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 245);
+            this.label9.Location = new System.Drawing.Point(30, 250);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 56;
@@ -179,7 +181,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(30, 219);
+            this.label8.Location = new System.Drawing.Point(30, 224);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 13);
             this.label8.TabIndex = 54;
@@ -188,7 +190,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 193);
+            this.label7.Location = new System.Drawing.Point(30, 198);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
             this.label7.TabIndex = 53;
@@ -196,7 +198,7 @@
             // 
             // textRegAdress
             // 
-            this.textRegAdress.Location = new System.Drawing.Point(154, 219);
+            this.textRegAdress.Location = new System.Drawing.Point(154, 224);
             this.textRegAdress.Name = "textRegAdress";
             this.textRegAdress.ReadOnly = true;
             this.textRegAdress.Size = new System.Drawing.Size(223, 20);
@@ -205,7 +207,7 @@
             // 
             // textLiveAdress
             // 
-            this.textLiveAdress.Location = new System.Drawing.Point(154, 193);
+            this.textLiveAdress.Location = new System.Drawing.Point(154, 198);
             this.textLiveAdress.Name = "textLiveAdress";
             this.textLiveAdress.ReadOnly = true;
             this.textLiveAdress.Size = new System.Drawing.Size(223, 20);
@@ -215,7 +217,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(30, 167);
+            this.label6.Location = new System.Drawing.Point(30, 172);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 50;
@@ -223,7 +225,7 @@
             // 
             // textNation
             // 
-            this.textNation.Location = new System.Drawing.Point(154, 167);
+            this.textNation.Location = new System.Drawing.Point(154, 172);
             this.textNation.Name = "textNation";
             this.textNation.ReadOnly = true;
             this.textNation.Size = new System.Drawing.Size(223, 20);
@@ -324,6 +326,13 @@
             this.просмотретьИсториюБолезнейToolStripMenuItem.Text = "История болезней";
             this.просмотретьИсториюБолезнейToolStripMenuItem.Click += new System.EventHandler(this.просмотретьИсториюБолезнейToolStripMenuItem_Click);
             // 
+            // записиВрачейToolStripMenuItem
+            // 
+            this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
+            this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
+            this.записиВрачейToolStripMenuItem.Click += new System.EventHandler(this.записиВрачейToolStripMenuItem_Click);
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -371,7 +380,7 @@
             // 
             // textBoxRegDate
             // 
-            this.textBoxRegDate.Location = new System.Drawing.Point(154, 245);
+            this.textBoxRegDate.Location = new System.Drawing.Point(154, 250);
             this.textBoxRegDate.Name = "textBoxRegDate";
             this.textBoxRegDate.ReadOnly = true;
             this.textBoxRegDate.Size = new System.Drawing.Size(223, 20);
@@ -387,18 +396,31 @@
             this.textBoxDocType.TabIndex = 83;
             this.textBoxDocType.Text = "a";
             // 
-            // записиВрачейToolStripMenuItem
+            // textBoxBirthPlace
             // 
-            this.записиВрачейToolStripMenuItem.Name = "записиВрачейToolStripMenuItem";
-            this.записиВрачейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.записиВрачейToolStripMenuItem.Text = "Записи врачей";
-            this.записиВрачейToolStripMenuItem.Click += new System.EventHandler(this.записиВрачейToolStripMenuItem_Click);
+            this.textBoxBirthPlace.Location = new System.Drawing.Point(154, 141);
+            this.textBoxBirthPlace.Name = "textBoxBirthPlace";
+            this.textBoxBirthPlace.ReadOnly = true;
+            this.textBoxBirthPlace.Size = new System.Drawing.Size(223, 20);
+            this.textBoxBirthPlace.TabIndex = 113;
+            this.textBoxBirthPlace.Text = "a";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 13);
+            this.label2.TabIndex = 112;
+            this.label2.Text = "Место рождения";
             // 
             // PatientMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 332);
+            this.Controls.Add(this.textBoxBirthPlace);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxDocType);
             this.Controls.Add(this.textBoxRegDate);
             this.Controls.Add(this.textBoxBirthDate);
@@ -479,5 +501,7 @@
         public System.Windows.Forms.TextBox textBoxRegDate;
         public System.Windows.Forms.TextBox textBoxDocType;
         private System.Windows.Forms.ToolStripMenuItem записиВрачейToolStripMenuItem;
+        public System.Windows.Forms.TextBox textBoxBirthPlace;
+        private System.Windows.Forms.Label label2;
     }
 }
