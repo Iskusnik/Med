@@ -28,7 +28,7 @@ namespace Med2
             {
                 this.textInsurancePolicyNum.Hide();
                 this.textBoxWorkIncapacity.Hide();
-                this.textBoxBloodType.Hide();
+                this.comboBoxBloodType.Hide();
                 this.label20.Show();
                 this.label15.Show();
                 this.label19.Hide();
@@ -64,18 +64,18 @@ namespace Med2
             {
                 if (this.Owner is SelectPerson)
                 {
-                    textBoxBloodType.ReadOnly = false;
+                    comboBoxBloodType.Enabled = true;
                     this.button3.Show();
                 }
                 else
                 {
-                    textBoxBloodType.ReadOnly = true;
+                    comboBoxBloodType.Enabled = false;
                     this.button3.Hide();
                 }
             
                 this.textInsurancePolicyNum.Show();
                 this.textBoxWorkIncapacity.Show();
-                this.textBoxBloodType.Show();
+                this.comboBoxBloodType.Show();
                 this.textBoxJob.Hide();
                 this.textInsuranceMemberships.Hide();
                 this.textBoxEducation.Hide();
@@ -99,7 +99,7 @@ namespace Med2
                     this.textBoxInsuranceBillNum.Text = thisPatient.InsuranceBillNum;
                     this.textInsurancePolicyNum.Text = thisPatient.InsurancePolicyNum;
                     this.textBoxWorkIncapacity.Text = thisPatient.WorkIncapacityListNum;
-                    this.textBoxBloodType.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
+                    this.comboBoxBloodType.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
 
 
                     this.textBoxDocType.Text = thisPatient.Documents.DocumentName;
@@ -120,17 +120,17 @@ namespace Med2
                 if (info is Patient)
                 {
 
-                    if (Regex.IsMatch(textBoxBloodType.Text, @"(-|\+)[1-4]{1}$|[1-4]{1}$"))
+                    if (Regex.IsMatch(comboBoxBloodType.Text, @"(-|\+)[1-4]{1}$|[1-4]{1}$"))
                     {
-                        if (textBoxBloodType.Text[0] == '-')
+                        if (comboBoxBloodType.Text[0] == '-')
                         {
                             (info as Patient).Rhesus = "-";
-                            (info as Patient).BloodType -= byte.Parse(textBoxBloodType.Text);
+                            (info as Patient).BloodType -= byte.Parse(comboBoxBloodType.Text);
                         }
                         else
                         {
                             (info as Patient).Rhesus = "+";
-                            (info as Patient).BloodType = byte.Parse(textBoxBloodType.Text);
+                            (info as Patient).BloodType = byte.Parse(comboBoxBloodType.Text);
                         }
                     }
                     else

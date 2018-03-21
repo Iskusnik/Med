@@ -234,6 +234,8 @@ namespace Med2
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
+                object misValue = System.Reflection.Missing.Value;
+
                 // Создаём экземпляр нашего приложения
                 Excel.Application excelApp = new Excel.Application();
                 // Создаём экземпляр рабочий книги Excel
@@ -241,12 +243,12 @@ namespace Med2
                 // Создаём экземпляр листа Excel
                 Excel.Worksheet workSheet;
 
-                workBook = excelApp.Workbooks.Add();
+                workBook = excelApp.Workbooks.Add(misValue);
                 workSheet = (Excel.Worksheet)workBook.Worksheets.get_Item(1);
 
                 var specials = (from docs in db.PersonSet where (docs is Doctor) select (docs as Doctor).Job).Distinct().ToArray();
                 //var workTime = (from works in db.WorkTimeSet group works by works.Start.Date);
-                var workT = (from works in db.WorkTimeSet select works.Start).ToList();
+                var workT = (from works in db.WorkTimeSet select new { works.Start, works.Doctor.Job }).ToList();
                 //List<DateTime> workDays = new List<DateTime>();
                 //foreach (DateTime t in workT)
                 //    workDays.Add(t.Date);
@@ -255,29 +257,28 @@ namespace Med2
 
                 DateTime start = (from works in db.WorkTimeSet select works.Start).Min();
                 DateTime finish = (from works in db.WorkTimeSet select works.Start).Max();
-                int[,] days = new int[specials.Length, (finish.Date - start.Date).Days];
+                int[,] days = new int[specials.Length, (finish.Date - start.Date).Days + 1];
 
 
                 //Подсчёт прёмов по профессиям и по дням
                 for (int i = 0; i < specials.Length; i++)
-                    foreach (DateTime d in workDays)
-                        foreach (WorkTime work in db.WorkTimeSet)
-                            if (work.Start.Date == d && specials[i] == work.Doctor.Job)
-                                days[i, (work.Start - start).Days]++;
+                    foreach (var t in workT)
+                      if (specials[i] == t.Job)
+                        days[i, (t.Start.Date - start.Date).Days]++;
 
                 //Заполнение строчек и столбцов посчитанными значениями
-                for (int i = 0; i < specials.Length; i++)
+                for (int i = 1; i <= specials.Length; i++)
                 {
-                    workSheet.Cells[i, 0] = specials[i];
+                    workSheet.Cells[i, 1] = specials[i-1];
 
-                    for (int j = 1; j <= days.GetLength(1); j++)
-                        workSheet.Cells[i, j] = days[i, j];
+                    for (int j = 2; j <= days.GetLength(1) + 1; j++)
+                        workSheet.Cells[i, j] = days[i-1, j-2];
                 }
 
-                workSheet.Cells[specials.Length, 0] = start;
+                workSheet.Cells[specials.Length+1, 1] = start;
 
-                for (int i = 1; i <= days.GetLength(1); i++)
-                    workSheet.Cells[specials.Length, i] = start.AddDays(1);
+                for (int i = 2; i <= days.GetLength(1); i++)
+                    workSheet.Cells[specials.Length+1, i] = start.AddDays(1);
                 /*
                 //Вычисляем сумму этих чисел
                 Excel.Range rng = workSheet.Range["A2"];
@@ -297,18 +298,20 @@ namespace Med2
                 Microsoft.Office.Interop.Excel.Application xla = new Microsoft.Office.Interop.Excel.Application();
                 Excel.SeriesCollection seriesCollection = chartPage.SeriesCollection();
 
-                Excel.Range rngX = workSheet.Range[workSheet.Cells[specials.Length, 1], workSheet.Cells[specials.Length, days.GetLength(1)]];
+                char a = char.ConvertFromUtf32((char.ConvertToUtf32('A',0) + days.GetLength(1)));
 
-                for (int i = 0; i < specials.Length; i++)
+                Excel.Range rngX = workSheet.Range["A" + (1+ specials.Length).ToString(), ToString()]
+                    workSheet.Cells[specials.Length+1, 1], workSheet.Cells[specials.Length+1, days.GetLength(1)]];
+
+                for (int i = 1; i <= specials.Length; i++)
                 {
                     Excel.Series series = seriesCollection.NewSeries();
-                    Excel.Range rng = workSheet.Range[workSheet.Cells[i, 1], workSheet.Cells[i, days.GetLength(1)]];
+                    Excel.Range rng = workSheet.Range[workSheet.Cells[i, 2], workSheet.Cells[i, days.GetLength(1)]];
                     series.XValues = workSheet.get_Range(rngX);
                     series.Values = workSheet.get_Range(rng);
                     series.Name = workSheet.Cells[i, 0];
                 }
 
-                object misValue = System.Reflection.Missing.Value;
                 workBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
 
                 workBook.Close(true, misValue, misValue);

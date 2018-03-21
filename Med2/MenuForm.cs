@@ -51,6 +51,7 @@ namespace Med2
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
+            ControlFunctions.AnalyseVisits("11111");
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 int doctorsCount = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor as Doctor)).Count();

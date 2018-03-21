@@ -59,7 +59,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxBloodType = new System.Windows.Forms.TextBox();
             this.textBoxWorkIncapacity = new System.Windows.Forms.TextBox();
             this.textInsurancePolicyNum = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,6 +67,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBoxBirthPlace = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.comboBoxBloodType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxEducation
@@ -345,14 +345,6 @@
             this.label2.TabIndex = 150;
             this.label2.Text = "Группа крови";
             // 
-            // textBoxBloodType
-            // 
-            this.textBoxBloodType.Location = new System.Drawing.Point(152, 269);
-            this.textBoxBloodType.Name = "textBoxBloodType";
-            this.textBoxBloodType.Size = new System.Drawing.Size(223, 20);
-            this.textBoxBloodType.TabIndex = 149;
-            this.textBoxBloodType.Text = "a";
-            // 
             // textBoxWorkIncapacity
             // 
             this.textBoxWorkIncapacity.Location = new System.Drawing.Point(438, 252);
@@ -425,18 +417,37 @@
             this.label18.TabIndex = 154;
             this.label18.Text = "Место рождения";
             // 
+            // comboBoxBloodType
+            // 
+            this.comboBoxBloodType.AutoCompleteCustomSource.AddRange(new string[] {
+            "-1",
+            "-2",
+            "-3",
+            "-4",
+            "+1",
+            "+2",
+            "+3",
+            "+4",
+            "Неизвестно"});
+            this.comboBoxBloodType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBloodType.FormattingEnabled = true;
+            this.comboBoxBloodType.Location = new System.Drawing.Point(152, 268);
+            this.comboBoxBloodType.Name = "comboBoxBloodType";
+            this.comboBoxBloodType.Size = new System.Drawing.Size(223, 21);
+            this.comboBoxBloodType.TabIndex = 156;
+            // 
             // ChangePersonInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 384);
+            this.Controls.Add(this.comboBoxBloodType);
             this.Controls.Add(this.textBoxBirthPlace);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxBloodType);
             this.Controls.Add(this.textBoxWorkIncapacity);
             this.Controls.Add(this.textInsurancePolicyNum);
             this.Controls.Add(this.label3);
@@ -512,7 +523,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.TextBox textBoxBloodType;
         public System.Windows.Forms.TextBox textBoxWorkIncapacity;
         public System.Windows.Forms.TextBox textInsurancePolicyNum;
         private System.Windows.Forms.Label label3;
@@ -521,5 +531,6 @@
         private System.Windows.Forms.Button button3;
         public System.Windows.Forms.TextBox textBoxBirthPlace;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox comboBoxBloodType;
     }
 }
