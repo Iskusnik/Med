@@ -24,7 +24,7 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                var thisPersonVisits = (from visit in thisPatient.MedCard.DoctorRecord select new { Время_начала_приёма = visit.Date, Имя_врача = visit.Doctor.FullName}).ToList();
+                var thisPersonVisits = (from visit in thisPatient.MedCard.DoctorRecord.AsParallel() select new { Время_начала_приёма = visit.Date, Имя_врача = visit.Doctor.FullName}).ToList();
                 dataGridView1.Columns.Clear();
                 dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                 dataGridView1.Columns.Add("Имя врача", "Имя врача");

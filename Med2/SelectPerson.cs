@@ -55,23 +55,23 @@ namespace Med2
                 try
                 {
                     if (checkBoxName.Checked)
-                        searchResult = (from d in searchResult where (d.FullName == name) select d).ToList();
+                        searchResult = (from d in searchResult.AsParallel() where (d.FullName == name) select d).ToList();
 
                     if (checkBoxBirth.Checked)
                     {
                         switch (comboBoxBirth.SelectedIndex)
                         {
-                            case 0: searchResult = (from d in searchResult where (d.BirthDate < date) select d).ToList(); break;
-                            case 1: searchResult = (from d in searchResult where (d.BirthDate <= date) select d).ToList(); break;
-                            case 2: searchResult = (from d in searchResult where (d.BirthDate == date) select d).ToList(); break;
-                            case 3: searchResult = (from d in searchResult where (d.BirthDate > date) select d).ToList(); break;
-                            case 4: searchResult = (from d in searchResult where (d.BirthDate >= date) select d).ToList(); break;
+                            case 0: searchResult = (from d in searchResult.AsParallel() where (d.BirthDate < date) select d).ToList(); break;
+                            case 1: searchResult = (from d in searchResult.AsParallel() where (d.BirthDate <= date) select d).ToList(); break;
+                            case 2: searchResult = (from d in searchResult.AsParallel() where (d.BirthDate == date) select d).ToList(); break;
+                            case 3: searchResult = (from d in searchResult.AsParallel() where (d.BirthDate > date) select d).ToList(); break;
+                            case 4: searchResult = (from d in searchResult.AsParallel() where (d.BirthDate >= date) select d).ToList(); break;
                         }
                     }
                     if (checkBoxDocs.Checked)
-                        searchResult = (from d in searchResult where (d is Doctor) select d).ToList();
+                        searchResult = (from d in searchResult.AsParallel() where (d is Doctor) select d).ToList();
                     if (checkBoxPat.Checked)
-                        searchResult = (from d in searchResult where (d is Patient) select d).ToList();
+                        searchResult = (from d in searchResult.AsParallel() where (d is Patient) select d).ToList();
 
                     comboBox1.Items.Clear();
                     foreach (Person per in searchResult)

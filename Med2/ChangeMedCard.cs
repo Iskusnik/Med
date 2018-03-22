@@ -37,18 +37,18 @@ namespace Med2
                 dataGWIllness.Columns.Clear();
                 dataGWVisitInfo.Columns.Clear();
 
-                var illnesses = (from ill in db.IllnessSet select ill.Name).Distinct().ToList();
+                var illnesses = (from ill in db.IllnessSet.AsParallel() select ill.Name).Distinct().ToList();
                 foreach (string ill in illnesses)
                     comboBox1.Items.Add(ill);
 
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
 
                 illnesses = null;
-                illnesses = (from ill in thisPatient.Illness select ill.Name).ToList();
+                illnesses = (from ill in thisPatient.Illness.AsParallel() select ill.Name).ToList();
                 if (illnesses != null)
                 {
                     thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                    var IllNames = (from n in thisPatient.Illness select n.Name).ToList();
+                    var IllNames = (from n in thisPatient.Illness.AsParallel() select n.Name).ToList();
                     dataGWIllness.Columns.Add("Название болезни", "Название болезни");
                     foreach (string s in IllNames)
                         dataGWIllness.Rows.Add(s);
@@ -69,7 +69,7 @@ namespace Med2
                 dataGWVisitInfo.Refresh();
 
 
-                var doctorRecords = (from recs in thisPatient.MedCard.DoctorRecord select recs).ToList();
+                var doctorRecords = (from recs in thisPatient.MedCard.DoctorRecord.AsParallel() select recs).ToList();
                 dataGridViewDocRecs.Columns.Clear();
                 dataGridViewDocRecs.Columns.Add("Время оказания помощи", "Время оказания помощи");
                 dataGridViewDocRecs.Columns.Add("Доктор", "Доктор");

@@ -30,7 +30,7 @@ namespace Med2
                 {
                     case 0:
                         {
-                            var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
+                            var thisPersonVisits = (from visit in thisPatient.VisitInfo.AsParallel() select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
                             dataGridView1.Columns.Clear();
                             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                             dataGridView1.Columns.Add("Имя врача", "Имя врача");
@@ -43,7 +43,7 @@ namespace Med2
                         }
                     case 1:
                         {
-                            var thisPersonVisits = (from visit in thisPatient.VisitInfo where (visit.DateStart > DateTime.Today) select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
+                            var thisPersonVisits = (from visit in thisPatient.VisitInfo.AsParallel() where (visit.DateStart > DateTime.Today) select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
                             dataGridView1.Columns.Clear();
                             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                             dataGridView1.Columns.Add("Имя врача", "Имя врача");
@@ -56,7 +56,7 @@ namespace Med2
                         }
                     case 2:
                         {
-                            var thisPersonVisits = (from visit in thisPatient.VisitInfo where (visit.DateStart <= DateTime.Today) select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
+                            var thisPersonVisits = (from visit in thisPatient.VisitInfo.AsParallel() where (visit.DateStart <= DateTime.Today) select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
                             dataGridView1.Columns.Clear();
                             dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                             dataGridView1.Columns.Add("Имя врача", "Имя врача");
@@ -82,7 +82,7 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                var thisPersonVisits = (from visit in thisPatient.VisitInfo select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
+                var thisPersonVisits = (from visit in thisPatient.VisitInfo.AsParallel() select new { Время_начала_приёма = visit.DateStart, Имя_врача = visit.WorkTimes.Doctor.FullName }).ToList();
                 dataGridView1.Columns.Clear();
                 dataGridView1.Columns.Add("Время начала приёма", "Время начала приёма");
                 dataGridView1.Columns.Add("Имя врача", "Имя врача");
