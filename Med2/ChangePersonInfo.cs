@@ -70,6 +70,7 @@ namespace Med2
                 else
                 {
                     comboBoxBloodType.Enabled = false;
+                    comboBoxBloodType.Hide();
                     this.button3.Hide();
                 }
             
@@ -100,7 +101,10 @@ namespace Med2
                     this.textInsurancePolicyNum.Text = thisPatient.InsurancePolicyNum;
                     this.textBoxWorkIncapacity.Text = thisPatient.WorkIncapacityListNum;
                     this.comboBoxBloodType.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
-
+                    this.comboBoxBloodType.Hide();
+                    this.textBoxJob.Show();
+                    this.textBoxJob.ReadOnly = true;
+                    this.textBoxJob.Text = thisPatient.Rhesus + thisPatient.BloodType.ToString();
 
                     this.textBoxDocType.Text = thisPatient.Documents.DocumentName;
                     this.textDocumentN.Text = thisPatient.Documents.DocumentNum.ToString();

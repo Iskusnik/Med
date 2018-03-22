@@ -185,6 +185,12 @@
     <Compile Include="SelectPerson.Designer.cs">
       <DependentUpon>SelectPerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowDocsVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowDocsVisits.Designer.cs">
+      <DependentUpon>ShowDocsVisits.cs</DependentUpon>
+    </Compile>
     <Compile Include="Showillnesses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,12 +202,6 @@
     </Compile>
     <Compile Include="ShowInfoAboutVisit.Designer.cs">
       <DependentUpon>ShowInfoAboutVisit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ShowDocsVisits.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ShowDocsVisits.Designer.cs">
-      <DependentUpon>ShowDocsVisits.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowPatientInfo.cs">
       <SubType>Form</SubType>
@@ -272,14 +272,14 @@
     <EmbeddedResource Include="SelectPerson.resx">
       <DependentUpon>SelectPerson.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ShowDocsVisits.resx">
+      <DependentUpon>ShowDocsVisits.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Showillnesses.resx">
       <DependentUpon>Showillnesses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowInfoAboutVisit.resx">
       <DependentUpon>ShowInfoAboutVisit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ShowDocsVisits.resx">
-      <DependentUpon>ShowDocsVisits.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShowPatientInfo.resx">
       <DependentUpon>ShowPatientInfo.cs</DependentUpon>
@@ -295,6 +295,7 @@
       <LastGenOutput>ModelMedDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="ClassDiagram1.cd" />
+    <None Include="medcard.dot" />
     <None Include="ModelMedDB.edmx.diagram">
       <DependentUpon>ModelMedDB.edmx</DependentUpon>
     </None>

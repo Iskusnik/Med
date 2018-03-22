@@ -68,9 +68,6 @@ namespace Med2
                             break;
                         }
                 }
-                dataGridView1.Columns[0].Name = "Начало приёма";
-                dataGridView1.Columns[0].Name = "Конец приёма";
-                dataGridView1.Columns[0].Name = "Имя врача";
             }
         }
 

@@ -80,7 +80,7 @@
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.comboBox1);
             this.Name = "ChangeVacancies";
-            this.Text = "ChangeVacancies";
+            this.Text = "Изменить список профессий";
             this.Load += new System.EventHandler(this.ChangeVacancies_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

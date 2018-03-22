@@ -217,7 +217,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddInfoAboutVisit";
-            this.Text = "AddInfoAboutVisit";
+            this.Text = "Добавить запись";
             this.Load += new System.EventHandler(this.AddInfoAboutVisit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

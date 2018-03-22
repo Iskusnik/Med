@@ -110,12 +110,12 @@ namespace Med2
         private void статистикаОбращенийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
-            string fileName;
+            string fileName = "";
             save.Filter = "Таблица Excel|*.xls";
             save.ShowDialog();
             fileName = save.FileName;
-            ControlFunctions.AnalyseVisits(fileName);
-            
+            if (fileName != null && fileName != "")
+                ControlFunctions.AnalyseVisits(fileName);
         }
 
     }

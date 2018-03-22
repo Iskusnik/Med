@@ -361,6 +361,47 @@ namespace Med2
         }
 
 
+        public static void MakeDocFile(string fileName)
+        {
+            Word.Application application;
+            Word.Document document = null;
+
+            Object missingObj = System.Reflection.Missing.Value;
+            Object trueObj = true;
+            Object falseObj = false;
+
+            application = new Word.Application();
+            Object templatePathObj = "medcard.dot";
+
+            try
+            {
+                document = application.Documents.Add(ref templatePathObj, ref missingObj, ref missingObj, missingObj);
+            }
+            catch
+            {
+                document.Close(ref falseObj, ref missingObj, ref missingObj);
+                application.Quit(ref missingObj, ref missingObj, ref missingObj);
+                document = null;
+                application = null;
+                throw new Exception();
+            }
+            application.Visible = true;
+        }
+
+
+        /* public static void AddPatientFromDoc(string fileName)
+         {
+             Word.Application application;
+             Word.Document document;
+
+             Object missingObj = System.Reflection.Missing.Value;
+             Object trueObj = true;
+             Object falseObj = false;
+
+             application = new Word.Application();
+             Object templatePathObj = "medcard.dot";
+         }*/
+
         //График работа на ближайшие 30 дней cчитая  со следующего дня
         //start - час и день начала работы
         //
