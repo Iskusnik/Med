@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using System.Windows.Forms;
-
+using System.Text.RegularExpressions;
 
 
 using Excel = Microsoft.Office.Interop.Excel;
@@ -18,6 +18,8 @@ namespace Med2
     public class ControlFunctions
     {
 
+        static Regex nameCheck = new Regex("([А-Я]{1})([а-я]*)$");
+        static Regex numCheck = new Regex("[0-9]*$");
 
         public static bool LoginPasswordCheck(string login, string password, out string mes, out Person pers)
         {
@@ -62,6 +64,19 @@ namespace Med2
                           || regForm.textDocumentN.Text == "" || regForm.textBoxPassword1.Text == ""
                           || regForm.textBoxBirthPlace.Text == "")
                         throw (new ArgumentNullException());
+
+                    if (!(nameCheck.IsMatch(regForm.textSurname.Text)
+                        && nameCheck.IsMatch(regForm.textName.Text)))
+                        throw (new Exception("Имя, фамилия и отчество начинаются с заглавной буквы и могут содержать только буквы русского алфавита."));
+                    else
+                        if (regForm.textName2.Text != "" && nameCheck.IsMatch(regForm.textName2.Text))
+                        throw (new Exception("Имя, фамилия и отчество начинаются с заглавной буквы и могут содержать только буквы русского алфавита."));
+
+                    if (!(numCheck.IsMatch(regForm.textBoxInsuranceBillNum.Text)
+                        && nameCheck.IsMatch(regForm.textInsurancePolicyNum.Text)
+                        && nameCheck.IsMatch(regForm.textBoxWorkIncapacity.Text)))
+                        throw (new Exception("Номера документов могут содержать только цифры."));
+                    
 
                     newPatient.FullName = regForm.textSurname.Text + " " + regForm.textName.Text + " " + regForm.textName2.Text;
                     newPatient.Gender = regForm.comboBoxGender.Text;
@@ -118,7 +133,7 @@ namespace Med2
                 }
                 catch (ArgumentNullException)
                 {
-                    MessageBox.Show("Заполните пустые поля");
+                    MessageBox.Show("Заполните пустые поля, где не указано \"При наличии\"");
                     return false;
                 }
                 catch (ArgumentOutOfRangeException)
@@ -153,6 +168,18 @@ namespace Med2
                           || regForm.comboBoxJob.Text == "" || regForm.textBoxEducation.Text == ""
                           || regForm.textBoxBirthPlace.Text == "")
                         throw (new ArgumentNullException());
+
+                    if (!(nameCheck.IsMatch(regForm.textSurname.Text)
+                        && nameCheck.IsMatch(regForm.textName.Text)))
+                        throw (new Exception("Имя, фамилия и отчество начинаются с заглавной буквы и могут содержать только буквы русского алфавита."));
+                    else
+                        if (regForm.textName2.Text != "" && nameCheck.IsMatch(regForm.textName2.Text))
+                        throw (new Exception("Имя, фамилия и отчество начинаются с заглавной буквы и могут содержать только буквы русского алфавита."));
+
+                    if (!(numCheck.IsMatch(regForm.textBoxInsuranceBillNum.Text)))
+                        throw (new Exception("Номера документов могут содержать только цифры."));
+                    
+
 
                     newDoctor.FullName = regForm.textSurname.Text + " " + regForm.textName.Text + " " + regForm.textName2.Text;
                     newDoctor.Gender = regForm.comboBoxGender.Text;
@@ -213,7 +240,7 @@ namespace Med2
                 }
                 catch (ArgumentNullException)
                 {
-                    MessageBox.Show("Заполните пустые поля");
+                    MessageBox.Show("Заполните пустые поля, где не указано \"При наличии\"");
                     return false;
                 }
                 catch (ArgumentOutOfRangeException)

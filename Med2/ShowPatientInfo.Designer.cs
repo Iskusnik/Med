@@ -377,7 +377,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label1);
             this.Name = "ShowPatientInfo";
-            this.Text = "ShowPatientInfo";
+            this.Text = "Информация о пациенте";
             this.Load += new System.EventHandler(this.ShowPatientInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

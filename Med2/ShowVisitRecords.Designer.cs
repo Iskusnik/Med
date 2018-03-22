@@ -65,7 +65,7 @@
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ShowVisitRecords";
-            this.Text = "ShowVisitRecords";
+            this.Text = "Записи врачей";
             this.Load += new System.EventHandler(this.ShowVisitRecords_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
