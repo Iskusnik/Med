@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Threading;
 
 
 namespace Med2
@@ -15,6 +15,8 @@ namespace Med2
     public partial class DoctorMenu : Form
     {
         public Doctor thisDoctor;
+
+        
         public DoctorMenu(Doctor doct)
         {
             thisDoctor = doct;
@@ -46,6 +48,7 @@ namespace Med2
             //ClinicManageToolStripMenuItem.Enabled = thisDoctor.Job == "Главврач";
             ClinicManageToolStripMenuItem.Enabled = true;
         }
+
         private void DoctorMenu_Load(object sender, EventArgs e)
         {
             RefreshMenu();
@@ -108,10 +111,12 @@ namespace Med2
         {
             SaveFileDialog save = new SaveFileDialog();
             string fileName;
-            save.Filter = "Таблиа Excel|*.xlsx";
+            save.Filter = "Таблица Excel|*.xls";
             save.ShowDialog();
             fileName = save.FileName;
             ControlFunctions.AnalyseVisits(fileName);
+            
         }
+
     }
 }

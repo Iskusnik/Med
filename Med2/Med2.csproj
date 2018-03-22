@@ -294,6 +294,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelMedDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ModelMedDB.edmx.diagram">
       <DependentUpon>ModelMedDB.edmx</DependentUpon>
     </None>

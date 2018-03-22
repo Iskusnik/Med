@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Med2.Doctor">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABgCAAAAAAAgCAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Doctor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="WorkTimes" />
+      <Property Name="DoctorRecord" />
+      <Property Name="FreeTimes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Med2.DoctorRecord">
+    <Position X="2" Y="7.25" Width="1.5" />
+    <AssociationLine Name="Doctor" Type="Med2.Doctor" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.5" Y="7.688" />
+        <Point X="5.346" Y="7.687" Type="JumpStart" />
+        <Point X="5.513" Y="7.688" Type="JumpEnd" />
+        <Point X="5.819" Y="7.687" Type="JumpStart" />
+        <Point X="5.986" Y="7.688" Type="JumpEnd" />
+        <Point X="7.5" Y="7.688" />
+        <Point X="7.5" Y="6.569" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AhBAAAAAAAAAgBAAAAAAAAQAQAAAAAQBAAAAAAAEAAA=</HashCode>
+      <FileName>DoctorRecord.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Doctor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Med2.Documents">
+    <Position X="8.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAgA=</HashCode>
+      <FileName>Documents.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Med2.FreeTime">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQACAAAAAQAAAAAAAAAAAg=</HashCode>
+      <FileName>FreeTime.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Doctor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Med2.Illness">
+    <Position X="2" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAQAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Illness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Med2.MedCard">
+    <Position X="2" Y="5" Width="1.5" />
+    <AssociationLine Name="DoctorRecord" Type="Med2.DoctorRecord" FixedFromPoint="true">
+      <Path>
+        <Point X="2.312" Y="6.555" />
+        <Point X="2.312" Y="7.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>MedCard.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Patient" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="DoctorRecord" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Med2.Patient">
+    <Position X="5" Y="4.5" Width="1.5" />
+    <AssociationLine Name="Illness" Type="Med2.Illness" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="5" Y="4.625" />
+        <Point X="4.625" Y="4.625" />
+        <Point X="4.625" Y="4.625" />
+        <Point X="3.5" Y="4.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAQAQACAAAAAAAAIBAABAAAAA=</HashCode>
+      <FileName>Patient.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MedCard" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="VisitInfo" />
+      <Property Name="Illness" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Med2.Person">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAACAAAAAAAICAAAAAAEQACAAAAAACAAAAACAICAA=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Med2.VisitInfo">
+    <Position X="4.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgIAAAAAAAAAAAAAjAAAAAAAAAgAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>VisitInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="WorkTimes" />
+      <Property Name="Patient" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Med2.WorkTime">
+    <Position X="8" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQACAAAAAQAAABAAAAAAAg=</HashCode>
+      <FileName>WorkTime.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Doctor" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -272,13 +272,16 @@ namespace Med2
                     workSheet.Cells[i, 1] = specials[i-1];
 
                     for (int j = 2; j <= days.GetLength(1) + 1; j++)
-                        workSheet.Cells[i, j] = days[i-1, j-2];
+                        workSheet.Cells[i, j] = days[i - 1, j - 2];
                 }
 
                 workSheet.Cells[specials.Length+1, 1] = start;
 
-                for (int i = 2; i <= days.GetLength(1); i++)
-                    workSheet.Cells[specials.Length+1, i] = start.AddDays(1);
+                for (int i = 2; i <= days.GetLength(1)+1; i++)
+                {
+                    workSheet.Cells[specials.Length + 1, i] = start;
+                    start = start.AddDays(1);
+                }
                 /*
                 //Вычисляем сумму этих чисел
                 Excel.Range rng = workSheet.Range["A2"];
@@ -294,26 +297,31 @@ namespace Med2
                 Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(10, 80, 300, 250);
                // Excel.ChartObject chartObj = myChart.Add(5, 50, 300, 300);
                 Excel.Chart chartPage = myChart.Chart;
-                chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
+                //chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
+                //chartPage.ChartType = Excel.XlChartType.xlBarClustered;
+                //chartPage.ChartType = Excel.XlChartType.xlLine;
+
                 Microsoft.Office.Interop.Excel.Application xla = new Microsoft.Office.Interop.Excel.Application();
                 Excel.SeriesCollection seriesCollection = chartPage.SeriesCollection();
 
                 //char a = char.ConvertFromUtf32((char.ConvertToUtf32('A',0) + days.GetLength(1)));
 
-                //Excel.Range rngX = workSheet.Range["A" + (1+ specials.Length).ToString(), ToString()]
+                Excel.Range rngX = workSheet.Range[workSheet.Cells[specials.Length + 1, 2], workSheet.Cells[specials.Length + 1, days.GetLength(1)+1]];
+
                 //    workSheet.Cells[specials.Length+1, 1], workSheet.Cells[specials.Length+1, days.GetLength(1)]];
 
                 for (int i = 1; i <= specials.Length; i++)
                 {
                     Excel.Series series = seriesCollection.NewSeries();
-                    Excel.Range rng = workSheet.Range[workSheet.Cells[i, 2], workSheet.Cells[i, days.GetLength(1)]];
-                  //  series.XValues = workSheet.get_Range(rngX);
-                    series.Values = workSheet.get_Range(rng);
-                    series.Name = workSheet.Cells[i, 0];
+                    Excel.Range rng = workSheet.Range[workSheet.Cells[i, 2], workSheet.Cells[i, days.GetLength(1)+1]];
+                    series.XValues = rngX;
+                    series.Values = rng;
+                    series.Name = specials[i-1];
+                    
                 }
-
-                workBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-
+                workSheet.Columns.AutoFit();
+                workBook.SaveAs(fileName, Excel.XlFileFormat.xlExcel12, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                
                 workBook.Close(true, misValue, misValue);
                 excelApp.Quit();
 
