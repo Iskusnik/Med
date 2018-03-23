@@ -54,8 +54,8 @@ namespace Med2
                                                                          where (times.Start.Date.ToShortDateString() == comboBoxDate.Text
                                                                               && times.Start.TimeOfDay.ToString() == comboBoxTime.Text)
                                                                          select (times)).ToArray()[0]; ;
-                    
-                    
+
+                    comboBoxTime.Items.Remove(comboBoxTime.Text);
                     WorkTime workTi = new WorkTime { Start = freeTi.Start, Doctor = tempDoctor, Finish = freeTi.Finish, BirthDate = tempDoctor.BirthDate, NameHashID = tempDoctor.NameHashID };
 
                     db.FreeTimeSet.Remove(freeTi);
@@ -80,6 +80,7 @@ namespace Med2
 
                     db.SaveChanges();
                     MessageBox.Show("Запись совершена");
+                    button1.Enabled = false;
                 }
         }
 
@@ -91,7 +92,8 @@ namespace Med2
             {
                 
                 object[] temp = (from doctor in db.PersonSet.AsParallel() where (doctor is Doctor) select (doctor)).ToArray();
-                DoctorsList = (from doctor in temp.AsParallel() where ((Doctor)doctor).Job == comboBoxJob.Text select (Doctor)doctor).ToArray();
+                string s = comboBoxJob.Text;
+                DoctorsList = (from doctor in temp.AsParallel() where ((Doctor)doctor).Job == s select (Doctor)doctor).ToArray();
                 
             }
             foreach (Doctor doct in DoctorsList)
@@ -132,7 +134,8 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
-                string[] distinct = (from dates in d.FreeTimes.AsParallel() where (dates.Start.ToShortDateString() == comboBoxDate.Text) select (dates.Start.TimeOfDay.ToString())).ToArray();
+                string s = comboBoxDate.Text;
+                string[] distinct = (from dates in d.FreeTimes.AsParallel() where (dates.Start.ToShortDateString() == s) select (dates.Start.TimeOfDay.ToString())).ToArray();
 
                 foreach (string doct in distinct)
                     this.comboBoxTime.Items.Add(doct);
