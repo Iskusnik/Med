@@ -16,7 +16,8 @@ namespace Med2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MenuForm());
+            //Application.Run(new MenuForm());
+            Application.Run(new MyQueryBuilder());
         }
     }
 }

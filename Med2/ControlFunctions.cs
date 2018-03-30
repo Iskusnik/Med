@@ -721,33 +721,3 @@ namespace Med2
         }
     }
 }
-/*
-            string sqlExpression = "INSERT INTO PersonSet (FullName, Gender) VALUES ('Tom Tommy Tomphson', 'M')";
-            using (connection)
-            {
-                using (MEDDBContainer db = new MEDDBContainer())
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sqlExpression, connection);
-                   // int number = command.ExecuteNonQuery();
-
-                    db.PersonSet.Add(new Patient { FullName = "Фёдоров Фёдор Фёдорович" });
-                    db.PersonSet.Add(new Patient { FullName = "Иванов Фёдор Фёдорович" });
-                    db.SaveChanges();
-                }
-
-
-
-
-            }*/
-//static string connectionString = ConfigurationManager.ConnectionStrings["Med.Properties.Settings.LastMedDBConnectionString"].ConnectionString;
-//public static SqlConnection connection = new SqlConnection(connectionString);
-//static public LastMedDBDataSet db = new LastMedDBDataSet();
-//db.PersonSet_Operator.FindByBirthDateNameHashID()
-
-/*public static string connectionString = @"Data Source=ISKUSNIK;Initial Catalog=NewMedDB;Integrated Security=True";
-public static SqlConnection connection = new SqlConnection(connectionString);
-
-     using (connection)
-    {}*/
-

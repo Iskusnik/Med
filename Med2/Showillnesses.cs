@@ -26,7 +26,7 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 thisPatient = (Patient)db.PersonSet.Find(thisPatient.BirthDate, thisPatient.NameHashID);
-                var IllNames = (from n in thisPatient.Illness.AsParallel() select n.Name).ToList();
+                var IllNames = (from n in thisPatient.Illness select n.Name).ToList();
                 dataGridView1.Columns.Add("Название болезни", "Название болезни");
                 foreach (string s in IllNames)
                     dataGridView1.Rows.Add(s);

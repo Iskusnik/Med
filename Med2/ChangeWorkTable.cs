@@ -35,7 +35,7 @@ namespace Med2
                         t.FreeTimes.Clear();
                         bool[] weekCheck = { checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked, checkBox5.Checked, checkBox6.Checked, checkBox7.Checked };
                         t.FreeTimes = ControlFunctions.makeJob(weekCheck, dateTimePicker1.Value, t, (int)numericUpDownPeriod.Value, (int)numericUpDownHours.Value, (int)numericUpDownDays.Value);
-                        var workTime = (from workT in db.WorkTimeSet.AsParallel() where (workT.Doctor == t && workT.Start > DateTime.Today) select workT).ToList();
+                        var workTime = (from workT in db.WorkTimeSet where (workT.Doctor == t && workT.Start > DateTime.Today) select workT).ToList();
                         db.WorkTimeSet.RemoveRange(workTime);
                         db.SaveChanges();
                     }
@@ -49,7 +49,7 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 Head = (Doctor)db.PersonSet.Find(Head.BirthDate, Head.NameHashID);
-                var temp = (from docs in db.PersonSet.AsParallel() where (docs is Doctor && docs.NameHashID != Head.NameHashID && docs.BirthDate != Head.BirthDate) select docs).ToList();
+                var temp = (from docs in db.PersonSet  where (docs is Doctor && docs.NameHashID != Head.NameHashID && docs.BirthDate != Head.BirthDate) select docs).ToList();
                 List<Person> doctors = (List<Person>)temp;
                 docs = new Doctor[doctors.Count];
                 for (int i = 0; i < doctors.Count; i++)

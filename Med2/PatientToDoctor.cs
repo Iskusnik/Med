@@ -28,7 +28,7 @@ namespace Med2
         {
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
-                string[] distinct = (from doctor in db.PersonSet.AsParallel() where (doctor is Doctor) select (doctor as Doctor).Job).Distinct().ToArray();
+                string[] distinct = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor as Doctor).Job).Distinct().ToArray();
 
                 this.comboBoxJob.Items.Remove("Главврач");
                 foreach (string job in distinct)
@@ -91,9 +91,9 @@ namespace Med2
             using (ModelMedDBContainer db = new ModelMedDBContainer())
             {
                 
-                object[] temp = (from doctor in db.PersonSet.AsParallel() where (doctor is Doctor) select (doctor)).ToArray();
+                object[] temp = (from doctor in db.PersonSet where (doctor is Doctor) select (doctor)).ToArray();
                 string s = comboBoxJob.Text;
-                DoctorsList = (from doctor in temp.AsParallel() where ((Doctor)doctor).Job == s select (Doctor)doctor).ToArray();
+                DoctorsList = (from doctor in temp  where ((Doctor)doctor).Job == s select (Doctor)doctor).ToArray();
                 
             }
             foreach (Doctor doct in DoctorsList)
@@ -114,7 +114,7 @@ namespace Med2
                     {
                         Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
 
-                        string[] distinct = (from dates in d.FreeTimes.AsParallel() select dates.Start.ToShortDateString()).Distinct().ToArray();
+                        string[] distinct = (from dates in d.FreeTimes select dates.Start.ToShortDateString()).Distinct().ToArray();
 
                         foreach (string doct in distinct)
                             this.comboBoxDate.Items.Add(doct);
@@ -135,7 +135,7 @@ namespace Med2
             {
                 Doctor d = (Doctor)db.PersonSet.Find(DoctorsList[index].BirthDate, DoctorsList[index].NameHashID);
                 string s = comboBoxDate.Text;
-                string[] distinct = (from dates in d.FreeTimes.AsParallel() where (dates.Start.ToShortDateString() == s) select (dates.Start.TimeOfDay.ToString())).ToArray();
+                string[] distinct = (from dates in d.FreeTimes where (dates.Start.ToShortDateString() == s) select (dates.Start.TimeOfDay.ToString())).ToArray();
 
                 foreach (string doct in distinct)
                     this.comboBoxTime.Items.Add(doct);
