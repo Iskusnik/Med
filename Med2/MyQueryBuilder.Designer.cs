@@ -51,9 +51,9 @@
             this.comboBoxEntities.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEntities.FormattingEnabled = true;
             this.comboBoxEntities.Items.AddRange(new object[] {
-            "Человек",
-            "Доктор",
-            "Пациент",
+            "Все персональные данные",
+            "Доктора",
+            "Пациенты",
             "Медицинская карта",
             "Болезнь",
             "Запись на приём",
@@ -189,18 +189,18 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(257, 13);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(256, 274);
+            this.dataGridView1.Size = new System.Drawing.Size(340, 274);
             this.dataGridView1.TabIndex = 13;
             // 
             // buttonToExcel
             // 
             this.buttonToExcel.Location = new System.Drawing.Point(257, 291);
             this.buttonToExcel.Name = "buttonToExcel";
-            this.buttonToExcel.Size = new System.Drawing.Size(256, 23);
+            this.buttonToExcel.Size = new System.Drawing.Size(340, 23);
             this.buttonToExcel.TabIndex = 14;
             this.buttonToExcel.Text = "Выгрузить в xls";
             this.buttonToExcel.UseVisualStyleBackColor = true;
@@ -213,12 +213,13 @@
             this.buttonSearch.TabIndex = 15;
             this.buttonSearch.Text = "Поиск";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // MyQueryBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 326);
+            this.ClientSize = new System.Drawing.Size(609, 326);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.buttonToExcel);
             this.Controls.Add(this.dataGridView1);
@@ -234,6 +235,7 @@
             this.Controls.Add(this.textBoxField1);
             this.Controls.Add(this.comboBoxField1);
             this.Controls.Add(this.comboBoxEntities);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MyQueryBuilder";
             this.Text = "Конструктор запросов";
             this.Load += new System.EventHandler(this.MyQueryBuilder_Load);
